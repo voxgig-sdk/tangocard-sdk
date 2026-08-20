@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "customer": {
+      "CUSTOMER00": {
+        "customerIdentifier": "s1e",
+        "displayName": "s1f",
+        "email": "s20"
+      },
+      "CUSTOMER01": {
+        "customerIdentifier": "s3c",
+        "displayName": "s3d",
+        "email": "s3e"
+      },
+      "CUSTOMER02": {
+        "customerIdentifier": "s5a",
+        "displayName": "s5b",
+        "email": "s5c"
+      }
+    }
+  },
+  "new": {
+    "customer": {
+      "customer_ref01": {
+        "customerIdentifier": "s78",
+        "displayName": "s79",
+        "email": "s7a"
+      }
+    }
+  }
+}

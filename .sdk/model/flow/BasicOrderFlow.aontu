@@ -1,0 +1,30 @@
+# BasicOrderFlow
+
+main: kit: flow: BasicOrderFlow:
+{
+  entity: "order",
+  kind: "basic",
+  name: "BasicOrderFlow",
+  step: [
+    {
+      input: {
+        ref: "order_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "order_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOrderFlow"
+}

@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "catalog": {
+      "CATALOG00": {
+        "brandKey": "s28",
+        "brandName": "s29",
+        "imageUrls": [],
+        "items": []
+      },
+      "CATALOG01": {
+        "brandKey": "s50",
+        "brandName": "s51",
+        "imageUrls": [],
+        "items": []
+      },
+      "CATALOG02": {
+        "brandKey": "s78",
+        "brandName": "s79",
+        "imageUrls": [],
+        "items": []
+      }
+    }
+  },
+  "new": {
+    "catalog": {
+      "catalog_ref01": {
+        "brandKey": "sa0",
+        "brandName": "sa1",
+        "imageUrls": [],
+        "items": []
+      }
+    }
+  }
+}

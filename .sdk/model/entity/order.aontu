@@ -1,0 +1,139 @@
+# Entity: order
+
+main: kit: entity: order: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accountIdentifier"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "amount"
+      op: {
+        create: {
+          req: true
+          type: "`$NUMBER`"
+        }
+      }
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "campaign"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "created"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "customerIdentifier"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "recipient"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "referenceOrderID"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "rewardName"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "sendEmail"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "utid"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "order"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/orders"
+          parts: [
+            "orders"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/orders"
+          parts: [
+            "orders"
+          ]
+          select: {
+            exist: [
+              "limit"
+              "offset"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

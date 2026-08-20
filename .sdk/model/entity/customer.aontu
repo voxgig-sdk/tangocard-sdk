@@ -1,0 +1,47 @@
+# Entity: customer
+
+main: kit: entity: customer: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "customerIdentifier"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "displayName"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "customer"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/customers"
+          parts: [
+            "customers"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

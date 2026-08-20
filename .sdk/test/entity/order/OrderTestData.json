@@ -1,0 +1,65 @@
+{
+  "existing": {
+    "order": {
+      "ORDER00": {
+        "accountIdentifier": "s6e",
+        "amount": 111,
+        "campaign": "s70",
+        "created": "s71",
+        "customerIdentifier": "s72",
+        "recipient": {},
+        "referenceOrderID": "s74",
+        "rewardName": "s75",
+        "sendEmail": true,
+        "status": "s77",
+        "utid": "s78",
+        "id": "ORDER00"
+      },
+      "ORDER01": {
+        "accountIdentifier": "sdc",
+        "amount": 221,
+        "campaign": "sde",
+        "created": "sdf",
+        "customerIdentifier": "se0",
+        "recipient": {},
+        "referenceOrderID": "se2",
+        "rewardName": "se3",
+        "sendEmail": true,
+        "status": "se5",
+        "utid": "se6",
+        "id": "ORDER01"
+      },
+      "ORDER02": {
+        "accountIdentifier": "s14a",
+        "amount": 331,
+        "campaign": "s14c",
+        "created": "s14d",
+        "customerIdentifier": "s14e",
+        "recipient": {},
+        "referenceOrderID": "s150",
+        "rewardName": "s151",
+        "sendEmail": true,
+        "status": "s153",
+        "utid": "s154",
+        "id": "ORDER02"
+      }
+    }
+  },
+  "new": {
+    "order": {
+      "order_ref01": {
+        "accountIdentifier": "s1b8",
+        "amount": 441,
+        "campaign": "s1ba",
+        "created": "s1bb",
+        "customerIdentifier": "s1bc",
+        "recipient": {},
+        "referenceOrderID": "s1be",
+        "rewardName": "s1bf",
+        "sendEmail": true,
+        "status": "s1c1",
+        "utid": "s1c2"
+      }
+    }
+  }
+}

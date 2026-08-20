@@ -1,0 +1,174 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Tango Card RaaS API",
+    "version": "2.0.0",
+    "description": "List customers/brands and place reward orders via Tango Card's Rewards as a Service API."
+  },
+  "servers": [
+    { "url": "https://integration-api.tangocard.com/raas/v2" }
+  ],
+  "security": [
+    { "basicAuth": [] }
+  ],
+  "paths": {
+    "/customers": {
+      "get": {
+        "operationId": "listCustomers",
+        "summary": "List customers",
+        "responses": {
+          "200": {
+            "description": "Customers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Customer" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalogs": {
+      "get": {
+        "operationId": "listBrands",
+        "summary": "List reward brands in the catalog",
+        "responses": {
+          "200": {
+            "description": "Catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "brands": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Brand" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "operationId": "listOrders",
+        "summary": "List reward orders",
+        "parameters": [
+          { "name": "offset", "in": "query", "required": false, "schema": { "type": "integer" } },
+          { "name": "limit", "in": "query", "required": false, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "orders": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Order" }
+                    },
+                    "page": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrder",
+        "summary": "Place a reward order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrderInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The created order",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Order" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "customerIdentifier": { "type": "string" },
+          "displayName": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      },
+      "Brand": {
+        "type": "object",
+        "properties": {
+          "brandKey": { "type": "string" },
+          "brandName": { "type": "string" },
+          "imageUrls": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "items": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        }
+      },
+      "OrderInput": {
+        "type": "object",
+        "required": ["accountIdentifier", "customerIdentifier", "amount", "utid"],
+        "properties": {
+          "accountIdentifier": { "type": "string" },
+          "customerIdentifier": { "type": "string" },
+          "amount": { "type": "number" },
+          "utid": { "type": "string" },
+          "recipient": {
+            "type": "object",
+            "properties": {
+              "email": { "type": "string" },
+              "firstName": { "type": "string" },
+              "lastName": { "type": "string" }
+            }
+          },
+          "sendEmail": { "type": "boolean" },
+          "campaign": { "type": "string" }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "referenceOrderID": { "type": "string" },
+          "amount": { "type": "number" },
+          "utid": { "type": "string" },
+          "status": { "type": "string" },
+          "rewardName": { "type": "string" },
+          "created": { "type": "string" }
+        }
+      }
+    }
+  }
+}

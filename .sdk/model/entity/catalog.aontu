@@ -1,0 +1,52 @@
+# Entity: catalog
+
+main: kit: entity: catalog: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "brandKey"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "brandName"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "imageUrls"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "items"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "catalog"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/catalogs"
+          parts: [
+            "catalogs"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.brands`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

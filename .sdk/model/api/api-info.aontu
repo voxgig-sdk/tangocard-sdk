@@ -1,0 +1,27 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "List customers/brands and place reward orders via Tango Card's Rewards as a Service API."
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Basic"
+        scheme: "basicAuth"
+        type: "http"
+      }
+      servers: [
+        {
+          url: "https://integration-api.tangocard.com/raas/v2"
+        }
+      ]
+      summary: "List customers/brands and place reward orders via Tango Card's Rewards as a Service API."
+      title: "Tango Card RaaS API"
+      version: "2.0.0"
+      website: "https://integration-api.tangocard.com"
+    }
+  }
+}
+
