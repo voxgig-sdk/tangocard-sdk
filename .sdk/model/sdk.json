@@ -1,6 +1,15 @@
 {
+  "NAME": "TANGOCARD",
+  "Name": "Tangocard",
   "def": "tangocard-raas-only.json",
   "main": {
+    "api": {
+      "entity": {},
+      "guide": {}
+    },
+    "custom": {
+      "plurals": {}
+    },
     "def": {
       "desc": ""
     },
@@ -1059,5 +1068,8 @@
     }
   },
   "name": "tangocard",
+  "name-": "tangocard",
+  "name_": "tangocard",
+  "name__orig": "tangocard",
   "origin": "voxgig-sdk"
 }
