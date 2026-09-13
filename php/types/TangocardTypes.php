@@ -65,17 +65,8 @@ class Order
 /** Request payload for Order#list. */
 class OrderListMatch
 {
-    public ?string $accountIdentifier = null;
-    public ?float $amount = null;
-    public ?string $campaign = null;
-    public ?string $created = null;
-    public ?string $customerIdentifier = null;
-    public ?array $recipient = null;
-    public ?string $referenceOrderID = null;
-    public ?string $rewardName = null;
-    public ?bool $sendEmail = null;
-    public ?string $status = null;
-    public ?string $utid = null;
+    public ?int $limit = null;
+    public ?int $offset = null;
 }
 
 /** Request payload for Order#create. */

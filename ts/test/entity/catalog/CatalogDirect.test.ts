@@ -1,6 +1,4 @@
 
-const envlocal = __dirname + '/../../../.env.local'
-require('dotenv').config({ quiet: true, path: [envlocal] })
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
@@ -10,10 +8,19 @@ import { TangocardSDK } from '../../..'
 
 import {
   envOverride,
+  liveClientOptions,
   liveDelay,
+  loadEnvLocal,
   maybeSkipControl,
   skipIfMissingIds,
 } from '../../utility'
+
+
+// AFTER the imports on purpose: TypeScript hoists `import` above any
+// statement in the emitted CommonJS, so a loader placed above them would
+// run only after every imported module had already been evaluated - and
+// anything reading process.env at module scope would miss these values.
+loadEnvLocal(__dirname + '/../../../.env.local')
 
 
 describe('CatalogDirect', async () => {
@@ -83,15 +90,20 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'TANGOCARD_TEST_CATALOG_ENTID': {},
     'TANGOCARD_TEST_LIVE': 'FALSE',
-    'TANGOCARD_APIKEY': 'NONE',
+    'TANGOCARD_APIKEY': '',
+    'TANGOCARD_SECRET': '',
   })
 
   const live = 'TRUE' === env.TANGOCARD_TEST_LIVE
 
   if (live) {
-    const client = new TangocardSDK({
+    // Merged so the generated fields win: sdk-test-control.json's
+    // test.client.options adds to the live client, it does not redirect it.
+    const client = new TangocardSDK(
+      Object.assign({}, liveClientOptions(), {
       apikey: env.TANGOCARD_APIKEY,
-    })
+      secret: env.TANGOCARD_SECRET,
+      }))
 
     let idmap: any = env['TANGOCARD_TEST_CATALOG_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {

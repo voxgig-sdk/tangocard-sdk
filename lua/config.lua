@@ -64,13 +64,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/catalogs",
-                ["parts"] = {
-                  "catalogs",
+                ["segments"] = {
+                  {
+                    ["lit"] = "catalogs",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.brands`",
+                },
+                ["parts"] = {
+                  "catalogs",
                 },
               },
             },
@@ -106,13 +111,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/customers",
-                ["parts"] = {
-                  "customers",
+                ["segments"] = {
+                  {
+                    ["lit"] = "customers",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "customers",
                 },
               },
             },
@@ -194,13 +204,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/orders",
-                ["parts"] = {
-                  "orders",
+                ["segments"] = {
+                  {
+                    ["lit"] = "orders",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "orders",
                 },
               },
             },
@@ -229,8 +244,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/orders",
-                ["parts"] = {
-                  "orders",
+                ["segments"] = {
+                  {
+                    ["lit"] = "orders",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -241,6 +258,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "orders",
                 },
               },
             },

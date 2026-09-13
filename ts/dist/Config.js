@@ -1,10 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.config = void 0;
+exports.FEATURE_PLUGINS = exports.config = void 0;
 const TestFeature_1 = require("./feature/test/TestFeature");
 const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
 };
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS = {};
+exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
@@ -36,6 +44,7 @@ class Config {
         base: "https://integration-api.tangocard.com/raas/v2",
         auth: {
             prefix: 'Basic',
+            basic: true,
         },
         headers: {
             "content-type": "application/json"
@@ -77,14 +86,19 @@ class Config {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/catalogs",
-                            "parts": [
-                                "catalogs"
+                            "segments": [
+                                {
+                                    "lit": "catalogs"
+                                }
                             ],
                             "select": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.brands`"
-                            }
+                            },
+                            "parts": [
+                                "catalogs"
+                            ]
                         }
                     ]
                 }
@@ -119,14 +133,19 @@ class Config {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/customers",
-                            "parts": [
-                                "customers"
+                            "segments": [
+                                {
+                                    "lit": "customers"
+                                }
                             ],
                             "select": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "customers"
+                            ]
                         }
                     ]
                 }
@@ -207,14 +226,19 @@ class Config {
                             "kind": "http",
                             "method": "POST",
                             "orig": "/orders",
-                            "parts": [
-                                "orders"
+                            "segments": [
+                                {
+                                    "lit": "orders"
+                                }
                             ],
                             "select": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "orders"
+                            ]
                         }
                     ]
                 },
@@ -242,8 +266,10 @@ class Config {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/orders",
-                            "parts": [
-                                "orders"
+                            "segments": [
+                                {
+                                    "lit": "orders"
+                                }
                             ],
                             "select": {
                                 "exist": [
@@ -254,7 +280,10 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "orders"
+                            ]
                         }
                     ]
                 }

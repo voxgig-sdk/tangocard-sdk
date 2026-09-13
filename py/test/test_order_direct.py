@@ -60,15 +60,18 @@ def _order_direct_setup(mockres):
     env = runner.env_override({
         "TANGOCARD_TEST_ORDER_ENTID": {},
         "TANGOCARD_TEST_LIVE": "FALSE",
-        "TANGOCARD_APIKEY": "NONE",
+        "TANGOCARD_APIKEY": "",
     })
 
     live = env.get("TANGOCARD_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("TANGOCARD_APIKEY"),
-        }
+        })
         client = TangocardSDK(merged_opts)
         return {
             "client": client,

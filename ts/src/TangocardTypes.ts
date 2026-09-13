@@ -46,17 +46,8 @@ export interface Order {
 }
 
 export interface OrderListMatch {
-  accountIdentifier?: string
-  amount?: number
-  campaign?: string
-  created?: string
-  customerIdentifier?: string
-  recipient?: Record<string, any>
-  referenceOrderID?: string
-  rewardName?: string
-  sendEmail?: boolean
-  status?: string
-  utid?: string
+  limit?: number
+  offset?: number
 }
 
 export interface OrderCreateData {

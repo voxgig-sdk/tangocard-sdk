@@ -82,8 +82,10 @@ main: kit: entity: order: {
         {
           method: "POST"
           orig: "/orders"
-          parts: [
-            "orders"
+          segments: [
+            {
+              lit: "orders"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -116,8 +118,10 @@ main: kit: entity: order: {
           }
           method: "GET"
           orig: "/orders"
-          parts: [
-            "orders"
+          segments: [
+            {
+              lit: "orders"
+            }
           ]
           select: {
             exist: [

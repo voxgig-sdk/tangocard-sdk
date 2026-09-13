@@ -42,17 +42,8 @@
 ---@field utid? string
 
 ---@class OrderListMatch
----@field accountIdentifier? string
----@field amount? number
----@field campaign? string
----@field created? string
----@field customerIdentifier? string
----@field recipient? table
----@field referenceOrderID? string
----@field rewardName? string
----@field sendEmail? boolean
----@field status? string
----@field utid? string
+---@field limit? number
+---@field offset? number
 
 ---@class OrderCreateData
 ---@field accountIdentifier string

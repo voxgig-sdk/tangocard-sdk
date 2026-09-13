@@ -90,13 +90,18 @@ class TangocardConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/catalogs',
-                  'parts' => [
-                    'catalogs',
+                  'segments' => [
+                    [
+                      'lit' => 'catalogs',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.brands`',
+                  ],
+                  'parts' => [
+                    'catalogs',
                   ],
                 ],
               ],
@@ -132,13 +137,18 @@ class TangocardConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/customers',
-                  'parts' => [
-                    'customers',
+                  'segments' => [
+                    [
+                      'lit' => 'customers',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'customers',
                   ],
                 ],
               ],
@@ -220,13 +230,18 @@ class TangocardConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/orders',
-                  'parts' => [
-                    'orders',
+                  'segments' => [
+                    [
+                      'lit' => 'orders',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'orders',
                   ],
                 ],
               ],
@@ -255,8 +270,10 @@ class TangocardConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/orders',
-                  'parts' => [
-                    'orders',
+                  'segments' => [
+                    [
+                      'lit' => 'orders',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -267,6 +284,9 @@ class TangocardConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'orders',
                   ],
                 ],
               ],

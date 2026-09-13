@@ -68,13 +68,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/catalogs",
-								"parts": []any{
-									"catalogs",
+								"segments": []any{
+									map[string]any{
+										"lit": "catalogs",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.brands`",
+								},
+								"parts": []any{
+									"catalogs",
 								},
 							},
 						},
@@ -110,13 +115,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/customers",
-								"parts": []any{
-									"customers",
+								"segments": []any{
+									map[string]any{
+										"lit": "customers",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"customers",
 								},
 							},
 						},
@@ -198,13 +208,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/orders",
-								"parts": []any{
-									"orders",
+								"segments": []any{
+									map[string]any{
+										"lit": "orders",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"orders",
 								},
 							},
 						},
@@ -233,8 +248,10 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/orders",
-								"parts": []any{
-									"orders",
+								"segments": []any{
+									map[string]any{
+										"lit": "orders",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -246,6 +263,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"orders",
+								},
 							},
 						},
 					},
@@ -256,6 +276,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

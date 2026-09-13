@@ -35,8 +35,10 @@ main: kit: entity: catalog: {
         {
           method: "GET"
           orig: "/catalogs"
-          parts: [
-            "catalogs"
+          segments: [
+            {
+              lit: "catalogs"
+            }
           ]
           transform: {
             req: "`reqdata`"

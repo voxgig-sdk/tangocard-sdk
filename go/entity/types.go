@@ -59,17 +59,8 @@ type Order struct {
 
 // OrderListMatch is the typed request payload for Order.ListTyped.
 type OrderListMatch struct {
-	AccountIdentifier *string `json:"accountIdentifier,omitempty"`
-	Amount *float64 `json:"amount,omitempty"`
-	Campaign *string `json:"campaign,omitempty"`
-	Created *string `json:"created,omitempty"`
-	CustomerIdentifier *string `json:"customerIdentifier,omitempty"`
-	Recipient *map[string]any `json:"recipient,omitempty"`
-	ReferenceOrderID *string `json:"referenceOrderID,omitempty"`
-	RewardName *string `json:"rewardName,omitempty"`
-	SendEmail *bool `json:"sendEmail,omitempty"`
-	Status *string `json:"status,omitempty"`
-	Utid *string `json:"utid,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
 }
 
 // OrderCreateData is the typed request payload for Order.CreateTyped.

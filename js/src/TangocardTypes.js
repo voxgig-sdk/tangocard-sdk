@@ -53,17 +53,8 @@
 
 /**
  * @typedef {Object} OrderListMatch
- * @property {string} [accountIdentifier]
- * @property {number} [amount]
- * @property {string} [campaign]
- * @property {string} [created]
- * @property {string} [customerIdentifier]
- * @property {Object} [recipient]
- * @property {string} [referenceOrderID]
- * @property {string} [rewardName]
- * @property {boolean} [sendEmail]
- * @property {string} [status]
- * @property {string} [utid]
+ * @property {number} [limit]
+ * @property {number} [offset]
  */
 
 /**

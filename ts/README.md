@@ -32,6 +32,7 @@ import { TangocardSDK } from '@voxgig-sdk/tangocard'
 
 const client = new TangocardSDK({
   apikey: process.env.TANGOCARD_APIKEY,
+  secret: process.env.TANGOCARD_SECRET,
 })
 ```
 
@@ -132,7 +133,7 @@ console.log(catalog)
 You can also use the instance method:
 
 ```ts
-const client = new TangocardSDK({ apikey: '...' })
+const client = new TangocardSDK({ apikey: '...', secret: '...' })
 const testClient = client.tester()
 ```
 
@@ -169,6 +170,7 @@ const logger = {
 
 const client = new TangocardSDK({
   apikey: '...',
+  secret: '...',
   extend: [logger],
 })
 ```
@@ -180,6 +182,7 @@ Create a `.env.local` file at the project root:
 ```
 TANGOCARD_TEST_LIVE=TRUE
 TANGOCARD_APIKEY=<your-key>
+TANGOCARD_SECRET=<your-secret>
 ```
 
 Then run:
@@ -198,6 +201,7 @@ cd ts && npm test
 ```ts
 new TangocardSDK(options?: {
   apikey?: string
+  secret?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -209,6 +213,7 @@ new TangocardSDK(options?: {
 | Option | Type | Description |
 | --- | --- | --- |
 | `apikey` | `string` | API key for authentication. |
+| `secret` | `string` | API secret for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -435,6 +440,29 @@ const order = await client.Order().create({
   customerIdentifier: 'example_customerIdentifier',
 })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

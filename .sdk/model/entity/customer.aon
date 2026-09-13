@@ -30,8 +30,10 @@ main: kit: entity: customer: {
         {
           method: "GET"
           orig: "/customers"
-          parts: [
-            "customers"
+          segments: [
+            {
+              lit: "customers"
+            }
           ]
           transform: {
             req: "`reqdata`"

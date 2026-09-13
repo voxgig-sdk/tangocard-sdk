@@ -60,17 +60,8 @@ class Order(OrderRequired, total=False):
 
 
 class OrderListMatch(TypedDict, total=False):
-    accountIdentifier: str
-    amount: float
-    campaign: str
-    created: str
-    customerIdentifier: str
-    recipient: dict
-    referenceOrderID: str
-    rewardName: str
-    sendEmail: bool
-    status: str
-    utid: str
+    limit: int
+    offset: int
 
 
 class OrderCreateDataRequired(TypedDict):

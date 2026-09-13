@@ -1,6 +1,14 @@
 # Tangocard SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -85,14 +93,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/catalogs",
-                "parts": [
-                  "catalogs",
+                "segments": [
+                  {
+                    "lit": "catalogs",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.brands`",
                 },
+                "parts": [
+                  "catalogs",
+                ],
               },
             ],
           },
@@ -127,14 +140,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/customers",
-                "parts": [
-                  "customers",
+                "segments": [
+                  {
+                    "lit": "customers",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "customers",
+                ],
               },
             ],
           },
@@ -215,14 +233,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/orders",
-                "parts": [
-                  "orders",
+                "segments": [
+                  {
+                    "lit": "orders",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "orders",
+                ],
               },
             ],
           },
@@ -250,8 +273,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/orders",
-                "parts": [
-                  "orders",
+                "segments": [
+                  {
+                    "lit": "orders",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -263,6 +288,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "orders",
+                ],
               },
             ],
           },
