@@ -4,7 +4,14 @@ declare(strict_types=1);
 // Tangocard SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/DebugFeature.php';
+require_once __DIR__ . '/feature/IdempotencyFeature.php';
+require_once __DIR__ . '/feature/MetricsFeature.php';
+require_once __DIR__ . '/feature/PagingFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class TangocardFeatures
@@ -14,8 +21,22 @@ class TangocardFeatures
         switch ($name) {
             case "base":
                 return new TangocardBaseFeature();
+            case "debug":
+                return new TangocardDebugFeature();
+            case "idempotency":
+                return new TangocardIdempotencyFeature();
+            case "metrics":
+                return new TangocardMetricsFeature();
+            case "paging":
+                return new TangocardPagingFeature();
+            case "ratelimit":
+                return new TangocardRatelimitFeature();
+            case "retry":
+                return new TangocardRetryFeature();
             case "test":
                 return new TangocardTestFeature();
+            case "timeout":
+                return new TangocardTimeoutFeature();
             default:
                 return new TangocardBaseFeature();
         }
@@ -31,7 +52,14 @@ class TangocardFeatures
     {
         switch ($name) {
             case "base":
+            case "debug":
+            case "idempotency":
+            case "metrics":
+            case "paging":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

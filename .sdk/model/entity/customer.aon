@@ -28,6 +28,12 @@ main: kit: entity: customer: {
       name: "list"
       points: [
         {
+          contract: {
+            id: "GET /customers"
+            json: "{\"operationId\":\"listCustomers\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"customerIdentifier\":{\"type\":\"string\"},\"displayName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Customers\"}},\"security\":[{\"basicAuth\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/customers"
           segments: [

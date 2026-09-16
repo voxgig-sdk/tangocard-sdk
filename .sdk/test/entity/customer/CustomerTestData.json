@@ -26,5 +26,53 @@
         "email": "s7a"
       }
     }
+  },
+  "requests": {
+    "GET /customers": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listCustomers",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "customerIdentifier": {
+                        "type": "string"
+                      },
+                      "displayName": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Customers"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

@@ -61,5 +61,189 @@
         "utid": "s1c2"
       }
     }
+  },
+  "requests": {
+    "POST /orders": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createOrder",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "accountIdentifier": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "campaign": {
+                    "type": "string"
+                  },
+                  "customerIdentifier": {
+                    "type": "string"
+                  },
+                  "recipient": {
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "sendEmail": {
+                    "type": "boolean"
+                  },
+                  "utid": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "accountIdentifier",
+                  "customerIdentifier",
+                  "amount",
+                  "utid"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "created": {
+                      "type": "string"
+                    },
+                    "referenceOrderID": {
+                      "type": "string"
+                    },
+                    "rewardName": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "utid": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The created order"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /orders": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listOrders",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "orders": {
+                      "items": {
+                        "properties": {
+                          "amount": {
+                            "type": "number"
+                          },
+                          "created": {
+                            "type": "string"
+                          },
+                          "referenceOrderID": {
+                            "type": "string"
+                          },
+                          "rewardName": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "utid": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "page": {
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Orders"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

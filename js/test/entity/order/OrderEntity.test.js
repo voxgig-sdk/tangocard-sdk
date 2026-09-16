@@ -1,12 +1,14 @@
 
 const envlocal = __dirname + '/../../../.env.local'
-require('dotenv').config({ quiet: true, path: [envlocal] })
+require('../../utility').loadEnvLocal(envlocal)
 
 const Path = require('node:path')
 const Fs = require('node:fs')
 
 const { test, describe, afterEach } = require('node:test')
 const assert = require('node:assert')
+const { createLiveTransport } = require('../../live-runner')
+const { runLiveEntity } = require('../../live-entity')
 
 
 const { TangocardSDK, BaseFeature, stdutil, config } = require('../../..')
@@ -36,9 +38,13 @@ describe('OrderEntity', async () => {
   })
 
 
-  test('basic', async () => {
+  test('basic', async (t) => {
 
+    
     const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"accountIdentifier","req":true,"type":"`$STRING`","index$":0},{"active":true,"name":"amount","op":{"create":{"req":true,"type":"`$NUMBER`"}},"req":false,"type":"`$NUMBER`","index$":1},{"active":true,"name":"campaign","req":false,"type":"`$STRING`","index$":2},{"active":true,"name":"created","req":false,"type":"`$STRING`","index$":3},{"active":true,"name":"customerIdentifier","req":true,"type":"`$STRING`","index$":4},{"active":true,"name":"recipient","req":false,"type":"`$OBJECT`","index$":5},{"active":true,"name":"referenceOrderID","req":false,"type":"`$STRING`","index$":6},{"active":true,"name":"rewardName","req":false,"type":"`$STRING`","index$":7},{"active":true,"name":"sendEmail","req":false,"type":"`$BOOLEAN`","index$":8},{"active":true,"name":"status","req":false,"type":"`$STRING`","index$":9},{"active":true,"name":"utid","op":{"create":{"req":true,"type":"`$STRING`"}},"req":false,"type":"`$STRING`","index$":10}],"name":"order","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{},"contract":{"id":"POST /orders","json":"{\"operationId\":\"createOrder\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accountIdentifier\":{\"type\":\"string\"},\"amount\":{\"type\":\"number\"},\"campaign\":{\"type\":\"string\"},\"customerIdentifier\":{\"type\":\"string\"},\"recipient\":{\"properties\":{\"email\":{\"type\":\"string\"},\"firstName\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"}},\"type\":\"object\"},\"sendEmail\":{\"type\":\"boolean\"},\"utid\":{\"type\":\"string\"}},\"required\":[\"accountIdentifier\",\"customerIdentifier\",\"amount\",\"utid\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"created\":{\"type\":\"string\"},\"referenceOrderID\":{\"type\":\"string\"},\"rewardName\":{\"type\":\"string\"},\"status\":{\"type\":\"string\"},\"utid\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"The created order\"}},\"security\":[{\"basicAuth\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/orders","segments":[{"lit":"orders"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"kind":"query","name":"limit","orig":"limit","reqd":false,"type":"`$INTEGER`","index$":0},{"active":true,"kind":"query","name":"offset","orig":"offset","reqd":false,"type":"`$INTEGER`","index$":1}]},"contract":{"id":"GET /orders","json":"{\"operationId\":\"listOrders\",\"parameters\":[{\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"orders\":{\"items\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"created\":{\"type\":\"string\"},\"referenceOrderID\":{\"type\":\"string\"},\"rewardName\":{\"type\":\"string\"},\"status\":{\"type\":\"string\"},\"utid\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"page\":{\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Orders\"}},\"security\":[{\"basicAuth\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/orders","segments":[{"lit":"orders"}],"select":{"exist":["limit","offset"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"order","name__orig":"order","Name":"Order","name_":"order","name-":"order","NAME":"ORDER","index$":2}, {"active":true,"entity":"order","key$":"BasicOrderFlow","kind":"basic","name":"BasicOrderFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"order_ref01"},"match":{},"op":"create","spec":[],"valid":[],"index$":0},{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"order_ref01"}}],"index$":1}]}, 'Order')
+    }
     const client = setup.client
     const struct = setup.struct
 
@@ -105,7 +111,14 @@ function basicSetup(extra) {
 
   idmap = env['TANGOCARD_TEST_ORDER_ENTID']
 
-  if ('TRUE' === env.TANGOCARD_TEST_LIVE) {
+  const live = 'TRUE' === env.TANGOCARD_TEST_LIVE
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['TANGOCARD_TEST_ORDER_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new TangocardSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -117,7 +130,8 @@ function basicSetup(extra) {
       // the last entry is undefined, and basicSetup is normally called with no
       // argument at all - so a bare 'extra' silently discarded the apikey and
       // server values above and handed the SDK undefined.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -129,6 +143,8 @@ function basicSetup(extra) {
     struct,
     data: entityData,
     explain: 'TRUE' === env.TANGOCARD_TEST_EXPLAIN,
+    live,
+    transport,
     now: Date.now(),
   }
 

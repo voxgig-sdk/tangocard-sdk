@@ -30,5 +30,67 @@
         "items": []
       }
     }
+  },
+  "requests": {
+    "GET /catalogs": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listBrands",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "brands": {
+                      "items": {
+                        "properties": {
+                          "brandKey": {
+                            "type": "string"
+                          },
+                          "brandName": {
+                            "type": "string"
+                          },
+                          "imageUrls": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "items": {
+                            "items": {
+                              "type": "object"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Catalog"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

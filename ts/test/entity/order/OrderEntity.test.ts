@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { TangocardSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('OrderEntity', async () => {
 
     const live = 'TRUE' === process.env.TANGOCARD_TEST_LIVE
     for (const op of ['create', 'list']) {
-      if (maybeSkipControl(t, 'entityOp', 'order.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'order.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set TANGOCARD_TEST_ORDER_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"accountIdentifier","req":true,"type":"`$STRING`","index$":0},{"active":true,"name":"amount","op":{"create":{"req":true,"type":"`$NUMBER`"}},"req":false,"type":"`$NUMBER`","index$":1},{"active":true,"name":"campaign","req":false,"type":"`$STRING`","index$":2},{"active":true,"name":"created","req":false,"type":"`$STRING`","index$":3},{"active":true,"name":"customerIdentifier","req":true,"type":"`$STRING`","index$":4},{"active":true,"name":"recipient","req":false,"type":"`$OBJECT`","index$":5},{"active":true,"name":"referenceOrderID","req":false,"type":"`$STRING`","index$":6},{"active":true,"name":"rewardName","req":false,"type":"`$STRING`","index$":7},{"active":true,"name":"sendEmail","req":false,"type":"`$BOOLEAN`","index$":8},{"active":true,"name":"status","req":false,"type":"`$STRING`","index$":9},{"active":true,"name":"utid","op":{"create":{"req":true,"type":"`$STRING`"}},"req":false,"type":"`$STRING`","index$":10}],"name":"order","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{},"contract":{"id":"POST /orders","json":"{\"operationId\":\"createOrder\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accountIdentifier\":{\"type\":\"string\"},\"amount\":{\"type\":\"number\"},\"campaign\":{\"type\":\"string\"},\"customerIdentifier\":{\"type\":\"string\"},\"recipient\":{\"properties\":{\"email\":{\"type\":\"string\"},\"firstName\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"}},\"type\":\"object\"},\"sendEmail\":{\"type\":\"boolean\"},\"utid\":{\"type\":\"string\"}},\"required\":[\"accountIdentifier\",\"customerIdentifier\",\"amount\",\"utid\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"created\":{\"type\":\"string\"},\"referenceOrderID\":{\"type\":\"string\"},\"rewardName\":{\"type\":\"string\"},\"status\":{\"type\":\"string\"},\"utid\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"The created order\"}},\"security\":[{\"basicAuth\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/orders","segments":[{"lit":"orders"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"kind":"query","name":"limit","orig":"limit","reqd":false,"type":"`$INTEGER`","index$":0},{"active":true,"kind":"query","name":"offset","orig":"offset","reqd":false,"type":"`$INTEGER`","index$":1}]},"contract":{"id":"GET /orders","json":"{\"operationId\":\"listOrders\",\"parameters\":[{\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"orders\":{\"items\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"created\":{\"type\":\"string\"},\"referenceOrderID\":{\"type\":\"string\"},\"rewardName\":{\"type\":\"string\"},\"status\":{\"type\":\"string\"},\"utid\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"page\":{\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Orders\"}},\"security\":[{\"basicAuth\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/orders","segments":[{"lit":"orders"}],"select":{"exist":["limit","offset"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"order","name__orig":"order","Name":"Order","name_":"order","name-":"order","NAME":"ORDER","index$":2}, {"active":true,"entity":"order","key$":"BasicOrderFlow","kind":"basic","name":"BasicOrderFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"order_ref01"},"match":{},"op":"create","spec":[],"valid":[],"index$":0},{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"order_ref01"}}],"index$":1}]}, 'Order')
     }
     const client = setup.client
     const struct = setup.struct
@@ -115,13 +114,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['TANGOCARD_TEST_ORDER_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'TANGOCARD_TEST_ORDER_ENTID': idmap,
     'TANGOCARD_TEST_LIVE': 'FALSE',
@@ -134,7 +126,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.TANGOCARD_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['TANGOCARD_TEST_ORDER_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new TangocardSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -148,7 +146,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -161,7 +160,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.TANGOCARD_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 
