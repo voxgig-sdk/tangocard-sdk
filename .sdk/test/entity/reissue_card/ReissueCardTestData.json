@@ -1,0 +1,252 @@
+{
+  "existing": {
+    "reissue_card": {
+      "REISSUE_CARD00": {
+        "commentText": "s32",
+        "id": "REISSUE_CARD00",
+        "reason": "s34",
+        "status": "s35",
+        "updatedBy": "s36"
+      },
+      "REISSUE_CARD01": {
+        "commentText": "s64",
+        "id": "REISSUE_CARD01",
+        "reason": "s66",
+        "status": "s67",
+        "updatedBy": "s68"
+      },
+      "REISSUE_CARD02": {
+        "commentText": "s96",
+        "id": "REISSUE_CARD02",
+        "reason": "s98",
+        "status": "s99",
+        "updatedBy": "s9a"
+      }
+    }
+  },
+  "new": {
+    "reissue_card": {
+      "reissue_card_ref01": {
+        "commentText": "sc8",
+        "reason": "sca",
+        "status": "scb",
+        "updatedBy": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /prepaidCardService/reissueCard/{referenceLineItemID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "reissueCard",
+        "parameters": [
+          {
+            "description": "Reference Line Item ID",
+            "in": "path",
+            "name": "referenceLineItemID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "commentText": {
+                    "description": "Optional comment for the card replacement.",
+                    "type": "string"
+                  },
+                  "reason": {
+                    "description": "Reason for the card replacement.",
+                    "enum": [
+                      "CARDHOLDER_REQUESTED",
+                      "CUSTOMER_REQUEST",
+                      "CUSTOMER_SERVICE_INITIATED",
+                      "FRAUD",
+                      "LOST",
+                      "STOLEN",
+                      "DAMAGED",
+                      "RENEW",
+                      "RISK_SPOOF_SITE",
+                      "RISK_VICTIM_ASSISTED",
+                      "RISK_TAMPERED",
+                      "RISK_FRIENDLY_FRAUD",
+                      "RISK_POTENTIAL_COMPROMISED_CARD",
+                      "RISK_EXCESSIVE_BALANCE_INQUIRY",
+                      "RISK_PARTNER_REQUEST",
+                      "RISK_POTENTIAL_PROGRAM_ABUSE"
+                    ],
+                    "type": "string"
+                  },
+                  "updatedBy": {
+                    "description": "Identifier of the agent initiating the request.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "reason",
+                  "updatedBy"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "description": "Status of the reissue request.",
+                      "enum": [
+                        "ACCEPTED",
+                        "FAILED"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

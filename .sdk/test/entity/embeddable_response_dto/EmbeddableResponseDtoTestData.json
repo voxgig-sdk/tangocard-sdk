@@ -1,0 +1,140 @@
+{
+  "existing": {
+    "embeddable_response_dto": {
+      "EMBEDDABLE_RESPONSE_DTO00": {
+        "url": "sa",
+        "reference_line_item_id": "REFERENCE_LINE_ITEM01",
+        "id": "EMBEDDABLE_RESPONSE_DTO00"
+      },
+      "EMBEDDABLE_RESPONSE_DTO01": {
+        "url": "s14",
+        "reference_line_item_id": "REFERENCE_LINE_ITEM01",
+        "id": "EMBEDDABLE_RESPONSE_DTO01"
+      },
+      "EMBEDDABLE_RESPONSE_DTO02": {
+        "url": "s1e",
+        "reference_line_item_id": "REFERENCE_LINE_ITEM01",
+        "id": "EMBEDDABLE_RESPONSE_DTO02"
+      }
+    }
+  },
+  "new": {
+    "embeddable_response_dto": {
+      "embeddable_response_dto_ref01": {
+        "url": "s28"
+      }
+    }
+  },
+  "requests": {
+    "GET /lineItems/{referenceLineItemID}/embeddedUrl": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getEmbeddedURL",
+        "parameters": [
+          {
+            "description": "Reference order ID",
+            "in": "path",
+            "name": "referenceLineItemID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

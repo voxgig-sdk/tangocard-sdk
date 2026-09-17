@@ -1,0 +1,1260 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AsyncOrder | Tango API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Tango API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/tangocard-sdk">voxgig-sdk/tangocard-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Tango API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/account.html">Account</a>
+<a href="../api/add_comment_escalation.html">AddCommentEscalation</a>
+<a href="../api/all_event_type.html">AllEventType</a>
+<a aria-current="page" href="../api/async_order.html">AsyncOrder</a><div class="nav-sections"><a class="nav-section" href="#post-asyncorders">POST /asyncOrders</a>
+<a class="nav-section" href="#get-asyncorders">GET /asyncOrders</a></div>
+<a href="../api/async_order_detail_view.html">AsyncOrderDetailView</a>
+<a href="../api/async_order_line_items_view.html">AsyncOrderLineItemsView</a>
+<a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
+<a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
+<a href="../api/balance_alert_view.html">BalanceAlertView</a>
+<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/catalog.html">Catalog</a>
+<a href="../api/choice_product.html">ChoiceProduct</a>
+<a href="../api/country_view_summary.html">CountryViewSummary</a>
+<a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
+<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
+<a href="../api/credential_type_view.html">CredentialTypeView</a>
+<a href="../api/credit_card.html">CreditCard</a>
+<a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
+<a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
+<a href="../api/customer.html">Customer</a>
+<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
+<a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
+<a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
+<a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
+<a href="../api/line_item.html">LineItem</a>
+<a href="../api/low_balance_alert_list_view.html">LowBalanceAlertListView</a>
+<a href="../api/low_balance_alert_view.html">LowBalanceAlertView</a>
+<a href="../api/mobile_country.html">MobileCountry</a>
+<a href="../api/n14_webhook.html">N14Webhook</a>
+<a href="../api/n1_customer.html">N1Customer</a>
+<a href="../api/n2_account.html">N2Account</a>
+<a href="../api/n3_fund.html">N3Fund</a>
+<a href="../api/n8_line_item.html">N8LineItem</a>
+<a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
+<a href="../api/order.html">Order</a>
+<a href="../api/order_view_summary.html">OrderViewSummary</a>
+<a href="../api/prepaid_card_info.html">PrepaidCardInfo</a>
+<a href="../api/prepaid_card_transaction.html">PrepaidCardTransaction</a>
+<a href="../api/reissue_card.html">ReissueCard</a>
+<a href="../api/replacement_reason.html">ReplacementReason</a>
+<a href="../api/resend.html">Resend</a>
+<a href="../api/reward_reasons_map.html">RewardReasonsMap</a>
+<a href="../api/transfer_fund.html">TransferFund</a>
+<a href="../api/update_account.html">UpdateAccount</a>
+<a href="../api/update_webhook_subscription_response_view.html">UpdateWebhookSubscriptionResponseView</a>
+<a href="../api/webhook.html">Webhook</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="asyncorder">AsyncOrder</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-asyncorders"><code>/asyncOrders</code></a></td>
+<td><code>create</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-asyncorders"><code>/asyncOrders</code></a></td>
+<td><code>list</code></td>
+<td>OK</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>specify the account this order will be deducted from</td>
+</tr>
+<tr>
+<td><code>accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Initial value and the total charged amount on the account</td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>specify the customer associated with the order.</td>
+</tr>
+<tr>
+<td><code>duplicateLineItemRefIds</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>If any duplicate duplicateLineItemRefIds exist in the request</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required.</td>
+</tr>
+<tr>
+<td><code>failedLineItems</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>Failed line items list (business validations)</td>
+</tr>
+<tr>
+<td><code>fulfillBy</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>Line Items of the bulk order a required field</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional order notes.</td>
+</tr>
+<tr>
+<td><code>orderStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The Purchase Order Number associated with this order.</td>
+</tr>
+<tr>
+<td><code>referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This status reflects about cart status or validation status based on the processing</td>
+</tr>
+<tr>
+<td><code>totalLineItems</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Total number of line items submitted in the request</td>
+</tr>
+<tr>
+<td><code>totalLineItemsRows</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-asyncorders" class="operation" data-method="post"><code>POST</code> /asyncOrders</h3>
+<p>Operation ID: <code>createAsyncOrder</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>specify the account this order will be deducted from</td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Campaign that may be used to administratively categorize a specific order. Must be between 0 and 1024 characters in length.</td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>specify the customer associated with the order. Must be the customer the accountIdentifier is associated with.</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.</td>
+</tr>
+<tr>
+<td><code>lineItems</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>Line Items of the bulk order a required field</td>
+</tr>
+<tr>
+<td><code>lineItems[].amount</code></td>
+<td><code>number</code></td>
+<td>Yes</td>
+<td>specify the face value of the reward. Always required, including for fixed value items.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Only used for and is required when deliveryMethod is BULKSHIPMENT</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.address</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The address where the bulk shipment is to be delivered.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.address.city</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>35 characters max, Required, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, hyphen, ampersand, and apostrophe.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.address.country</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>2 characters, Enter the ISO 3166-1 alpha-2 country code</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Allows 5 characters, not blank, Digits 0-9 and alpha (a-z, A-Z). For US addresses, this must include only the five-digit US ZIP Code.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>36 characters max, Address region must be a valid 2-character uppercase abbreviation for a U.S. state, territory, or military base; a Canadian province; or contain an international region less than 36 characters.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>35 characters max, required, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>35 characters max, Optional, Not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the company where the shipment is being delivered.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.contactEmail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The email address of the person receiving the shipment</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.contactFirstName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The first name of the bulk shipment contact person.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.contactLastName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The last name of the bulk shipment contact person.</td>
+</tr>
+<tr>
+<td><code>lineItems[].bulkShipping.contactMobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The phone number of the person receiving the shipment</td>
+</tr>
+<tr>
+<td><code>lineItems[].deliveryDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Specify the date to deliver the reward to the recipient. It must be at least 7 days in the future. If not specified, the reward will be immediately send.</td>
+</tr>
+<tr>
+<td><code>lineItems[].deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, EMBEDDED_COMPONENT, ...</code></td>
+<td>Yes</td>
+<td>Specify delivery method for the line item</td>
+</tr>
+<tr>
+<td><code>lineItems[].emailSubject</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. If not specified, a default email subject will be used for the specified reward.</td>
+</tr>
+<tr>
+<td><code>lineItems[].etid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Used with deliveryMethod of EMAIL or PHONE. The unique identifier for the electronic template you would like to use. If not specified, the system will use the default etid.</td>
+</tr>
+<tr>
+<td><code>lineItems[].expirationDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional for Promo Links, the exact calendar date the Promo Link will expire.</td>
+</tr>
+<tr>
+<td><code>lineItems[].externalRefLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Required. Idempotent field that can be used for client-side order line item cross reference and used to map failed and success line items on client side.</td>
+</tr>
+<tr>
+<td><code>lineItems[].lineItemNote</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional line item notes (up to 150 characters)</td>
+</tr>
+<tr>
+<td><code>lineItems[].message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>optional gift message</td>
+</tr>
+<tr>
+<td><code>lineItems[].ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page.</td>
+</tr>
+<tr>
+<td><code>lineItems[].quantity</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The number of rewards to send to the recipient</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. Use to set and store the recipient’s contact information. When deliveryMethod is NONE or EMBEDDED, setting these parameters will allow the platform to store this information for reporting, auditing, and reconciliation.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS. May be required for some UTIDs. This field is optional for digital orders, NOTE: Some digital cash options may require including an address.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 30 characters, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, hyphen, ampersand, and apostrophe.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional, Typically used when shipping to a corporate address.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 5 characters, not blank, Digits 0-9 and alpha (a-z, A-Z). For US addresses this must include the five digit US ZIP Code only.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Address region must be a valid 2-character uppercase abbreviation for a U.S. state, territory, or military base; a Canadian province; or contain an international region less than 36 characters.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is EMAIL. May be required for some UTIDs. It is useful to include when deliveryMethod is PHONE to easily switch between email and phone delivery</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use &lt; or &gt; or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, otherwise optional. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use &lt; or &gt; or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is PHONE. May be required for some UTIDs. Format: +CCCPPPPPPPPPPPP (where C is the country code, 1-3 digits, and P is the phone number, up to 12 digits). Follows ITU E.164, allowing (+) and up to 15 digits for the combined country code and phone number.</td>
+</tr>
+<tr>
+<td><code>lineItems[].shippingMethod</code></td>
+<td><code>enum: upsground, upsgroundsignature, ups2ndday, ups2nddaysignature, upsnextday, upsnextdaysignature, ...</code></td>
+<td>No</td>
+<td>Enumeration for the selected shipping method. Required for deliveryMethod of ADDRESS or BULKSHIPMENT.</td>
+</tr>
+<tr>
+<td><code>lineItems[].utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>the unique identifier for the reward you are sending as provided in the Get Catalog call</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional order notes. Must be between 0 and 1024 characters in length.</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The Purchase Order Number associated with this order.</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional. Use to set the sender’s name and email address if different than the default platform setting.</td>
+</tr>
+<tr>
+<td><code>sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>always optional</td>
+</tr>
+<tr>
+<td><code>sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>always optional (100 character max)</td>
+</tr>
+<tr>
+<td><code>sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>always optional (100 character max)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="200-ok" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>duplicateLineItemRefIds</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>If any duplicate duplicateLineItemRefIds exist in the request</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.</td>
+</tr>
+<tr>
+<td><code>failedLineItems</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Failed line items list (business validations)</td>
+</tr>
+<tr>
+<td><code>failedLineItems[].errors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>failedLineItems[].errors[].errorCodeName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>failedLineItems[].errors[].errorCodeValue</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>failedLineItems[].errors[].field</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>failedLineItems[].errors[].message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>failedLineItems[].externalRefLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>failedLineItems[].lineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>failedLineItems[].utid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This status reflects about cart status or validation status based on the processing</td>
+</tr>
+<tr>
+<td><code>totalLineItems</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>Total number of line items submitted in the request</td>
+</tr>
+</tbody>
+</table>
+<h5 id="202-accepted" class="status" data-status="2xx">202: Accepted</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="402-insufficient-funds" class="status" data-status="4xx">402: Insufficient Funds</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="422-unprocessable-entity" class="status" data-status="4xx">422: Unprocessable Entity</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-exceeded-the-allowable-tps-rate-limit" class="status" data-status="4xx">429: Exceeded the allowable TPS rate limit</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-internal-server-error" class="status" data-status="5xx">500: Internal Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="503-service-unavailable" class="status" data-status="5xx">503: Service Unavailable</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-asyncorders" class="operation" data-method="get"><code>GET</code> /asyncOrders</h3>
+<p>Operation ID: <code>listAsyncOrders</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>accountIdentifier</code> | <code>query</code> | <code>string</code> | No | specify the account to be queried. |
+| <code>customerIdentifier</code> | <code>query</code> | <code>string</code> | No | specify the customer to be queried |
+| <code>externalRefID</code> | <code>query</code> | <code>string</code> | No | specify the external reference ID to be queried |
+| <code>startDate</code> | <code>query</code> | <code>string</code> | No | specify the starting date or date time to be queried according to RFC 3339, that is &quot;2016-01-01&quot; or &quot;2016-01-01T00:00:00Z&quot;. See https://www.ietf.org/rfc/rfc3339.txt |
+| <code>endDate</code> | <code>query</code> | <code>string</code> | No | specify the ending date or date time to be queried according to RFC 3339, that is &quot;2016-01-01&quot; or &quot;2016-01-01T00:00:00Z&quot;. See https://www.ietf.org/rfc/rfc3339.txt |
+| <code>maxResults</code> | <code>query</code> | <code>string</code> | No | specify the number of maxResults per page. |
+| <code>elementsPerBlock</code> | <code>query</code> | <code>string</code> | No | specify the number of elements in a block. |
+| <code>page</code> | <code>query</code> | <code>string</code> | No | specify the page number to return. |
+| <code>minAmount</code> | <code>query</code> | <code>string</code> | No | specify the minimum face value of the reward to be queried. |
+| <code>maxAmount</code> | <code>query</code> | <code>string</code> | No | specify the maximum face value of the reward to be queried. |
+| <code>currencyCode</code> | <code>query</code> | <code>string</code> | No | specify the currency code of the reward to be queried. |
+| <code>utid</code> | <code>query</code> | <code>string</code> | No | specify the unique identifier of the reward to be queried. |
+| <code>ptid</code> | <code>query</code> | <code>string</code> | No | specify the unique identifier of the physical delivery template to be queried. |
+| <code>rewardName</code> | <code>query</code> | <code>string</code> | No | specify the reward name of the reward to be queried. |
+| <code>senderFirstName</code> | <code>query</code> | <code>string</code> | No | specify the sender's first name to be queried. |
+| <code>senderLastName</code> | <code>query</code> | <code>string</code> | No | specify the sender's last name to be queried. |
+| <code>senderEmail</code> | <code>query</code> | <code>string</code> | No | specify the sender email address to be queried. |
+| <code>recipientEmail</code> | <code>query</code> | <code>string</code> | No | specify the recipient's email address to be queried. |
+| <code>recipientMobileNumber</code> | <code>query</code> | <code>string</code> | No | specify the recipient's mobile number to be queried. |
+| <code>recipientFirstName</code> | <code>query</code> | <code>string</code> | No | specify the recipient's first name to be queried. |
+| <code>recipientLastName</code> | <code>query</code> | <code>string</code> | No | specify the recipient's last name to be queried. |
+| <code>sendEmail</code> | <code>query</code> | <code>string</code> | No | specify if sendEmail is true or false to be queried. |
+| <code>deliveryMethod</code> | <code>query</code> | <code>string</code> | No | specify the delivery method to be queried. |
+| <code>orderStatus</code> | <code>query</code> | <code>string</code> | No | specify the order status to be queried. |
+| <code>lineItemStatus</code> | <code>query</code> | <code>string</code> | No | specify the line item status to be queried. |
+| <code>campaign</code> | <code>query</code> | <code>string</code> | No | specify the campaign to be queried. |
+| <code>notes</code> | <code>query</code> | <code>string</code> | No | specify the notes to be queried. |
+| <code>lineItemNotes</code> | <code>query</code> | <code>string</code> | No | specify the notes to be queried. |
+| <code>purchaseOrderNumber</code> | <code>query</code> | <code>string</code> | No | specify the purchaseOrderNumber to be queried. |
+| <code>prevCursor</code> | <code>query</code> | <code>string</code> | No |  |
+| <code>nextCursor</code> | <code>query</code> | <code>string</code> | No |  |</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-ok-1" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>maxResults</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>Maximum number of results per page</td>
+</tr>
+<tr>
+<td><code>nextCursor</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Cursor for the next page of results</td>
+</tr>
+<tr>
+<td><code>nextPageAvailable</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Indicates if a next page is available</td>
+</tr>
+<tr>
+<td><code>orders</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Order elements for the current page</td>
+</tr>
+<tr>
+<td><code>orders[].accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
+</tr>
+<tr>
+<td><code>orders[].accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Number</td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Initial value and the total charged amount on the account</td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged.shippingFee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].campaign</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Campaign</td>
+</tr>
+<tr>
+<td><code>orders[].createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>orders[].customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>orders[].externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>External Reference ID</td>
+</tr>
+<tr>
+<td><code>orders[].fulfillBy</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>fulfill By</td>
+</tr>
+<tr>
+<td><code>orders[].notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td><code>orders[].orderStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td><code>orders[].purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>orders[].referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>orders[].sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>orders[].sender.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.address.streetLine2</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].sender.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].totalLineItemsRows</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>Total Line Items for Order</td>
+</tr>
+<tr>
+<td><code>prevCursor</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Cursor for the previous page of results</td>
+</tr>
+<tr>
+<td><code>prevPageAvailable</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Indicates if a previous page is available</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request-1" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-1" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-1" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-internal-server-error-1" class="status" data-status="5xx">500: Internal Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

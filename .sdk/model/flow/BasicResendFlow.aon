@@ -1,0 +1,22 @@
+# BasicResendFlow
+
+main: kit: flow: BasicResendFlow:
+{
+  entity: "resend",
+  kind: "basic",
+  name: "BasicResendFlow",
+  step: [
+    {
+      input: {
+        ref: "resend_ref01"
+      }
+
+      match: {
+        reference_order_id: "reference_order01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicResendFlow"
+}

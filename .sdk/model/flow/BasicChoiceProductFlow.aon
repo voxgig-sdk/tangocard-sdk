@@ -1,0 +1,44 @@
+# BasicChoiceProductFlow
+
+main: kit: flow: BasicChoiceProductFlow:
+{
+  entity: "choice_product",
+  kind: "basic",
+  name: "BasicChoiceProductFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "choice_product_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "choice_product_ref01",
+        srcdatavar: "choice_product_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "choice_product01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-choice_product_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicChoiceProductFlow"
+}

@@ -1,0 +1,1021 @@
+{
+  "existing": {
+    "account": {
+      "ACCOUNT00": {
+        "accountIdentifier": "s64",
+        "accountNumber": "s65",
+        "contactEmail": "s66",
+        "createdAt": "s67",
+        "currencyCode": "s68",
+        "currentBalance": 105,
+        "displayName": "s6a",
+        "fundingNotification": [],
+        "id": "ACCOUNT00",
+        "status": "s6d",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01"
+      },
+      "ACCOUNT01": {
+        "accountIdentifier": "sc8",
+        "accountNumber": "sc9",
+        "contactEmail": "sca",
+        "createdAt": "scb",
+        "currencyCode": "scc",
+        "currentBalance": 205,
+        "displayName": "sce",
+        "fundingNotification": [],
+        "id": "ACCOUNT01",
+        "status": "sd1",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01"
+      },
+      "ACCOUNT02": {
+        "accountIdentifier": "s12c",
+        "accountNumber": "s12d",
+        "contactEmail": "s12e",
+        "createdAt": "s12f",
+        "currencyCode": "s130",
+        "currentBalance": 305,
+        "displayName": "s132",
+        "fundingNotification": [],
+        "id": "ACCOUNT02",
+        "status": "s135",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01"
+      }
+    }
+  },
+  "new": {
+    "account": {
+      "account_ref01": {
+        "accountIdentifier": "s190",
+        "accountNumber": "s191",
+        "contactEmail": "s192",
+        "createdAt": "s193",
+        "currencyCode": "s194",
+        "currentBalance": 405,
+        "displayName": "s196",
+        "fundingNotification": [],
+        "status": "s199"
+      }
+    }
+  },
+  "requests": {
+    "GET /accounts": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listCustomerAccounts_1",
+        "parameters": [
+          {
+            "description": "Whether to paginate the results or not. Defaults to false.",
+            "in": "query",
+            "name": "paginate",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The cursor to use for the previous page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "prevCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The cursor to use for the next page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "nextCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of results to return. The default is 10, and the maximum is 200. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "maxResults",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Specify the account number to be queried.",
+            "in": "query",
+            "name": "accountNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account display name to be queried.",
+            "in": "query",
+            "name": "displayName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the status to be queried.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "INACTIVE",
+                "DISABLED",
+                "FROZEN",
+                "DELETED"
+              ],
+              "pattern": "ACTIVE|INACTIVE|DISABLED|FROZEN|DELETED",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the contact email address to be queried.",
+            "in": "query",
+            "name": "contactEmail",
+            "required": false,
+            "schema": {
+              "format": "email",
+              "maxLength": 255,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the currency code(s) to be queried.",
+            "in": "query",
+            "name": "currencyCode",
+            "required": false,
+            "schema": {
+              "items": {
+                "enum": [
+                  "AUD",
+                  "CAD",
+                  "EUR",
+                  "GBP",
+                  "USD",
+                  "MXN",
+                  "SGD",
+                  "PLN"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Specify the minimum currentBalance to be queried.",
+            "in": "query",
+            "name": "minBalance",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Specify the maximum currentBalance to be queried.",
+            "in": "query",
+            "name": "maxBalance",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Specify the earliest createdAt date to be queried.",
+            "in": "query",
+            "name": "minDateCreatedAt",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the latest createdAt date to be queried.",
+            "in": "query",
+            "name": "maxDateCreatedAt",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the funding notification email(s) to be queried.",
+            "in": "query",
+            "name": "fundingNotificationEmail",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "items": {
+                        "properties": {
+                          "accountIdentifier": {
+                            "title": "Account Identifier",
+                            "type": "string"
+                          },
+                          "accountNumber": {
+                            "title": "Account Number",
+                            "type": "string"
+                          },
+                          "contactEmail": {
+                            "title": "Contact Email",
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "title": "Account Creation Timestamp",
+                            "type": "string"
+                          },
+                          "currencyCode": {
+                            "title": "Currency Code",
+                            "type": "string"
+                          },
+                          "currentBalance": {
+                            "title": "Current Balance",
+                            "type": "number"
+                          },
+                          "displayName": {
+                            "title": "Account Display Name",
+                            "type": "string"
+                          },
+                          "fundingNotification": {
+                            "items": {
+                              "properties": {
+                                "emailAddress": {
+                                  "title": "Email Address",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "title": "Funding Notification Email Addresses",
+                            "type": "array"
+                          },
+                          "status": {
+                            "title": "Account Status",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "accountIdentifier",
+                          "accountNumber",
+                          "createdAt",
+                          "currencyCode",
+                          "currentBalance",
+                          "displayName",
+                          "status"
+                        ],
+                        "type": "object"
+                      },
+                      "properties": {
+                        "empty": {
+                          "type": "boolean"
+                        },
+                        "first": {
+                          "properties": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/properties"
+                          },
+                          "required": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/required"
+                          },
+                          "type": "object"
+                        },
+                        "last": {
+                          "properties": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/properties"
+                          },
+                          "required": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/required"
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "title": "Non Paginated",
+                      "type": "array"
+                    },
+                    {
+                      "properties": {
+                        "items": {
+                          "items": {
+                            "properties": {
+                              "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/properties"
+                            },
+                            "required": {
+                              "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/required"
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "maxResults": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "nextCursor": {
+                          "type": "string"
+                        },
+                        "nextPageAvailable": {
+                          "type": "boolean"
+                        },
+                        "numberOfElements": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "prevCursor": {
+                          "type": "string"
+                        },
+                        "prevPageAvailable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "title": "Paginated",
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /accounts/{accountIdentifier}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getAccount",
+        "parameters": [
+          {
+            "description": "The accountIdentifier for the Account you are seeking details.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "accountNumber": {
+                      "title": "Account Number",
+                      "type": "string"
+                    },
+                    "contactEmail": {
+                      "title": "Contact Email",
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "title": "Account Creation Timestamp",
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "title": "Currency Code",
+                      "type": "string"
+                    },
+                    "currentBalance": {
+                      "title": "Current Balance",
+                      "type": "number"
+                    },
+                    "displayName": {
+                      "title": "Account Display Name",
+                      "type": "string"
+                    },
+                    "fundingNotification": {
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "title": "Email Address",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "Funding Notification Email Addresses",
+                      "type": "array"
+                    },
+                    "status": {
+                      "title": "Account Status",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "accountNumber",
+                    "createdAt",
+                    "currencyCode",
+                    "currentBalance",
+                    "displayName",
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PATCH /customers/{customerIdentifier}/accounts/{accountIdentifier}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateCustomerAccount",
+        "parameters": [
+          {
+            "description": "The customerIdentifier for the Customer under which you are updating an account.",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The accountIdentifier for the Account you are updating.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "contactEmail": {
+                    "description": "optional, an email address for a designated representative for this account.",
+                    "title": "Email",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "description": "optional, a friendly name for this account.",
+                    "title": "Display Name",
+                    "type": "string"
+                  },
+                  "fundingNotification": {
+                    "description": "optional, send funding notification emails to the following address(es). A provided list replaces the existing list, an empty list clears all existing emails, and a null/omitted value leaves the list unchanged.",
+                    "items": {
+                      "properties": {
+                        "emailAddress": {
+                          "description": "optional, email address to send funding notifications to for this account.",
+                          "title": "Email",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "title": "Funding Notification",
+                    "type": "array",
+                    "uniqueItems": true
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "accountNumber": {
+                      "title": "Account Number",
+                      "type": "string"
+                    },
+                    "contactEmail": {
+                      "title": "Contact Email",
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "title": "Account Creation Timestamp",
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "title": "Currency Code",
+                      "type": "string"
+                    },
+                    "currentBalance": {
+                      "title": "Current Balance",
+                      "type": "number"
+                    },
+                    "displayName": {
+                      "title": "Account Display Name",
+                      "type": "string"
+                    },
+                    "fundingNotification": {
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "title": "Email Address",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "Funding Notification Email Addresses",
+                      "type": "array"
+                    },
+                    "status": {
+                      "title": "Account Status",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "accountNumber",
+                    "createdAt",
+                    "currencyCode",
+                    "currentBalance",
+                    "displayName",
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

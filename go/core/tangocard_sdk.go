@@ -338,11 +338,155 @@ func (sdk *TangocardSDK) Graphql(
 }
 
 
+// Account returns a Account entity bound to this client.
+// Idiomatic usage: client.Account(nil).List(nil, nil) or
+// client.Account(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) Account(data map[string]any) TangocardEntity {
+	return NewAccountEntityFunc(sdk, data)
+}
+
+
+// AddCommentEscalation returns a AddCommentEscalation entity bound to this client.
+// Idiomatic usage: client.AddCommentEscalation(nil).List(nil, nil) or
+// client.AddCommentEscalation(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) AddCommentEscalation(data map[string]any) TangocardEntity {
+	return NewAddCommentEscalationEntityFunc(sdk, data)
+}
+
+
+// AllEventType returns a AllEventType entity bound to this client.
+// Idiomatic usage: client.AllEventType(nil).List(nil, nil) or
+// client.AllEventType(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) AllEventType(data map[string]any) TangocardEntity {
+	return NewAllEventTypeEntityFunc(sdk, data)
+}
+
+
+// AsyncOrder returns a AsyncOrder entity bound to this client.
+// Idiomatic usage: client.AsyncOrder(nil).List(nil, nil) or
+// client.AsyncOrder(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) AsyncOrder(data map[string]any) TangocardEntity {
+	return NewAsyncOrderEntityFunc(sdk, data)
+}
+
+
+// AsyncOrderDetailView returns a AsyncOrderDetailView entity bound to this client.
+// Idiomatic usage: client.AsyncOrderDetailView(nil).List(nil, nil) or
+// client.AsyncOrderDetailView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) AsyncOrderDetailView(data map[string]any) TangocardEntity {
+	return NewAsyncOrderDetailViewEntityFunc(sdk, data)
+}
+
+
+// AsyncOrderLineItemsView returns a AsyncOrderLineItemsView entity bound to this client.
+// Idiomatic usage: client.AsyncOrderLineItemsView(nil).List(nil, nil) or
+// client.AsyncOrderLineItemsView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) AsyncOrderLineItemsView(data map[string]any) TangocardEntity {
+	return NewAsyncOrderLineItemsViewEntityFunc(sdk, data)
+}
+
+
+// AsyncReasonCodesView returns a AsyncReasonCodesView entity bound to this client.
+// Idiomatic usage: client.AsyncReasonCodesView(nil).List(nil, nil) or
+// client.AsyncReasonCodesView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) AsyncReasonCodesView(data map[string]any) TangocardEntity {
+	return NewAsyncReasonCodesViewEntityFunc(sdk, data)
+}
+
+
+// AsyncUpdateLineItemView returns a AsyncUpdateLineItemView entity bound to this client.
+// Idiomatic usage: client.AsyncUpdateLineItemView(nil).List(nil, nil) or
+// client.AsyncUpdateLineItemView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) AsyncUpdateLineItemView(data map[string]any) TangocardEntity {
+	return NewAsyncUpdateLineItemViewEntityFunc(sdk, data)
+}
+
+
+// BalanceAlertView returns a BalanceAlertView entity bound to this client.
+// Idiomatic usage: client.BalanceAlertView(nil).List(nil, nil) or
+// client.BalanceAlertView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) BalanceAlertView(data map[string]any) TangocardEntity {
+	return NewBalanceAlertViewEntityFunc(sdk, data)
+}
+
+
+// BrandCategoriesView returns a BrandCategoriesView entity bound to this client.
+// Idiomatic usage: client.BrandCategoriesView(nil).List(nil, nil) or
+// client.BrandCategoriesView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) BrandCategoriesView(data map[string]any) TangocardEntity {
+	return NewBrandCategoriesViewEntityFunc(sdk, data)
+}
+
+
 // Catalog returns a Catalog entity bound to this client.
 // Idiomatic usage: client.Catalog(nil).List(nil, nil) or
 // client.Catalog(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TangocardSDK) Catalog(data map[string]any) TangocardEntity {
 	return NewCatalogEntityFunc(sdk, data)
+}
+
+
+// ChoiceProduct returns a ChoiceProduct entity bound to this client.
+// Idiomatic usage: client.ChoiceProduct(nil).List(nil, nil) or
+// client.ChoiceProduct(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) ChoiceProduct(data map[string]any) TangocardEntity {
+	return NewChoiceProductEntityFunc(sdk, data)
+}
+
+
+// CountryViewSummary returns a CountryViewSummary entity bound to this client.
+// Idiomatic usage: client.CountryViewSummary(nil).List(nil, nil) or
+// client.CountryViewSummary(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) CountryViewSummary(data map[string]any) TangocardEntity {
+	return NewCountryViewSummaryEntityFunc(sdk, data)
+}
+
+
+// CreateAccountCriterion returns a CreateAccountCriterion entity bound to this client.
+// Idiomatic usage: client.CreateAccountCriterion(nil).List(nil, nil) or
+// client.CreateAccountCriterion(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) CreateAccountCriterion(data map[string]any) TangocardEntity {
+	return NewCreateAccountCriterionEntityFunc(sdk, data)
+}
+
+
+// CreateCustomerCriterion returns a CreateCustomerCriterion entity bound to this client.
+// Idiomatic usage: client.CreateCustomerCriterion(nil).List(nil, nil) or
+// client.CreateCustomerCriterion(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) CreateCustomerCriterion(data map[string]any) TangocardEntity {
+	return NewCreateCustomerCriterionEntityFunc(sdk, data)
+}
+
+
+// CredentialTypeView returns a CredentialTypeView entity bound to this client.
+// Idiomatic usage: client.CredentialTypeView(nil).List(nil, nil) or
+// client.CredentialTypeView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) CredentialTypeView(data map[string]any) TangocardEntity {
+	return NewCredentialTypeViewEntityFunc(sdk, data)
+}
+
+
+// CreditCard returns a CreditCard entity bound to this client.
+// Idiomatic usage: client.CreditCard(nil).List(nil, nil) or
+// client.CreditCard(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) CreditCard(data map[string]any) TangocardEntity {
+	return NewCreditCardEntityFunc(sdk, data)
+}
+
+
+// CreditCardDeposit returns a CreditCardDeposit entity bound to this client.
+// Idiomatic usage: client.CreditCardDeposit(nil).List(nil, nil) or
+// client.CreditCardDeposit(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) CreditCardDeposit(data map[string]any) TangocardEntity {
+	return NewCreditCardDepositEntityFunc(sdk, data)
+}
+
+
+// CreditCardUnregister returns a CreditCardUnregister entity bound to this client.
+// Idiomatic usage: client.CreditCardUnregister(nil).List(nil, nil) or
+// client.CreditCardUnregister(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) CreditCardUnregister(data map[string]any) TangocardEntity {
+	return NewCreditCardUnregisterEntityFunc(sdk, data)
 }
 
 
@@ -354,11 +498,211 @@ func (sdk *TangocardSDK) Customer(data map[string]any) TangocardEntity {
 }
 
 
+// EmailTemplateListView returns a EmailTemplateListView entity bound to this client.
+// Idiomatic usage: client.EmailTemplateListView(nil).List(nil, nil) or
+// client.EmailTemplateListView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) EmailTemplateListView(data map[string]any) TangocardEntity {
+	return NewEmailTemplateListViewEntityFunc(sdk, data)
+}
+
+
+// EmailTemplateViewVerbose returns a EmailTemplateViewVerbose entity bound to this client.
+// Idiomatic usage: client.EmailTemplateViewVerbose(nil).List(nil, nil) or
+// client.EmailTemplateViewVerbose(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) EmailTemplateViewVerbose(data map[string]any) TangocardEntity {
+	return NewEmailTemplateViewVerboseEntityFunc(sdk, data)
+}
+
+
+// EmbeddableResponseDto returns a EmbeddableResponseDto entity bound to this client.
+// Idiomatic usage: client.EmbeddableResponseDto(nil).List(nil, nil) or
+// client.EmbeddableResponseDto(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) EmbeddableResponseDto(data map[string]any) TangocardEntity {
+	return NewEmbeddableResponseDtoEntityFunc(sdk, data)
+}
+
+
+// ExchangeRatesWithDisclaimer returns a ExchangeRatesWithDisclaimer entity bound to this client.
+// Idiomatic usage: client.ExchangeRatesWithDisclaimer(nil).List(nil, nil) or
+// client.ExchangeRatesWithDisclaimer(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) ExchangeRatesWithDisclaimer(data map[string]any) TangocardEntity {
+	return NewExchangeRatesWithDisclaimerEntityFunc(sdk, data)
+}
+
+
+// LineItem returns a LineItem entity bound to this client.
+// Idiomatic usage: client.LineItem(nil).List(nil, nil) or
+// client.LineItem(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) LineItem(data map[string]any) TangocardEntity {
+	return NewLineItemEntityFunc(sdk, data)
+}
+
+
+// LowBalanceAlertListView returns a LowBalanceAlertListView entity bound to this client.
+// Idiomatic usage: client.LowBalanceAlertListView(nil).List(nil, nil) or
+// client.LowBalanceAlertListView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) LowBalanceAlertListView(data map[string]any) TangocardEntity {
+	return NewLowBalanceAlertListViewEntityFunc(sdk, data)
+}
+
+
+// LowBalanceAlertView returns a LowBalanceAlertView entity bound to this client.
+// Idiomatic usage: client.LowBalanceAlertView(nil).List(nil, nil) or
+// client.LowBalanceAlertView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) LowBalanceAlertView(data map[string]any) TangocardEntity {
+	return NewLowBalanceAlertViewEntityFunc(sdk, data)
+}
+
+
+// MobileCountry returns a MobileCountry entity bound to this client.
+// Idiomatic usage: client.MobileCountry(nil).List(nil, nil) or
+// client.MobileCountry(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) MobileCountry(data map[string]any) TangocardEntity {
+	return NewMobileCountryEntityFunc(sdk, data)
+}
+
+
+// N14Webhook returns a N14Webhook entity bound to this client.
+// Idiomatic usage: client.N14Webhook(nil).List(nil, nil) or
+// client.N14Webhook(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) N14Webhook(data map[string]any) TangocardEntity {
+	return NewN14WebhookEntityFunc(sdk, data)
+}
+
+
+// N1Customer returns a N1Customer entity bound to this client.
+// Idiomatic usage: client.N1Customer(nil).List(nil, nil) or
+// client.N1Customer(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) N1Customer(data map[string]any) TangocardEntity {
+	return NewN1CustomerEntityFunc(sdk, data)
+}
+
+
+// N2Account returns a N2Account entity bound to this client.
+// Idiomatic usage: client.N2Account(nil).List(nil, nil) or
+// client.N2Account(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) N2Account(data map[string]any) TangocardEntity {
+	return NewN2AccountEntityFunc(sdk, data)
+}
+
+
+// N3Fund returns a N3Fund entity bound to this client.
+// Idiomatic usage: client.N3Fund(nil).List(nil, nil) or
+// client.N3Fund(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) N3Fund(data map[string]any) TangocardEntity {
+	return NewN3FundEntityFunc(sdk, data)
+}
+
+
+// N8LineItem returns a N8LineItem entity bound to this client.
+// Idiomatic usage: client.N8LineItem(nil).List(nil, nil) or
+// client.N8LineItem(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) N8LineItem(data map[string]any) TangocardEntity {
+	return NewN8LineItemEntityFunc(sdk, data)
+}
+
+
+// N9DigitalTemplate returns a N9DigitalTemplate entity bound to this client.
+// Idiomatic usage: client.N9DigitalTemplate(nil).List(nil, nil) or
+// client.N9DigitalTemplate(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) N9DigitalTemplate(data map[string]any) TangocardEntity {
+	return NewN9DigitalTemplateEntityFunc(sdk, data)
+}
+
+
 // Order returns a Order entity bound to this client.
 // Idiomatic usage: client.Order(nil).List(nil, nil) or
 // client.Order(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TangocardSDK) Order(data map[string]any) TangocardEntity {
 	return NewOrderEntityFunc(sdk, data)
+}
+
+
+// OrderViewSummary returns a OrderViewSummary entity bound to this client.
+// Idiomatic usage: client.OrderViewSummary(nil).List(nil, nil) or
+// client.OrderViewSummary(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) OrderViewSummary(data map[string]any) TangocardEntity {
+	return NewOrderViewSummaryEntityFunc(sdk, data)
+}
+
+
+// PrepaidCardInfo returns a PrepaidCardInfo entity bound to this client.
+// Idiomatic usage: client.PrepaidCardInfo(nil).List(nil, nil) or
+// client.PrepaidCardInfo(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) PrepaidCardInfo(data map[string]any) TangocardEntity {
+	return NewPrepaidCardInfoEntityFunc(sdk, data)
+}
+
+
+// PrepaidCardTransaction returns a PrepaidCardTransaction entity bound to this client.
+// Idiomatic usage: client.PrepaidCardTransaction(nil).List(nil, nil) or
+// client.PrepaidCardTransaction(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) PrepaidCardTransaction(data map[string]any) TangocardEntity {
+	return NewPrepaidCardTransactionEntityFunc(sdk, data)
+}
+
+
+// ReissueCard returns a ReissueCard entity bound to this client.
+// Idiomatic usage: client.ReissueCard(nil).List(nil, nil) or
+// client.ReissueCard(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) ReissueCard(data map[string]any) TangocardEntity {
+	return NewReissueCardEntityFunc(sdk, data)
+}
+
+
+// ReplacementReason returns a ReplacementReason entity bound to this client.
+// Idiomatic usage: client.ReplacementReason(nil).List(nil, nil) or
+// client.ReplacementReason(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) ReplacementReason(data map[string]any) TangocardEntity {
+	return NewReplacementReasonEntityFunc(sdk, data)
+}
+
+
+// Resend returns a Resend entity bound to this client.
+// Idiomatic usage: client.Resend(nil).List(nil, nil) or
+// client.Resend(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) Resend(data map[string]any) TangocardEntity {
+	return NewResendEntityFunc(sdk, data)
+}
+
+
+// RewardReasonsMap returns a RewardReasonsMap entity bound to this client.
+// Idiomatic usage: client.RewardReasonsMap(nil).List(nil, nil) or
+// client.RewardReasonsMap(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) RewardReasonsMap(data map[string]any) TangocardEntity {
+	return NewRewardReasonsMapEntityFunc(sdk, data)
+}
+
+
+// TransferFund returns a TransferFund entity bound to this client.
+// Idiomatic usage: client.TransferFund(nil).List(nil, nil) or
+// client.TransferFund(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) TransferFund(data map[string]any) TangocardEntity {
+	return NewTransferFundEntityFunc(sdk, data)
+}
+
+
+// UpdateAccount returns a UpdateAccount entity bound to this client.
+// Idiomatic usage: client.UpdateAccount(nil).List(nil, nil) or
+// client.UpdateAccount(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) UpdateAccount(data map[string]any) TangocardEntity {
+	return NewUpdateAccountEntityFunc(sdk, data)
+}
+
+
+// UpdateWebhookSubscriptionResponseView returns a UpdateWebhookSubscriptionResponseView entity bound to this client.
+// Idiomatic usage: client.UpdateWebhookSubscriptionResponseView(nil).List(nil, nil) or
+// client.UpdateWebhookSubscriptionResponseView(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) UpdateWebhookSubscriptionResponseView(data map[string]any) TangocardEntity {
+	return NewUpdateWebhookSubscriptionResponseViewEntityFunc(sdk, data)
+}
+
+
+// Webhook returns a Webhook entity bound to this client.
+// Idiomatic usage: client.Webhook(nil).List(nil, nil) or
+// client.Webhook(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) Webhook(data map[string]any) TangocardEntity {
+	return NewWebhookEntityFunc(sdk, data)
 }
 
 

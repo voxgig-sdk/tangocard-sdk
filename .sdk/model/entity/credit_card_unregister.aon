@@ -1,0 +1,73 @@
+# Entity: credit_card_unregister
+
+main: kit: entity: credit_card_unregister: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accountIdentifier"
+      req: true
+      short: "Specify the account this credit card is associated with."
+      type: "`$STRING`"
+    }
+    {
+      name: "createdDate"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "creditCardToken"
+      req: true
+      short: "Specify the credit card token to unregister."
+      type: "`$STRING`"
+    }
+    {
+      name: "customerIdentifier"
+      req: true
+      short: "Specify the customer associated with the credit card."
+      type: "`$STRING`"
+    }
+    {
+      name: "message"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "token"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "credit_card_unregister"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          contract: {
+            id: "POST /creditCardUnregisters"
+            json: "{\"operationId\":\"createCreditCardUnregister\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"<strong>customerIdentifier</strong> - Specify the customer associated with the credit card. Must be the customer the accountIdentifier is associated with.<br/><br/><strong>accountIdentifier</strong> - Specify the account this credit card is associated with.<br/><br/><strong>creditCardToken</strong> - Specify the credit card token to unregister.<br/><br/>\",\"properties\":{\"accountIdentifier\":{\"description\":\"Specify the account this credit card is associated with.\",\"title\":\"Account Identifier\",\"type\":\"string\"},\"creditCardToken\":{\"description\":\"Specify the credit card token to unregister.\",\"title\":\"Token\",\"type\":\"string\"},\"customerIdentifier\":{\"description\":\"Specify the customer associated with the credit card. Must be the customer the accountIdentifier is associated with.\",\"title\":\"Customer Identifier\",\"type\":\"string\"}},\"required\":[\"accountIdentifier\",\"creditCardToken\",\"customerIdentifier\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"createdDate\":{\"title\":\"Date the credit card was un-registered\",\"type\":\"string\"},\"message\":{\"title\":\"Friendly message that the credit card has been un-registered successfully\",\"type\":\"string\"},\"token\":{\"title\":\"Credit Card Unregister token identifier\",\"type\":\"string\"}},\"required\":[\"createdDate\",\"message\",\"token\"],\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/creditCardUnregisters"
+          segments: [
+            {
+              lit: "creditCardUnregisters"
+            }
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

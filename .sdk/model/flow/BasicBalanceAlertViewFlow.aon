@@ -1,0 +1,9 @@
+# BasicBalanceAlertViewFlow
+
+main: kit: flow: BasicBalanceAlertViewFlow:
+{
+  entity: "balance_alert_view",
+  kind: "basic",
+  name: "BasicBalanceAlertViewFlow",
+  "key$": "BasicBalanceAlertViewFlow"
+}

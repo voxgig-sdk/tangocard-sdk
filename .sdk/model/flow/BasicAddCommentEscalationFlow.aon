@@ -1,0 +1,22 @@
+# BasicAddCommentEscalationFlow
+
+main: kit: flow: BasicAddCommentEscalationFlow:
+{
+  entity: "add_comment_escalation",
+  kind: "basic",
+  name: "BasicAddCommentEscalationFlow",
+  step: [
+    {
+      input: {
+        ref: "add_comment_escalation_ref01"
+      }
+
+      match: {
+        reference_line_item_i_d: "reference_line_item_i_d01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicAddCommentEscalationFlow"
+}

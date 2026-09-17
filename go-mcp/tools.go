@@ -16,7 +16,7 @@ import (
 // reqdata map passed through to the SDK. For load, `query` should be
 // `{"id": <value>}`. For list, omit `query` or pass an empty map.
 type Args struct {
-	Entity string         `json:"entity" jsonschema:"catalog | customer | order"`
+	Entity string         `json:"entity" jsonschema:"account | add_comment_escalation | all_event_type | async_order | async_order_detail_view | async_order_line_items_view | async_reason_codes_view | async_update_line_item_view | balance_alert_view | brand_categories_view | catalog | choice_product | country_view_summary | create_account_criterion | create_customer_criterion | credential_type_view | credit_card | credit_card_deposit | credit_card_unregister | customer | email_template_list_view | email_template_view_verbose | embeddable_response_dto | exchange_rates_with_disclaimer | line_item | low_balance_alert_list_view | low_balance_alert_view | mobile_country | n14_webhook | n1_customer | n2_account | n3_fund | n8_line_item | n9_digital_template | order | order_view_summary | prepaid_card_info | prepaid_card_transaction | reissue_card | replacement_reason | resend | reward_reasons_map | transfer_fund | update_account | update_webhook_subscription_response_view | webhook"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
 }
 
@@ -77,12 +77,98 @@ func runOp(client *sdk.TangocardSDK, op string, args Args) (*mcp.CallToolResult,
 // emits one `case "<name>":` per entity defined in the SDK model.
 func entityFor(client *sdk.TangocardSDK, name string) (sdk.TangocardEntity, error) {
 	switch strings.ToLower(name) {
+	case "account":
+		return client.Account(nil), nil
+	case "add_comment_escalation":
+		return client.AddCommentEscalation(nil), nil
+	case "all_event_type":
+		return client.AllEventType(nil), nil
+	case "async_order":
+		return client.AsyncOrder(nil), nil
+	case "async_order_detail_view":
+		return client.AsyncOrderDetailView(nil), nil
+	case "async_order_line_items_view":
+		return client.AsyncOrderLineItemsView(nil), nil
+	case "async_reason_codes_view":
+		return client.AsyncReasonCodesView(nil), nil
+	case "async_update_line_item_view":
+		return client.AsyncUpdateLineItemView(nil), nil
+	case "balance_alert_view":
+		return client.BalanceAlertView(nil), nil
+	case "brand_categories_view":
+		return client.BrandCategoriesView(nil), nil
 	case "catalog":
 		return client.Catalog(nil), nil
+	case "choice_product":
+		return client.ChoiceProduct(nil), nil
+	case "country_view_summary":
+		return client.CountryViewSummary(nil), nil
+	case "create_account_criterion":
+		return client.CreateAccountCriterion(nil), nil
+	case "create_customer_criterion":
+		return client.CreateCustomerCriterion(nil), nil
+	case "credential_type_view":
+		return client.CredentialTypeView(nil), nil
+	case "credit_card":
+		return client.CreditCard(nil), nil
+	case "credit_card_deposit":
+		return client.CreditCardDeposit(nil), nil
+	case "credit_card_unregister":
+		return client.CreditCardUnregister(nil), nil
 	case "customer":
 		return client.Customer(nil), nil
+	case "email_template_list_view":
+		return client.EmailTemplateListView(nil), nil
+	case "email_template_view_verbose":
+		return client.EmailTemplateViewVerbose(nil), nil
+	case "embeddable_response_dto":
+		return client.EmbeddableResponseDto(nil), nil
+	case "exchange_rates_with_disclaimer":
+		return client.ExchangeRatesWithDisclaimer(nil), nil
+	case "line_item":
+		return client.LineItem(nil), nil
+	case "low_balance_alert_list_view":
+		return client.LowBalanceAlertListView(nil), nil
+	case "low_balance_alert_view":
+		return client.LowBalanceAlertView(nil), nil
+	case "mobile_country":
+		return client.MobileCountry(nil), nil
+	case "n14_webhook":
+		return client.N14Webhook(nil), nil
+	case "n1_customer":
+		return client.N1Customer(nil), nil
+	case "n2_account":
+		return client.N2Account(nil), nil
+	case "n3_fund":
+		return client.N3Fund(nil), nil
+	case "n8_line_item":
+		return client.N8LineItem(nil), nil
+	case "n9_digital_template":
+		return client.N9DigitalTemplate(nil), nil
 	case "order":
 		return client.Order(nil), nil
+	case "order_view_summary":
+		return client.OrderViewSummary(nil), nil
+	case "prepaid_card_info":
+		return client.PrepaidCardInfo(nil), nil
+	case "prepaid_card_transaction":
+		return client.PrepaidCardTransaction(nil), nil
+	case "reissue_card":
+		return client.ReissueCard(nil), nil
+	case "replacement_reason":
+		return client.ReplacementReason(nil), nil
+	case "resend":
+		return client.Resend(nil), nil
+	case "reward_reasons_map":
+		return client.RewardReasonsMap(nil), nil
+	case "transfer_fund":
+		return client.TransferFund(nil), nil
+	case "update_account":
+		return client.UpdateAccount(nil), nil
+	case "update_webhook_subscription_response_view":
+		return client.UpdateWebhookSubscriptionResponseView(nil), nil
+	case "webhook":
+		return client.Webhook(nil), nil
 
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)

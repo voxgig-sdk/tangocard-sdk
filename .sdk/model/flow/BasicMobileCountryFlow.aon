@@ -1,0 +1,28 @@
+# BasicMobileCountryFlow
+
+main: kit: flow: BasicMobileCountryFlow:
+{
+  entity: "mobile_country",
+  kind: "basic",
+  name: "BasicMobileCountryFlow",
+  step: [
+    {
+      input: {
+        ref: "mobile_country_ref01",
+        srcdatavar: "mobile_country_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-mobile_country_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMobileCountryFlow"
+}

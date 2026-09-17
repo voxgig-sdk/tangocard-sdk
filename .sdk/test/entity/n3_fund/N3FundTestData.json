@@ -1,0 +1,15 @@
+{
+  "existing": {
+    "n3_fund": {
+      "N3_FUND00": {},
+      "N3_FUND01": {},
+      "N3_FUND02": {}
+    }
+  },
+  "new": {
+    "n3_fund": {
+      "n3_fund_ref01": {}
+    }
+  },
+  "requests": {}
+}

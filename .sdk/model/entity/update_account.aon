@@ -1,0 +1,92 @@
+# Entity: update_account
+
+main: kit: entity: update_account: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "registration"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "updatedBy"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "update_account"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "reference_line_item_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "POST /prepaidCardService/updateAccount/{referenceLineItemID}"
+            json: "{\"operationId\":\"updateAccountInfo\",\"parameters\":[{\"description\":\"Reference Line Item ID\",\"in\":\"path\",\"name\":\"referenceLineItemID\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"registration\":{\"properties\":{\"address1\":{\"maxLength\":100,\"minLength\":0,\"type\":\"string\"},\"address2\":{\"maxLength\":100,\"minLength\":0,\"type\":\"string\"},\"city\":{\"maxLength\":50,\"minLength\":0,\"type\":\"string\"},\"country\":{\"pattern\":\"^[A-Za-z]{2,3}$\",\"type\":\"string\"},\"email\":{\"format\":\"email\",\"maxLength\":100,\"minLength\":0,\"type\":\"string\"},\"firstName\":{\"maxLength\":50,\"minLength\":0,\"type\":\"string\"},\"homePhone\":{\"pattern\":\"^\\\\d{10}$\",\"type\":\"string\"},\"lastName\":{\"maxLength\":50,\"minLength\":0,\"type\":\"string\"},\"mobilePhone\":{\"pattern\":\"^\\\\d{10}$\",\"type\":\"string\"},\"postal\":{\"pattern\":\"^[A-Za-z0-9\\\\- ]{1,10}$\",\"type\":\"string\"},\"state\":{\"pattern\":\"^[A-Za-z]{2}$\",\"type\":\"string\"}},\"type\":\"object\"},\"updatedBy\":{\"maxLength\":100,\"minLength\":0,\"type\":\"string\"}},\"required\":[\"registration\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"status\":{\"enum\":[\"ACCEPTED\",\"FAILED\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/401/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/401/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unprocessable Entity\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/401/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/prepaidCardService/updateAccount/{referenceLineItemID}"
+          rename: {
+            param: {
+              referenceLineItemID: "id"
+            }
+          }
+          segments: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "updateAccount"
+            }
+            {
+              var: "id"
+            }
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

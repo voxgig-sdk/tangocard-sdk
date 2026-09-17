@@ -114,7 +114,7 @@ function catalog_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "catalog01", "catalog02", "catalog03" },
+    { "catalog01", "catalog02", "catalog03", "choice_product01", "choice_product02", "choice_product03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

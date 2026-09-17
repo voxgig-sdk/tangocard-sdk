@@ -89,12 +89,98 @@ func runOp(client *sdk.TangocardSDK, op string, query *eng.Value, entityAtom eng
 // emits one `case "<name>":` per entity defined in the SDK model.
 func entityFor(client *sdk.TangocardSDK, name string) (sdk.TangocardEntity, error) {
 	switch strings.ToLower(name) {
+	case "account":
+		return client.Account(nil), nil
+	case "add_comment_escalation":
+		return client.AddCommentEscalation(nil), nil
+	case "all_event_type":
+		return client.AllEventType(nil), nil
+	case "async_order":
+		return client.AsyncOrder(nil), nil
+	case "async_order_detail_view":
+		return client.AsyncOrderDetailView(nil), nil
+	case "async_order_line_items_view":
+		return client.AsyncOrderLineItemsView(nil), nil
+	case "async_reason_codes_view":
+		return client.AsyncReasonCodesView(nil), nil
+	case "async_update_line_item_view":
+		return client.AsyncUpdateLineItemView(nil), nil
+	case "balance_alert_view":
+		return client.BalanceAlertView(nil), nil
+	case "brand_categories_view":
+		return client.BrandCategoriesView(nil), nil
 	case "catalog":
 		return client.Catalog(nil), nil
+	case "choice_product":
+		return client.ChoiceProduct(nil), nil
+	case "country_view_summary":
+		return client.CountryViewSummary(nil), nil
+	case "create_account_criterion":
+		return client.CreateAccountCriterion(nil), nil
+	case "create_customer_criterion":
+		return client.CreateCustomerCriterion(nil), nil
+	case "credential_type_view":
+		return client.CredentialTypeView(nil), nil
+	case "credit_card":
+		return client.CreditCard(nil), nil
+	case "credit_card_deposit":
+		return client.CreditCardDeposit(nil), nil
+	case "credit_card_unregister":
+		return client.CreditCardUnregister(nil), nil
 	case "customer":
 		return client.Customer(nil), nil
+	case "email_template_list_view":
+		return client.EmailTemplateListView(nil), nil
+	case "email_template_view_verbose":
+		return client.EmailTemplateViewVerbose(nil), nil
+	case "embeddable_response_dto":
+		return client.EmbeddableResponseDto(nil), nil
+	case "exchange_rates_with_disclaimer":
+		return client.ExchangeRatesWithDisclaimer(nil), nil
+	case "line_item":
+		return client.LineItem(nil), nil
+	case "low_balance_alert_list_view":
+		return client.LowBalanceAlertListView(nil), nil
+	case "low_balance_alert_view":
+		return client.LowBalanceAlertView(nil), nil
+	case "mobile_country":
+		return client.MobileCountry(nil), nil
+	case "n14_webhook":
+		return client.N14Webhook(nil), nil
+	case "n1_customer":
+		return client.N1Customer(nil), nil
+	case "n2_account":
+		return client.N2Account(nil), nil
+	case "n3_fund":
+		return client.N3Fund(nil), nil
+	case "n8_line_item":
+		return client.N8LineItem(nil), nil
+	case "n9_digital_template":
+		return client.N9DigitalTemplate(nil), nil
 	case "order":
 		return client.Order(nil), nil
+	case "order_view_summary":
+		return client.OrderViewSummary(nil), nil
+	case "prepaid_card_info":
+		return client.PrepaidCardInfo(nil), nil
+	case "prepaid_card_transaction":
+		return client.PrepaidCardTransaction(nil), nil
+	case "reissue_card":
+		return client.ReissueCard(nil), nil
+	case "replacement_reason":
+		return client.ReplacementReason(nil), nil
+	case "resend":
+		return client.Resend(nil), nil
+	case "reward_reasons_map":
+		return client.RewardReasonsMap(nil), nil
+	case "transfer_fund":
+		return client.TransferFund(nil), nil
+	case "update_account":
+		return client.UpdateAccount(nil), nil
+	case "update_webhook_subscription_response_view":
+		return client.UpdateWebhookSubscriptionResponseView(nil), nil
+	case "webhook":
+		return client.Webhook(nil), nil
 
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)

@@ -60,7 +60,7 @@ describe("OrderEntity", function()
     local setup = order_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"create", "list"}) do
+    for _, _op in ipairs({"create", "list", "load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "order." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -84,6 +84,7 @@ describe("OrderEntity", function()
     assert.is_nil(err)
     order_ref01_data = helpers.to_map(type(order_ref01_data_result) == 'table' and order_ref01_data_result.data_get and order_ref01_data_result:data_get() or order_ref01_data_result)
     assert.is_not_nil(order_ref01_data)
+    assert.is_not_nil(order_ref01_data["id"])
 
     -- LIST
     local order_ref01_match = {}
@@ -91,6 +92,21 @@ describe("OrderEntity", function()
     local order_ref01_list_result, err = order_ref01_ent:list(order_ref01_match, nil)
     assert.is_nil(err)
     assert.is_table(order_ref01_list_result)
+
+    local found_item = vs.select(
+      runner.entity_list_to_data(order_ref01_list_result),
+      { id = order_ref01_data["id"] })
+    assert.is_false(vs.isempty(found_item))
+
+    -- LOAD
+    local order_ref01_match_dt0 = {
+      id = order_ref01_data["id"],
+    }
+    local order_ref01_data_dt0_loaded, err = order_ref01_ent:load(order_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local order_ref01_data_dt0_load_result = helpers.to_map(type(order_ref01_data_dt0_loaded) == 'table' and order_ref01_data_dt0_loaded.data_get and order_ref01_data_dt0_loaded:data_get() or order_ref01_data_dt0_loaded)
+    assert.is_not_nil(order_ref01_data_dt0_load_result)
+    assert.are.equal(order_ref01_data_dt0_load_result["id"], order_ref01_data["id"])
 
   end)
 end)

@@ -62,7 +62,7 @@ class OrderEntityTest extends TestCase
         $setup = order_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["create", "list"] as $_op) {
+        foreach (["create", "list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "order." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -85,12 +85,27 @@ class OrderEntityTest extends TestCase
         $order_ref01_data_result = $order_ref01_ent->create($order_ref01_data, null);
         $order_ref01_data = Helpers::to_map(is_object($order_ref01_data_result) && method_exists($order_ref01_data_result, 'data_get') ? $order_ref01_data_result->data_get() : $order_ref01_data_result);
         $this->assertNotNull($order_ref01_data);
+        $this->assertNotNull($order_ref01_data["id"]);
 
         // LIST
         $order_ref01_match = [];
 
         $order_ref01_list_result = $order_ref01_ent->list($order_ref01_match, null);
         $this->assertIsArray($order_ref01_list_result);
+
+        $found_item = sdk_select(
+            Runner::entity_list_to_data($order_ref01_list_result),
+            ["id" => $order_ref01_data["id"]]);
+        $this->assertNotEmpty($found_item);
+
+        // LOAD
+        $order_ref01_match_dt0 = [
+            "id" => $order_ref01_data["id"],
+        ];
+        $order_ref01_data_dt0_loaded = $order_ref01_ent->load($order_ref01_match_dt0, null);
+        $order_ref01_data_dt0_load_result = Helpers::to_map(is_object($order_ref01_data_dt0_loaded) && method_exists($order_ref01_data_dt0_loaded, 'data_get') ? $order_ref01_data_dt0_loaded->data_get() : $order_ref01_data_dt0_loaded);
+        $this->assertNotNull($order_ref01_data_dt0_load_result);
+        $this->assertEquals($order_ref01_data_dt0_load_result["id"], $order_ref01_data["id"]);
 
     }
 }

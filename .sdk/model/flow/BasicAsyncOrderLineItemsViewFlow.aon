@@ -1,0 +1,28 @@
+# BasicAsyncOrderLineItemsViewFlow
+
+main: kit: flow: BasicAsyncOrderLineItemsViewFlow:
+{
+  entity: "async_order_line_items_view",
+  kind: "basic",
+  name: "BasicAsyncOrderLineItemsViewFlow",
+  step: [
+    {
+      match: {
+        account_id: "account01",
+        customer_id: "customer01",
+        external_ref_id: "external_ref01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "async_order_line_items_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAsyncOrderLineItemsViewFlow"
+}

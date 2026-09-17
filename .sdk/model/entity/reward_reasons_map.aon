@@ -1,0 +1,67 @@
+# Entity: reward_reasons_map
+
+main: kit: entity: reward_reasons_map: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "CANCEL"
+      req: false
+      short: "Map of cancel reasons"
+      type: "`$OBJECT`"
+    }
+    {
+      name: "CANCEL_AND_REISSUE"
+      req: false
+      short: "Map of cancel and reissue reasons"
+      type: "`$OBJECT`"
+    }
+    {
+      name: "FREEZE"
+      req: false
+      short: "Map of freeze reasons"
+      type: "`$OBJECT`"
+    }
+    {
+      name: "UNFREEZE"
+      req: false
+      short: "Map of unfreeze reasons"
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "reward_reasons_map"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          contract: {
+            id: "GET /lineItems/reasonCodes"
+            json: "{\"operationId\":\"fetchAllReasonsCodes\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"CANCEL\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Map of cancel reasons\",\"type\":\"object\"},\"CANCEL_AND_REISSUE\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Map of cancel and reissue reasons\",\"type\":\"object\"},\"FREEZE\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Map of freeze reasons\",\"type\":\"object\"},\"UNFREEZE\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Map of unfreeze reasons\",\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/lineItems/reasonCodes"
+          segments: [
+            {
+              lit: "lineItems"
+            }
+            {
+              lit: "reasonCodes"
+            }
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

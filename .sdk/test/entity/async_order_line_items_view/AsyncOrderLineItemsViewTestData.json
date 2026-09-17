@@ -1,0 +1,744 @@
+{
+  "existing": {
+    "async_order_line_items_view": {
+      "ASYNC_ORDER_LINE_ITEMS_VIEW00": {
+        "accountIdentifier": "s82",
+        "amountCharged": {},
+        "campaign": "s84",
+        "customerIdentifier": "s85",
+        "externalRefID": "s86",
+        "lineItems": [],
+        "orderErrors": [],
+        "orderNotes": "s89",
+        "orderStatus": "s8a",
+        "pagination": {},
+        "purchaseOrderNumber": "s8c",
+        "referenceOrderID": "s8d",
+        "sender": {},
+        "account_id": "ACCOUNT01",
+        "customer_id": "CUSTOMER01",
+        "external_ref_id": "EXTERNAL_REF01"
+      },
+      "ASYNC_ORDER_LINE_ITEMS_VIEW01": {
+        "accountIdentifier": "s104",
+        "amountCharged": {},
+        "campaign": "s106",
+        "customerIdentifier": "s107",
+        "externalRefID": "s108",
+        "lineItems": [],
+        "orderErrors": [],
+        "orderNotes": "s10b",
+        "orderStatus": "s10c",
+        "pagination": {},
+        "purchaseOrderNumber": "s10e",
+        "referenceOrderID": "s10f",
+        "sender": {},
+        "account_id": "ACCOUNT01",
+        "customer_id": "CUSTOMER01",
+        "external_ref_id": "EXTERNAL_REF01"
+      },
+      "ASYNC_ORDER_LINE_ITEMS_VIEW02": {
+        "accountIdentifier": "s186",
+        "amountCharged": {},
+        "campaign": "s188",
+        "customerIdentifier": "s189",
+        "externalRefID": "s18a",
+        "lineItems": [],
+        "orderErrors": [],
+        "orderNotes": "s18d",
+        "orderStatus": "s18e",
+        "pagination": {},
+        "purchaseOrderNumber": "s190",
+        "referenceOrderID": "s191",
+        "sender": {},
+        "account_id": "ACCOUNT01",
+        "customer_id": "CUSTOMER01",
+        "external_ref_id": "EXTERNAL_REF01"
+      }
+    }
+  },
+  "new": {
+    "async_order_line_items_view": {
+      "async_order_line_items_view_ref01": {
+        "accountIdentifier": "s208",
+        "amountCharged": {},
+        "campaign": "s20a",
+        "customerIdentifier": "s20b",
+        "externalRefID": "s20c",
+        "lineItems": [],
+        "orderErrors": [],
+        "orderNotes": "s20f",
+        "orderStatus": "s210",
+        "pagination": {},
+        "purchaseOrderNumber": "s212",
+        "referenceOrderID": "s213",
+        "sender": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}/lineItems": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getAsyncOrderLineItemDetails",
+        "parameters": [
+          {
+            "description": "specify the customer to be queried",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the account to be queried.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "External Reference ID for a specific async order",
+            "in": "path",
+            "name": "externalRefID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify previous cursor to return (optional).",
+            "in": "query",
+            "name": "prevCursor",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify next cursor to return (optional).",
+            "in": "query",
+            "name": "nextCursor",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the max results to return (optional).",
+            "in": "query",
+            "name": "maxResults",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Specify the externalRefLineItemIDs to be queried. A maximum of 50 externalRefLineItemIDs can be provided",
+            "in": "query",
+            "name": "externalRefLineItemIDs",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Specify the referenceLineItemIDs to be queried. A maximum of 50 referenceLineItemIDs can be provided",
+            "in": "query",
+            "name": "referenceLineItemIDs",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Specify true to return only failed line items",
+            "in": "query",
+            "name": "failedOnly",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "A list line items for a specific async order.",
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "amountCharged": {
+                      "description": "Initial value and the total charged amount on the account",
+                      "properties": {
+                        "currencyCode": {
+                          "type": "string"
+                        },
+                        "shippingFee": {
+                          "type": "number"
+                        },
+                        "total": {
+                          "type": "number"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "campaign": {
+                      "title": "Campaign",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    },
+                    "externalRefID": {
+                      "title": "External Reference ID",
+                      "type": "string"
+                    },
+                    "lineItems": {
+                      "description": "The List of Line Items for the Async Order.",
+                      "items": {
+                        "properties": {
+                          "amountCharged": {
+                            "properties": {
+                              "currencyCode": {
+                                "type": "string"
+                              },
+                              "exchangeRate": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              },
+                              "total": {
+                                "type": "number"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "title": "Amount Charged",
+                            "type": "object"
+                          },
+                          "amountIssued": {
+                            "properties": {
+                              "currencyCode": {
+                                "type": "string"
+                              },
+                              "exchangeRate": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              },
+                              "total": {
+                                "type": "number"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "title": "Amount Issued",
+                            "type": "object"
+                          },
+                          "bulkShipping": {
+                            "properties": {
+                              "address": {
+                                "properties": {
+                                  "city": {
+                                    "title": "City",
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "title": "Country Code",
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "title": "Postal Code",
+                                    "type": "string"
+                                  },
+                                  "stateOrProvince": {
+                                    "title": "State or Province",
+                                    "type": "string"
+                                  },
+                                  "streetLine1": {
+                                    "title": "Street Line 1",
+                                    "type": "string"
+                                  },
+                                  "streetLine2": {
+                                    "title": "Street Line 2",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "companyName": {
+                                "type": "string"
+                              },
+                              "contactEmail": {
+                                "type": "string"
+                              },
+                              "contactFirstName": {
+                                "type": "string"
+                              },
+                              "contactLastName": {
+                                "type": "string"
+                              },
+                              "contactMobileNumber": {
+                                "type": "string"
+                              }
+                            },
+                            "title": "Bulk Shipping",
+                            "type": "object"
+                          },
+                          "canCancel": {
+                            "title": "Can Cancel",
+                            "type": "boolean"
+                          },
+                          "canFreeze": {
+                            "title": "Can Freeze",
+                            "type": "boolean"
+                          },
+                          "dateIssued": {
+                            "format": "date-time",
+                            "title": "Date Issued",
+                            "type": "string"
+                          },
+                          "deliveryDate": {
+                            "format": "date-time",
+                            "title": "Delivery Date",
+                            "type": "string"
+                          },
+                          "deliveryMethod": {
+                            "title": "Delivery Method",
+                            "type": "string"
+                          },
+                          "deliveryStatus": {
+                            "title": "Delivery Status",
+                            "type": "string"
+                          },
+                          "emailSubject": {
+                            "title": "Line Item Email Subject",
+                            "type": "string"
+                          },
+                          "etid": {
+                            "title": "Etid",
+                            "type": "string"
+                          },
+                          "expirationDate": {
+                            "format": "date-time",
+                            "title": "Expiration Date",
+                            "type": "string"
+                          },
+                          "externalRefLineItemID": {
+                            "title": "External Reference Line Item ID",
+                            "type": "string"
+                          },
+                          "lineItemActionReason": {
+                            "title": "Line Item Action Reason",
+                            "type": "string"
+                          },
+                          "lineItemErrors": {
+                            "items": {
+                              "properties": {
+                                "errorCode": {
+                                  "type": "string"
+                                },
+                                "errorMessage": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "title": "Line Item Errors",
+                            "type": "array"
+                          },
+                          "lineItemNotes": {
+                            "title": "Line Item Notes",
+                            "type": "string"
+                          },
+                          "lineItemStatus": {
+                            "title": "Line Item Status",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Line Item Message",
+                            "type": "string"
+                          },
+                          "physicalMethod": {
+                            "title": "Physical Method",
+                            "type": "string"
+                          },
+                          "ptid": {
+                            "title": "Ptid",
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "format": "int32",
+                            "title": "Reward Quantity",
+                            "type": "integer"
+                          },
+                          "recipient": {
+                            "properties": {
+                              "address": {
+                                "properties": {
+                                  "city": {
+                                    "title": "City",
+                                    "type": "string"
+                                  },
+                                  "companyName": {
+                                    "title": "Company Name",
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "title": "Country Code",
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "title": "Postal Code",
+                                    "type": "string"
+                                  },
+                                  "stateOrProvince": {
+                                    "title": "State or Province",
+                                    "type": "string"
+                                  },
+                                  "streetLine1": {
+                                    "title": "Street Line 1",
+                                    "type": "string"
+                                  },
+                                  "streetLine2": {
+                                    "title": "Street Line 2",
+                                    "type": "string"
+                                  }
+                                },
+                                "title": "Address",
+                                "type": "object"
+                              },
+                              "email": {
+                                "title": "Email",
+                                "type": "string"
+                              },
+                              "firstName": {
+                                "title": "First Name",
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "title": "Last Name",
+                                "type": "string"
+                              },
+                              "mobileNumber": {
+                                "title": "Mobile Number",
+                                "type": "string"
+                              }
+                            },
+                            "title": "Recipient Details",
+                            "type": "object"
+                          },
+                          "referenceLineItemID": {
+                            "title": "Reference Line Item ID",
+                            "type": "string"
+                          },
+                          "reissuedFromReferenceLineItemId": {
+                            "description": "Reissued from reference line item ID",
+                            "title": "Reissued From",
+                            "type": "string"
+                          },
+                          "reissuedToReferenceLineItemId": {
+                            "description": "Reissued to reference line item ID",
+                            "title": "Reissued To",
+                            "type": "string"
+                          },
+                          "rewardName": {
+                            "title": "Reward Name",
+                            "type": "string"
+                          },
+                          "rewards": {
+                            "items": {
+                              "properties": {
+                                "credentialList": {
+                                  "items": {
+                                    "properties": {
+                                      "credentialType": {
+                                        "type": "string"
+                                      },
+                                      "label": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "type": "string"
+                                      },
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "title": "Verbose list of credentials",
+                                  "type": "array"
+                                },
+                                "redemptionInstructions": {
+                                  "title": "Redemption Instructions",
+                                  "type": "string"
+                                },
+                                "rewardStatus": {
+                                  "title": "Reward Status",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "title": "The Reward",
+                            "type": "array"
+                          },
+                          "scheduledDeliveryDate": {
+                            "format": "date-time",
+                            "title": "Scheduled Delivery Date",
+                            "type": "string"
+                          },
+                          "shippingMethod": {
+                            "title": "Shipping Method",
+                            "type": "string"
+                          },
+                          "utid": {
+                            "title": "Utid",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "amountIssued",
+                          "dateIssued",
+                          "deliveryStatus",
+                          "etid",
+                          "expirationDate",
+                          "lineItemStatus",
+                          "referenceLineItemID",
+                          "rewardName",
+                          "rewards",
+                          "utid"
+                        ],
+                        "type": "object"
+                      },
+                      "title": "Line Items",
+                      "type": "array"
+                    },
+                    "orderErrors": {
+                      "description": "The List of Errors for the Async Order.",
+                      "items": {
+                        "properties": {
+                          "errorCode": {
+                            "type": "string"
+                          },
+                          "errorMessage": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "Order Errors",
+                      "type": "array"
+                    },
+                    "orderNotes": {
+                      "title": "Order Notes",
+                      "type": "string"
+                    },
+                    "orderStatus": {
+                      "title": "Order Status",
+                      "type": "string"
+                    },
+                    "pagination": {
+                      "description": "The cursor for pagination of the async order line items.",
+                      "properties": {
+                        "maxResults": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "nextCursor": {
+                          "type": "string"
+                        },
+                        "nextPageAvailable": {
+                          "type": "boolean"
+                        },
+                        "numberOfElements": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "prevCursor": {
+                          "type": "string"
+                        },
+                        "prevPageAvailable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "title": "Pagination Cursor",
+                      "type": "object"
+                    },
+                    "purchaseOrderNumber": {
+                      "title": "Purchase Order Number",
+                      "type": "string"
+                    },
+                    "referenceOrderID": {
+                      "title": "Reference Order ID",
+                      "type": "string"
+                    },
+                    "sender": {
+                      "properties": {
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "title": "Last Name",
+                          "type": "string"
+                        }
+                      },
+                      "title": "Sender Details",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "customerIdentifier",
+                    "orderStatus",
+                    "referenceOrderID"
+                  ],
+                  "title": "Get line items for async order",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

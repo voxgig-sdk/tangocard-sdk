@@ -1,0 +1,22 @@
+# BasicCreateAccountCriterionFlow
+
+main: kit: flow: BasicCreateAccountCriterionFlow:
+{
+  entity: "create_account_criterion",
+  kind: "basic",
+  name: "BasicCreateAccountCriterionFlow",
+  step: [
+    {
+      input: {
+        ref: "create_account_criterion_ref01"
+      }
+
+      match: {
+        customer_identifier: "customerentifier01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicCreateAccountCriterionFlow"
+}

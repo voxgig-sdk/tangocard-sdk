@@ -1,0 +1,40 @@
+# BasicCreditCardDepositFlow
+
+main: kit: flow: BasicCreditCardDepositFlow:
+{
+  entity: "credit_card_deposit",
+  kind: "basic",
+  name: "BasicCreditCardDepositFlow",
+  step: [
+    {
+      input: {
+        ref: "credit_card_deposit_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "credit_card_deposit_ref01",
+        srcdatavar: "credit_card_deposit_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "credit_card_deposit01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-credit_card_deposit_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCreditCardDepositFlow"
+}

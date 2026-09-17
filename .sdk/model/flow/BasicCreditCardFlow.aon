@@ -1,0 +1,40 @@
+# BasicCreditCardFlow
+
+main: kit: flow: BasicCreditCardFlow:
+{
+  entity: "credit_card",
+  kind: "basic",
+  name: "BasicCreditCardFlow",
+  step: [
+    {
+      input: {
+        ref: "credit_card_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "credit_card_ref01",
+        srcdatavar: "credit_card_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "credit_card01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-credit_card_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCreditCardFlow"
+}

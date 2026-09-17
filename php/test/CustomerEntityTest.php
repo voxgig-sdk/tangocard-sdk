@@ -62,7 +62,7 @@ class CustomerEntityTest extends TestCase
         $setup = customer_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["list"] as $_op) {
+        foreach (["create", "list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "customer." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -77,20 +77,35 @@ class CustomerEntityTest extends TestCase
         }
         $client = $setup["client"];
 
-        // Bootstrap entity data from existing test data.
-        $customer_ref01_data_raw = Vs::items(Helpers::to_map(
-            Vs::getpath($setup["data"], "existing.customer")));
-        $customer_ref01_data = null;
-        if (count($customer_ref01_data_raw) > 0) {
-            $customer_ref01_data = Helpers::to_map($customer_ref01_data_raw[0][1]);
-        }
+        // CREATE
+        $customer_ref01_ent = $client->Customer(null);
+        $customer_ref01_data = Helpers::to_map(Vs::getprop(
+            Vs::getpath($setup["data"], "new.customer"), "customer_ref01"));
+
+        $customer_ref01_data_result = $customer_ref01_ent->create($customer_ref01_data, null);
+        $customer_ref01_data = Helpers::to_map(is_object($customer_ref01_data_result) && method_exists($customer_ref01_data_result, 'data_get') ? $customer_ref01_data_result->data_get() : $customer_ref01_data_result);
+        $this->assertNotNull($customer_ref01_data);
+        $this->assertNotNull($customer_ref01_data["id"]);
 
         // LIST
-        $customer_ref01_ent = $client->Customer(null);
         $customer_ref01_match = [];
 
         $customer_ref01_list_result = $customer_ref01_ent->list($customer_ref01_match, null);
         $this->assertIsArray($customer_ref01_list_result);
+
+        $found_item = sdk_select(
+            Runner::entity_list_to_data($customer_ref01_list_result),
+            ["id" => $customer_ref01_data["id"]]);
+        $this->assertNotEmpty($found_item);
+
+        // LOAD
+        $customer_ref01_match_dt0 = [
+            "id" => $customer_ref01_data["id"],
+        ];
+        $customer_ref01_data_dt0_loaded = $customer_ref01_ent->load($customer_ref01_match_dt0, null);
+        $customer_ref01_data_dt0_load_result = Helpers::to_map(is_object($customer_ref01_data_dt0_loaded) && method_exists($customer_ref01_data_dt0_loaded, 'data_get') ? $customer_ref01_data_dt0_loaded->data_get() : $customer_ref01_data_dt0_loaded);
+        $this->assertNotNull($customer_ref01_data_dt0_load_result);
+        $this->assertEquals($customer_ref01_data_dt0_load_result["id"], $customer_ref01_data["id"]);
 
     }
 }

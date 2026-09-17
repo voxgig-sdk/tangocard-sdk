@@ -1,0 +1,322 @@
+{
+  "existing": {
+    "transfer_fund": {
+      "TRANSFER_FUND00": {
+        "amount": 70,
+        "externalRefID": "s47",
+        "transferDate": "s48",
+        "transferFrom": {},
+        "transferNotes": "s4a",
+        "transferTo": {},
+        "transferredAmount": 76,
+        "id": "TRANSFER_FUND00"
+      },
+      "TRANSFER_FUND01": {
+        "amount": 140,
+        "externalRefID": "s8d",
+        "transferDate": "s8e",
+        "transferFrom": {},
+        "transferNotes": "s90",
+        "transferTo": {},
+        "transferredAmount": 146,
+        "id": "TRANSFER_FUND01"
+      },
+      "TRANSFER_FUND02": {
+        "amount": 210,
+        "externalRefID": "sd3",
+        "transferDate": "sd4",
+        "transferFrom": {},
+        "transferNotes": "sd6",
+        "transferTo": {},
+        "transferredAmount": 216,
+        "id": "TRANSFER_FUND02"
+      }
+    }
+  },
+  "new": {
+    "transfer_fund": {
+      "transfer_fund_ref01": {
+        "amount": 280,
+        "externalRefID": "s119",
+        "transferDate": "s11a",
+        "transferFrom": {},
+        "transferNotes": "s11c",
+        "transferTo": {},
+        "transferredAmount": 286
+      }
+    }
+  },
+  "requests": {
+    "POST /transferFunds": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "transferFunds",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The transferFundsCriteria object.",
+                "properties": {
+                  "amount": {
+                    "description": "Specify the currency amount of the funds being transferred.",
+                    "minimum": 0,
+                    "title": "amount",
+                    "type": "number"
+                  },
+                  "externalRefID": {
+                    "description": "specify the external reference id to associate with this funding action. Must be unique",
+                    "title": "External Reference Identifier",
+                    "type": "string"
+                  },
+                  "transferFrom": {
+                    "description": "The accountIdentifier for the Account transferring funds from.",
+                    "minLength": 1,
+                    "title": "Transfer From",
+                    "type": "string"
+                  },
+                  "transferNotes": {
+                    "description": "Optional transfer notes (up to 150 characters)",
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "title": "Transfer Notes",
+                    "type": "string"
+                  },
+                  "transferTo": {
+                    "description": "The accountIdentifier for the Account transferring funds to.",
+                    "minLength": 1,
+                    "title": "Transfer To",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "amount",
+                  "transferFrom",
+                  "transferTo"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "externalRefID": {
+                      "title": "External Reference ID",
+                      "type": "string"
+                    },
+                    "transferDate": {
+                      "title": "Transfer Date",
+                      "type": "string"
+                    },
+                    "transferFrom": {
+                      "properties": {
+                        "accountIdentifier": {
+                          "title": "Account Identifier",
+                          "type": "string"
+                        },
+                        "accountNumber": {
+                          "title": "Account Number",
+                          "type": "string"
+                        },
+                        "contactEmail": {
+                          "title": "Contact Email",
+                          "type": "string"
+                        },
+                        "currencyCode": {
+                          "title": "Currency Code",
+                          "type": "string"
+                        },
+                        "displayName": {
+                          "title": "Display Name",
+                          "type": "string"
+                        },
+                        "endingBalance": {
+                          "title": "Ending Balance",
+                          "type": "number"
+                        },
+                        "startingBalance": {
+                          "title": "Starting Balance",
+                          "type": "number"
+                        },
+                        "status": {
+                          "title": "Status",
+                          "type": "string"
+                        }
+                      },
+                      "title": "Transfer From",
+                      "type": "object"
+                    },
+                    "transferNotes": {
+                      "title": "Transfer Notes",
+                      "type": "string"
+                    },
+                    "transferTo": {
+                      "properties": {
+                        "$ref": "#/responses/200/content/application~1json/schema/properties/transferFrom/properties"
+                      },
+                      "title": "Transfer To",
+                      "type": "object"
+                    },
+                    "transferredAmount": {
+                      "title": "Transferred Amount",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict; Duplicate Exists"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

@@ -1,0 +1,483 @@
+{
+  "existing": {
+    "resend": {
+      "RESEND00": {
+        "newDeliveryMethod": "s46",
+        "newEmail": "s47",
+        "newEtid": "s48",
+        "newMobile": "s49",
+        "newMobileNumber": "s4a",
+        "otherReason": "s4b",
+        "reasonCode": "s4c",
+        "line_item_id": "LINE_ITEM01",
+        "reference_order_id": "REFERENCE_ORDER01",
+        "id": "RESEND00"
+      },
+      "RESEND01": {
+        "newDeliveryMethod": "s8c",
+        "newEmail": "s8d",
+        "newEtid": "s8e",
+        "newMobile": "s8f",
+        "newMobileNumber": "s90",
+        "otherReason": "s91",
+        "reasonCode": "s92",
+        "line_item_id": "LINE_ITEM01",
+        "reference_order_id": "REFERENCE_ORDER01",
+        "id": "RESEND01"
+      },
+      "RESEND02": {
+        "newDeliveryMethod": "sd2",
+        "newEmail": "sd3",
+        "newEtid": "sd4",
+        "newMobile": "sd5",
+        "newMobileNumber": "sd6",
+        "otherReason": "sd7",
+        "reasonCode": "sd8",
+        "line_item_id": "LINE_ITEM01",
+        "reference_order_id": "REFERENCE_ORDER01",
+        "id": "RESEND02"
+      }
+    }
+  },
+  "new": {
+    "resend": {
+      "resend_ref01": {
+        "newDeliveryMethod": "s118",
+        "newEmail": "s119",
+        "newEtid": "s11a",
+        "newMobile": "s11b",
+        "newMobileNumber": "s11c",
+        "otherReason": "s11d",
+        "reasonCode": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "POST /lineItems/{referenceLineItemId}/resends": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "resendLineItem",
+        "parameters": [
+          {
+            "description": "Reference line item id is returned in the line item response payload.",
+            "in": "path",
+            "name": "referenceLineItemId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "<strong>newDeliveryMethod</strong> - The delivery method used to re-deliver the reward.  If missing, the redelivery will use the delivery method used on the original order<br/><br/><strong>newEmail</strong> - A new email address to re-deliver this order to. If missing, use the original order email if deliveryMethod=EMAIL<br/><br/><strong>newMobile</strong> - A new phone number to re-deliver this order to. If missing, use the original order phoneNumber of deliveryMethod=PHONE<br/><br/><strong>newEtid</strong> - A new etid used to re-deliver an order. If missing, use the original order etid.<br/><br/><strong>reasonCode</strong> - Enter the reason why this line item is being RESENT (respectively)<br/><br/><strong>otherReason</strong> - Required when lineItemResendReasonCode is \"OTHER\", enter the reason why the line item is being RESENT",
+                "properties": {
+                  "newDeliveryMethod": {
+                    "description": "The delivery method used to re-deliver the reward.  If missing, the redelivery will use the delivery method used on the original order",
+                    "enum": [
+                      "NONE",
+                      "EMAIL",
+                      "PHONE",
+                      "WHATSAPP"
+                    ],
+                    "title": "New Delivery Method",
+                    "type": "string"
+                  },
+                  "newEmail": {
+                    "description": "A new email address to re-deliver this order to. If missing, use the original order email if deliveryMethod=EMAIL",
+                    "title": "New Email Address",
+                    "type": "string"
+                  },
+                  "newEtid": {
+                    "description": "A new etid used to re-deliver an order. If missing, use the original order etid.",
+                    "title": "New ETID",
+                    "type": "string"
+                  },
+                  "newMobileNumber": {
+                    "description": "A new phone number to re-deliver this order to. If missing, use the original order phoneNumber of deliveryMethod=PHONE",
+                    "title": "New Mobile Number",
+                    "type": "string"
+                  },
+                  "otherReason": {
+                    "description": "Required when lineItemResendReasonCode is \"OTHER\", enter the reason why the line item is being RESENT",
+                    "title": "Other Reason",
+                    "type": "string"
+                  },
+                  "reasonCode": {
+                    "description": "Enter the reason why this line item is being RESENT (respectively)",
+                    "enum": [
+                      "NOT_RECEIVED",
+                      "LOST_DELETED",
+                      "DELIVERY_INFO",
+                      "DELIVERY_METHOD",
+                      "REMINDER",
+                      "OTHER"
+                    ],
+                    "title": "Reason Code",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "createdAt": {
+                      "title": "Created Date",
+                      "type": "string"
+                    },
+                    "deliveryMethod": {
+                      "enum": [
+                        "NONE",
+                        "EMAIL",
+                        "PHONE",
+                        "ADDRESS",
+                        "EMBEDDED",
+                        "BULKSHIPMENT",
+                        "QRCODE",
+                        "BULKDIGITAL",
+                        "EMBEDDED_COMPONENT",
+                        "WHATSAPP"
+                      ],
+                      "title": "The delivery method of the resend",
+                      "type": "string"
+                    },
+                    "email": {
+                      "title": "Email address that the resend was sent to if deliveryMethod=EMAIL",
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "int64",
+                      "title": "ID",
+                      "type": "integer"
+                    },
+                    "legacyId": {
+                      "title": "Legacy ID (only when resending v1 orders)",
+                      "type": "string"
+                    },
+                    "mobileNumber": {
+                      "title": "Mobile number that the resend was sent to if deliveryMethod=PHONE",
+                      "type": "string"
+                    },
+                    "otherReason": {
+                      "title": "The reason for the resend if reasonCode=OTHER",
+                      "type": "string"
+                    },
+                    "reasonCode": {
+                      "enum": [
+                        "NOT_RECEIVED",
+                        "LOST_DELETED",
+                        "DELIVERY_INFO",
+                        "DELIVERY_METHOD",
+                        "REMINDER",
+                        "OTHER"
+                      ],
+                      "title": "The reason for the resend",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "POST /orders/{referenceOrderID}/resends": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getOrderResends",
+        "parameters": [
+          {
+            "description": "Reference order ID is returned in the order response payload",
+            "in": "path",
+            "name": "referenceOrderID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "<strong>newEmail</strong> - A new email address to resend this order to.<br/><br/><strong>newMobile</strong> - A new mobile number to use for resending an order.<br/><br/><strong>newEtid</strong> - A new etid to use for resending an order.<strong>newEtid</strong> - A new delivery method to use for resending an order.",
+                "properties": {
+                  "newDeliveryMethod": {
+                    "description": "A new delivery method to use for resending an order.",
+                    "enum": [
+                      "NONE",
+                      "EMAIL",
+                      "PHONE",
+                      "WHATSAPP"
+                    ],
+                    "example": "EMAIL",
+                    "title": "Delivery Method",
+                    "type": "string"
+                  },
+                  "newEmail": {
+                    "description": "A new email address to resend this order to.",
+                    "title": "Optional new email address for resending an order to",
+                    "type": "string"
+                  },
+                  "newEtid": {
+                    "description": "A new etid to use for resending an order.",
+                    "title": "Optional new etid to use for resending an order",
+                    "type": "string"
+                  },
+                  "newMobile": {
+                    "description": "A new mobile number to use for resending an order.",
+                    "title": "Mobile Number",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "createdAt": {
+                      "title": "Created Date",
+                      "type": "string"
+                    },
+                    "email": {
+                      "title": "Email address that the resend was sent to",
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "int64",
+                      "title": "ID",
+                      "type": "integer"
+                    },
+                    "legacyId": {
+                      "title": "Legacy ID (only when resending v1 orders)",
+                      "type": "string"
+                    },
+                    "mobileNumber": {
+                      "title": "Mobile Number that the resend was sent to",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "createdAt",
+                    "id"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+# BasicLowBalanceAlertViewFlow
+
+main: kit: flow: BasicLowBalanceAlertViewFlow:
+{
+  entity: "low_balance_alert_view",
+  kind: "basic",
+  name: "BasicLowBalanceAlertViewFlow",
+  step: [
+    {
+      input: {
+        ref: "low_balance_alert_view_ref01"
+      }
+
+      match: {
+        account_id: "account01",
+        account_identifier: "accountentifier01",
+        customer_identifier: "customerentifier01"
+      }
+
+      op: "create"
+    }
+
+    {
+      data: {
+        account_id: "account01",
+        customer_identifier: "customerentifier01"
+      }
+
+      input: {
+        ref: "low_balance_alert_view_ref01",
+        srcdatavar: "low_balance_alert_view_ref01_data",
+        suffix: "_up0",
+        textfield: "accountIdentifier"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-low_balance_alert_view_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "low_balance_alert_view_ref01",
+        srcdatavar: "low_balance_alert_view_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        account_id: "account01",
+        customer_identifier: "customerentifier01",
+        id: "low_balance_alert_view01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-low_balance_alert_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLowBalanceAlertViewFlow"
+}

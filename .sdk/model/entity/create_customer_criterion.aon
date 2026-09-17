@@ -1,0 +1,10 @@
+# Entity: create_customer_criterion
+
+main: kit: entity: create_customer_criterion: {
+
+  alias: field: {}
+
+  name: "create_customer_criterion"
+
+
+}

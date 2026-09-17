@@ -1,0 +1,22 @@
+# BasicAllEventTypeFlow
+
+main: kit: flow: BasicAllEventTypeFlow:
+{
+  entity: "all_event_type",
+  kind: "basic",
+  name: "BasicAllEventTypeFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "all_event_type_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAllEventTypeFlow"
+}

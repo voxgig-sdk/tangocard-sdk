@@ -1,0 +1,60 @@
+# Entity: mobile_country
+
+main: kit: entity: mobile_country: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "countryCode"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "countryName"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "isoCode"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "languageCode"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "mobile_country"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          contract: {
+            id: "GET /mobileCountries"
+            json: "{\"operationId\":\"listMobileCountries\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"countryCode\":{\"title\":\"Country Code\",\"type\":\"string\"},\"countryName\":{\"title\":\"Country Name\",\"type\":\"string\"},\"isoCode\":{\"title\":\"Iso Code\",\"type\":\"string\"},\"languageCode\":{\"title\":\"Language Code\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/mobileCountries"
+          segments: [
+            {
+              lit: "mobileCountries"
+            }
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,29 @@
+# BasicAsyncUpdateLineItemViewFlow
+
+main: kit: flow: BasicAsyncUpdateLineItemViewFlow:
+{
+  entity: "async_update_line_item_view",
+  kind: "basic",
+  name: "BasicAsyncUpdateLineItemViewFlow",
+  step: [
+    {
+      input: {
+        ref: "async_update_line_item_view_ref01",
+        srcdatavar: "async_update_line_item_view_ref01_data",
+        suffix: "_up0",
+        textfield: "deliveryDate"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-async_update_line_item_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAsyncUpdateLineItemViewFlow"
+}

@@ -1,0 +1,32 @@
+# BasicN1CustomerFlow
+
+main: kit: flow: BasicN1CustomerFlow:
+{
+  entity: "n1_customer",
+  kind: "basic",
+  name: "BasicN1CustomerFlow",
+  step: [
+    {
+      input: {
+        ref: "n1_customer_ref01",
+        srcdatavar: "n1_customer_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "n1_customer01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-n1_customer_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicN1CustomerFlow"
+}

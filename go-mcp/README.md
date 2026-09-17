@@ -27,11 +27,11 @@ Tool-call arguments (what an agent sends):
 
 ```jsonc
 // tangocard_list: first page of records
-{ "entity": "catalog" }
-{ "entity": "catalog", "query": { } }
+{ "entity": "all_event_type" }
+{ "entity": "all_event_type", "query": { } }
 
 // tangocard_load: one record by id
-{ "entity": "catalog", "query": { "id": 1 } }
+{ "entity": "account", "query": { "id": 1 } }
 ```
 
 > The rest of this guide follows the [Diátaxis](https://diataxis.fr) framework:
@@ -60,8 +60,8 @@ Tool-call arguments (what an agent sends):
    ```
 
 4. **Restart Claude Code.** The `tangocard_list` and `tangocard_load` tools now appear
-   in new sessions. Ask the agent to *"list catalog using tangocard"*
-   and it calls `tangocard_list` with `{"entity":"catalog"}`.
+   in new sessions. Ask the agent to *"list all_event_type using tangocard"*
+   and it calls `tangocard_list` with `{"entity":"all_event_type"}`.
 
 ## How-to guides
 
@@ -92,7 +92,7 @@ Args: `entity` (required), `query` (optional filter map). Returns the first
 page of records as JSON:
 
 ```jsonc
-{ "entity": "catalog" }
+{ "entity": "all_event_type" }
 ```
 
 ### Call the `tangocard_load` tool
@@ -101,7 +101,7 @@ Args: `entity` (required), `query` = `{"id":N}` (required). Returns the single
 record as JSON:
 
 ```jsonc
-{ "entity": "catalog", "query": { "id": 1 } }
+{ "entity": "account", "query": { "id": 1 } }
 ```
 
 ### Cross-compile release binaries
@@ -129,7 +129,7 @@ Both tools take the same argument object:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `entity` | string | One of the 3 supported entities (see below). |
+| `entity` | string | One of the 46 supported entities (see below). |
 | `query` | object | Optional match map. `{"id":N}` for load; omit or `{}` for list. |
 
 JSON schemas are emitted by the SDK from the `Args` struct's `json` /
@@ -151,9 +151,9 @@ JSON schemas are emitted by the SDK from the `Args` struct's `json` /
 
 ### Entities
 
-The 3 entities valid as the `entity` argument:
+The 46 entities valid as the `entity` argument:
 
-catalog | customer | order
+account | add_comment_escalation | all_event_type | async_order | async_order_detail_view | async_order_line_items_view | async_reason_codes_view | async_update_line_item_view | balance_alert_view | brand_categories_view | catalog | choice_product | country_view_summary | create_account_criterion | create_customer_criterion | credential_type_view | credit_card | credit_card_deposit | credit_card_unregister | customer | email_template_list_view | email_template_view_verbose | embeddable_response_dto | exchange_rates_with_disclaimer | line_item | low_balance_alert_list_view | low_balance_alert_view | mobile_country | n14_webhook | n1_customer | n2_account | n3_fund | n8_line_item | n9_digital_template | order | order_view_summary | prepaid_card_info | prepaid_card_transaction | reissue_card | replacement_reason | resend | reward_reasons_map | transfer_fund | update_account | update_webhook_subscription_response_view | webhook
 
 ### Smoke test via HTTP (raw JSON-RPC)
 
@@ -173,7 +173,7 @@ curl -sN -X POST http://localhost:18080 \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json, text/event-stream' \
   -H "Mcp-Session-Id: $SESSION" \
-  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"tangocard_load","arguments":{"entity":"catalog","query":{"id":1}}}}'
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"tangocard_load","arguments":{"entity":"account","query":{"id":1}}}}'
 ```
 
 ## Explanation

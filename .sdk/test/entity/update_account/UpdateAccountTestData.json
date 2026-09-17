@@ -1,0 +1,261 @@
+{
+  "existing": {
+    "update_account": {
+      "UPDATE_ACCOUNT00": {
+        "id": "UPDATE_ACCOUNT00",
+        "registration": {},
+        "status": "s2a",
+        "updatedBy": "s2b"
+      },
+      "UPDATE_ACCOUNT01": {
+        "id": "UPDATE_ACCOUNT01",
+        "registration": {},
+        "status": "s52",
+        "updatedBy": "s53"
+      },
+      "UPDATE_ACCOUNT02": {
+        "id": "UPDATE_ACCOUNT02",
+        "registration": {},
+        "status": "s7a",
+        "updatedBy": "s7b"
+      }
+    }
+  },
+  "new": {
+    "update_account": {
+      "update_account_ref01": {
+        "registration": {},
+        "status": "sa2",
+        "updatedBy": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /prepaidCardService/updateAccount/{referenceLineItemID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateAccountInfo",
+        "parameters": [
+          {
+            "description": "Reference Line Item ID",
+            "in": "path",
+            "name": "referenceLineItemID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "registration": {
+                    "properties": {
+                      "address1": {
+                        "maxLength": 100,
+                        "minLength": 0,
+                        "type": "string"
+                      },
+                      "address2": {
+                        "maxLength": 100,
+                        "minLength": 0,
+                        "type": "string"
+                      },
+                      "city": {
+                        "maxLength": 50,
+                        "minLength": 0,
+                        "type": "string"
+                      },
+                      "country": {
+                        "pattern": "^[A-Za-z]{2,3}$",
+                        "type": "string"
+                      },
+                      "email": {
+                        "format": "email",
+                        "maxLength": 100,
+                        "minLength": 0,
+                        "type": "string"
+                      },
+                      "firstName": {
+                        "maxLength": 50,
+                        "minLength": 0,
+                        "type": "string"
+                      },
+                      "homePhone": {
+                        "pattern": "^\\d{10}$",
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "maxLength": 50,
+                        "minLength": 0,
+                        "type": "string"
+                      },
+                      "mobilePhone": {
+                        "pattern": "^\\d{10}$",
+                        "type": "string"
+                      },
+                      "postal": {
+                        "pattern": "^[A-Za-z0-9\\- ]{1,10}$",
+                        "type": "string"
+                      },
+                      "state": {
+                        "pattern": "^[A-Za-z]{2}$",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "updatedBy": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "registration"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "enum": [
+                        "ACCEPTED",
+                        "FAILED"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/401/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/401/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/401/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

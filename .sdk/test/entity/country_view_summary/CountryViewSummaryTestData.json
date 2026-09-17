@@ -1,0 +1,218 @@
+{
+  "existing": {
+    "country_view_summary": {
+      "COUNTRY_VIEW_SUMMARY00": {
+        "countryName": "s28",
+        "preferredCurrency": "s29",
+        "threeLetterCode": "s2a",
+        "twoLetterCode": "s2b",
+        "id": "COUNTRY_VIEW_SUMMARY00"
+      },
+      "COUNTRY_VIEW_SUMMARY01": {
+        "countryName": "s50",
+        "preferredCurrency": "s51",
+        "threeLetterCode": "s52",
+        "twoLetterCode": "s53",
+        "id": "COUNTRY_VIEW_SUMMARY01"
+      },
+      "COUNTRY_VIEW_SUMMARY02": {
+        "countryName": "s78",
+        "preferredCurrency": "s79",
+        "threeLetterCode": "s7a",
+        "twoLetterCode": "s7b",
+        "id": "COUNTRY_VIEW_SUMMARY02"
+      }
+    }
+  },
+  "new": {
+    "country_view_summary": {
+      "country_view_summary_ref01": {
+        "countryName": "sa0",
+        "preferredCurrency": "sa1",
+        "threeLetterCode": "sa2",
+        "twoLetterCode": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /rewardCountries": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listCountries",
+        "parameters": [
+          {
+            "description": "The cursor to use for the previous page of results.",
+            "in": "query",
+            "name": "prevCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The cursor to use for the next page of results.",
+            "in": "query",
+            "name": "nextCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of results to return. The default is 10, and the maximum is 200.",
+            "in": "query",
+            "name": "maxResults",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Comma-separated string of the countries to be queried.",
+            "in": "query",
+            "name": "countries",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Comma-separated string of the preferred currencies to be queried.",
+            "in": "query",
+            "name": "preferredCurrencies",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "countryName": {
+                      "title": "Country Name",
+                      "type": "string"
+                    },
+                    "preferredCurrency": {
+                      "title": "Preferred Currency",
+                      "type": "string"
+                    },
+                    "threeLetterCode": {
+                      "title": "Three Letter Code",
+                      "type": "string"
+                    },
+                    "twoLetterCode": {
+                      "title": "Two Letter Code",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "countryName",
+                    "preferredCurrency",
+                    "threeLetterCode",
+                    "twoLetterCode"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

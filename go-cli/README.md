@@ -19,15 +19,16 @@ make build
 export TANGOCARD_APIKEY=sk_live_xxx
 
 # 4. Each command line is ONE boru expression, run against the API:
-./tangocard-cli list catalog
-./tangocard-cli list customer
+./tangocard-cli load 1 account            # {id:1} shorthand
+./tangocard-cli load '{id:1}' account       # explicit match map
+./tangocard-cli update '{name:"x"}' account
 
 # 5. Override the API base URL for a single call
-TANGOCARD_BASE=https://api.example.com ./tangocard-cli list catalog
+TANGOCARD_BASE=https://api.example.com ./tangocard-cli load 1 account
 
 # 6. No arguments -> interactive REPL
 ./tangocard-cli
-tangocard> list catalog
+tangocard> load 1 account
 tangocard> /quit
 ```
 
@@ -53,7 +54,7 @@ tangocard> /quit
    arguments to open the REPL):
 
    ```sh
-   ./dist/*/tangocard-cli list catalog
+   ./dist/*/tangocard-cli load 1 account
    ```
 
 4. **Go interactive.** Run the binary with no arguments to open the REPL, then
@@ -63,14 +64,24 @@ That is the whole loop: *build → set key → evaluate boru expressions*.
 
 ## How-to guides
 
-### List the records of an entity
+### Load a single record
 
 ```sh
-./tangocard-cli list catalog
+./tangocard-cli load 1 account          # scalar shorthand for {id:1}
+./tangocard-cli load '{id:1}' account     # explicit match map
 ```
 
-`list <entity>` returns the first page of records. `<entity>` is a bareword —
-it is auto-quoted as an boru atom, so no quotes are needed.
+The query is either a **scalar** (`1`, treated as `{id:1}`) or a **match map**
+(`{id:1}`, `{slug:"acme"}`). Quote the map so your shell passes it through intact.
+
+### Update a record
+
+```sh
+./tangocard-cli update '{id:1,name:"new"}' account
+```
+
+The match map carries both the selector and the new field values; the updated
+record is printed back.
 
 ### Authenticate and choose an environment
 
@@ -79,7 +90,7 @@ Configuration is read from the environment — nothing is written to disk:
 ```sh
 export TANGOCARD_APIKEY=sk_live_xxx            # API key
 export TANGOCARD_BASE=https://api.example.com  # optional: override the API base URL
-./tangocard-cli list catalog
+./tangocard-cli load 1 account
 ```
 
 Both are injectable by a secrets vault, so the key never has to be typed inline.
@@ -91,7 +102,7 @@ evaluated as its own boru expression:
 
 ```text
 $ ./tangocard-cli
-tangocard> list catalog
+tangocard> load 1 account
 tangocard> /help
 tangocard> /quit
 ```
@@ -106,7 +117,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 ### Discover the available entities
 
 `/help` in the REPL prints the full entity list, or see [Entities](#entities)
-below — this SDK exposes 3 entities.
+below — this SDK exposes 46 entities.
 
 ## Reference
 
@@ -117,8 +128,10 @@ The CLI registers these boru words, each bound to the SDK:
 | Word     | Signatures                                    | Returns                        |
 |----------|-----------------------------------------------|--------------------------------|
 | `list`   | `list <entity>` · `list <query> <entity>`     | First page of records          |
+| `load`   | `load <entity>` · `load <query> <entity>`     | A single record                |
+| `update` | `update <query> <entity>`                     | Update a record, return it     |
 
-- `<entity>` is a bareword, auto-quoted as an boru atom (e.g. `catalog`).
+- `<entity>` is a bareword, auto-quoted as an boru atom (e.g. `account`).
 - `<query>` is either a **Map** (`{id:1}`) or a **Scalar** (`1`, treated as
   `{id:1}`). A scalar is always wrapped as `{id:<value>}`.
 
@@ -159,9 +172,9 @@ Meta-commands use the `/` prefix (everything else on a line is evaluated as boru
 
 ### Entities
 
-The 3 entities this SDK exposes (any is valid as `<entity>`):
+The 46 entities this SDK exposes (any is valid as `<entity>`):
 
-catalog customer order
+account add_comment_escalation all_event_type async_order async_order_detail_view async_order_line_items_view async_reason_codes_view async_update_line_item_view balance_alert_view brand_categories_view catalog choice_product country_view_summary create_account_criterion create_customer_criterion credential_type_view credit_card credit_card_deposit credit_card_unregister customer email_template_list_view email_template_view_verbose embeddable_response_dto exchange_rates_with_disclaimer line_item low_balance_alert_list_view low_balance_alert_view mobile_country n14_webhook n1_customer n2_account n3_fund n8_line_item n9_digital_template order order_view_summary prepaid_card_info prepaid_card_transaction reissue_card replacement_reason resend reward_reasons_map transfer_fund update_account update_webhook_subscription_response_view webhook
 
 ## Explanation
 

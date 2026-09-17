@@ -1,0 +1,269 @@
+{
+  "existing": {
+    "balance_alert_view": {
+      "BALANCE_ALERT_VIEW00": {
+        "account_id": "ACCOUNT01",
+        "balance_alert_id": "BALANCE_ALERT01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "id": "BALANCE_ALERT_VIEW00"
+      },
+      "BALANCE_ALERT_VIEW01": {
+        "account_id": "ACCOUNT01",
+        "balance_alert_id": "BALANCE_ALERT01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "id": "BALANCE_ALERT_VIEW01"
+      },
+      "BALANCE_ALERT_VIEW02": {
+        "account_id": "ACCOUNT01",
+        "balance_alert_id": "BALANCE_ALERT01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "id": "BALANCE_ALERT_VIEW02"
+      }
+    }
+  },
+  "new": {
+    "balance_alert_view": {
+      "balance_alert_view_ref01": {}
+    }
+  },
+  "requests": {
+    "DELETE /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteLowBalanceAlert",
+        "parameters": [
+          {
+            "description": "The customerIdentifier for the Customer / Account combination.",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The accountIdentifier for the Customer / Account combination.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The balance alert ID that is being deleted.",
+            "in": "path",
+            "name": "balanceAlertID",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "balanceAlertID": {
+                      "format": "uuid",
+                      "title": "Balance Alert ID",
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "ACTIVE",
+                        "INACTIVE",
+                        "DELETED"
+                      ],
+                      "title": "Status",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Conflict; Duplicate Exists"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

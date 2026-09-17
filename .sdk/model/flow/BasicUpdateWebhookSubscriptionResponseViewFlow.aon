@@ -1,0 +1,29 @@
+# BasicUpdateWebhookSubscriptionResponseViewFlow
+
+main: kit: flow: BasicUpdateWebhookSubscriptionResponseViewFlow:
+{
+  entity: "update_webhook_subscription_response_view",
+  kind: "basic",
+  name: "BasicUpdateWebhookSubscriptionResponseViewFlow",
+  step: [
+    {
+      input: {
+        ref: "update_webhook_subscription_response_view_ref01",
+        srcdatavar: "update_webhook_subscription_response_view_ref01_data",
+        suffix: "_up0",
+        textfield: "createdAt"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-update_webhook_subscription_response_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUpdateWebhookSubscriptionResponseViewFlow"
+}

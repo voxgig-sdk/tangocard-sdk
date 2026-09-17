@@ -1,0 +1,9 @@
+# BasicCreateCustomerCriterionFlow
+
+main: kit: flow: BasicCreateCustomerCriterionFlow:
+{
+  entity: "create_customer_criterion",
+  kind: "basic",
+  name: "BasicCreateCustomerCriterionFlow",
+  "key$": "BasicCreateCustomerCriterionFlow"
+}

@@ -1,20 +1,311 @@
 # Guide
 
 guide: {
-  metrics: count: entity: 3
-  metrics: count: path: 3
-  metrics: count: method: 4
+  metrics: count: entity: 46
+  metrics: count: path: 56
+  metrics: count: method: 72
+
+  entity: account: {
+    path: "/accounts": {
+      op: load: method: *GET
+    }
+    path: "/accounts/{accountIdentifier}": {
+      rename: param: "accountIdentifier": *"id"
+      op: load: method: *GET
+    }
+    path: "/customers/{customerIdentifier}/accounts/{accountIdentifier}": {
+      rename: param: "accountIdentifier": *"id"
+      rename: param: "customerIdentifier": *"customer_identifier"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: add_comment_escalation: {
+    path: "/prepaidCardService/addCommentEscalation/{referenceLineItemID}": {
+      rename: param: "referenceLineItemID": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: all_event_type: {
+    path: "/webhooks/eventtypes": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+  }
+
+  entity: async_order: {
+    path: "/asyncOrders": {
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.orders`")|top
+    }
+  }
+
+  entity: async_order_detail_view: {
+    path: "/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}": {
+      rename: param: "accountIdentifier": *"account_identifier"
+      rename: param: "customerIdentifier": *"customer_identifier"
+      rename: param: "externalRefID": *"external_ref_id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: async_order_line_items_view: {
+    path: "/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}/lineItems": {
+      rename: param: "accountIdentifier": *"account_id"
+      rename: param: "customerIdentifier": *"customer_id"
+      rename: param: "externalRefID": *"external_ref_id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: async_reason_codes_view: {
+    path: "/asyncOrders/reasonCodes": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.reasonCodes`")|top
+    }
+  }
+
+  entity: async_update_line_item_view: {
+    path: "/asyncOrders/lineItems/{referenceLineItemId}": {
+      rename: param: "referenceLineItemId": *"reference_line_item_id"
+      op: patch: method: *PATCH
+      op: patch: transform: res: *("`body.senderInfo`")|top
+    }
+  }
+
+  entity: balance_alert_view: {
+    path: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}": {
+      rename: param: "accountIdentifier": *"account_id"
+      rename: param: "balanceAlertID": *"balance_alert_id"
+      rename: param: "customerIdentifier": *"customer_identifier"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: brand_categories_view: {
+    path: "/brandCategories": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.brandCategories`")|top
+    }
+  }
 
   entity: catalog: {
     path: "/catalogs": {
       op: list: method: *GET
       op: list: transform: res: *("`body.brands`")|top
     }
+    path: "/choiceProducts/{choiceProductUtid}/catalog": {
+      rename: param: "choiceProductUtid": *"choice_product_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.brands`")|top
+    }
+  }
+
+  entity: choice_product: {
+    path: "/choiceProducts": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.choiceProducts`")|top
+    }
+    path: "/choiceProducts/{utid}": {
+      rename: param: "utid": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: country_view_summary: {
+    path: "/rewardCountries": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: create_account_criterion: {
+    path: "/customers/{customerIdentifier}/accounts": {
+      rename: param: "customerIdentifier": *"customer_identifier"
+      op: create: method: *POST
+    }
+  }
+
+  entity: create_customer_criterion: {
+  }
+
+  entity: credential_type_view: {
+    path: "/credentialtypes": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: credit_card: {
+    path: "/creditCards": {
+      op: create: method: *POST
+      op: load: method: *GET
+    }
+    path: "/creditCards/{token}": {
+      rename: param: "token": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: credit_card_deposit: {
+    path: "/creditCardDeposits": {
+      op: create: method: *POST
+    }
+    path: "/creditCardDeposits/{referenceDepositID}": {
+      rename: param: "referenceDepositID": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: credit_card_unregister: {
+    path: "/creditCardUnregisters": {
+      op: create: method: *POST
+    }
   }
 
   entity: customer: {
     path: "/customers": {
+      op: create: method: *POST
       op: list: method: *GET
+    }
+    path: "/customers/{customerIdentifier}": {
+      rename: param: "customerIdentifier": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: email_template_list_view: {
+  }
+
+  entity: email_template_view_verbose: {
+    path: "/digitalTemplates": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/digitalTemplates/{etid}": {
+      op: load: method: *GET
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: embeddable_response_dto: {
+    path: "/lineItems/{referenceLineItemID}/embeddedUrl": {
+      rename: param: "referenceLineItemID": *"reference_line_item_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: exchange_rates_with_disclaimer: {
+    path: "/exchangerates": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.exchangeRates`")|top
+    }
+  }
+
+  entity: line_item: {
+    path: "/lineItems": {
+      op: list: method: *GET
+    }
+    path: "/lineItems/{referenceLineItemID}": {
+      rename: param: "referenceLineItemID": *"id"
+      op: load: method: *GET
+    }
+    path: "/lineItems/{referenceLineItemID}/cancel": {
+      action: "cancel": {}
+      rename: param: "referenceLineItemID": *"reference_line_item_id"
+      op: create: method: *POST
+    }
+    path: "/lineItems/{referenceLineItemID}/freeze": {
+      action: "freeze": {}
+      rename: param: "referenceLineItemID": *"reference_line_item_id"
+      op: create: method: *POST
+    }
+    path: "/lineItems/{referenceLineItemID}/unfreeze": {
+      action: "unfreeze": {}
+      rename: param: "referenceLineItemID": *"reference_line_item_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: low_balance_alert_list_view: {
+    path: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance": {
+      rename: param: "accountIdentifier": *"account_identifier"
+      rename: param: "customerIdentifier": *"customer_identifier"
+      op: list: method: *GET
+    }
+  }
+
+  entity: low_balance_alert_view: {
+    path: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance": {
+      rename: param: "accountIdentifier": *"account_identifier"
+      rename: param: "customerIdentifier": *"customer_identifier"
+      op: create: method: *POST
+    }
+    path: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}": {
+      rename: param: "accountIdentifier": *"account_id"
+      rename: param: "balanceAlertID": *"balance_alert_id"
+      rename: param: "customerIdentifier": *"customer_identifier"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: mobile_country: {
+    path: "/mobileCountries": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: n14_webhook: {
+    path: "/webhooks": {
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/webhooks/{webhookId}": {
+      rename: param: "webhookId": *"id"
+      op: remove: method: *DELETE
+    }
+    path: "/webhooks/{webhookId}/events": {
+      rename: param: "webhookId": *"webhook_id"
+      op: load: method: *GET
+    }
+    path: "/webhooks/{webhookId}/tests": {
+      rename: param: "webhookId": *"webhook_id"
+      op: create: method: *POST
+    }
+    path: "/webhooks/{webhookId}/tests/{testName}": {
+      rename: param: "testName": *"test_name"
+      rename: param: "webhookId": *"webhook_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: n1_customer: {
+    path: "/customers/{customerIdentifier}/accounts": {
+      rename: param: "customerIdentifier": *"customer_identifier"
+      op: load: method: *GET
+    }
+  }
+
+  entity: n2_account: {
+  }
+
+  entity: n3_fund: {
+  }
+
+  entity: n8_line_item: {
+    path: "/lineItems/{referenceLineItemID}": {
+      rename: param: "referenceLineItemID": *"id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: n9_digital_template: {
+    path: "/digitalTemplates/{etid}": {
+      rename: param: "etid": *"id"
+      op: remove: method: *DELETE
     }
   }
 
@@ -22,6 +313,99 @@ guide: {
     path: "/orders": {
       op: create: method: *POST
       op: list: method: *GET
+    }
+    path: "/orders/{referenceOrderID}": {
+      rename: param: "referenceOrderID": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: order_view_summary: {
+    path: "/lineItems/{referenceLineItemID}/reissue": {
+      rename: param: "referenceLineItemID": *"reference_line_item_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: prepaid_card_info: {
+    path: "/prepaidCardService/getCardInfo/{referenceLineItemID}": {
+      rename: param: "referenceLineItemID": *"reference_line_item_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: prepaid_card_transaction: {
+    path: "/prepaidCardService/getCardTransactions/{referenceLineItemID}": {
+      rename: param: "referenceLineItemID": *"reference_line_item_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: reissue_card: {
+    path: "/prepaidCardService/reissueCard/{referenceLineItemID}": {
+      rename: param: "referenceLineItemID": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: replacement_reason: {
+    path: "/prepaidCardService/replacementReasons": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.replacementReasons`")|top
+    }
+  }
+
+  entity: resend: {
+    path: "/lineItems/{referenceLineItemId}/resends": {
+      rename: param: "referenceLineItemId": *"line_item_id"
+      op: create: method: *POST
+    }
+    path: "/orders/{referenceOrderID}/resends": {
+      rename: param: "referenceOrderID": *"reference_order_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: reward_reasons_map: {
+    path: "/lineItems/reasonCodes": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: transfer_fund: {
+    path: "/transferFunds": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: update_account: {
+    path: "/prepaidCardService/updateAccount/{referenceLineItemID}": {
+      rename: param: "referenceLineItemID": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: update_webhook_subscription_response_view: {
+    path: "/webhooks/{webhookId}": {
+      rename: param: "webhookId": *"webhook_id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: webhook: {
+    path: "/webhooks/{webhookId}": {
+      rename: param: "webhookId": *"id"
+      op: load: method: *GET
+    }
+    path: "/webhooks/{webhookId}/renew": {
+      action: "renew": {}
+      rename: param: "webhookId": *"id"
+      op: create: method: *POST
+    }
+    path: "/webhooks/{webhookId}/replay": {
+      action: "replay": {}
+      rename: param: "webhookId": *"id"
+      op: create: method: *POST
     }
   }
 

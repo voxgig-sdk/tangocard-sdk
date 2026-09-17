@@ -1,0 +1,9 @@
+# BasicN2AccountFlow
+
+main: kit: flow: BasicN2AccountFlow:
+{
+  entity: "n2_account",
+  kind: "basic",
+  name: "BasicN2AccountFlow",
+  "key$": "BasicN2AccountFlow"
+}

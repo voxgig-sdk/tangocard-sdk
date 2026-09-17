@@ -1,0 +1,9 @@
+# BasicEmailTemplateListViewFlow
+
+main: kit: flow: BasicEmailTemplateListViewFlow:
+{
+  entity: "email_template_list_view",
+  kind: "basic",
+  name: "BasicEmailTemplateListViewFlow",
+  "key$": "BasicEmailTemplateListViewFlow"
+}

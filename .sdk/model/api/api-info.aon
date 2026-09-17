@@ -4,7 +4,16 @@
 main: {
   kit: {
     info: {
-      description: "List customers/brands and place reward orders via Tango Card's Rewards as a Service API."
+      contact: {
+        email: "devsupport@tangocard.com"
+        name: "Tango Developer Support"
+        url: "https://www.tangocard.com/developer"
+      }
+      description: "Welcome to the Tango API – with this RESTful API you can integrate a global reward or incentive program into your app or platform.<br /><br /> This console works in our Sandbox environment. To receive your own credentials or to ask questions, please contact us at <a href=\\\"mailto:devsupport@tangocard.com\\\">devsupport@tangocard.com</a>."
+      license: {
+        name: "Apache 2.0"
+        url: "https://www.apache.org/licenses/LICENSE-2.0"
+      }
       security: {
         in: "header"
         name: "Authorization"
@@ -14,11 +23,13 @@ main: {
       }
       servers: [
         {
+          description: "Generated server url"
           url: "https://integration-api.tangocard.com/raas/v2"
         }
       ]
-      summary: "List customers/brands and place reward orders via Tango Card's Rewards as a Service API."
-      title: "Tango Card RaaS API"
+      summary: "Welcome to the Tango API – with this RESTful API you can integrate a global reward or incentive program into your app or platform.<br /><br /> This console works in our Sandbox environment."
+      termsOfService: "https://www.tangocard.com/terms-of-service"
+      title: "Tango API"
       version: "2.0.0"
       website: "https://integration-api.tangocard.com"
     }

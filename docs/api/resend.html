@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Resend | Tango API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Tango API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/tangocard-sdk">voxgig-sdk/tangocard-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Tango API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/account.html">Account</a>
+<a href="../api/add_comment_escalation.html">AddCommentEscalation</a>
+<a href="../api/all_event_type.html">AllEventType</a>
+<a href="../api/async_order.html">AsyncOrder</a>
+<a href="../api/async_order_detail_view.html">AsyncOrderDetailView</a>
+<a href="../api/async_order_line_items_view.html">AsyncOrderLineItemsView</a>
+<a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
+<a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
+<a href="../api/balance_alert_view.html">BalanceAlertView</a>
+<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/catalog.html">Catalog</a>
+<a href="../api/choice_product.html">ChoiceProduct</a>
+<a href="../api/country_view_summary.html">CountryViewSummary</a>
+<a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
+<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
+<a href="../api/credential_type_view.html">CredentialTypeView</a>
+<a href="../api/credit_card.html">CreditCard</a>
+<a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
+<a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
+<a href="../api/customer.html">Customer</a>
+<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
+<a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
+<a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
+<a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
+<a href="../api/line_item.html">LineItem</a>
+<a href="../api/low_balance_alert_list_view.html">LowBalanceAlertListView</a>
+<a href="../api/low_balance_alert_view.html">LowBalanceAlertView</a>
+<a href="../api/mobile_country.html">MobileCountry</a>
+<a href="../api/n14_webhook.html">N14Webhook</a>
+<a href="../api/n1_customer.html">N1Customer</a>
+<a href="../api/n2_account.html">N2Account</a>
+<a href="../api/n3_fund.html">N3Fund</a>
+<a href="../api/n8_line_item.html">N8LineItem</a>
+<a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
+<a href="../api/order.html">Order</a>
+<a href="../api/order_view_summary.html">OrderViewSummary</a>
+<a href="../api/prepaid_card_info.html">PrepaidCardInfo</a>
+<a href="../api/prepaid_card_transaction.html">PrepaidCardTransaction</a>
+<a href="../api/reissue_card.html">ReissueCard</a>
+<a href="../api/replacement_reason.html">ReplacementReason</a>
+<a aria-current="page" href="../api/resend.html">Resend</a><div class="nav-sections"><a class="nav-section" href="#post-lineitemsreferencelineitemidresends">POST /lineItems/{referenceLineItemId}/resends</a>
+<a class="nav-section" href="#post-ordersreferenceorderidresends">POST /orders/{referenceOrderID}/resends</a></div>
+<a href="../api/reward_reasons_map.html">RewardReasonsMap</a>
+<a href="../api/transfer_fund.html">TransferFund</a>
+<a href="../api/update_account.html">UpdateAccount</a>
+<a href="../api/update_webhook_subscription_response_view.html">UpdateWebhookSubscriptionResponseView</a>
+<a href="../api/webhook.html">Webhook</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="resend">Resend</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-lineitemsreferencelineitemidresends"><code>/lineItems/{referenceLineItemId}/resends</code></a></td>
+<td><code>create</code></td>
+<td>Created</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-ordersreferenceorderidresends"><code>/orders/{referenceOrderID}/resends</code></a></td>
+<td><code>create</code></td>
+<td>Created</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>newDeliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The delivery method used to re-deliver the reward.</td>
+</tr>
+<tr>
+<td><code>newEmail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new email address to re-deliver this order to.</td>
+</tr>
+<tr>
+<td><code>newEtid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new etid used to re-deliver an order.</td>
+</tr>
+<tr>
+<td><code>newMobile</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new mobile number to use for resending an order.</td>
+</tr>
+<tr>
+<td><code>newMobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new phone number to re-deliver this order to.</td>
+</tr>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required when lineItemResendReasonCode is &quot;OTHER&quot;, enter the reason why the line item is being RESENT</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Enter the reason why this line item is being RESENT (respectively)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-lineitemsreferencelineitemidresends" class="operation" data-method="post"><code>POST</code> /lineItems/{referenceLineItemId}/resends</h3>
+<p>Operation ID: <code>resendLineItem</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceLineItemId</code> | <code>path</code> | <code>string</code> | Yes | Reference line item id is returned in the line item response payload. |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>newDeliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, WHATSAPP</code></td>
+<td>No</td>
+<td>The delivery method used to re-deliver the reward. If missing, the redelivery will use the delivery method used on the original order</td>
+</tr>
+<tr>
+<td><code>newEmail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new email address to re-deliver this order to. If missing, use the original order email if deliveryMethod=EMAIL</td>
+</tr>
+<tr>
+<td><code>newEtid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new etid used to re-deliver an order. If missing, use the original order etid.</td>
+</tr>
+<tr>
+<td><code>newMobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new phone number to re-deliver this order to. If missing, use the original order phoneNumber of deliveryMethod=PHONE</td>
+</tr>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required when lineItemResendReasonCode is &quot;OTHER&quot;, enter the reason why the line item is being RESENT</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>enum: NOT_RECEIVED, LOST_DELETED, DELIVERY_INFO, DELIVERY_METHOD, REMINDER, OTHER</code></td>
+<td>No</td>
+<td>Enter the reason why this line item is being RESENT (respectively)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="201-created" class="status" data-status="2xx">201: Created</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code></td>
+<td>No</td>
+<td>The delivery method of the resend</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email address that the resend was sent to if deliveryMethod=EMAIL</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>ID</td>
+</tr>
+<tr>
+<td><code>legacyId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Legacy ID (only when resending v1 orders)</td>
+</tr>
+<tr>
+<td><code>mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile number that the resend was sent to if deliveryMethod=PHONE</td>
+</tr>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The reason for the resend if reasonCode=OTHER</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>enum: NOT_RECEIVED, LOST_DELETED, DELIVERY_INFO, DELIVERY_METHOD, REMINDER, OTHER</code></td>
+<td>No</td>
+<td>The reason for the resend</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-not-found" class="status" data-status="4xx">404: Not Found</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-ordersreferenceorderidresends" class="operation" data-method="post"><code>POST</code> /orders/{referenceOrderID}/resends</h3>
+<p>Operation ID: <code>getOrderResends</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceOrderID</code> | <code>path</code> | <code>string</code> | Yes | Reference order ID is returned in the order response payload |</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>newDeliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, WHATSAPP</code></td>
+<td>No</td>
+<td>A new delivery method to use for resending an order.</td>
+</tr>
+<tr>
+<td><code>newEmail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new email address to resend this order to.</td>
+</tr>
+<tr>
+<td><code>newEtid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new etid to use for resending an order.</td>
+</tr>
+<tr>
+<td><code>newMobile</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A new mobile number to use for resending an order.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-1">Responses</h4>
+<h5 id="201-created-1" class="status" data-status="2xx">201: Created</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email address that the resend was sent to</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>ID</td>
+</tr>
+<tr>
+<td><code>legacyId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Legacy ID (only when resending v1 orders)</td>
+</tr>
+<tr>
+<td><code>mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number that the resend was sent to</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request-1" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-1" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-1" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

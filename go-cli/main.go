@@ -20,7 +20,7 @@ import (
 const prompt = "tangocard"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "catalog customer order"
+const entitiesHelp = "account add_comment_escalation all_event_type async_order async_order_detail_view async_order_line_items_view async_reason_codes_view async_update_line_item_view balance_alert_view brand_categories_view catalog choice_product country_view_summary create_account_criterion create_customer_criterion credential_type_view credit_card credit_card_deposit credit_card_unregister customer email_template_list_view email_template_view_verbose embeddable_response_dto exchange_rates_with_disclaimer line_item low_balance_alert_list_view low_balance_alert_view mobile_country n14_webhook n1_customer n2_account n3_fund n8_line_item n9_digital_template order order_view_summary prepaid_card_info prepaid_card_transaction reissue_card replacement_reason resend reward_reasons_map transfer_fund update_account update_webhook_subscription_response_view webhook"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

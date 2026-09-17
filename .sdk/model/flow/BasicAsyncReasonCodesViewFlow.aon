@@ -1,0 +1,28 @@
+# BasicAsyncReasonCodesViewFlow
+
+main: kit: flow: BasicAsyncReasonCodesViewFlow:
+{
+  entity: "async_reason_codes_view",
+  kind: "basic",
+  name: "BasicAsyncReasonCodesViewFlow",
+  step: [
+    {
+      input: {
+        ref: "async_reason_codes_view_ref01",
+        srcdatavar: "async_reason_codes_view_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-async_reason_codes_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAsyncReasonCodesViewFlow"
+}

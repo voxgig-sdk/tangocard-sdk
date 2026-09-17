@@ -2,37 +2,442 @@
   "existing": {
     "customer": {
       "CUSTOMER00": {
-        "customerIdentifier": "s1e",
-        "displayName": "s1f",
-        "email": "s20"
+        "accounts": [],
+        "createdAt": "s3d",
+        "customerIdentifier": "s3e",
+        "displayName": "s3f",
+        "id": "CUSTOMER00",
+        "status": "s41"
       },
       "CUSTOMER01": {
-        "customerIdentifier": "s3c",
-        "displayName": "s3d",
-        "email": "s3e"
+        "accounts": [],
+        "createdAt": "s79",
+        "customerIdentifier": "s7a",
+        "displayName": "s7b",
+        "id": "CUSTOMER01",
+        "status": "s7d"
       },
       "CUSTOMER02": {
-        "customerIdentifier": "s5a",
-        "displayName": "s5b",
-        "email": "s5c"
+        "accounts": [],
+        "createdAt": "sb5",
+        "customerIdentifier": "sb6",
+        "displayName": "sb7",
+        "id": "CUSTOMER02",
+        "status": "sb9"
       }
     }
   },
   "new": {
     "customer": {
       "customer_ref01": {
-        "customerIdentifier": "s78",
-        "displayName": "s79",
-        "email": "s7a"
+        "accounts": [],
+        "createdAt": "sf1",
+        "customerIdentifier": "sf2",
+        "displayName": "sf3",
+        "status": "sf5"
       }
     }
   },
   "requests": {
+    "POST /customers": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createCustomer",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "customerIdentifier": {
+                    "description": "A unique identifier for this customer. Must be between 5-100 characters and accepts the following: -0-9a-zA-Z in any sequence.",
+                    "pattern": "^[-a-zA-Z0-9]{5,100}$",
+                    "title": "Customer Identifier",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "description": "A friendly name for this customer. Must be between 5-100 characters and accepts letters, numbers, punctuation and whitespace separators in any sequence.",
+                    "pattern": "^[\\p{L}\\p{N}\\p{P}\\p{Z}]{5,100}$",
+                    "title": "Display Name",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "customerIdentifier",
+                  "displayName"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "customerIdentifier": {
+                      "description": "A unique identifier for this customer. Must be between 5-100 characters and accepts the following: -0-9a-zA-Z in any sequence.",
+                      "pattern": "^[-a-zA-Z0-9]{5,100}$",
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    },
+                    "displayName": {
+                      "description": "A friendly name for this customer. Must be between 5-100 characters and accepts letters, numbers, punctuation and whitespace separators in any sequence.",
+                      "pattern": "^[\\p{L}\\p{N}\\p{P}\\p{Z}]{5,100}$",
+                      "title": "Display Name",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "customerIdentifier",
+                    "displayName"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Conflict; Duplicate Exists"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
     "GET /customers": {
       "provenance": "operation-contract",
       "contract": {
         "operationId": "listCustomers",
-        "parameters": [],
+        "parameters": [
+          {
+            "description": "Specify the customer display name to be queried.",
+            "in": "query",
+            "name": "displayName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the status to be queried.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the customer earliest createdAt date to be queried.",
+            "in": "query",
+            "name": "customerMinDateCreatedAt",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the customer latest createdAt date to be queried.",
+            "in": "query",
+            "name": "customerMaxDateCreatedAt",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account status to be queried.",
+            "in": "query",
+            "name": "accountStatus",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account identifier to be queried.",
+            "in": "query",
+            "name": "accountIdentifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account number to be queried.",
+            "in": "query",
+            "name": "accountNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account display name to be queried.",
+            "in": "query",
+            "name": "accountDisplayName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the earliest createdAt date to be queried.",
+            "in": "query",
+            "name": "accountMinDateCreatedAt",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the latest createdAt date to be queried.",
+            "in": "query",
+            "name": "accountMaxDateCreatedAt",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether to paginate the results or not. Defaults to false.",
+            "in": "query",
+            "name": "paginate",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The cursor to use for the previous page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "prevCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The cursor to use for the next page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "nextCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of results to return. The default is 10, and the maximum is 200. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "maxResults",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
         "protocol": "http",
         "responses": {
           "200": {
@@ -41,33 +446,564 @@
                 "schema": {
                   "items": {
                     "properties": {
+                      "accounts": {
+                        "items": {
+                          "properties": {
+                            "accountIdentifier": {
+                              "title": "Account Identifier",
+                              "type": "string"
+                            },
+                            "accountNumber": {
+                              "title": "Account Number",
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "title": "Account Creation Timestamp",
+                              "type": "string"
+                            },
+                            "currencyCode": {
+                              "title": "Currency Code",
+                              "type": "string"
+                            },
+                            "displayName": {
+                              "title": "Account Display Name",
+                              "type": "string"
+                            },
+                            "status": {
+                              "title": "Account Status",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "accountIdentifier",
+                            "accountNumber",
+                            "createdAt",
+                            "currencyCode",
+                            "displayName",
+                            "status"
+                          ],
+                          "type": "object"
+                        },
+                        "title": "List of Accounts this Customer has",
+                        "type": "array"
+                      },
+                      "createdAt": {
+                        "title": "Created Date",
+                        "type": "string"
+                      },
                       "customerIdentifier": {
+                        "title": "Customer Identifier",
                         "type": "string"
                       },
                       "displayName": {
+                        "title": "Customer Display Name",
                         "type": "string"
                       },
-                      "email": {
+                      "status": {
+                        "title": "Customer Status",
                         "type": "string"
                       }
                     },
+                    "required": [
+                      "accounts",
+                      "createdAt",
+                      "customerIdentifier",
+                      "displayName",
+                      "status"
+                    ],
                     "type": "object"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "Customers"
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "security": [
           {
             "basicAuth": []
+          },
+          {
+            "bearerToken": []
           }
         ],
         "securitySchemes": {
           "basicAuth": {
             "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /customers/{customerIdentifier}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCustomer",
+        "parameters": [
+          {
+            "description": "The customerIdentifier for the Customer under which you are seeking details.",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accounts": {
+                      "items": {
+                        "properties": {
+                          "accountIdentifier": {
+                            "title": "Account Identifier",
+                            "type": "string"
+                          },
+                          "accountNumber": {
+                            "title": "Account Number",
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "title": "Account Creation Timestamp",
+                            "type": "string"
+                          },
+                          "currencyCode": {
+                            "title": "Currency Code",
+                            "type": "string"
+                          },
+                          "displayName": {
+                            "title": "Account Display Name",
+                            "type": "string"
+                          },
+                          "status": {
+                            "title": "Account Status",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "accountIdentifier",
+                          "accountNumber",
+                          "createdAt",
+                          "currencyCode",
+                          "displayName",
+                          "status"
+                        ],
+                        "type": "object"
+                      },
+                      "title": "List of Accounts this Customer has",
+                      "type": "array"
+                    },
+                    "createdAt": {
+                      "title": "Created Date",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    },
+                    "displayName": {
+                      "title": "Customer Display Name",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Customer Status",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "accounts",
+                    "createdAt",
+                    "customerIdentifier",
+                    "displayName",
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
             "type": "http"
           }
         },

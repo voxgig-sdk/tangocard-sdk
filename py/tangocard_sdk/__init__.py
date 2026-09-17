@@ -307,10 +307,118 @@ class TangocardSDK:
         return res
 
 
+    def Account(self, data=None) -> "AccountEntity":
+        """Entity factory: client.Account().list() / client.Account().load({"id": ...})."""
+        from tangocard_sdk.entity.account_entity import AccountEntity
+        return AccountEntity(self, data)
+
+
+    def AddCommentEscalation(self, data=None) -> "AddCommentEscalationEntity":
+        """Entity factory: client.AddCommentEscalation().list() / client.AddCommentEscalation().load({"id": ...})."""
+        from tangocard_sdk.entity.add_comment_escalation_entity import AddCommentEscalationEntity
+        return AddCommentEscalationEntity(self, data)
+
+
+    def AllEventType(self, data=None) -> "AllEventTypeEntity":
+        """Entity factory: client.AllEventType().list() / client.AllEventType().load({"id": ...})."""
+        from tangocard_sdk.entity.all_event_type_entity import AllEventTypeEntity
+        return AllEventTypeEntity(self, data)
+
+
+    def AsyncOrder(self, data=None) -> "AsyncOrderEntity":
+        """Entity factory: client.AsyncOrder().list() / client.AsyncOrder().load({"id": ...})."""
+        from tangocard_sdk.entity.async_order_entity import AsyncOrderEntity
+        return AsyncOrderEntity(self, data)
+
+
+    def AsyncOrderDetailView(self, data=None) -> "AsyncOrderDetailViewEntity":
+        """Entity factory: client.AsyncOrderDetailView().list() / client.AsyncOrderDetailView().load({"id": ...})."""
+        from tangocard_sdk.entity.async_order_detail_view_entity import AsyncOrderDetailViewEntity
+        return AsyncOrderDetailViewEntity(self, data)
+
+
+    def AsyncOrderLineItemsView(self, data=None) -> "AsyncOrderLineItemsViewEntity":
+        """Entity factory: client.AsyncOrderLineItemsView().list() / client.AsyncOrderLineItemsView().load({"id": ...})."""
+        from tangocard_sdk.entity.async_order_line_items_view_entity import AsyncOrderLineItemsViewEntity
+        return AsyncOrderLineItemsViewEntity(self, data)
+
+
+    def AsyncReasonCodesView(self, data=None) -> "AsyncReasonCodesViewEntity":
+        """Entity factory: client.AsyncReasonCodesView().list() / client.AsyncReasonCodesView().load({"id": ...})."""
+        from tangocard_sdk.entity.async_reason_codes_view_entity import AsyncReasonCodesViewEntity
+        return AsyncReasonCodesViewEntity(self, data)
+
+
+    def AsyncUpdateLineItemView(self, data=None) -> "AsyncUpdateLineItemViewEntity":
+        """Entity factory: client.AsyncUpdateLineItemView().list() / client.AsyncUpdateLineItemView().load({"id": ...})."""
+        from tangocard_sdk.entity.async_update_line_item_view_entity import AsyncUpdateLineItemViewEntity
+        return AsyncUpdateLineItemViewEntity(self, data)
+
+
+    def BalanceAlertView(self, data=None) -> "BalanceAlertViewEntity":
+        """Entity factory: client.BalanceAlertView().list() / client.BalanceAlertView().load({"id": ...})."""
+        from tangocard_sdk.entity.balance_alert_view_entity import BalanceAlertViewEntity
+        return BalanceAlertViewEntity(self, data)
+
+
+    def BrandCategoriesView(self, data=None) -> "BrandCategoriesViewEntity":
+        """Entity factory: client.BrandCategoriesView().list() / client.BrandCategoriesView().load({"id": ...})."""
+        from tangocard_sdk.entity.brand_categories_view_entity import BrandCategoriesViewEntity
+        return BrandCategoriesViewEntity(self, data)
+
+
     def Catalog(self, data=None) -> "CatalogEntity":
         """Entity factory: client.Catalog().list() / client.Catalog().load({"id": ...})."""
         from tangocard_sdk.entity.catalog_entity import CatalogEntity
         return CatalogEntity(self, data)
+
+
+    def ChoiceProduct(self, data=None) -> "ChoiceProductEntity":
+        """Entity factory: client.ChoiceProduct().list() / client.ChoiceProduct().load({"id": ...})."""
+        from tangocard_sdk.entity.choice_product_entity import ChoiceProductEntity
+        return ChoiceProductEntity(self, data)
+
+
+    def CountryViewSummary(self, data=None) -> "CountryViewSummaryEntity":
+        """Entity factory: client.CountryViewSummary().list() / client.CountryViewSummary().load({"id": ...})."""
+        from tangocard_sdk.entity.country_view_summary_entity import CountryViewSummaryEntity
+        return CountryViewSummaryEntity(self, data)
+
+
+    def CreateAccountCriterion(self, data=None) -> "CreateAccountCriterionEntity":
+        """Entity factory: client.CreateAccountCriterion().list() / client.CreateAccountCriterion().load({"id": ...})."""
+        from tangocard_sdk.entity.create_account_criterion_entity import CreateAccountCriterionEntity
+        return CreateAccountCriterionEntity(self, data)
+
+
+    def CreateCustomerCriterion(self, data=None) -> "CreateCustomerCriterionEntity":
+        """Entity factory: client.CreateCustomerCriterion().list() / client.CreateCustomerCriterion().load({"id": ...})."""
+        from tangocard_sdk.entity.create_customer_criterion_entity import CreateCustomerCriterionEntity
+        return CreateCustomerCriterionEntity(self, data)
+
+
+    def CredentialTypeView(self, data=None) -> "CredentialTypeViewEntity":
+        """Entity factory: client.CredentialTypeView().list() / client.CredentialTypeView().load({"id": ...})."""
+        from tangocard_sdk.entity.credential_type_view_entity import CredentialTypeViewEntity
+        return CredentialTypeViewEntity(self, data)
+
+
+    def CreditCard(self, data=None) -> "CreditCardEntity":
+        """Entity factory: client.CreditCard().list() / client.CreditCard().load({"id": ...})."""
+        from tangocard_sdk.entity.credit_card_entity import CreditCardEntity
+        return CreditCardEntity(self, data)
+
+
+    def CreditCardDeposit(self, data=None) -> "CreditCardDepositEntity":
+        """Entity factory: client.CreditCardDeposit().list() / client.CreditCardDeposit().load({"id": ...})."""
+        from tangocard_sdk.entity.credit_card_deposit_entity import CreditCardDepositEntity
+        return CreditCardDepositEntity(self, data)
+
+
+    def CreditCardUnregister(self, data=None) -> "CreditCardUnregisterEntity":
+        """Entity factory: client.CreditCardUnregister().list() / client.CreditCardUnregister().load({"id": ...})."""
+        from tangocard_sdk.entity.credit_card_unregister_entity import CreditCardUnregisterEntity
+        return CreditCardUnregisterEntity(self, data)
 
 
     def Customer(self, data=None) -> "CustomerEntity":
@@ -319,10 +427,160 @@ class TangocardSDK:
         return CustomerEntity(self, data)
 
 
+    def EmailTemplateListView(self, data=None) -> "EmailTemplateListViewEntity":
+        """Entity factory: client.EmailTemplateListView().list() / client.EmailTemplateListView().load({"id": ...})."""
+        from tangocard_sdk.entity.email_template_list_view_entity import EmailTemplateListViewEntity
+        return EmailTemplateListViewEntity(self, data)
+
+
+    def EmailTemplateViewVerbose(self, data=None) -> "EmailTemplateViewVerboseEntity":
+        """Entity factory: client.EmailTemplateViewVerbose().list() / client.EmailTemplateViewVerbose().load({"id": ...})."""
+        from tangocard_sdk.entity.email_template_view_verbose_entity import EmailTemplateViewVerboseEntity
+        return EmailTemplateViewVerboseEntity(self, data)
+
+
+    def EmbeddableResponseDto(self, data=None) -> "EmbeddableResponseDtoEntity":
+        """Entity factory: client.EmbeddableResponseDto().list() / client.EmbeddableResponseDto().load({"id": ...})."""
+        from tangocard_sdk.entity.embeddable_response_dto_entity import EmbeddableResponseDtoEntity
+        return EmbeddableResponseDtoEntity(self, data)
+
+
+    def ExchangeRatesWithDisclaimer(self, data=None) -> "ExchangeRatesWithDisclaimerEntity":
+        """Entity factory: client.ExchangeRatesWithDisclaimer().list() / client.ExchangeRatesWithDisclaimer().load({"id": ...})."""
+        from tangocard_sdk.entity.exchange_rates_with_disclaimer_entity import ExchangeRatesWithDisclaimerEntity
+        return ExchangeRatesWithDisclaimerEntity(self, data)
+
+
+    def LineItem(self, data=None) -> "LineItemEntity":
+        """Entity factory: client.LineItem().list() / client.LineItem().load({"id": ...})."""
+        from tangocard_sdk.entity.line_item_entity import LineItemEntity
+        return LineItemEntity(self, data)
+
+
+    def LowBalanceAlertListView(self, data=None) -> "LowBalanceAlertListViewEntity":
+        """Entity factory: client.LowBalanceAlertListView().list() / client.LowBalanceAlertListView().load({"id": ...})."""
+        from tangocard_sdk.entity.low_balance_alert_list_view_entity import LowBalanceAlertListViewEntity
+        return LowBalanceAlertListViewEntity(self, data)
+
+
+    def LowBalanceAlertView(self, data=None) -> "LowBalanceAlertViewEntity":
+        """Entity factory: client.LowBalanceAlertView().list() / client.LowBalanceAlertView().load({"id": ...})."""
+        from tangocard_sdk.entity.low_balance_alert_view_entity import LowBalanceAlertViewEntity
+        return LowBalanceAlertViewEntity(self, data)
+
+
+    def MobileCountry(self, data=None) -> "MobileCountryEntity":
+        """Entity factory: client.MobileCountry().list() / client.MobileCountry().load({"id": ...})."""
+        from tangocard_sdk.entity.mobile_country_entity import MobileCountryEntity
+        return MobileCountryEntity(self, data)
+
+
+    def N14Webhook(self, data=None) -> "N14WebhookEntity":
+        """Entity factory: client.N14Webhook().list() / client.N14Webhook().load({"id": ...})."""
+        from tangocard_sdk.entity.n14_webhook_entity import N14WebhookEntity
+        return N14WebhookEntity(self, data)
+
+
+    def N1Customer(self, data=None) -> "N1CustomerEntity":
+        """Entity factory: client.N1Customer().list() / client.N1Customer().load({"id": ...})."""
+        from tangocard_sdk.entity.n1_customer_entity import N1CustomerEntity
+        return N1CustomerEntity(self, data)
+
+
+    def N2Account(self, data=None) -> "N2AccountEntity":
+        """Entity factory: client.N2Account().list() / client.N2Account().load({"id": ...})."""
+        from tangocard_sdk.entity.n2_account_entity import N2AccountEntity
+        return N2AccountEntity(self, data)
+
+
+    def N3Fund(self, data=None) -> "N3FundEntity":
+        """Entity factory: client.N3Fund().list() / client.N3Fund().load({"id": ...})."""
+        from tangocard_sdk.entity.n3_fund_entity import N3FundEntity
+        return N3FundEntity(self, data)
+
+
+    def N8LineItem(self, data=None) -> "N8LineItemEntity":
+        """Entity factory: client.N8LineItem().list() / client.N8LineItem().load({"id": ...})."""
+        from tangocard_sdk.entity.n8_line_item_entity import N8LineItemEntity
+        return N8LineItemEntity(self, data)
+
+
+    def N9DigitalTemplate(self, data=None) -> "N9DigitalTemplateEntity":
+        """Entity factory: client.N9DigitalTemplate().list() / client.N9DigitalTemplate().load({"id": ...})."""
+        from tangocard_sdk.entity.n9_digital_template_entity import N9DigitalTemplateEntity
+        return N9DigitalTemplateEntity(self, data)
+
+
     def Order(self, data=None) -> "OrderEntity":
         """Entity factory: client.Order().list() / client.Order().load({"id": ...})."""
         from tangocard_sdk.entity.order_entity import OrderEntity
         return OrderEntity(self, data)
+
+
+    def OrderViewSummary(self, data=None) -> "OrderViewSummaryEntity":
+        """Entity factory: client.OrderViewSummary().list() / client.OrderViewSummary().load({"id": ...})."""
+        from tangocard_sdk.entity.order_view_summary_entity import OrderViewSummaryEntity
+        return OrderViewSummaryEntity(self, data)
+
+
+    def PrepaidCardInfo(self, data=None) -> "PrepaidCardInfoEntity":
+        """Entity factory: client.PrepaidCardInfo().list() / client.PrepaidCardInfo().load({"id": ...})."""
+        from tangocard_sdk.entity.prepaid_card_info_entity import PrepaidCardInfoEntity
+        return PrepaidCardInfoEntity(self, data)
+
+
+    def PrepaidCardTransaction(self, data=None) -> "PrepaidCardTransactionEntity":
+        """Entity factory: client.PrepaidCardTransaction().list() / client.PrepaidCardTransaction().load({"id": ...})."""
+        from tangocard_sdk.entity.prepaid_card_transaction_entity import PrepaidCardTransactionEntity
+        return PrepaidCardTransactionEntity(self, data)
+
+
+    def ReissueCard(self, data=None) -> "ReissueCardEntity":
+        """Entity factory: client.ReissueCard().list() / client.ReissueCard().load({"id": ...})."""
+        from tangocard_sdk.entity.reissue_card_entity import ReissueCardEntity
+        return ReissueCardEntity(self, data)
+
+
+    def ReplacementReason(self, data=None) -> "ReplacementReasonEntity":
+        """Entity factory: client.ReplacementReason().list() / client.ReplacementReason().load({"id": ...})."""
+        from tangocard_sdk.entity.replacement_reason_entity import ReplacementReasonEntity
+        return ReplacementReasonEntity(self, data)
+
+
+    def Resend(self, data=None) -> "ResendEntity":
+        """Entity factory: client.Resend().list() / client.Resend().load({"id": ...})."""
+        from tangocard_sdk.entity.resend_entity import ResendEntity
+        return ResendEntity(self, data)
+
+
+    def RewardReasonsMap(self, data=None) -> "RewardReasonsMapEntity":
+        """Entity factory: client.RewardReasonsMap().list() / client.RewardReasonsMap().load({"id": ...})."""
+        from tangocard_sdk.entity.reward_reasons_map_entity import RewardReasonsMapEntity
+        return RewardReasonsMapEntity(self, data)
+
+
+    def TransferFund(self, data=None) -> "TransferFundEntity":
+        """Entity factory: client.TransferFund().list() / client.TransferFund().load({"id": ...})."""
+        from tangocard_sdk.entity.transfer_fund_entity import TransferFundEntity
+        return TransferFundEntity(self, data)
+
+
+    def UpdateAccount(self, data=None) -> "UpdateAccountEntity":
+        """Entity factory: client.UpdateAccount().list() / client.UpdateAccount().load({"id": ...})."""
+        from tangocard_sdk.entity.update_account_entity import UpdateAccountEntity
+        return UpdateAccountEntity(self, data)
+
+
+    def UpdateWebhookSubscriptionResponseView(self, data=None) -> "UpdateWebhookSubscriptionResponseViewEntity":
+        """Entity factory: client.UpdateWebhookSubscriptionResponseView().list() / client.UpdateWebhookSubscriptionResponseView().load({"id": ...})."""
+        from tangocard_sdk.entity.update_webhook_subscription_response_view_entity import UpdateWebhookSubscriptionResponseViewEntity
+        return UpdateWebhookSubscriptionResponseViewEntity(self, data)
+
+
+    def Webhook(self, data=None) -> "WebhookEntity":
+        """Entity factory: client.Webhook().list() / client.Webhook().load({"id": ...})."""
+        from tangocard_sdk.entity.webhook_entity import WebhookEntity
+        return WebhookEntity(self, data)
 
 
 
@@ -352,6 +610,49 @@ class TangocardSDK:
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from tangocard_sdk.entity.account_entity import AccountEntity
+    from tangocard_sdk.entity.add_comment_escalation_entity import AddCommentEscalationEntity
+    from tangocard_sdk.entity.all_event_type_entity import AllEventTypeEntity
+    from tangocard_sdk.entity.async_order_entity import AsyncOrderEntity
+    from tangocard_sdk.entity.async_order_detail_view_entity import AsyncOrderDetailViewEntity
+    from tangocard_sdk.entity.async_order_line_items_view_entity import AsyncOrderLineItemsViewEntity
+    from tangocard_sdk.entity.async_reason_codes_view_entity import AsyncReasonCodesViewEntity
+    from tangocard_sdk.entity.async_update_line_item_view_entity import AsyncUpdateLineItemViewEntity
+    from tangocard_sdk.entity.balance_alert_view_entity import BalanceAlertViewEntity
+    from tangocard_sdk.entity.brand_categories_view_entity import BrandCategoriesViewEntity
     from tangocard_sdk.entity.catalog_entity import CatalogEntity
+    from tangocard_sdk.entity.choice_product_entity import ChoiceProductEntity
+    from tangocard_sdk.entity.country_view_summary_entity import CountryViewSummaryEntity
+    from tangocard_sdk.entity.create_account_criterion_entity import CreateAccountCriterionEntity
+    from tangocard_sdk.entity.create_customer_criterion_entity import CreateCustomerCriterionEntity
+    from tangocard_sdk.entity.credential_type_view_entity import CredentialTypeViewEntity
+    from tangocard_sdk.entity.credit_card_entity import CreditCardEntity
+    from tangocard_sdk.entity.credit_card_deposit_entity import CreditCardDepositEntity
+    from tangocard_sdk.entity.credit_card_unregister_entity import CreditCardUnregisterEntity
     from tangocard_sdk.entity.customer_entity import CustomerEntity
+    from tangocard_sdk.entity.email_template_list_view_entity import EmailTemplateListViewEntity
+    from tangocard_sdk.entity.email_template_view_verbose_entity import EmailTemplateViewVerboseEntity
+    from tangocard_sdk.entity.embeddable_response_dto_entity import EmbeddableResponseDtoEntity
+    from tangocard_sdk.entity.exchange_rates_with_disclaimer_entity import ExchangeRatesWithDisclaimerEntity
+    from tangocard_sdk.entity.line_item_entity import LineItemEntity
+    from tangocard_sdk.entity.low_balance_alert_list_view_entity import LowBalanceAlertListViewEntity
+    from tangocard_sdk.entity.low_balance_alert_view_entity import LowBalanceAlertViewEntity
+    from tangocard_sdk.entity.mobile_country_entity import MobileCountryEntity
+    from tangocard_sdk.entity.n14_webhook_entity import N14WebhookEntity
+    from tangocard_sdk.entity.n1_customer_entity import N1CustomerEntity
+    from tangocard_sdk.entity.n2_account_entity import N2AccountEntity
+    from tangocard_sdk.entity.n3_fund_entity import N3FundEntity
+    from tangocard_sdk.entity.n8_line_item_entity import N8LineItemEntity
+    from tangocard_sdk.entity.n9_digital_template_entity import N9DigitalTemplateEntity
     from tangocard_sdk.entity.order_entity import OrderEntity
+    from tangocard_sdk.entity.order_view_summary_entity import OrderViewSummaryEntity
+    from tangocard_sdk.entity.prepaid_card_info_entity import PrepaidCardInfoEntity
+    from tangocard_sdk.entity.prepaid_card_transaction_entity import PrepaidCardTransactionEntity
+    from tangocard_sdk.entity.reissue_card_entity import ReissueCardEntity
+    from tangocard_sdk.entity.replacement_reason_entity import ReplacementReasonEntity
+    from tangocard_sdk.entity.resend_entity import ResendEntity
+    from tangocard_sdk.entity.reward_reasons_map_entity import RewardReasonsMapEntity
+    from tangocard_sdk.entity.transfer_fund_entity import TransferFundEntity
+    from tangocard_sdk.entity.update_account_entity import UpdateAccountEntity
+    from tangocard_sdk.entity.update_webhook_subscription_response_view_entity import UpdateWebhookSubscriptionResponseViewEntity
+    from tangocard_sdk.entity.webhook_entity import WebhookEntity

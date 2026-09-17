@@ -5,7 +5,7 @@
 The JavaScript SDK for the Tangocard API — an entity-oriented client with full async/await support.
 
 The API is exposed as capitalised, semantic **Entities** — e.g.
-`client.Catalog()` — each with a small set of operations (`list`, `create`)
+`client.Account()` — each with a small set of operations (`list`, `load`, `create`, `update`, `remove`)
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
@@ -33,13 +33,22 @@ const client = new TangocardSDK({
 })
 ```
 
-### List Catalog Records
+### Load an Account
 
 ```js
-const catalogs = await client.Catalog().list()
-for (const catalog of catalogs) {
-  console.log(catalog)
-}
+const account = await client.Account().load({ id: 'account_id' })
+console.log(account)
+```
+
+### Update a Account
+
+```js
+const updated = await client.Account().update({
+  id: 'account_id',
+  customer_identifier: 'example_customer_identifier',
+  accountIdentifier: 'example_accountIdentifier',
+})
+console.log(updated)
 ```
 
 ### Direct API Access
@@ -65,10 +74,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const catalogs = await client.Catalog().list()
-  console.log(catalogs)
+  const rewardreasonsmap = await client.RewardReasonsMap().load()
+  console.log(rewardreasonsmap)
 } catch (err) {
-  console.error('list failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -132,10 +141,10 @@ Create a mock client for unit testing — no server required:
 ```js
 const client = TangocardSDK.test()
 
-const catalog = await client.Catalog().list()
-// catalog is the entity, populated with mock response data
-// — call catalog.data() for the record itself
-console.log(catalog)
+const rewardreasonsmap = await client.RewardReasonsMap().load()
+// rewardreasonsmap is the entity, populated with mock response data
+// — call rewardreasonsmap.data() for the record itself
+console.log(rewardreasonsmap)
 ```
 
 You can also use the instance method:
@@ -150,10 +159,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```js
-const entity = client.Catalog()
+const entity = client.RewardReasonsMap()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -225,9 +234,52 @@ new TangocardSDK(options?)
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
+| `Account(data?)` | `AccountEntity` | Create an Account entity instance. |
+| `AddCommentEscalation(data?)` | `AddCommentEscalationEntity` | Create an AddCommentEscalation entity instance. |
+| `AllEventType(data?)` | `AllEventTypeEntity` | Create an AllEventType entity instance. |
+| `AsyncOrder(data?)` | `AsyncOrderEntity` | Create an AsyncOrder entity instance. |
+| `AsyncOrderDetailView(data?)` | `AsyncOrderDetailViewEntity` | Create an AsyncOrderDetailView entity instance. |
+| `AsyncOrderLineItemsView(data?)` | `AsyncOrderLineItemsViewEntity` | Create an AsyncOrderLineItemsView entity instance. |
+| `AsyncReasonCodesView(data?)` | `AsyncReasonCodesViewEntity` | Create an AsyncReasonCodesView entity instance. |
+| `AsyncUpdateLineItemView(data?)` | `AsyncUpdateLineItemViewEntity` | Create an AsyncUpdateLineItemView entity instance. |
+| `BalanceAlertView(data?)` | `BalanceAlertViewEntity` | Create a BalanceAlertView entity instance. |
+| `BrandCategoriesView(data?)` | `BrandCategoriesViewEntity` | Create a BrandCategoriesView entity instance. |
 | `Catalog(data?)` | `CatalogEntity` | Create a Catalog entity instance. |
+| `ChoiceProduct(data?)` | `ChoiceProductEntity` | Create a ChoiceProduct entity instance. |
+| `CountryViewSummary(data?)` | `CountryViewSummaryEntity` | Create a CountryViewSummary entity instance. |
+| `CreateAccountCriterion(data?)` | `CreateAccountCriterionEntity` | Create a CreateAccountCriterion entity instance. |
+| `CreateCustomerCriterion(data?)` | `CreateCustomerCriterionEntity` | Create a CreateCustomerCriterion entity instance. |
+| `CredentialTypeView(data?)` | `CredentialTypeViewEntity` | Create a CredentialTypeView entity instance. |
+| `CreditCard(data?)` | `CreditCardEntity` | Create a CreditCard entity instance. |
+| `CreditCardDeposit(data?)` | `CreditCardDepositEntity` | Create a CreditCardDeposit entity instance. |
+| `CreditCardUnregister(data?)` | `CreditCardUnregisterEntity` | Create a CreditCardUnregister entity instance. |
 | `Customer(data?)` | `CustomerEntity` | Create a Customer entity instance. |
+| `EmailTemplateListView(data?)` | `EmailTemplateListViewEntity` | Create an EmailTemplateListView entity instance. |
+| `EmailTemplateViewVerbose(data?)` | `EmailTemplateViewVerboseEntity` | Create an EmailTemplateViewVerbose entity instance. |
+| `EmbeddableResponseDto(data?)` | `EmbeddableResponseDtoEntity` | Create an EmbeddableResponseDto entity instance. |
+| `ExchangeRatesWithDisclaimer(data?)` | `ExchangeRatesWithDisclaimerEntity` | Create an ExchangeRatesWithDisclaimer entity instance. |
+| `LineItem(data?)` | `LineItemEntity` | Create a LineItem entity instance. |
+| `LowBalanceAlertListView(data?)` | `LowBalanceAlertListViewEntity` | Create a LowBalanceAlertListView entity instance. |
+| `LowBalanceAlertView(data?)` | `LowBalanceAlertViewEntity` | Create a LowBalanceAlertView entity instance. |
+| `MobileCountry(data?)` | `MobileCountryEntity` | Create a MobileCountry entity instance. |
+| `N14Webhook(data?)` | `N14WebhookEntity` | Create a N14Webhook entity instance. |
+| `N1Customer(data?)` | `N1CustomerEntity` | Create a N1Customer entity instance. |
+| `N2Account(data?)` | `N2AccountEntity` | Create a N2Account entity instance. |
+| `N3Fund(data?)` | `N3FundEntity` | Create a N3Fund entity instance. |
+| `N8LineItem(data?)` | `N8LineItemEntity` | Create a N8LineItem entity instance. |
+| `N9DigitalTemplate(data?)` | `N9DigitalTemplateEntity` | Create a N9DigitalTemplate entity instance. |
 | `Order(data?)` | `OrderEntity` | Create an Order entity instance. |
+| `OrderViewSummary(data?)` | `OrderViewSummaryEntity` | Create an OrderViewSummary entity instance. |
+| `PrepaidCardInfo(data?)` | `PrepaidCardInfoEntity` | Create a PrepaidCardInfo entity instance. |
+| `PrepaidCardTransaction(data?)` | `PrepaidCardTransactionEntity` | Create a PrepaidCardTransaction entity instance. |
+| `ReissueCard(data?)` | `ReissueCardEntity` | Create a ReissueCard entity instance. |
+| `ReplacementReason(data?)` | `ReplacementReasonEntity` | Create a ReplacementReason entity instance. |
+| `Resend(data?)` | `ResendEntity` | Create a Resend entity instance. |
+| `RewardReasonsMap(data?)` | `RewardReasonsMapEntity` | Create a RewardReasonsMap entity instance. |
+| `TransferFund(data?)` | `TransferFundEntity` | Create a TransferFund entity instance. |
+| `UpdateAccount(data?)` | `UpdateAccountEntity` | Create an UpdateAccount entity instance. |
+| `UpdateWebhookSubscriptionResponseView(data?)` | `UpdateWebhookSubscriptionResponseViewEntity` | Create an UpdateWebhookSubscriptionResponseView entity instance. |
+| `Webhook(data?)` | `WebhookEntity` | Create a Webhook entity instance. |
 | `tester(testopts?, sdkopts?)` | `TangocardSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -244,8 +296,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
 | `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
 | `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -257,9 +312,10 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
-- `create` resolves to a single entity object.
+- `load`, `create` and `update` resolve to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
+- `remove` resolves to `undefined`.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -295,54 +351,1053 @@ The `prepare()` method returns:
 
 ### Entities
 
+#### Account
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` |  |
+| `accountNumber` |  |
+| `contactEmail` | optional, an email address for a designated representative for this account. |
+| `createdAt` |  |
+| `currencyCode` |  |
+| `currentBalance` |  |
+| `displayName` | optional, a friendly name for this account. |
+| `fundingNotification` | optional, send funding notification emails to the following address(es). |
+| `id` |  |
+| `status` |  |
+
+Operations: load, update.
+
+API path: `/accounts`
+
+#### AddCommentEscalation
+
+| Field | Description |
+| --- | --- |
+| `assignee` | Assignee ID. |
+| `commentText` | Free-text comment to add to the prepaid card. |
+| `id` |  |
+| `inquiryCategoryCode` | Inquiry category code. |
+| `inquiryIdNumber` | Inquiry ID number. |
+| `inquirySource` | Origination source identifier (e.g. |
+| `inquiryTypeCode` | Inquiry type code. |
+| `issueDescription` | Short description of the issue. |
+| `status` | Status of the inquiry (e.g. |
+| `userId` | Agent or CSR user ID. |
+
+Operations: create.
+
+API path: `/prepaidCardService/addCommentEscalation/{referenceLineItemID}`
+
+#### AllEventType
+
+| Field | Description |
+| --- | --- |
+| `category` | The category of events can be subscribed to. |
+| `eventTypes` | The event types that can be subscribed to. |
+
+Operations: list.
+
+API path: `/webhooks/eventtypes`
+
+#### AsyncOrder
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` | specify the account this order will be deducted from |
+| `accountNumber` |  |
+| `amountCharged` | Initial value and the total charged amount on the account |
+| `campaign` | Optional. |
+| `createdAt` |  |
+| `customerIdentifier` | specify the customer associated with the order. |
+| `duplicateLineItemRefIds` | If any duplicate duplicateLineItemRefIds exist in the request |
+| `externalRefID` | Required. |
+| `failedLineItems` | Failed line items list (business validations) |
+| `fulfillBy` |  |
+| `lineItems` | Line Items of the bulk order a required field |
+| `notes` | Optional order notes. |
+| `orderStatus` |  |
+| `purchaseOrderNumber` | The Purchase Order Number associated with this order. |
+| `referenceOrderID` |  |
+| `sender` | Optional. |
+| `status` | This status reflects about cart status or validation status based on the processing |
+| `totalLineItems` | Total number of line items submitted in the request |
+| `totalLineItemsRows` |  |
+
+Operations: create, list.
+
+API path: `/asyncOrders`
+
+#### AsyncOrderDetailView
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` | Account identifier |
+| `amountCharged` | Initial value and the total charged amount on the account |
+| `campaign` | Campaign name |
+| `completedAt` | Order completion timestamp |
+| `createdAt` | Order creation timestamp |
+| `customerIdentifier` | Customer identifier |
+| `externalRefID` | External reference ID provided by client |
+| `id` |  |
+| `lineItems` | list of line items |
+| `notes` | Order notes |
+| `orderErrors` | Order level errors |
+| `orderStatus` | Current status of the order |
+| `pagination` | Pagination information |
+| `purchaseOrderNumber` | Purchase order number |
+| `referenceOrderID` | Internal reference order ID |
+| `sender` | Sender information |
+| `totalLineItems` | Total number of line items |
+
+Operations: load, update.
+
+API path: `/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}`
+
+#### AsyncOrderLineItemsView
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` |  |
+| `amountCharged` | Initial value and the total charged amount on the account |
+| `campaign` |  |
+| `customerIdentifier` |  |
+| `externalRefID` |  |
+| `lineItems` | The List of Line Items for the Async Order. |
+| `orderErrors` | The List of Errors for the Async Order. |
+| `orderNotes` |  |
+| `orderStatus` |  |
+| `pagination` | The cursor for pagination of the async order line items. |
+| `purchaseOrderNumber` |  |
+| `referenceOrderID` |  |
+| `sender` |  |
+
+Operations: list.
+
+API path: `/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}/lineItems`
+
+#### AsyncReasonCodesView
+
+| Field | Description |
+| --- | --- |
+
+Operations: load.
+
+API path: `/asyncOrders/reasonCodes`
+
+#### AsyncUpdateLineItemView
+
+| Field | Description |
+| --- | --- |
+| `deliveryDate` | Optional. |
+| `lineItemNote` | Optional line item notes (up to 150 characters) |
+| `senderInfo` | Optional. |
+
+Operations: update.
+
+API path: `/asyncOrders/lineItems/{referenceLineItemId}`
+
+#### BalanceAlertView
+
+| Field | Description |
+| --- | --- |
+
+Operations: remove.
+
+API path: `/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}`
+
+#### BrandCategoriesView
+
+| Field | Description |
+| --- | --- |
+| `description` |  |
+| `identifier` |  |
+
+Operations: list.
+
+API path: `/brandCategories`
+
 #### Catalog
 
 | Field | Description |
 | --- | --- |
+| `barcodeType` |  |
 | `brandKey` |  |
 | `brandName` |  |
+| `brandRequirements` |  |
+| `categories` |  |
+| `createdDate` |  |
+| `description` |  |
+| `disclaimer` |  |
 | `imageUrls` |  |
 | `items` |  |
+| `lastUpdateDate` |  |
+| `shortDescription` |  |
+| `status` |  |
+| `terms` |  |
 
 Operations: list.
 
-API path: `/catalogs`
+API path: `/choiceProducts/{choiceProductUtid}/catalog`
+
+#### ChoiceProduct
+
+| Field | Description |
+| --- | --- |
+| `countries` |  |
+| `currencyCode` |  |
+| `id` |  |
+| `rewardName` |  |
+| `utid` |  |
+
+Operations: list, load.
+
+API path: `/choiceProducts`
+
+#### CountryViewSummary
+
+| Field | Description |
+| --- | --- |
+| `countryName` |  |
+| `preferredCurrency` |  |
+| `threeLetterCode` |  |
+| `twoLetterCode` |  |
+
+Operations: load.
+
+API path: `/rewardCountries`
+
+#### CreateAccountCriterion
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` | A unique identifier for this account. |
+| `contactEmail` | An email address for a designated representative for this account. |
+| `currencyCode` | The currency this account will accept for deposits/withdraws. |
+| `displayName` | A friendly name for this account. |
+| `fundingNotification` | optional, send funding notification emails to the following address(es) |
+
+Operations: create.
+
+API path: `/customers/{customerIdentifier}/accounts`
+
+#### CreateCustomerCriterion
+
+| Field | Description |
+| --- | --- |
+
+Operations: .
+
+API path: ``
+
+#### CredentialTypeView
+
+| Field | Description |
+| --- | --- |
+| `credentialType` |  |
+| `description` |  |
+
+Operations: list.
+
+API path: `/credentialtypes`
+
+#### CreditCard
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` | specify the account this credit card is associated with |
+| `accountNumber` |  |
+| `activationDate` |  |
+| `billingAddress` | required Enter the billing address information for the credit card that is being registered |
+| `contactInformation` | Optional. |
+| `createdDate` |  |
+| `creditCard` | required Enter the credit card details that is being registered |
+| `customerIdentifier` | specify the customer associated with the credit card. |
+| `expirationDate` |  |
+| `id` |  |
+| `ipAddress` | specify the The IP address of the person adding the credit card |
+| `label` | specify a label for the credit card |
+| `lastFourDigits` |  |
+| `status` |  |
+| `token` |  |
+
+Operations: create, load.
+
+API path: `/creditCards`
+
+#### CreditCardDeposit
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` | specify the account this credit card is associated with |
+| `accountNumber` |  |
+| `amount` | specify the amount to fund in USD |
+| `amountCharged` |  |
+| `createdDate` |  |
+| `creditCardToken` | specify the credit card token to fund with |
+| `customerIdentifier` | specify the customer associated with the credit card. |
+| `externalRefID` | specify the external reference id to associate with this funding action. |
+| `feePercent` |  |
+| `id` |  |
+| `referenceDepositID` |  |
+| `status` |  |
+
+Operations: create, load.
+
+API path: `/creditCardDeposits`
+
+#### CreditCardUnregister
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` | Specify the account this credit card is associated with. |
+| `createdDate` |  |
+| `creditCardToken` | Specify the credit card token to unregister. |
+| `customerIdentifier` | Specify the customer associated with the credit card. |
+| `message` |  |
+| `token` |  |
+
+Operations: create.
+
+API path: `/creditCardUnregisters`
 
 #### Customer
 
 | Field | Description |
 | --- | --- |
-| `customerIdentifier` |  |
-| `displayName` |  |
-| `email` |  |
+| `accounts` |  |
+| `createdAt` |  |
+| `customerIdentifier` | A unique identifier for this customer. |
+| `displayName` | A friendly name for this customer. |
+| `id` |  |
+| `status` |  |
+
+Operations: create, list, load.
+
+API path: `/customers`
+
+#### EmailTemplateListView
+
+| Field | Description |
+| --- | --- |
+
+Operations: .
+
+API path: ``
+
+#### EmailTemplateViewVerbose
+
+| Field | Description |
+| --- | --- |
+| `accentColor` | A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email. |
+| `accessControl` | (Optional) Which Customers and/or Accounts should have access to this template. |
+| `accessControls` |  |
+| `closing` | After the reward credential, a space to close the email message to the recipient. |
+| `customerServiceMessage` | If left null, Tango Card's Customer Support contact information will be included. |
+| `defaults` | If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order. |
+| `etid` |  |
+| `fromName` | The name that will appear in the From line of the email and the {from_name} in the text message. |
+| `headerImage` | A Base64 encoded string of an image that will show as the header of the email. |
+| `headerImageAltText` | The Alt Text for the Header Image in the email. |
+| `messageBody` | The message body for the email. |
+| `name` | A unique name to give the template. |
+| `smsMessageBody` | The message body for the SMS. |
+| `subject` | The Subject of the email. |
+
+Operations: create, list, load, update.
+
+API path: `/digitalTemplates`
+
+#### EmbeddableResponseDto
+
+| Field | Description |
+| --- | --- |
+| `url` |  |
+
+Operations: load.
+
+API path: `/lineItems/{referenceLineItemID}/embeddedUrl`
+
+#### ExchangeRatesWithDisclaimer
+
+| Field | Description |
+| --- | --- |
+| `baseCurrency` |  |
+| `baseFx` |  |
+| `lastModifiedDate` |  |
+| `rewardCurrency` |  |
 
 Operations: list.
 
-API path: `/customers`
+API path: `/exchangerates`
+
+#### LineItem
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` |  |
+| `accountNumber` |  |
+| `amountCharged` |  |
+| `amountIssued` |  |
+| `campaign` |  |
+| `canCancel` |  |
+| `canFreeze` |  |
+| `customerIdentifier` |  |
+| `dateIssued` |  |
+| `deliveryMethod` |  |
+| `deliveryStatus` |  |
+| `emailStatus` |  |
+| `etid` |  |
+| `expirationDate` |  |
+| `externalReferenceLineItemID` |  |
+| `id` |  |
+| `lineItemActionHistory` |  |
+| `lineItemActionReason` |  |
+| `lineItemErrors` | Errors related to the line item |
+| `lineNumber` |  |
+| `orderNotes` |  |
+| `orderSource` |  |
+| `orderStatus` |  |
+| `ptid` |  |
+| `purchaseOrderNumber` |  |
+| `quantity` | quantity of line items |
+| `recipient` |  |
+| `redemptionHistory` |  |
+| `referenceLineItemID` |  |
+| `referenceOrderID` |  |
+| `reissuedFromReferenceLineItemId` | Reissued from reference line item ID |
+| `reissuedToReferenceLineItemId` | Reissued to reference line item ID |
+| `remainingBalance` |  |
+| `resendHistory` |  |
+| `reward` |  |
+| `rewardName` |  |
+| `rewardStatus` |  |
+| `rewardViewHistory` |  |
+| `sender` |  |
+| `status` |  |
+| `utid` |  |
+
+Operations: create, list, load.
+
+API path: `/lineItems/{referenceLineItemID}/cancel`
+
+#### LowBalanceAlertListView
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` |  |
+| `balanceAlertDisplayName` |  |
+| `balanceAlertID` |  |
+| `balanceAlertNotification` |  |
+| `balanceAlertThreshold` |  |
+| `createdAt` |  |
+| `customerIdentifier` |  |
+
+Operations: list.
+
+API path: `/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance`
+
+#### LowBalanceAlertView
+
+| Field | Description |
+| --- | --- |
+| `accountIdentifier` |  |
+| `balanceAlertDisplayName` | A friendly name for this low balance alert (will be displayed in the Tango Portal). |
+| `balanceAlertID` |  |
+| `balanceAlertNotification` | Send low balance notification emails to the following address(es). |
+| `balanceAlertThreshold` | The threshold amount that will trigger the low balance alert. |
+| `createdAt` |  |
+| `customerIdentifier` |  |
+
+Operations: create, load, update.
+
+API path: `/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance`
+
+#### MobileCountry
+
+| Field | Description |
+| --- | --- |
+| `countryCode` |  |
+| `countryName` |  |
+| `isoCode` |  |
+| `languageCode` |  |
+
+Operations: load.
+
+API path: `/mobileCountries`
+
+#### N14Webhook
+
+| Field | Description |
+| --- | --- |
+| `categories` | The categories the customer wants to subscribe to. |
+| `createdAt` | The date and time the webhook was created. |
+| `eventTypes` | The event types the customer wants to subscribe to. |
+| `expiresAt` | The date and time the webhook expires. |
+| `headers` | Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener. |
+| `hmacSharedSecretKey` | The HMAC secret key used to sign the webhook payload. |
+| `id` |  |
+| `payloadVerificationMethod` | Method to verify webhook payload authenticity |
+| `signingCertificate` | The public X509 certificate used to sign the webhook payload. |
+| `updatedAt` | The date and time when the webhook was last updated. |
+| `url` | The URL of the customer's webhook listener. |
+| `webhookId` | The ID of the webhook. |
+
+Operations: create, list, load, remove.
+
+API path: `/webhooks/{webhookId}/tests/{testName}`
+
+#### N1Customer
+
+| Field | Description |
+| --- | --- |
+
+Operations: load.
+
+API path: `/customers/{customerIdentifier}/accounts`
+
+#### N2Account
+
+| Field | Description |
+| --- | --- |
+
+Operations: .
+
+API path: ``
+
+#### N3Fund
+
+| Field | Description |
+| --- | --- |
+
+Operations: .
+
+API path: ``
+
+#### N8LineItem
+
+| Field | Description |
+| --- | --- |
+| `campaign` | optional campaign that may be used to administratively categorize a specific order. |
+| `id` |  |
+| `orderNotes` | Optional order notes (up to 150 characters) |
+| `purchaseOrderNumber` | The Purchase Order Number associated with this order. |
+
+Operations: update.
+
+API path: `/lineItems/{referenceLineItemID}`
+
+#### N9DigitalTemplate
+
+| Field | Description |
+| --- | --- |
+| `id` |  |
+
+Operations: remove.
+
+API path: `/digitalTemplates/{etid}`
 
 #### Order
 
 | Field | Description |
 | --- | --- |
-| `accountIdentifier` |  |
-| `amount` |  |
-| `campaign` |  |
-| `created` |  |
-| `customerIdentifier` |  |
-| `recipient` |  |
+| `accountIdentifier` | Specify the account this order will be deducted from |
+| `accountNumber` |  |
+| `amount` | Specify the face value of of the reward. |
+| `amountCharged` |  |
+| `asyncOrderEntity` |  |
+| `campaign` | Optional. |
+| `createdAt` |  |
+| `customFields` | Optional. |
+| `customerIdentifier` | Specify the customer associated with the order. |
+| `deliveryMethod` | Specify delivery method for the order |
+| `denomination` |  |
+| `emailSubject` | Optional. |
+| `etid` | Optional. |
+| `expirationDate` | Optional for Promo Links, the exact calendar date the Promo Link will expire. |
+| `externalRefID` | Optional. |
+| `id` |  |
+| `lineItemStatus` |  |
+| `message` | Optional gift message |
+| `notes` | Optional order notes. |
+| `orderClientSource` |  |
+| `orderExternalRefIdDupe` |  |
+| `orderStatus` |  |
+| `ptid` | Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page. |
+| `purchaseOrderNumber` | The Purchase Order Number associated with this order. |
+| `recipient` | Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. |
+| `redemptionInstructions` |  |
+| `referenceLineItemID` |  |
 | `referenceOrderID` |  |
+| `reward` |  |
 | `rewardName` |  |
-| `sendEmail` |  |
+| `sendEmail` | Deprecated Oct 1, 2025. |
+| `sender` | Optional. |
 | `status` |  |
-| `utid` |  |
+| `utid` | The unique identifier for the reward you are sending as provided in the Get Catalog call |
 
-Operations: create, list.
+Operations: create, list, load.
 
 API path: `/orders`
+
+#### OrderViewSummary
+
+| Field | Description |
+| --- | --- |
+| `amount` | Optional. |
+| `deliveryMethod` | Optional. |
+| `notes` | Optional order notes (up to 150 characters). |
+| `otherReason` | Required when reasonCode is "OTHER", enter the reason why the line item is being reissued. |
+| `reasonCode` | Required. |
+| `recipient` | Optional. |
+
+Operations: create.
+
+API path: `/lineItems/{referenceLineItemID}/reissue`
+
+#### PrepaidCardInfo
+
+| Field | Description |
+| --- | --- |
+| `balance` |  |
+| `card` |  |
+| `comments` |  |
+| `registration` |  |
+
+Operations: load.
+
+API path: `/prepaidCardService/getCardInfo/{referenceLineItemID}`
+
+#### PrepaidCardTransaction
+
+| Field | Description |
+| --- | --- |
+| `journal` |  |
+| `page` |  |
+
+Operations: load.
+
+API path: `/prepaidCardService/getCardTransactions/{referenceLineItemID}`
+
+#### ReissueCard
+
+| Field | Description |
+| --- | --- |
+| `commentText` | Optional comment for the card replacement. |
+| `id` |  |
+| `reason` | Reason for the card replacement. |
+| `status` | Status of the reissue request. |
+| `updatedBy` | Identifier of the agent initiating the request. |
+
+Operations: create.
+
+API path: `/prepaidCardService/reissueCard/{referenceLineItemID}`
+
+#### ReplacementReason
+
+| Field | Description |
+| --- | --- |
+| `replacementReasons` | List of valid replacement reason codes. |
+
+Operations: list.
+
+API path: `/prepaidCardService/replacementReasons`
+
+#### Resend
+
+| Field | Description |
+| --- | --- |
+| `newDeliveryMethod` | The delivery method used to re-deliver the reward. |
+| `newEmail` | A new email address to re-deliver this order to. |
+| `newEtid` | A new etid used to re-deliver an order. |
+| `newMobile` | A new mobile number to use for resending an order. |
+| `newMobileNumber` | A new phone number to re-deliver this order to. |
+| `otherReason` | Required when lineItemResendReasonCode is "OTHER", enter the reason why the line item is being RESENT |
+| `reasonCode` | Enter the reason why this line item is being RESENT (respectively) |
+
+Operations: create.
+
+API path: `/lineItems/{referenceLineItemId}/resends`
+
+#### RewardReasonsMap
+
+| Field | Description |
+| --- | --- |
+| `CANCEL` | Map of cancel reasons |
+| `CANCEL_AND_REISSUE` | Map of cancel and reissue reasons |
+| `FREEZE` | Map of freeze reasons |
+| `UNFREEZE` | Map of unfreeze reasons |
+
+Operations: load.
+
+API path: `/lineItems/reasonCodes`
+
+#### TransferFund
+
+| Field | Description |
+| --- | --- |
+| `amount` | Specify the currency amount of the funds being transferred. |
+| `externalRefID` | specify the external reference id to associate with this funding action. |
+| `transferDate` |  |
+| `transferFrom` | The accountIdentifier for the Account transferring funds from. |
+| `transferNotes` | Optional transfer notes (up to 150 characters) |
+| `transferTo` | The accountIdentifier for the Account transferring funds to. |
+| `transferredAmount` |  |
+
+Operations: create.
+
+API path: `/transferFunds`
+
+#### UpdateAccount
+
+| Field | Description |
+| --- | --- |
+| `id` |  |
+| `registration` |  |
+| `status` |  |
+| `updatedBy` |  |
+
+Operations: create.
+
+API path: `/prepaidCardService/updateAccount/{referenceLineItemID}`
+
+#### UpdateWebhookSubscriptionResponseView
+
+| Field | Description |
+| --- | --- |
+| `categories` | The categories the customer is subscribed to. |
+| `createdAt` | The date and time the webhook was created. |
+| `eventTypes` | The event types the customer is subscribed to. |
+| `expiresAt` | The date and time the webhook expires. |
+| `headers` | Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener. |
+| `hmacSharedSecretKey` | The HMAC secret key used to sign the webhook payload. |
+| `payloadVerificationMethod` | Method to verify webhook payload integrity |
+| `signingCertificate` | The public X509 certificate used to sign the webhook payload. |
+| `updatedAt` | The date and time when the webhook was last updated. |
+| `url` | The URL of the customer's webhook listener. |
+| `webhookId` | The ID of the webhook. |
+
+Operations: update.
+
+API path: `/webhooks/{webhookId}`
+
+#### Webhook
+
+| Field | Description |
+| --- | --- |
+| `categories` | The categories the customer wants to subscribe to. |
+| `createdAt` | The date and time the webhook was created. |
+| `eventTypes` | The event types the customer wants to subscribe to. |
+| `expiresAt` | The date and time the webhook expires. |
+| `headers` | Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener. |
+| `hmacSharedSecretKey` | The HMAC secret key used to sign the webhook payload. |
+| `id` |  |
+| `payloadVerificationMethod` | Method to verify webhook payload integrity. |
+| `signingCertificate` | The public X509 certificate used to sign the webhook payload. |
+| `updatedAt` | The date and time when the webhook was last updated. |
+| `url` | The URL of the customer's webhook listener. |
+| `webhookId` | The ID of the webhook. |
+
+Operations: create, load.
+
+API path: `/webhooks/{webhookId}/replay`
 
 
 
 ## Entities
+
+
+### Account
+
+Create an instance: `const account = client.Account()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+| `update(data)` | Update an existing entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` |  |
+| `accountNumber` | `string` |  |
+| `contactEmail` | `string` | optional, an email address for a designated representative for this account. |
+| `createdAt` | `string` |  |
+| `currencyCode` | `string` |  |
+| `currentBalance` | `number` |  |
+| `displayName` | `string` | optional, a friendly name for this account. |
+| `fundingNotification` | `Array` | optional, send funding notification emails to the following address(es). |
+| `id` | `string` |  |
+| `status` | `string` |  |
+
+#### Example: Load
+
+```ts
+const account = await client.Account().load({ id: 'account_id' })
+```
+
+
+### AddCommentEscalation
+
+Create an instance: `const add_comment_escalation = client.AddCommentEscalation()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `assignee` | `number` | Assignee ID. |
+| `commentText` | `string` | Free-text comment to add to the prepaid card. |
+| `id` | `string` |  |
+| `inquiryCategoryCode` | `number` | Inquiry category code. |
+| `inquiryIdNumber` | `number` | Inquiry ID number. |
+| `inquirySource` | `string` | Origination source identifier (e.g. |
+| `inquiryTypeCode` | `number` | Inquiry type code. |
+| `issueDescription` | `string` | Short description of the issue. |
+| `status` | `string` | Status of the inquiry (e.g. |
+| `userId` | `string` | Agent or CSR user ID. |
+
+#### Example: Create
+
+```ts
+const add_comment_escalation = await client.AddCommentEscalation().create({
+  id: 'example_id',
+  commentText: 'example_commentText',
+  issueDescription: 'example_issueDescription',
+})
+```
+
+
+### AllEventType
+
+Create an instance: `const all_event_type = client.AllEventType()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `category` | `string` | The category of events can be subscribed to. |
+| `eventTypes` | `Array` | The event types that can be subscribed to. |
+
+#### Example: List
+
+```ts
+const all_event_types = await client.AllEventType().list()
+```
+
+
+### AsyncOrder
+
+Create an instance: `const async_order = client.AsyncOrder()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` | specify the account this order will be deducted from |
+| `accountNumber` | `string` |  |
+| `amountCharged` | `Object` | Initial value and the total charged amount on the account |
+| `campaign` | `string` | Optional. |
+| `createdAt` | `string` |  |
+| `customerIdentifier` | `string` | specify the customer associated with the order. |
+| `duplicateLineItemRefIds` | `Object` | If any duplicate duplicateLineItemRefIds exist in the request |
+| `externalRefID` | `string` | Required. |
+| `failedLineItems` | `Array` | Failed line items list (business validations) |
+| `fulfillBy` | `string` |  |
+| `lineItems` | `Array` | Line Items of the bulk order a required field |
+| `notes` | `string` | Optional order notes. |
+| `orderStatus` | `string` |  |
+| `purchaseOrderNumber` | `string` | The Purchase Order Number associated with this order. |
+| `referenceOrderID` | `string` |  |
+| `sender` | `Object` | Optional. |
+| `status` | `string` | This status reflects about cart status or validation status based on the processing |
+| `totalLineItems` | `number` | Total number of line items submitted in the request |
+| `totalLineItemsRows` | `number` |  |
+
+#### Example: List
+
+```ts
+const async_orders = await client.AsyncOrder().list()
+```
+
+#### Example: Create
+
+```ts
+const async_order = await client.AsyncOrder().create({
+  accountIdentifier: 'example_accountIdentifier',
+  accountNumber: 'example_accountNumber',
+  customerIdentifier: 'example_customerIdentifier',
+  lineItems: [],
+  referenceOrderID: 'example_referenceOrderID',
+})
+```
+
+
+### AsyncOrderDetailView
+
+Create an instance: `const async_order_detail_view = client.AsyncOrderDetailView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+| `update(data)` | Update an existing entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` | Account identifier |
+| `amountCharged` | `Object` | Initial value and the total charged amount on the account |
+| `campaign` | `string` | Campaign name |
+| `completedAt` | `string` | Order completion timestamp |
+| `createdAt` | `string` | Order creation timestamp |
+| `customerIdentifier` | `string` | Customer identifier |
+| `externalRefID` | `string` | External reference ID provided by client |
+| `id` | `string` |  |
+| `lineItems` | `Array` | list of line items |
+| `notes` | `string` | Order notes |
+| `orderErrors` | `Array` | Order level errors |
+| `orderStatus` | `string` | Current status of the order |
+| `pagination` | `Object` | Pagination information |
+| `purchaseOrderNumber` | `string` | Purchase order number |
+| `referenceOrderID` | `string` | Internal reference order ID |
+| `sender` | `Object` | Sender information |
+| `totalLineItems` | `number` | Total number of line items |
+
+#### Example: Load
+
+```ts
+const async_order_detail_view = await client.AsyncOrderDetailView().load({ account_identifier: 'account_identifier', customer_identifier: 'customer_identifier', external_ref_id: 'external_ref_id' })
+```
+
+
+### AsyncOrderLineItemsView
+
+Create an instance: `const async_order_line_items_view = client.AsyncOrderLineItemsView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` |  |
+| `amountCharged` | `Object` | Initial value and the total charged amount on the account |
+| `campaign` | `string` |  |
+| `customerIdentifier` | `string` |  |
+| `externalRefID` | `string` |  |
+| `lineItems` | `Array` | The List of Line Items for the Async Order. |
+| `orderErrors` | `Array` | The List of Errors for the Async Order. |
+| `orderNotes` | `string` |  |
+| `orderStatus` | `string` |  |
+| `pagination` | `Object` | The cursor for pagination of the async order line items. |
+| `purchaseOrderNumber` | `string` |  |
+| `referenceOrderID` | `string` |  |
+| `sender` | `Object` |  |
+
+#### Example: List
+
+```ts
+const async_order_line_items_views = await client.AsyncOrderLineItemsView().list({ account_id: "example", customer_id: "example", external_ref_id: "example" })
+```
+
+
+### AsyncReasonCodesView
+
+Create an instance: `const async_reason_codes_view = client.AsyncReasonCodesView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Example: Load
+
+```ts
+const async_reason_codes_view = await client.AsyncReasonCodesView().load()
+```
+
+
+### AsyncUpdateLineItemView
+
+Create an instance: `const async_update_line_item_view = client.AsyncUpdateLineItemView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `update(data)` | Update an existing entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `deliveryDate` | `string` | Optional. |
+| `lineItemNote` | `string` | Optional line item notes (up to 150 characters) |
+| `senderInfo` | `Object` | Optional. |
+
+
+### BalanceAlertView
+
+Create an instance: `const balance_alert_view = client.BalanceAlertView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `remove(match)` | Remove the matching entity. |
+
+
+### BrandCategoriesView
+
+Create an instance: `const brand_categories_view = client.BrandCategoriesView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `description` | `string` |  |
+| `identifier` | `string` |  |
+
+#### Example: List
+
+```ts
+const brand_categories_views = await client.BrandCategoriesView().list()
+```
 
 
 ### Catalog
@@ -359,10 +1414,20 @@ Create an instance: `const catalog = client.Catalog()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `barcodeType` | `string` |  |
 | `brandKey` | `string` |  |
 | `brandName` | `string` |  |
-| `imageUrls` | `Array` |  |
+| `brandRequirements` | `Object` |  |
+| `categories` | `Array` |  |
+| `createdDate` | `string` |  |
+| `description` | `string` |  |
+| `disclaimer` | `string` |  |
+| `imageUrls` | `Object` |  |
 | `items` | `Array` |  |
+| `lastUpdateDate` | `string` |  |
+| `shortDescription` | `string` |  |
+| `status` | `string` |  |
+| `terms` | `string` |  |
 
 #### Example: List
 
@@ -371,9 +1436,106 @@ const catalogs = await client.Catalog().list()
 ```
 
 
-### Customer
+### ChoiceProduct
 
-Create an instance: `const customer = client.Customer()`
+Create an instance: `const choice_product = client.ChoiceProduct()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `countries` | `Array` |  |
+| `currencyCode` | `string` |  |
+| `id` | `string` |  |
+| `rewardName` | `string` |  |
+| `utid` | `string` |  |
+
+#### Example: Load
+
+```ts
+const choice_product = await client.ChoiceProduct().load({ id: 'choice_product_id' })
+```
+
+#### Example: List
+
+```ts
+const choice_products = await client.ChoiceProduct().list()
+```
+
+
+### CountryViewSummary
+
+Create an instance: `const country_view_summary = client.CountryViewSummary()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `countryName` | `string` |  |
+| `preferredCurrency` | `string` |  |
+| `threeLetterCode` | `string` |  |
+| `twoLetterCode` | `string` |  |
+
+#### Example: Load
+
+```ts
+const country_view_summary = await client.CountryViewSummary().load()
+```
+
+
+### CreateAccountCriterion
+
+Create an instance: `const create_account_criterion = client.CreateAccountCriterion()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` | A unique identifier for this account. |
+| `contactEmail` | `string` | An email address for a designated representative for this account. |
+| `currencyCode` | `string` | The currency this account will accept for deposits/withdraws. |
+| `displayName` | `string` | A friendly name for this account. |
+| `fundingNotification` | `Array` | optional, send funding notification emails to the following address(es) |
+
+#### Example: Create
+
+```ts
+const create_account_criterion = await client.CreateAccountCriterion().create({
+  customer_identifier: 'example_customer_identifier',
+  accountIdentifier: 'example_accountIdentifier',
+  contactEmail: 'example_contactEmail',
+  displayName: 'example_displayName',
+})
+```
+
+
+### CreateCustomerCriterion
+
+Create an instance: `const create_customer_criterion = client.CreateCustomerCriterion()`
+
+
+### CredentialTypeView
+
+Create an instance: `const credential_type_view = client.CredentialTypeView()`
 
 #### Operations
 
@@ -385,15 +1547,631 @@ Create an instance: `const customer = client.Customer()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `customerIdentifier` | `string` |  |
-| `displayName` | `string` |  |
-| `email` | `string` |  |
+| `credentialType` | `string` |  |
+| `description` | `string` |  |
+
+#### Example: List
+
+```ts
+const credential_type_views = await client.CredentialTypeView().list()
+```
+
+
+### CreditCard
+
+Create an instance: `const credit_card = client.CreditCard()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` | specify the account this credit card is associated with |
+| `accountNumber` | `string` |  |
+| `activationDate` | `string` |  |
+| `billingAddress` | `Object` | required Enter the billing address information for the credit card that is being registered |
+| `contactInformation` | `Array` | Optional. |
+| `createdDate` | `string` |  |
+| `creditCard` | `Object` | required Enter the credit card details that is being registered |
+| `customerIdentifier` | `string` | specify the customer associated with the credit card. |
+| `expirationDate` | `string` |  |
+| `id` | `string` |  |
+| `ipAddress` | `string` | specify the The IP address of the person adding the credit card |
+| `label` | `string` | specify a label for the credit card |
+| `lastFourDigits` | `string` |  |
+| `status` | `string` |  |
+| `token` | `string` |  |
+
+#### Example: Load
+
+```ts
+const credit_card = await client.CreditCard().load({ id: 'credit_card_id' })
+```
+
+#### Example: Create
+
+```ts
+const credit_card = await client.CreditCard().create({
+  accountIdentifier: 'example_accountIdentifier',
+  accountNumber: 'example_accountNumber',
+  activationDate: 'example_activationDate',
+  billingAddress: {},
+  contactInformation: [],
+  createdDate: 'example_createdDate',
+  creditCard: {},
+  customerIdentifier: 'example_customerIdentifier',
+  expirationDate: 'example_expirationDate',
+  ipAddress: 'example_ipAddress',
+  label: 'example_label',
+  lastFourDigits: 'example_lastFourDigits',
+  status: 'example_status',
+  token: 'example_token',
+})
+```
+
+
+### CreditCardDeposit
+
+Create an instance: `const credit_card_deposit = client.CreditCardDeposit()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` | specify the account this credit card is associated with |
+| `accountNumber` | `string` |  |
+| `amount` | `number` | specify the amount to fund in USD |
+| `amountCharged` | `number` |  |
+| `createdDate` | `string` |  |
+| `creditCardToken` | `string` | specify the credit card token to fund with |
+| `customerIdentifier` | `string` | specify the customer associated with the credit card. |
+| `externalRefID` | `string` | specify the external reference id to associate with this funding action. |
+| `feePercent` | `number` |  |
+| `id` | `string` |  |
+| `referenceDepositID` | `string` |  |
+| `status` | `string` |  |
+
+#### Example: Load
+
+```ts
+const credit_card_deposit = await client.CreditCardDeposit().load({ id: 'credit_card_deposit_id' })
+```
+
+#### Example: Create
+
+```ts
+const credit_card_deposit = await client.CreditCardDeposit().create({
+  accountIdentifier: 'example_accountIdentifier',
+  accountNumber: 'example_accountNumber',
+  amount: 1,
+  amountCharged: 1,
+  createdDate: 'example_createdDate',
+  creditCardToken: 'example_creditCardToken',
+  customerIdentifier: 'example_customerIdentifier',
+  feePercent: 1,
+  referenceDepositID: 'example_referenceDepositID',
+  status: 'example_status',
+})
+```
+
+
+### CreditCardUnregister
+
+Create an instance: `const credit_card_unregister = client.CreditCardUnregister()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` | Specify the account this credit card is associated with. |
+| `createdDate` | `string` |  |
+| `creditCardToken` | `string` | Specify the credit card token to unregister. |
+| `customerIdentifier` | `string` | Specify the customer associated with the credit card. |
+| `message` | `string` |  |
+| `token` | `string` |  |
+
+#### Example: Create
+
+```ts
+const credit_card_unregister = await client.CreditCardUnregister().create({
+  accountIdentifier: 'example_accountIdentifier',
+  createdDate: 'example_createdDate',
+  creditCardToken: 'example_creditCardToken',
+  customerIdentifier: 'example_customerIdentifier',
+  message: 'example_message',
+  token: 'example_token',
+})
+```
+
+
+### Customer
+
+Create an instance: `const customer = client.Customer()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accounts` | `Array` |  |
+| `createdAt` | `string` |  |
+| `customerIdentifier` | `string` | A unique identifier for this customer. |
+| `displayName` | `string` | A friendly name for this customer. |
+| `id` | `string` |  |
+| `status` | `string` |  |
+
+#### Example: Load
+
+```ts
+const customer = await client.Customer().load({ id: 'customer_id' })
+```
 
 #### Example: List
 
 ```ts
 const customers = await client.Customer().list()
 ```
+
+#### Example: Create
+
+```ts
+const customer = await client.Customer().create({
+  accounts: [],
+  createdAt: 'example_createdAt',
+  customerIdentifier: 'example_customerIdentifier',
+  displayName: 'example_displayName',
+  status: 'example_status',
+})
+```
+
+
+### EmailTemplateListView
+
+Create an instance: `const email_template_list_view = client.EmailTemplateListView()`
+
+
+### EmailTemplateViewVerbose
+
+Create an instance: `const email_template_view_verbose = client.EmailTemplateViewVerbose()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
+| `update(data)` | Update an existing entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accentColor` | `string` | A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email. |
+| `accessControl` | `Array` | (Optional) Which Customers and/or Accounts should have access to this template. |
+| `accessControls` | `Array` |  |
+| `closing` | `string` | After the reward credential, a space to close the email message to the recipient. |
+| `customerServiceMessage` | `string` | If left null, Tango Card's Customer Support contact information will be included. |
+| `defaults` | `Array` | If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order. |
+| `etid` | `string` |  |
+| `fromName` | `string` | The name that will appear in the From line of the email and the {from_name} in the text message. |
+| `headerImage` | `string` | A Base64 encoded string of an image that will show as the header of the email. |
+| `headerImageAltText` | `string` | The Alt Text for the Header Image in the email. |
+| `messageBody` | `string` | The message body for the email. |
+| `name` | `string` | A unique name to give the template. |
+| `smsMessageBody` | `string` | The message body for the SMS. |
+| `subject` | `string` | The Subject of the email. |
+
+#### Example: Load
+
+```ts
+const email_template_view_verbose = await client.EmailTemplateViewVerbose().load({ etid: 'etid' })
+```
+
+#### Example: List
+
+```ts
+const email_template_view_verboses = await client.EmailTemplateViewVerbose().list()
+```
+
+#### Example: Create
+
+```ts
+const email_template_view_verbose = await client.EmailTemplateViewVerbose().create({
+  accentColor: 'example_accentColor',
+  closing: 'example_closing',
+  etid: 'example_etid',
+  fromName: 'example_fromName',
+  headerImage: 'example_headerImage',
+  headerImageAltText: 'example_headerImageAltText',
+  messageBody: 'example_messageBody',
+  name: 'example_name',
+  subject: 'example_subject',
+})
+```
+
+
+### EmbeddableResponseDto
+
+Create an instance: `const embeddable_response_dto = client.EmbeddableResponseDto()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `url` | `string` |  |
+
+#### Example: Load
+
+```ts
+const embeddable_response_dto = await client.EmbeddableResponseDto().load({ reference_line_item_id: 'reference_line_item_id' })
+```
+
+
+### ExchangeRatesWithDisclaimer
+
+Create an instance: `const exchange_rates_with_disclaimer = client.ExchangeRatesWithDisclaimer()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `baseCurrency` | `string` |  |
+| `baseFx` | `string` |  |
+| `lastModifiedDate` | `string` |  |
+| `rewardCurrency` | `string` |  |
+
+#### Example: List
+
+```ts
+const exchange_rates_with_disclaimers = await client.ExchangeRatesWithDisclaimer().list()
+```
+
+
+### LineItem
+
+Create an instance: `const line_item = client.LineItem()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` |  |
+| `accountNumber` | `string` |  |
+| `amountCharged` | `Object` |  |
+| `amountIssued` | `Object` |  |
+| `campaign` | `string` |  |
+| `canCancel` | `boolean` |  |
+| `canFreeze` | `boolean` |  |
+| `customerIdentifier` | `string` |  |
+| `dateIssued` | `string` |  |
+| `deliveryMethod` | `string` |  |
+| `deliveryStatus` | `string` |  |
+| `emailStatus` | `string` |  |
+| `etid` | `string` |  |
+| `expirationDate` | `string` |  |
+| `externalReferenceLineItemID` | `string` |  |
+| `id` | `string` |  |
+| `lineItemActionHistory` | `Array` |  |
+| `lineItemActionReason` | `string` |  |
+| `lineItemErrors` | `Array` | Errors related to the line item |
+| `lineNumber` | `number` |  |
+| `orderNotes` | `string` |  |
+| `orderSource` | `string` |  |
+| `orderStatus` | `string` |  |
+| `ptid` | `string` |  |
+| `purchaseOrderNumber` | `string` |  |
+| `quantity` | `number` | quantity of line items |
+| `recipient` | `Object` |  |
+| `redemptionHistory` | `Array` |  |
+| `referenceLineItemID` | `string` |  |
+| `referenceOrderID` | `string` |  |
+| `reissuedFromReferenceLineItemId` | `string` | Reissued from reference line item ID |
+| `reissuedToReferenceLineItemId` | `string` | Reissued to reference line item ID |
+| `remainingBalance` | `number` |  |
+| `resendHistory` | `Array` |  |
+| `reward` | `Object` |  |
+| `rewardName` | `string` |  |
+| `rewardStatus` | `string` |  |
+| `rewardViewHistory` | `Array` |  |
+| `sender` | `Object` |  |
+| `status` | `string` |  |
+| `utid` | `string` |  |
+
+#### Example: Load
+
+```ts
+const line_item = await client.LineItem().load({ id: 'line_item_id' })
+```
+
+#### Example: List
+
+```ts
+const line_items = await client.LineItem().list()
+```
+
+#### Example: Create
+
+```ts
+const line_item = await client.LineItem().create({
+  reference_line_item_id: 'example_reference_line_item_id',
+  accountIdentifier: 'example_accountIdentifier',
+  accountNumber: 'example_accountNumber',
+  amountIssued: {},
+  customerIdentifier: 'example_customerIdentifier',
+  dateIssued: 'example_dateIssued',
+  emailStatus: 'example_emailStatus',
+  etid: 'example_etid',
+  expirationDate: 'example_expirationDate',
+  lineNumber: 1,
+  orderSource: 'example_orderSource',
+  orderStatus: 'example_orderStatus',
+  referenceLineItemID: 'example_referenceLineItemID',
+  referenceOrderID: 'example_referenceOrderID',
+  reward: {},
+  rewardName: 'example_rewardName',
+  status: 'example_status',
+  utid: 'example_utid',
+})
+```
+
+
+### LowBalanceAlertListView
+
+Create an instance: `const low_balance_alert_list_view = client.LowBalanceAlertListView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` |  |
+| `balanceAlertDisplayName` | `string` |  |
+| `balanceAlertID` | `string` |  |
+| `balanceAlertNotification` | `Array` |  |
+| `balanceAlertThreshold` | `number` |  |
+| `createdAt` | `string` |  |
+| `customerIdentifier` | `string` |  |
+
+#### Example: List
+
+```ts
+const low_balance_alert_list_views = await client.LowBalanceAlertListView().list({ account_identifier: "example", customer_identifier: "example" })
+```
+
+
+### LowBalanceAlertView
+
+Create an instance: `const low_balance_alert_view = client.LowBalanceAlertView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
+| `update(data)` | Update an existing entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `accountIdentifier` | `string` |  |
+| `balanceAlertDisplayName` | `string` | A friendly name for this low balance alert (will be displayed in the Tango Portal). |
+| `balanceAlertID` | `string` |  |
+| `balanceAlertNotification` | `Array` | Send low balance notification emails to the following address(es). |
+| `balanceAlertThreshold` | `number` | The threshold amount that will trigger the low balance alert. |
+| `createdAt` | `string` |  |
+| `customerIdentifier` | `string` |  |
+
+#### Example: Load
+
+```ts
+const low_balance_alert_view = await client.LowBalanceAlertView().load({ account_id: 'account_id', balance_alert_id: 'balance_alert_id', customer_identifier: 'customer_identifier' })
+```
+
+#### Example: Create
+
+```ts
+const low_balance_alert_view = await client.LowBalanceAlertView().create({
+  account_identifier: 'example_account_identifier',
+  customer_identifier: 'example_customer_identifier',
+})
+```
+
+
+### MobileCountry
+
+Create an instance: `const mobile_country = client.MobileCountry()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `countryCode` | `string` |  |
+| `countryName` | `string` |  |
+| `isoCode` | `string` |  |
+| `languageCode` | `string` |  |
+
+#### Example: Load
+
+```ts
+const mobile_country = await client.MobileCountry().load()
+```
+
+
+### N14Webhook
+
+Create an instance: `const n14_webhook = client.N14Webhook()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
+| `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `categories` | `Array` | The categories the customer wants to subscribe to. |
+| `createdAt` | `string` | The date and time the webhook was created. |
+| `eventTypes` | `Array` | The event types the customer wants to subscribe to. |
+| `expiresAt` | `string` | The date and time the webhook expires. |
+| `headers` | `Array` | Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener. |
+| `hmacSharedSecretKey` | `string` | The HMAC secret key used to sign the webhook payload. |
+| `id` | `string` |  |
+| `payloadVerificationMethod` | `string` | Method to verify webhook payload authenticity |
+| `signingCertificate` | `string` | The public X509 certificate used to sign the webhook payload. |
+| `updatedAt` | `string` | The date and time when the webhook was last updated. |
+| `url` | `string` | The URL of the customer's webhook listener. |
+| `webhookId` | `string` | The ID of the webhook. |
+
+#### Example: Load
+
+```ts
+const n14_webhook = await client.N14Webhook().load({ webhook_id: 'webhook_id' })
+```
+
+#### Example: List
+
+```ts
+const n14_webhooks = await client.N14Webhook().list()
+```
+
+#### Example: Create
+
+```ts
+const n14_webhook = await client.N14Webhook().create({
+  test_name: 'example_test_name',
+  webhook_id: 'example_webhook_id',
+  url: 'example_url',
+})
+```
+
+
+### N1Customer
+
+Create an instance: `const n1_customer = client.N1Customer()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Example: Load
+
+```ts
+const n1_customer = await client.N1Customer().load({ customer_identifier: 'customer_identifier' })
+```
+
+
+### N2Account
+
+Create an instance: `const n2_account = client.N2Account()`
+
+
+### N3Fund
+
+Create an instance: `const n3_fund = client.N3Fund()`
+
+
+### N8LineItem
+
+Create an instance: `const n8_line_item = client.N8LineItem()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `update(data)` | Update an existing entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `campaign` | `string` | optional campaign that may be used to administratively categorize a specific order. |
+| `id` | `string` |  |
+| `orderNotes` | `string` | Optional order notes (up to 150 characters) |
+| `purchaseOrderNumber` | `string` | The Purchase Order Number associated with this order. |
+
+
+### N9DigitalTemplate
+
+Create an instance: `const n9_digital_template = client.N9DigitalTemplate()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 
 ### Order
@@ -406,22 +2184,52 @@ Create an instance: `const order = client.Order()`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accountIdentifier` | `string` |  |
-| `amount` | `number` |  |
-| `campaign` | `string` |  |
-| `created` | `string` |  |
-| `customerIdentifier` | `string` |  |
-| `recipient` | `Object` |  |
+| `accountIdentifier` | `string` | Specify the account this order will be deducted from |
+| `accountNumber` | `string` |  |
+| `amount` | `number` | Specify the face value of of the reward. |
+| `amountCharged` | `Object` |  |
+| `asyncOrderEntity` | `Object` |  |
+| `campaign` | `string` | Optional. |
+| `createdAt` | `string` |  |
+| `customFields` | `Object` | Optional. |
+| `customerIdentifier` | `string` | Specify the customer associated with the order. |
+| `deliveryMethod` | `string` | Specify delivery method for the order |
+| `denomination` | `Object` |  |
+| `emailSubject` | `string` | Optional. |
+| `etid` | `string` | Optional. |
+| `expirationDate` | `string` | Optional for Promo Links, the exact calendar date the Promo Link will expire. |
+| `externalRefID` | `string` | Optional. |
+| `id` | `string` |  |
+| `lineItemStatus` | `string` |  |
+| `message` | `string` | Optional gift message |
+| `notes` | `string` | Optional order notes. |
+| `orderClientSource` | `string` |  |
+| `orderExternalRefIdDupe` | `boolean` |  |
+| `orderStatus` | `string` |  |
+| `ptid` | `string` | Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page. |
+| `purchaseOrderNumber` | `string` | The Purchase Order Number associated with this order. |
+| `recipient` | `Object` | Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. |
+| `redemptionInstructions` | `string` |  |
+| `referenceLineItemID` | `string` |  |
 | `referenceOrderID` | `string` |  |
+| `reward` | `Object` |  |
 | `rewardName` | `string` |  |
-| `sendEmail` | `boolean` |  |
+| `sendEmail` | `boolean` | Deprecated Oct 1, 2025. |
+| `sender` | `Object` | Optional. |
 | `status` | `string` |  |
-| `utid` | `string` |  |
+| `utid` | `string` | The unique identifier for the reward you are sending as provided in the Get Catalog call |
+
+#### Example: Load
+
+```ts
+const order = await client.Order().load({ id: 'order_id' })
+```
 
 #### Example: List
 
@@ -434,7 +2242,342 @@ const orders = await client.Order().list()
 ```ts
 const order = await client.Order().create({
   accountIdentifier: 'example_accountIdentifier',
+  accountNumber: 'example_accountNumber',
+  amount: 1,
+  amountCharged: {},
+  campaign: 'example_campaign',
+  createdAt: 'example_createdAt',
   customerIdentifier: 'example_customerIdentifier',
+  emailSubject: 'example_emailSubject',
+  etid: 'example_etid',
+  message: 'example_message',
+  referenceOrderID: 'example_referenceOrderID',
+  reward: {},
+  rewardName: 'example_rewardName',
+  status: 'example_status',
+  utid: 'example_utid',
+})
+```
+
+
+### OrderViewSummary
+
+Create an instance: `const order_view_summary = client.OrderViewSummary()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `amount` | `number` | Optional. |
+| `deliveryMethod` | `string` | Optional. |
+| `notes` | `string` | Optional order notes (up to 150 characters). |
+| `otherReason` | `string` | Required when reasonCode is "OTHER", enter the reason why the line item is being reissued. |
+| `reasonCode` | `string` | Required. |
+| `recipient` | `Object` | Optional. |
+
+#### Example: Create
+
+```ts
+const order_view_summary = await client.OrderViewSummary().create({
+  reference_line_item_id: 'example_reference_line_item_id',
+  reasonCode: 'example_reasonCode',
+})
+```
+
+
+### PrepaidCardInfo
+
+Create an instance: `const prepaid_card_info = client.PrepaidCardInfo()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `balance` | `Object` |  |
+| `card` | `Object` |  |
+| `comments` | `Array` |  |
+| `registration` | `Object` |  |
+
+#### Example: Load
+
+```ts
+const prepaid_card_info = await client.PrepaidCardInfo().load({ reference_line_item_id: 'reference_line_item_id' })
+```
+
+
+### PrepaidCardTransaction
+
+Create an instance: `const prepaid_card_transaction = client.PrepaidCardTransaction()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `journal` | `Array` |  |
+| `page` | `Object` |  |
+
+#### Example: Load
+
+```ts
+const prepaid_card_transaction = await client.PrepaidCardTransaction().load({ reference_line_item_id: 'reference_line_item_id' })
+```
+
+
+### ReissueCard
+
+Create an instance: `const reissue_card = client.ReissueCard()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `commentText` | `string` | Optional comment for the card replacement. |
+| `id` | `string` |  |
+| `reason` | `string` | Reason for the card replacement. |
+| `status` | `string` | Status of the reissue request. |
+| `updatedBy` | `string` | Identifier of the agent initiating the request. |
+
+#### Example: Create
+
+```ts
+const reissue_card = await client.ReissueCard().create({
+  id: 'example_id',
+  reason: 'example_reason',
+  updatedBy: 'example_updatedBy',
+})
+```
+
+
+### ReplacementReason
+
+Create an instance: `const replacement_reason = client.ReplacementReason()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `replacementReasons` | `Array` | List of valid replacement reason codes. |
+
+#### Example: List
+
+```ts
+const replacement_reasons = await client.ReplacementReason().list()
+```
+
+
+### Resend
+
+Create an instance: `const resend = client.Resend()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `newDeliveryMethod` | `string` | The delivery method used to re-deliver the reward. |
+| `newEmail` | `string` | A new email address to re-deliver this order to. |
+| `newEtid` | `string` | A new etid used to re-deliver an order. |
+| `newMobile` | `string` | A new mobile number to use for resending an order. |
+| `newMobileNumber` | `string` | A new phone number to re-deliver this order to. |
+| `otherReason` | `string` | Required when lineItemResendReasonCode is "OTHER", enter the reason why the line item is being RESENT |
+| `reasonCode` | `string` | Enter the reason why this line item is being RESENT (respectively) |
+
+#### Example: Create
+
+```ts
+const resend = await client.Resend().create({
+  line_item_id: 'example_line_item_id',
+})
+```
+
+
+### RewardReasonsMap
+
+Create an instance: `const reward_reasons_map = client.RewardReasonsMap()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `CANCEL` | `Object` | Map of cancel reasons |
+| `CANCEL_AND_REISSUE` | `Object` | Map of cancel and reissue reasons |
+| `FREEZE` | `Object` | Map of freeze reasons |
+| `UNFREEZE` | `Object` | Map of unfreeze reasons |
+
+#### Example: Load
+
+```ts
+const reward_reasons_map = await client.RewardReasonsMap().load()
+```
+
+
+### TransferFund
+
+Create an instance: `const transfer_fund = client.TransferFund()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `amount` | `number` | Specify the currency amount of the funds being transferred. |
+| `externalRefID` | `string` | specify the external reference id to associate with this funding action. |
+| `transferDate` | `string` |  |
+| `transferFrom` | `Object` | The accountIdentifier for the Account transferring funds from. |
+| `transferNotes` | `string` | Optional transfer notes (up to 150 characters) |
+| `transferTo` | `Object` | The accountIdentifier for the Account transferring funds to. |
+| `transferredAmount` | `number` |  |
+
+#### Example: Create
+
+```ts
+const transfer_fund = await client.TransferFund().create({
+  amount: 1,
+})
+```
+
+
+### UpdateAccount
+
+Create an instance: `const update_account = client.UpdateAccount()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+| `registration` | `Object` |  |
+| `status` | `string` |  |
+| `updatedBy` | `string` |  |
+
+#### Example: Create
+
+```ts
+const update_account = await client.UpdateAccount().create({
+  id: 'example_id',
+  registration: {},
+})
+```
+
+
+### UpdateWebhookSubscriptionResponseView
+
+Create an instance: `const update_webhook_subscription_response_view = client.UpdateWebhookSubscriptionResponseView()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `update(data)` | Update an existing entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `categories` | `Array` | The categories the customer is subscribed to. |
+| `createdAt` | `string` | The date and time the webhook was created. |
+| `eventTypes` | `Array` | The event types the customer is subscribed to. |
+| `expiresAt` | `string` | The date and time the webhook expires. |
+| `headers` | `Array` | Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener. |
+| `hmacSharedSecretKey` | `string` | The HMAC secret key used to sign the webhook payload. |
+| `payloadVerificationMethod` | `string` | Method to verify webhook payload integrity |
+| `signingCertificate` | `string` | The public X509 certificate used to sign the webhook payload. |
+| `updatedAt` | `string` | The date and time when the webhook was last updated. |
+| `url` | `string` | The URL of the customer's webhook listener. |
+| `webhookId` | `string` | The ID of the webhook. |
+
+
+### Webhook
+
+Create an instance: `const webhook = client.Webhook()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `categories` | `Array` | The categories the customer wants to subscribe to. |
+| `createdAt` | `string` | The date and time the webhook was created. |
+| `eventTypes` | `Array` | The event types the customer wants to subscribe to. |
+| `expiresAt` | `string` | The date and time the webhook expires. |
+| `headers` | `Array` | Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener. |
+| `hmacSharedSecretKey` | `string` | The HMAC secret key used to sign the webhook payload. |
+| `id` | `string` |  |
+| `payloadVerificationMethod` | `string` | Method to verify webhook payload integrity. |
+| `signingCertificate` | `string` | The public X509 certificate used to sign the webhook payload. |
+| `updatedAt` | `string` | The date and time when the webhook was last updated. |
+| `url` | `string` | The URL of the customer's webhook listener. |
+| `webhookId` | `string` | The ID of the webhook. |
+
+#### Example: Load
+
+```ts
+const webhook = await client.Webhook().load({ id: 'webhook_id' })
+```
+
+#### Example: Create
+
+```ts
+const webhook = await client.Webhook().create({
+  id: 'example_id',
 })
 ```
 
@@ -645,16 +2788,16 @@ const { TangocardSDK } = require('@voxgig-sdk/tangocard-js')
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const catalog = client.Catalog()
-await catalog.list()
+const rewardreasonsmap = client.RewardReasonsMap()
+await rewardreasonsmap.load()
 
-// catalog.data() now returns the catalog data from the last `list`
-// catalog.match() returns the last match criteria
+// rewardreasonsmap.data() now returns the rewardreasonsmap data from the last `load`
+// rewardreasonsmap.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

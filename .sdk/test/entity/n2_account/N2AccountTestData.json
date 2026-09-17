@@ -1,0 +1,15 @@
+{
+  "existing": {
+    "n2_account": {
+      "N2_ACCOUNT00": {},
+      "N2_ACCOUNT01": {},
+      "N2_ACCOUNT02": {}
+    }
+  },
+  "new": {
+    "n2_account": {
+      "n2_account_ref01": {}
+    }
+  },
+  "requests": {}
+}

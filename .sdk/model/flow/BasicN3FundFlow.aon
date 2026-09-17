@@ -1,0 +1,9 @@
+# BasicN3FundFlow
+
+main: kit: flow: BasicN3FundFlow:
+{
+  entity: "n3_fund",
+  kind: "basic",
+  name: "BasicN3FundFlow",
+  "key$": "BasicN3FundFlow"
+}

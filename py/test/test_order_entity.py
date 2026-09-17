@@ -61,7 +61,7 @@ class TestOrderEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["create", "list"]:
+        for _op in ["create", "list", "load"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "order." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -80,12 +80,27 @@ class TestOrderEntity:
 
         order_ref01_data = helpers.to_map(runner.entity_data(order_ref01_ent.create(order_ref01_data, None)))
         assert order_ref01_data is not None
+        assert order_ref01_data["id"] is not None
 
         # LIST
         order_ref01_match = {}
 
         order_ref01_list_result = order_ref01_ent.list(order_ref01_match, None)
         assert isinstance(order_ref01_list_result, list)
+
+        found_item = vs.select(
+            runner.entity_list_to_data(order_ref01_list_result),
+            {"id": order_ref01_data["id"]})
+        assert not vs.isempty(found_item)
+
+        # LOAD
+        order_ref01_match_dt0 = {
+            "id": order_ref01_data["id"],
+        }
+        order_ref01_data_dt0_loaded = order_ref01_ent.load(order_ref01_match_dt0, None)
+        order_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(order_ref01_data_dt0_loaded))
+        assert order_ref01_data_dt0_load_result is not None
+        assert order_ref01_data_dt0_load_result["id"] == order_ref01_data["id"]
 
 
 

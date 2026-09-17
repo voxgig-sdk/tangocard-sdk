@@ -7,12 +7,42 @@ main: kit: flow: BasicCustomerFlow:
   name: "BasicCustomerFlow",
   step: [
     {
+      input: {
+        ref: "customer_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
       op: "list",
       valid: [
         {
           apply: "ItemExists",
           def: {
             ref: "customer_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "customer_ref01",
+        srcdatavar: "customer_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "customer01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-customer_ref01"
           }
         }
       ]

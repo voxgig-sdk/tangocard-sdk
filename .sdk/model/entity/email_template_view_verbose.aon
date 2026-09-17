@@ -1,0 +1,312 @@
+# Entity: email_template_view_verbose
+
+main: kit: entity: email_template_view_verbose: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accentColor"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email."
+      type: "`$STRING`"
+    }
+    {
+      name: "accessControl"
+      req: false
+      short: "(Optional) Which Customers and/or Accounts should have access to this template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "accessControls"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "closing"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "After the reward credential, a space to close the email message to the recipient."
+      type: "`$STRING`"
+    }
+    {
+      name: "customerServiceMessage"
+      req: false
+      short: "If left null, Tango Card's Customer Support contact information will be included."
+      type: "`$STRING`"
+    }
+    {
+      name: "defaults"
+      req: false
+      short: "If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "etid"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "fromName"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The name that will appear in the From line of the email and the {from_name} in the text message."
+      type: "`$STRING`"
+    }
+    {
+      name: "headerImage"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A Base64 encoded string of an image that will show as the header of the email."
+      type: "`$STRING`"
+    }
+    {
+      name: "headerImageAltText"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The Alt Text for the Header Image in the email."
+      type: "`$STRING`"
+    }
+    {
+      name: "messageBody"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The message body for the email."
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A unique name to give the template."
+      type: "`$STRING`"
+    }
+    {
+      name: "smsMessageBody"
+      req: false
+      short: "The message body for the SMS."
+      type: "`$STRING`"
+    }
+    {
+      name: "subject"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The Subject of the email."
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "email_template_view_verbose"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          contract: {
+            id: "POST /digitalTemplates"
+            json: "{\"operationId\":\"createDigitalTemplate\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"<strong>name</strong> - A unique name to give the template.<br/><br/><strong>fromName</strong> - The name that will appear in the From line of the email and the {from_name} in the text message.<br/><br/><strong>subject</strong> - The Subject of the email.<br/><br/><strong>headerImage</strong> - A Base64 encoded string of an image that will show as the header of the email.<br/><br/><strong>headerImageAltText</strong> - The Alt Text for the Header Image in the email.<br/><br/><strong>accentColor</strong> - A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email.<br/><br/><strong>messageBody</strong> - The message body for the email. This is often used to let the recipient know why they have received the reward.<br/><br/><strong>smsMessageBody</strong> - The message body for the SMS. This is often used to let the recipient know why they have received the reward. Must be non-NULL when sending rewards via SMS. (limited to 90 characters)<br/><br/><strong>closing</strong> - After the reward credential, a space to close the email message to the recipient.<br/><br/><strong>customerServiceMessage</strong> - If left null, Tango Card's Customer Support contact information will be included. Otherwise, please provide the contact information for your customer support if you are responsible for providing first-tier customer support to your recipients. (email only)<br/><br/><strong>accessControl</strong> - (Optional) Which Customers and/or Accounts should have access to this template.<br/><br/><strong>accessControl - type</strong> - The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.<br/><br/><strong>accessControl - identifier</strong> - Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.<br/><br/><strong>defaults</strong> - If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order.<br/><br/><strong>defaults - type</strong> - The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.<br/><br/><strong>defaults - identifier</strong> - Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"properties\":{\"accentColor\":{\"description\":\"A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email.\",\"example\":\"#000000\",\"title\":\"Accent Color\",\"type\":\"string\"},\"accessControl\":{\"description\":\"(Optional) Which Customers and/or Accounts should have access to this template.\",\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Access Control\",\"type\":\"array\"},\"closing\":{\"description\":\"After the reward credential, a space to close the email message to the recipient.\",\"title\":\"Closing Message\",\"type\":\"string\"},\"customerServiceMessage\":{\"description\":\"If left null, Tango Card's Customer Support contact information will be included. Otherwise, please provide the contact information for your customer support if you are responsible for providing first-tier customer support to your recipients. (email only)\",\"title\":\"Customer Service Message\",\"type\":\"string\"},\"defaults\":{\"description\":\"If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order.\",\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Defaults\",\"type\":\"array\"},\"fromName\":{\"description\":\"The name that will appear in the From line of the email and the {from_name} in the text message.\",\"title\":\"From Name\",\"type\":\"string\"},\"headerImage\":{\"description\":\"A Base64 encoded string of an image that will show as the header of the email.\",\"title\":\"Header Image (Base 64 Encoded)\",\"type\":\"string\"},\"headerImageAltText\":{\"description\":\"The Alt Text for the Header Image in the email.\",\"title\":\"Header Image - Alt Text\",\"type\":\"string\"},\"messageBody\":{\"description\":\"The message body for the email. This is often used to let the recipient know why they have received the reward.\",\"title\":\"Message Body\",\"type\":\"string\"},\"name\":{\"description\":\"A unique name to give the template.\",\"title\":\"Name\",\"type\":\"string\"},\"smsMessageBody\":{\"description\":\"The message body for the SMS. This is often used to let the recipient know why they have received the reward. Must be non-NULL when sending rewards via SMS. (limited to 90 characters)\",\"maxLength\":90,\"minLength\":0,\"title\":\"SMS Message Body\",\"type\":\"string\"},\"subject\":{\"description\":\"The Subject of the email.\",\"title\":\"Subject\",\"type\":\"string\"}},\"required\":[\"accentColor\",\"closing\",\"fromName\",\"headerImage\",\"headerImageAltText\",\"messageBody\",\"name\",\"subject\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accentColor\":{\"title\":\"Accent Color\",\"type\":\"string\"},\"accessControls\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Access Control\",\"type\":\"array\"},\"closing\":{\"title\":\"Closing Message\",\"type\":\"string\"},\"customerServiceMessage\":{\"title\":\"Customer Service Message\",\"type\":\"string\"},\"defaults\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Defaults\",\"type\":\"array\"},\"etid\":{\"title\":\"Email Template Identifier (ETID)\",\"type\":\"string\"},\"fromName\":{\"title\":\"From Name\",\"type\":\"string\"},\"headerImage\":{\"title\":\"Header Image Url\",\"type\":\"string\"},\"headerImageAltText\":{\"title\":\"Header Image - Alt Text\",\"type\":\"string\"},\"messageBody\":{\"title\":\"Message Body\",\"type\":\"string\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"smsMessageBody\":{\"title\":\"SMS Message Body\",\"type\":\"string\"},\"subject\":{\"title\":\"Subject\",\"type\":\"string\"}},\"required\":[\"accentColor\",\"closing\",\"etid\",\"fromName\",\"headerImage\",\"headerImageAltText\",\"messageBody\",\"name\",\"subject\"],\"type\":\"object\"}}},\"description\":\"Created\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Conflict; Duplicate Exists\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unprocessable Entity\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/digitalTemplates"
+          segments: [
+            {
+              lit: "digitalTemplates"
+            }
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "elements_per_block"
+                orig: "elements_per_block"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /digitalTemplates"
+            json: "{\"operationId\":\"listDigitalTemplates\",\"parameters\":[{\"description\":\"specify the number of elements in a block.\",\"in\":\"query\",\"name\":\"elementsPerBlock\",\"required\":false,\"schema\":{\"format\":\"int32\",\"type\":\"integer\"}},{\"description\":\"specify the page number to return.\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"format\":\"int32\",\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"emailTemplates\":{\"items\":{\"properties\":{\"accentColor\":{\"title\":\"Accent Color\",\"type\":\"string\"},\"accessControls\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Access Control\",\"type\":\"array\"},\"closing\":{\"title\":\"Closing Message\",\"type\":\"string\"},\"customerServiceMessage\":{\"title\":\"Customer Service Message\",\"type\":\"string\"},\"defaults\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Defaults\",\"type\":\"array\"},\"etid\":{\"title\":\"Email Template Identifier (ETID)\",\"type\":\"string\"},\"fromName\":{\"title\":\"From Name\",\"type\":\"string\"},\"headerImage\":{\"title\":\"Header Image Url\",\"type\":\"string\"},\"headerImageAltText\":{\"title\":\"Header Image - Alt Text\",\"type\":\"string\"},\"messageBody\":{\"title\":\"Message Body\",\"type\":\"string\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"smsMessageBody\":{\"title\":\"SMS Message Body\",\"type\":\"string\"},\"subject\":{\"title\":\"Subject\",\"type\":\"string\"}},\"required\":[\"accentColor\",\"closing\",\"etid\",\"fromName\",\"headerImage\",\"headerImageAltText\",\"messageBody\",\"name\",\"subject\"],\"type\":\"object\"},\"title\":\"Email Template elements for the current page\",\"type\":\"array\"},\"page\":{\"properties\":{\"elementsPerBlock\":{\"format\":\"int32\",\"title\":\"Total number of elements per page\",\"type\":\"integer\"},\"number\":{\"format\":\"int32\",\"title\":\"Current page number\",\"type\":\"integer\"},\"resultCount\":{\"format\":\"int32\",\"title\":\"Total number of elements in the current page\",\"type\":\"integer\"},\"totalCount\":{\"format\":\"int64\",\"title\":\"Total number of elements\",\"type\":\"integer\"}},\"required\":[\"elementsPerBlock\",\"number\",\"resultCount\",\"totalCount\"],\"title\":\"Page data for email templates\",\"type\":\"object\"}},\"required\":[\"emailTemplates\",\"page\"],\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/digitalTemplates"
+          segments: [
+            {
+              lit: "digitalTemplates"
+            }
+          ]
+          select: {
+            exist: [
+              "elements_per_block"
+              "page"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "etid"
+                orig: "etid"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /digitalTemplates/{etid}"
+            json: "{\"operationId\":\"getDigitalTemplate\",\"parameters\":[{\"description\":\"Template ID (ETID) is returned in the digital template response payload payload\",\"in\":\"path\",\"name\":\"etid\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accentColor\":{\"title\":\"Accent Color\",\"type\":\"string\"},\"accessControls\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Access Control\",\"type\":\"array\"},\"closing\":{\"title\":\"Closing Message\",\"type\":\"string\"},\"customerServiceMessage\":{\"title\":\"Customer Service Message\",\"type\":\"string\"},\"defaults\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Defaults\",\"type\":\"array\"},\"etid\":{\"title\":\"Email Template Identifier (ETID)\",\"type\":\"string\"},\"fromName\":{\"title\":\"From Name\",\"type\":\"string\"},\"headerImage\":{\"title\":\"Header Image Url\",\"type\":\"string\"},\"headerImageAltText\":{\"title\":\"Header Image - Alt Text\",\"type\":\"string\"},\"messageBody\":{\"title\":\"Message Body\",\"type\":\"string\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"smsMessageBody\":{\"title\":\"SMS Message Body\",\"type\":\"string\"},\"subject\":{\"title\":\"Subject\",\"type\":\"string\"}},\"required\":[\"accentColor\",\"closing\",\"etid\",\"fromName\",\"headerImage\",\"headerImageAltText\",\"messageBody\",\"name\",\"subject\"],\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/digitalTemplates/{etid}"
+          segments: [
+            {
+              lit: "digitalTemplates"
+            }
+            {
+              var: "etid"
+            }
+          ]
+          select: {
+            exist: [
+              "etid"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "etid"
+                orig: "etid"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "PATCH /digitalTemplates/{etid}"
+            json: "{\"operationId\":\"updateDigitalTemplate\",\"parameters\":[{\"description\":\"Template ID (ETID) is returned in the digital template response payload\",\"in\":\"path\",\"name\":\"etid\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"<strong>name</strong> - (Optional) A unique name to give the template.<br/><br/><strong>fromName</strong> - (Optional) The name that will appear in the From line of the email and the {from_name} in the text message.<br/><br/><strong>subject</strong> - (Optional) The Subject of the email.<br/><br/><strong>headerImage</strong> - (Optional) A Base64 encoded string of an image that will show as the header of the email.<br/><br/><strong>headerImageAltText</strong> - (Optional) The Alt Text for the Header Image in the email.<br/><br/><strong>accentColor</strong> - (Optional) A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email.<br/><br/><strong>messageBody</strong> - (Optional) The message body for the email. This is often used to let the recipient know why they have received the reward.<br/><br/><strong>closing</strong> - (Optional) After the reward credential, a space to close the email message to the recipient.<br/><br/><strong>customerServiceMessage</strong> - (Optional) If left null, Tango Card's Customer Support contact information will be included. Otherwise, please provide the contact information for your customer support if you are responsible for providing first-tier customer support to your recipients. (email only)<br/><br/><strong>accessControl</strong> - Optional. Which Customers and/or Accounts should have access to this template<br/><br/><strong>accessControl - type</strong> - The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.<br/><br/><strong>accessControl - identifier</strong> - Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.<br/><br/><strong>defaults</strong> - Optional. If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order.<br/><br/><strong>defaults - type</strong> - The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.<br/><br/><strong>defaults - identifier</strong> - Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"properties\":{\"accentColor\":{\"description\":\"(Optional) A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email.\",\"example\":\"#000000\",\"pattern\":\"^(#)([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$\",\"title\":\"Accent Color\",\"type\":\"string\"},\"accessControl\":{\"description\":\"Optional. Which Customers and/or Accounts should have access to this template\",\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Access Control\",\"type\":\"array\"},\"closing\":{\"description\":\"(Optional) After the reward credential, a space to close the email message to the recipient.\",\"title\":\"Closing Message\",\"type\":\"string\"},\"customerServiceMessage\":{\"description\":\"(Optional) If left null, Tango Card's Customer Support contact information will be included. Otherwise, please provide the contact information for your customer support if you are responsible for providing first-tier customer support to your recipients. (email only)\",\"title\":\"Customer Service Message\",\"type\":\"string\"},\"defaults\":{\"description\":\"Optional. If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order.\",\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Defaults\",\"type\":\"array\"},\"fromName\":{\"description\":\"(Optional) The name that will appear in the From line of the email and the {from_name} in the text message.\",\"title\":\"From Name\",\"type\":\"string\"},\"headerImage\":{\"description\":\"(Optional) A Base64 encoded string of an image that will show as the header of the email.\",\"title\":\"Header Image (Base 64 Encoded)\",\"type\":\"string\"},\"headerImageAltText\":{\"description\":\"(Optional) The Alt Text for the Header Image in the email.\",\"title\":\"Header Image - Alt Text\",\"type\":\"string\"},\"messageBody\":{\"description\":\"(Optional) The message body for the email. This is often used to let the recipient know why they have received the reward.\",\"title\":\"Message Body\",\"type\":\"string\"},\"name\":{\"description\":\"(Optional) A unique name to give the template.\",\"title\":\"Name\",\"type\":\"string\"},\"smsMessageBody\":{\"description\":\"The message body for the SMS. This is often used to let the recipient know why they have received the reward. Must be non-NULL when sending rewards via SMS. (limited to 90 characters)\",\"maxLength\":90,\"minLength\":0,\"title\":\"SMS Message Body\",\"type\":\"string\"},\"subject\":{\"description\":\"(Optional) The Subject of the email.\",\"title\":\"Subject\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accentColor\":{\"title\":\"Accent Color\",\"type\":\"string\"},\"accessControls\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of access being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Access Control\",\"type\":\"array\"},\"closing\":{\"title\":\"Closing Message\",\"type\":\"string\"},\"customerServiceMessage\":{\"title\":\"Customer Service Message\",\"type\":\"string\"},\"defaults\":{\"items\":{\"properties\":{\"identifier\":{\"description\":\"Leave this field blank if the type is PLATFORM.  Enter either the the customerIdentifier or the accountIdentifier if the type is CUSTOMER OR ACCOUNT, respectively.\",\"type\":\"string\"},\"type\":{\"description\":\"The type of default being specified: PLATFORM, CUSTOMER or ACCOUNT.\",\"enum\":[\"PLATFORM\",\"CUSTOMER\",\"ACCOUNT\"],\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Defaults\",\"type\":\"array\"},\"etid\":{\"title\":\"Email Template Identifier (ETID)\",\"type\":\"string\"},\"fromName\":{\"title\":\"From Name\",\"type\":\"string\"},\"headerImage\":{\"title\":\"Header Image Url\",\"type\":\"string\"},\"headerImageAltText\":{\"title\":\"Header Image - Alt Text\",\"type\":\"string\"},\"messageBody\":{\"title\":\"Message Body\",\"type\":\"string\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"smsMessageBody\":{\"title\":\"SMS Message Body\",\"type\":\"string\"},\"subject\":{\"title\":\"Subject\",\"type\":\"string\"}},\"required\":[\"accentColor\",\"closing\",\"etid\",\"fromName\",\"headerImage\",\"headerImageAltText\",\"messageBody\",\"name\",\"subject\"],\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Conflict; Duplicate Exists\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "PATCH"
+          orig: "/digitalTemplates/{etid}"
+          segments: [
+            {
+              lit: "digitalTemplates"
+            }
+            {
+              var: "etid"
+            }
+          ]
+          select: {
+            exist: [
+              "etid"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "digital_template"
+      ]
+    ]
+  }
+
+
+
+}

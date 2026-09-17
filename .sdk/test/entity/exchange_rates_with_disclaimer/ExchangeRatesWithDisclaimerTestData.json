@@ -1,0 +1,286 @@
+{
+  "existing": {
+    "exchange_rates_with_disclaimer": {
+      "EXCHANGE_RATES_WITH_DISCLAIMER00": {
+        "baseCurrency": "s28",
+        "baseFx": "s29",
+        "lastModifiedDate": "s2a",
+        "rewardCurrency": "s2b"
+      },
+      "EXCHANGE_RATES_WITH_DISCLAIMER01": {
+        "baseCurrency": "s50",
+        "baseFx": "s51",
+        "lastModifiedDate": "s52",
+        "rewardCurrency": "s53"
+      },
+      "EXCHANGE_RATES_WITH_DISCLAIMER02": {
+        "baseCurrency": "s78",
+        "baseFx": "s79",
+        "lastModifiedDate": "s7a",
+        "rewardCurrency": "s7b"
+      }
+    }
+  },
+  "new": {
+    "exchange_rates_with_disclaimer": {
+      "exchange_rates_with_disclaimer_ref01": {
+        "baseCurrency": "sa0",
+        "baseFx": "sa1",
+        "lastModifiedDate": "sa2",
+        "rewardCurrency": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /exchangerates": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getExchangeRates",
+        "parameters": [
+          {
+            "description": "Whether to paginate the results or not. Defaults to false.",
+            "in": "query",
+            "name": "paginate",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The cursor to use for the previous page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "prevCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The cursor to use for the next page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "nextCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of results to return. The default is 10, and the maximum is 200. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "maxResults",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Returns all exchange rates for a specific base currency.",
+            "in": "query",
+            "name": "baseCurrency",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          {
+            "description": "Returns all exchange rates for a specific reward currency.",
+            "in": "query",
+            "name": "rewardCurrency",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "disclaimer": {
+                      "type": "string"
+                    },
+                    "exchangeRates": {
+                      "items": {
+                        "properties": {
+                          "baseCurrency": {
+                            "title": "Base Currency",
+                            "type": "string"
+                          },
+                          "baseFx": {
+                            "title": "Base Fixed Exchange Rate",
+                            "type": "string"
+                          },
+                          "lastModifiedDate": {
+                            "format": "date-time",
+                            "title": "Last Modified Timestamp",
+                            "type": "string"
+                          },
+                          "rewardCurrency": {
+                            "title": "Reward Currency",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "baseCurrency",
+                          "baseFx",
+                          "lastModifiedDate",
+                          "rewardCurrency"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "maxResults": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "nextCursor": {
+                      "type": "string"
+                    },
+                    "nextPageAvailable": {
+                      "type": "boolean"
+                    },
+                    "prevCursor": {
+                      "type": "string"
+                    },
+                    "prevPageAvailable": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

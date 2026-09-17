@@ -1,0 +1,1102 @@
+{
+  "existing": {
+    "credit_card": {
+      "CREDIT_CARD00": {
+        "accountIdentifier": "s96",
+        "accountNumber": "s97",
+        "activationDate": "s98",
+        "billingAddress": {},
+        "contactInformation": [],
+        "createdDate": "s9b",
+        "creditCard": {},
+        "customerIdentifier": "s9d",
+        "expirationDate": "s9e",
+        "id": "CREDIT_CARD00",
+        "ipAddress": "sa0",
+        "label": "sa1",
+        "lastFourDigits": "sa2",
+        "status": "sa3",
+        "token": "sa4"
+      },
+      "CREDIT_CARD01": {
+        "accountIdentifier": "s12c",
+        "accountNumber": "s12d",
+        "activationDate": "s12e",
+        "billingAddress": {},
+        "contactInformation": [],
+        "createdDate": "s131",
+        "creditCard": {},
+        "customerIdentifier": "s133",
+        "expirationDate": "s134",
+        "id": "CREDIT_CARD01",
+        "ipAddress": "s136",
+        "label": "s137",
+        "lastFourDigits": "s138",
+        "status": "s139",
+        "token": "s13a"
+      },
+      "CREDIT_CARD02": {
+        "accountIdentifier": "s1c2",
+        "accountNumber": "s1c3",
+        "activationDate": "s1c4",
+        "billingAddress": {},
+        "contactInformation": [],
+        "createdDate": "s1c7",
+        "creditCard": {},
+        "customerIdentifier": "s1c9",
+        "expirationDate": "s1ca",
+        "id": "CREDIT_CARD02",
+        "ipAddress": "s1cc",
+        "label": "s1cd",
+        "lastFourDigits": "s1ce",
+        "status": "s1cf",
+        "token": "s1d0"
+      }
+    }
+  },
+  "new": {
+    "credit_card": {
+      "credit_card_ref01": {
+        "accountIdentifier": "s258",
+        "accountNumber": "s259",
+        "activationDate": "s25a",
+        "billingAddress": {},
+        "contactInformation": [],
+        "createdDate": "s25d",
+        "creditCard": {},
+        "customerIdentifier": "s25f",
+        "expirationDate": "s260",
+        "ipAddress": "s262",
+        "label": "s263",
+        "lastFourDigits": "s264",
+        "status": "s265",
+        "token": "s266"
+      }
+    }
+  },
+  "requests": {
+    "POST /creditCards": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createCreditCard",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "<strong>customerIdentifier</strong> - specify the customer associated with the credit card. Must be the customer the accountIdentifier is associated with.<br/><br/><strong>accountIdentifier</strong> - specify the account this credit card is associated with<br/><br/><strong>label</strong> - specify a label for the credit card<br/><br/><strong>ipAddress</strong> - specify the The IP address of the person adding the credit card<br/><br/><strong>creditCard - number</strong> - specify the account this order will be deducted from<br/><br/><strong>creditCard - expiration</strong> - specify the card expiration date in YYYY-MM format<br/><br/><strong>creditCard - verificationNumber</strong> - specify the 3 or 4-digit card security code on back of card (CVV2, CVC2, or CID)<br/><br/><strong>billingAddress - firstName</strong> - specify the billing address first name<br/><br/><strong>billingAddress - lastName</strong> - specify the billing address last name<br/><br/><strong>billingAddress - addressLine1</strong> - specify the billing address line 1<br/><br/><strong>billingAddress - addressLine2</strong> - Optional. Specify the billing address line 2<br/><br/><strong>billingAddress - city</strong> - specify the billing address city<br/><br/><strong>billingAddress - state</strong> - specify the billing address state<br/><br/><strong>billingAddress - postalCode</strong> - specify the billing address postal code<br/><br/><strong>billingAddress - country</strong> - specify the billing address 2-letter country code<br/><br/><strong>billingAddress - emailAddress</strong> - specify the billing address email<br/><br/><strong>contactInformation - fullName</strong> - Optional. Used for email receipts. Specify the contact full name.<br/><br/><strong>contactInformation - emailAddress</strong> - Optional. Used for email receipts. Specify the contact email address.<br/><br/>",
+                "properties": {
+                  "accountIdentifier": {
+                    "description": "specify the account this credit card is associated with",
+                    "title": "Account Identifier",
+                    "type": "string"
+                  },
+                  "billingAddress": {
+                    "description": "required Enter the billing address information for the credit card that is being registered",
+                    "properties": {
+                      "addressLine1": {
+                        "description": "specify the billing address line 1",
+                        "minLength": 1,
+                        "title": "Address Line 1",
+                        "type": "string"
+                      },
+                      "addressLine2": {
+                        "description": "Optional. Specify the billing address line 2",
+                        "title": "Address Line 2",
+                        "type": "string"
+                      },
+                      "city": {
+                        "description": "specify the billing address city",
+                        "minLength": 1,
+                        "title": "City",
+                        "type": "string"
+                      },
+                      "country": {
+                        "description": "specify the billing address 2-letter country code",
+                        "minLength": 1,
+                        "title": "Country",
+                        "type": "string"
+                      },
+                      "emailAddress": {
+                        "description": "specify the billing address email",
+                        "minLength": 1,
+                        "title": "Email Address",
+                        "type": "string"
+                      },
+                      "firstName": {
+                        "description": "specify the billing address first name",
+                        "minLength": 1,
+                        "title": "First Name",
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "description": "specify the billing address last name",
+                        "minLength": 1,
+                        "title": "Last Name",
+                        "type": "string"
+                      },
+                      "postalCode": {
+                        "description": "specify the billing address postal code",
+                        "minLength": 1,
+                        "title": "Postal Code",
+                        "type": "string"
+                      },
+                      "state": {
+                        "description": "specify the billing address state",
+                        "minLength": 1,
+                        "title": "State",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "addressLine1",
+                      "city",
+                      "country",
+                      "emailAddress",
+                      "firstName",
+                      "lastName",
+                      "postalCode",
+                      "state"
+                    ],
+                    "title": "Billing Address",
+                    "type": "object"
+                  },
+                  "contactInformation": {
+                    "description": "Optional.  Enter the contact information of the any person(s) who will be notified if there are issues.",
+                    "items": {
+                      "properties": {
+                        "emailAddress": {
+                          "description": "Optional. Used for email receipts. Specify the contact email address.",
+                          "title": "Contact email address",
+                          "type": "string"
+                        },
+                        "fullName": {
+                          "description": "Optional. Used for email receipts. Specify the contact full name.",
+                          "title": "Contact full name",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "title": "Contact Information",
+                    "type": "array"
+                  },
+                  "creditCard": {
+                    "description": "required  Enter the credit card details that is being registered",
+                    "properties": {
+                      "expiration": {
+                        "description": "specify the card expiration date in YYYY-MM format",
+                        "title": "Expiration Date",
+                        "type": "string"
+                      },
+                      "number": {
+                        "description": "specify the account this order will be deducted from",
+                        "title": "Credit Card Number",
+                        "type": "string"
+                      },
+                      "verificationNumber": {
+                        "description": "specify the 3 or 4-digit card security code on back of card (CVV2, CVC2, or CID)",
+                        "title": "Verification Number",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "expiration",
+                      "number",
+                      "verificationNumber"
+                    ],
+                    "title": "Credit Card Information",
+                    "type": "object"
+                  },
+                  "customerIdentifier": {
+                    "description": "specify the customer associated with the credit card. Must be the customer the accountIdentifier is associated with.",
+                    "title": "Customer Identifier",
+                    "type": "string"
+                  },
+                  "ipAddress": {
+                    "description": "specify the The IP address of the person adding the credit card",
+                    "title": "IP Address",
+                    "type": "string"
+                  },
+                  "label": {
+                    "description": "specify a label for the credit card",
+                    "title": "Credit Card Label",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "accountIdentifier",
+                  "billingAddress",
+                  "creditCard",
+                  "customerIdentifier",
+                  "ipAddress",
+                  "label"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "accountNumber": {
+                      "title": "Account Number",
+                      "type": "string"
+                    },
+                    "activationDate": {
+                      "title": "Date when the the credit card will be activated for use in funding",
+                      "type": "string"
+                    },
+                    "contactInformation": {
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "title": "Contact email address",
+                            "type": "string"
+                          },
+                          "fullName": {
+                            "title": "Contact full name",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "List of contact information for funding confirmation emails",
+                      "type": "array"
+                    },
+                    "createdDate": {
+                      "title": "Date the credit card was created",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    },
+                    "expirationDate": {
+                      "title": "Expiration date of the registered card in YYYY-MM format",
+                      "type": "string"
+                    },
+                    "label": {
+                      "title": "Credit Card label",
+                      "type": "string"
+                    },
+                    "lastFourDigits": {
+                      "title": "Last four digits of the registered credit card",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status of the registered card",
+                      "type": "string"
+                    },
+                    "token": {
+                      "title": "Credit Card token identifier",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "accountNumber",
+                    "activationDate",
+                    "contactInformation",
+                    "createdDate",
+                    "customerIdentifier",
+                    "expirationDate",
+                    "label",
+                    "lastFourDigits",
+                    "status",
+                    "token"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /creditCards": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listCreditCards",
+        "parameters": [
+          {
+            "description": "Whether to paginate the results or not. Defaults to false.",
+            "in": "query",
+            "name": "paginate",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The cursor to use for the previous page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "prevCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The cursor to use for the next page of results. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "nextCursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of results to return. The default is 10, and the maximum is 200. This will be ignored if paginate is false.",
+            "in": "query",
+            "name": "maxResults",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Show inactive cards (true or false).",
+            "in": "query",
+            "name": "showInactive",
+            "required": false,
+            "schema": {
+              "default": "false",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account number to be queried.",
+            "in": "query",
+            "name": "accountNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Get cards associated with a specific account",
+            "in": "query",
+            "name": "accountIdentifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the customer identifier to be queried.",
+            "in": "query",
+            "name": "customerIdentifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Credit card token to be queried",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the expiration date of the credit card to be queried.",
+            "in": "query",
+            "name": "expirationDate",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Get cards with specific status. When set, this option will override the showInactive parameter",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "DELETED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the contact email address to be queried.",
+            "in": "query",
+            "name": "emailAddress",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Contact person's full name to be queried.",
+            "in": "query",
+            "name": "fullName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Label for the credit card to be queried.",
+            "in": "query",
+            "name": "label",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The last four digits of the credit card to be queried.",
+            "in": "query",
+            "name": "lastFourDigits",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "items": {
+                        "properties": {
+                          "accountIdentifier": {
+                            "title": "Account Identifier",
+                            "type": "string"
+                          },
+                          "accountNumber": {
+                            "title": "Account Number",
+                            "type": "string"
+                          },
+                          "activationDate": {
+                            "title": "Date when the the credit card will be activated for use in funding",
+                            "type": "string"
+                          },
+                          "contactInformation": {
+                            "items": {
+                              "properties": {
+                                "emailAddress": {
+                                  "title": "Contact email address",
+                                  "type": "string"
+                                },
+                                "fullName": {
+                                  "title": "Contact full name",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "title": "List of contact information for funding confirmation emails",
+                            "type": "array"
+                          },
+                          "createdDate": {
+                            "title": "Date the credit card was created",
+                            "type": "string"
+                          },
+                          "customerIdentifier": {
+                            "title": "Customer Identifier",
+                            "type": "string"
+                          },
+                          "expirationDate": {
+                            "title": "Expiration date of the registered card in YYYY-MM format",
+                            "type": "string"
+                          },
+                          "label": {
+                            "title": "Credit Card label",
+                            "type": "string"
+                          },
+                          "lastFourDigits": {
+                            "title": "Last four digits of the registered credit card",
+                            "type": "string"
+                          },
+                          "status": {
+                            "title": "Status of the registered card",
+                            "type": "string"
+                          },
+                          "token": {
+                            "title": "Credit Card token identifier",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "accountIdentifier",
+                          "accountNumber",
+                          "activationDate",
+                          "contactInformation",
+                          "createdDate",
+                          "customerIdentifier",
+                          "expirationDate",
+                          "label",
+                          "lastFourDigits",
+                          "status",
+                          "token"
+                        ],
+                        "type": "object"
+                      },
+                      "properties": {
+                        "empty": {
+                          "type": "boolean"
+                        },
+                        "first": {
+                          "properties": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/properties"
+                          },
+                          "required": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/required"
+                          },
+                          "type": "object"
+                        },
+                        "last": {
+                          "properties": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/properties"
+                          },
+                          "required": {
+                            "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/required"
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "title": "Non Paginated",
+                      "type": "array"
+                    },
+                    {
+                      "properties": {
+                        "items": {
+                          "items": {
+                            "properties": {
+                              "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/properties"
+                            },
+                            "required": {
+                              "$ref": "#/responses/200/content/application~1json/schema/oneOf/0/items/required"
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "maxResults": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "nextCursor": {
+                          "type": "string"
+                        },
+                        "nextPageAvailable": {
+                          "type": "boolean"
+                        },
+                        "numberOfElements": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "prevCursor": {
+                          "type": "string"
+                        },
+                        "prevPageAvailable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "title": "Paginated",
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /creditCards/{token}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCreditCard",
+        "parameters": [
+          {
+            "description": "Credit card token",
+            "in": "path",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "accountNumber": {
+                      "title": "Account Number",
+                      "type": "string"
+                    },
+                    "activationDate": {
+                      "title": "Date when the the credit card will be activated for use in funding",
+                      "type": "string"
+                    },
+                    "contactInformation": {
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "title": "Contact email address",
+                            "type": "string"
+                          },
+                          "fullName": {
+                            "title": "Contact full name",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "List of contact information for funding confirmation emails",
+                      "type": "array"
+                    },
+                    "createdDate": {
+                      "title": "Date the credit card was created",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    },
+                    "expirationDate": {
+                      "title": "Expiration date of the registered card in YYYY-MM format",
+                      "type": "string"
+                    },
+                    "label": {
+                      "title": "Credit Card label",
+                      "type": "string"
+                    },
+                    "lastFourDigits": {
+                      "title": "Last four digits of the registered credit card",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status of the registered card",
+                      "type": "string"
+                    },
+                    "token": {
+                      "title": "Credit Card token identifier",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "accountNumber",
+                    "activationDate",
+                    "contactInformation",
+                    "createdDate",
+                    "customerIdentifier",
+                    "expirationDate",
+                    "label",
+                    "lastFourDigits",
+                    "status",
+                    "token"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

@@ -1,0 +1,158 @@
+# Entity: credit_card_deposit
+
+main: kit: entity: credit_card_deposit: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accountIdentifier"
+      req: true
+      short: "specify the account this credit card is associated with"
+      type: "`$STRING`"
+    }
+    {
+      name: "accountNumber"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "amount"
+      req: true
+      short: "specify the amount to fund in USD"
+      type: "`$NUMBER`"
+    }
+    {
+      name: "amountCharged"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "createdDate"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "creditCardToken"
+      req: true
+      short: "specify the credit card token to fund with"
+      type: "`$STRING`"
+    }
+    {
+      name: "customerIdentifier"
+      req: true
+      short: "specify the customer associated with the credit card."
+      type: "`$STRING`"
+    }
+    {
+      name: "externalRefID"
+      req: false
+      short: "specify the external reference id to associate with this funding action."
+      type: "`$STRING`"
+    }
+    {
+      name: "feePercent"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "referenceDepositID"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "credit_card_deposit"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          contract: {
+            id: "POST /creditCardDeposits"
+            json: "{\"operationId\":\"createCreditCardDeposit\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"<strong>customerIdentifier</strong> - specify the customer associated with the credit card. Must be the customer the accountIdentifier is associated with.<br/><br/><strong>accountIdentifier</strong> - specify the account this credit card is associated with<br/><br/><strong>externalRefID</strong> - specify the external reference id to associate with this funding action. Must be unique<br/><br/><strong>creditCardToken</strong> - specify the credit card token to fund with<br/><br/><strong>amount</strong> - specify the amount to fund in USD<br/><br/>\",\"properties\":{\"accountIdentifier\":{\"description\":\"specify the account this credit card is associated with\",\"title\":\"Account Identifier\",\"type\":\"string\"},\"amount\":{\"description\":\"specify the amount to fund in USD\",\"title\":\"The amount in USD to fund\",\"type\":\"number\"},\"creditCardToken\":{\"description\":\"specify the credit card token to fund with\",\"title\":\"Credit Card token\",\"type\":\"string\"},\"customerIdentifier\":{\"description\":\"specify the customer associated with the credit card. Must be the customer the accountIdentifier is associated with.\",\"title\":\"Customer Identifier\",\"type\":\"string\"},\"externalRefID\":{\"description\":\"specify the external reference id to associate with this funding action. Must be unique\",\"title\":\"External Reference Identifier\",\"type\":\"string\"}},\"required\":[\"accountIdentifier\",\"amount\",\"creditCardToken\",\"customerIdentifier\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accountNumber\":{\"title\":\"Account Number\",\"type\":\"string\"},\"amount\":{\"title\":\"Amount funded in USD\",\"type\":\"number\"},\"amountCharged\":{\"title\":\"Amount charged in USD\",\"type\":\"number\"},\"createdDate\":{\"title\":\"Date the credit card deposit was created\",\"type\":\"string\"},\"externalRefID\":{\"title\":\"External Reference Identifier\",\"type\":\"string\"},\"feePercent\":{\"title\":\"Fee percent charged for credit card processing\",\"type\":\"number\"},\"referenceDepositID\":{\"title\":\"Credit Card Deposit order reference ID\",\"type\":\"string\"},\"status\":{\"title\":\"Status of the credit card deposit\",\"type\":\"string\"}},\"required\":[\"accountNumber\",\"amount\",\"amountCharged\",\"createdDate\",\"feePercent\",\"referenceDepositID\",\"status\"],\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Conflict; Duplicate Exists\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/creditCardDeposits"
+          segments: [
+            {
+              lit: "creditCardDeposits"
+            }
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "reference_deposit_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /creditCardDeposits/{referenceDepositID}"
+            json: "{\"operationId\":\"getCreditCardDeposit\",\"parameters\":[{\"description\":\"Credit card deposit identifier returned in Fund an Account (POST /creditCardDeposits) response payload.\",\"in\":\"path\",\"name\":\"referenceDepositID\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accountNumber\":{\"title\":\"Account Number\",\"type\":\"string\"},\"amount\":{\"title\":\"Amount funded in USD\",\"type\":\"number\"},\"amountCharged\":{\"title\":\"Amount charged in USD\",\"type\":\"number\"},\"createdDate\":{\"title\":\"Date the credit card deposit was created\",\"type\":\"string\"},\"externalRefID\":{\"title\":\"External Reference Identifier\",\"type\":\"string\"},\"feePercent\":{\"title\":\"Fee percent charged for credit card processing\",\"type\":\"number\"},\"referenceDepositID\":{\"title\":\"Credit Card Deposit order reference ID\",\"type\":\"string\"},\"status\":{\"title\":\"Status of the credit card deposit\",\"type\":\"string\"}},\"required\":[\"accountNumber\",\"amount\",\"amountCharged\",\"createdDate\",\"feePercent\",\"referenceDepositID\",\"status\"],\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/creditCardDeposits/{referenceDepositID}"
+          rename: {
+            param: {
+              referenceDepositID: "id"
+            }
+          }
+          segments: [
+            {
+              lit: "creditCardDeposits"
+            }
+            {
+              var: "id"
+            }
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

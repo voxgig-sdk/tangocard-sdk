@@ -1,0 +1,392 @@
+{
+  "existing": {
+    "create_account_criterion": {
+      "CREATE_ACCOUNT_CRITERION00": {
+        "accountIdentifier": "s32",
+        "contactEmail": "s33",
+        "currencyCode": "s34",
+        "displayName": "s35",
+        "fundingNotification": [],
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "id": "CREATE_ACCOUNT_CRITERION00"
+      },
+      "CREATE_ACCOUNT_CRITERION01": {
+        "accountIdentifier": "s64",
+        "contactEmail": "s65",
+        "currencyCode": "s66",
+        "displayName": "s67",
+        "fundingNotification": [],
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "id": "CREATE_ACCOUNT_CRITERION01"
+      },
+      "CREATE_ACCOUNT_CRITERION02": {
+        "accountIdentifier": "s96",
+        "contactEmail": "s97",
+        "currencyCode": "s98",
+        "displayName": "s99",
+        "fundingNotification": [],
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "id": "CREATE_ACCOUNT_CRITERION02"
+      }
+    }
+  },
+  "new": {
+    "create_account_criterion": {
+      "create_account_criterion_ref01": {
+        "accountIdentifier": "sc8",
+        "contactEmail": "sc9",
+        "currencyCode": "sca",
+        "displayName": "scb",
+        "fundingNotification": []
+      }
+    }
+  },
+  "requests": {
+    "POST /customers/{customerIdentifier}/accounts": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createCustomerAccount",
+        "parameters": [
+          {
+            "description": "The customerIdentifier for the Customer under which you are creating a new account",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "accountIdentifier": {
+                    "description": "A unique identifier for this account. Must be between 5-100 characters and accepts the following: -0-9a-zA-Z in any sequence.",
+                    "pattern": "^[-a-zA-Z0-9]{5,100}$",
+                    "title": "Account Identifier",
+                    "type": "string"
+                  },
+                  "contactEmail": {
+                    "description": "An email address for a designated representative for this account.",
+                    "title": "Email",
+                    "type": "string"
+                  },
+                  "currencyCode": {
+                    "default": "USD",
+                    "description": "The currency this account will accept for deposits/withdraws. Only one currency can be specified, and can never be changed. Default to USD if not specified.",
+                    "enum": [
+                      "AUD",
+                      "CAD",
+                      "EUR",
+                      "GBP",
+                      "USD",
+                      "MXN",
+                      "SGD",
+                      "PLN"
+                    ],
+                    "title": "Currency Code",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "description": "A friendly name for this account.",
+                    "title": "Display Name",
+                    "type": "string"
+                  },
+                  "fundingNotification": {
+                    "description": "optional, send funding notification emails to the following address(es)",
+                    "items": {
+                      "properties": {
+                        "emailAddress": {
+                          "description": "optional, email address to send funding notifications to for this account.",
+                          "title": "Email",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "title": "Funding Notification",
+                    "type": "array",
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "accountIdentifier",
+                  "contactEmail",
+                  "displayName"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "description": "A unique identifier for this account. Must be between 5-100 characters and accepts the following: -0-9a-zA-Z in any sequence.",
+                      "pattern": "^[-a-zA-Z0-9]{5,100}$",
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "contactEmail": {
+                      "description": "An email address for a designated representative for this account.",
+                      "title": "Email",
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "default": "USD",
+                      "description": "The currency this account will accept for deposits/withdraws. Only one currency can be specified, and can never be changed. Default to USD if not specified.",
+                      "enum": [
+                        "AUD",
+                        "CAD",
+                        "EUR",
+                        "GBP",
+                        "USD",
+                        "MXN",
+                        "SGD",
+                        "PLN"
+                      ],
+                      "title": "Currency Code",
+                      "type": "string"
+                    },
+                    "displayName": {
+                      "description": "A friendly name for this account.",
+                      "title": "Display Name",
+                      "type": "string"
+                    },
+                    "fundingNotification": {
+                      "description": "optional, send funding notification emails to the following address(es)",
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "description": "optional, email address to send funding notifications to for this account.",
+                            "title": "Email",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "Funding Notification",
+                      "type": "array",
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "contactEmail",
+                    "displayName"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Conflict; Duplicate Exists"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

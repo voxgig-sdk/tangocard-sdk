@@ -1,0 +1,15 @@
+{
+  "existing": {
+    "email_template_list_view": {
+      "EMAIL_TEMPLATE_LIST_VIEW00": {},
+      "EMAIL_TEMPLATE_LIST_VIEW01": {},
+      "EMAIL_TEMPLATE_LIST_VIEW02": {}
+    }
+  },
+  "new": {
+    "email_template_list_view": {
+      "email_template_list_view_ref01": {}
+    }
+  },
+  "requests": {}
+}

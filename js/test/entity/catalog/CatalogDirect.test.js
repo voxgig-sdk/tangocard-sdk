@@ -40,9 +40,14 @@ describe('CatalogDirect', async () => {
     const { client, calls } = setup
 
     const params = {}
+    if (setup.live) {
+      params.choice_product_id = setup.idmap['choice_product01']
+    } else {
+      params.choice_product_id = 'direct01'
+    }
 
     const result = await client.direct({
-      path: 'catalogs',
+      path: 'choiceProducts/{choice_product_id}/catalog',
       method: 'GET',
       params,
     })
@@ -55,6 +60,7 @@ describe('CatalogDirect', async () => {
       assert(result.data.length === 2)
       assert(calls.length === 1)
       assert(calls[0].init.method === 'GET')
+      assert(calls[0].url.includes('direct01'))
     }
   })
 

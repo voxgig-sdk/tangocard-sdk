@@ -1,0 +1,32 @@
+# BasicPrepaidCardTransactionFlow
+
+main: kit: flow: BasicPrepaidCardTransactionFlow:
+{
+  entity: "prepaid_card_transaction",
+  kind: "basic",
+  name: "BasicPrepaidCardTransactionFlow",
+  step: [
+    {
+      input: {
+        ref: "prepaid_card_transaction_ref01",
+        srcdatavar: "prepaid_card_transaction_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "prepaid_card_transaction01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-prepaid_card_transaction_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPrepaidCardTransactionFlow"
+}

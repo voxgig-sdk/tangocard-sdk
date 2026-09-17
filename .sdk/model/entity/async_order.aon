@@ -1,0 +1,449 @@
+# Entity: async_order
+
+main: kit: entity: async_order: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accountIdentifier"
+      req: true
+      short: "specify the account this order will be deducted from"
+      type: "`$STRING`"
+    }
+    {
+      name: "accountNumber"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "amountCharged"
+      req: false
+      short: "Initial value and the total charged amount on the account"
+      type: "`$OBJECT`"
+    }
+    {
+      name: "campaign"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      short: "Optional."
+      type: "`$STRING`"
+    }
+    {
+      format: "date-time"
+      name: "createdAt"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "customerIdentifier"
+      req: true
+      short: "specify the customer associated with the order."
+      type: "`$STRING`"
+    }
+    {
+      name: "duplicateLineItemRefIds"
+      req: false
+      short: "If any duplicate duplicateLineItemRefIds exist in the request"
+      type: "`$OBJECT`"
+    }
+    {
+      name: "externalRefID"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      short: "Required."
+      type: "`$STRING`"
+    }
+    {
+      name: "failedLineItems"
+      req: false
+      short: "Failed line items list (business validations)"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "fulfillBy"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "lineItems"
+      req: true
+      short: "Line Items of the bulk order a required field"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "notes"
+      req: false
+      short: "Optional order notes."
+      type: "`$STRING`"
+    }
+    {
+      name: "orderStatus"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "purchaseOrderNumber"
+      req: false
+      short: "The Purchase Order Number associated with this order."
+      type: "`$STRING`"
+    }
+    {
+      name: "referenceOrderID"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "sender"
+      req: false
+      short: "Optional."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "status"
+      req: false
+      short: "This status reflects about cart status or validation status based on the processing"
+      type: "`$STRING`"
+    }
+    {
+      format: "int32"
+      name: "totalLineItems"
+      req: false
+      short: "Total number of line items submitted in the request"
+      type: "`$INTEGER`"
+    }
+    {
+      format: "int64"
+      name: "totalLineItemsRows"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "async_order"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          contract: {
+            id: "POST /asyncOrders"
+            json: "{\"operationId\":\"createAsyncOrder\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accountIdentifier\":{\"description\":\"specify the account this order will be deducted from\",\"pattern\":\"^[-a-zA-Z0-9]{5,100}$\",\"title\":\"Account Identifier\",\"type\":\"string\"},\"campaign\":{\"description\":\"Optional. Campaign that may be used to administratively categorize a specific order. Must be between 0 and 1024 characters in length.\",\"maxLength\":1024,\"minLength\":0,\"title\":\"Campaign\",\"type\":\"string\"},\"customerIdentifier\":{\"description\":\"specify the customer associated with the order. Must be the customer the accountIdentifier is associated with.\",\"pattern\":\"^[-a-zA-Z0-9]{5,100}$\",\"title\":\"Customer Identifier\",\"type\":\"string\"},\"externalRefID\":{\"description\":\"Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.\",\"maxLength\":100,\"minLength\":0,\"title\":\"External Reference ID\",\"type\":\"string\"},\"lineItems\":{\"description\":\"Line Items of the bulk order a required field\",\"items\":{\"properties\":{\"amount\":{\"description\":\"specify the face value of of the reward. Always required, including for fixed value items.\",\"minimum\":0,\"title\":\"Amount\",\"type\":\"number\"},\"bulkShipping\":{\"description\":\"Only used for and is required when deliveryMethod is BULKSHIPMENT\",\"properties\":{\"address\":{\"description\":\"The address where the bulk shipment is to be delivered.\",\"properties\":{\"city\":{\"description\":\"35 characters max, Required, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, hyphen, ampersand, and apostrophe.\",\"maxLength\":60,\"minLength\":0,\"title\":\"City\",\"type\":\"string\"},\"country\":{\"description\":\"2 characters, Enter the ISO 3166-1 alpha-2 country code\",\"maxLength\":2,\"minLength\":2,\"title\":\"Country Code\",\"type\":\"string\"},\"postalCode\":{\"description\":\"Allows 5 characters, not blank, Digits 0-9 and alpha (a-z, A-Z). For US addresses, this must include only the five-digit US ZIP Code.\",\"maxLength\":12,\"minLength\":0,\"title\":\"Postal Code\",\"type\":\"string\"},\"stateOrProvince\":{\"description\":\"36 characters max, Address region must be a valid 2-character uppercase abbreviation for a U.S. state, territory, or military base; a Canadian province; or contain an international region less than 36 characters.\",\"maxLength\":60,\"minLength\":0,\"title\":\"State or Province\",\"type\":\"string\"},\"streetLine1\":{\"description\":\"35 characters max, required, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.\",\"maxLength\":200,\"minLength\":0,\"title\":\"Street Line 1\",\"type\":\"string\"},\"streetLine2\":{\"description\":\"35 characters max, Optional,  Not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.\",\"maxLength\":100,\"minLength\":0,\"title\":\"Street Line 2\",\"type\":\"string\"}},\"required\":[\"city\",\"country\",\"postalCode\",\"stateOrProvince\",\"streetLine1\"],\"title\":\"Address\",\"type\":\"object\"},\"companyName\":{\"description\":\"The name of the company where the shipment is being delivered.\",\"title\":\"Company Name\",\"type\":\"string\"},\"contactEmail\":{\"description\":\"The email address of the person receiving the shipment\",\"title\":\"Contact Email\",\"type\":\"string\"},\"contactFirstName\":{\"description\":\"The first name of the bulk shipment contact person.\",\"title\":\"First Name\",\"type\":\"string\"},\"contactLastName\":{\"description\":\"The last name of the bulk shipment contact person.\",\"title\":\"Last Name\",\"type\":\"string\"},\"contactMobileNumber\":{\"description\":\"The phone number of the person receiving the shipment\",\"title\":\"Contact Mobile Number\",\"type\":\"string\"}},\"required\":[\"address\",\"contactFirstName\",\"contactLastName\"],\"title\":\"Bulk Shipping Details\",\"type\":\"object\"},\"deliveryDate\":{\"description\":\"Optional. Specify the date to deliver the reward to the recipient. It must be at least 7 days in the future. If not specified, the reward will be immediately send.\",\"title\":\"Delivery Date\",\"type\":\"string\"},\"deliveryMethod\":{\"default\":\"EMAIL\",\"description\":\"Specify delivery method for the line item\",\"enum\":[\"NONE\",\"EMAIL\",\"PHONE\",\"ADDRESS\",\"EMBEDDED\",\"EMBEDDED_COMPONENT\",\"WHATSAPP\"],\"title\":\"Delivery Method\",\"type\":\"string\"},\"emailSubject\":{\"description\":\"Optional. If not specified, a default email subject will be used for the specified reward.\",\"title\":\"subject\",\"type\":\"string\"},\"etid\":{\"description\":\"Optional. Used with deliveryMethod of EMAIL or PHONE. The unique identifier for the electronic template you would like to use. If not specified, the system will use the default etid.\",\"example\":\"E000000\",\"pattern\":\"^[eE][\\\\d]{6}$\",\"title\":\"Email Template Identifier\",\"type\":\"string\"},\"expirationDate\":{\"description\":\"Optional for Promo Links, the exact calendar date the Promo Link will expire.\",\"title\":\"Expiration Date\",\"type\":\"string\"},\"externalRefLineItemID\":{\"description\":\"Required. Idempotent field that can be used for client-side order line item cross reference and used to map failed and success line items on client side.\",\"maxLength\":100,\"minLength\":0,\"title\":\"External Reference Line Item ID\",\"type\":\"string\"},\"lineItemNote\":{\"description\":\"Optional line item notes (up to 150 characters)\",\"maxLength\":150,\"minLength\":0,\"title\":\"Notes\",\"type\":\"string\"},\"message\":{\"description\":\"optional gift message\",\"title\":\"Message\",\"type\":\"string\"},\"ptid\":{\"description\":\"Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page.\",\"pattern\":\"^[pP][\\\\d]+$\",\"title\":\"Physical Delivery Template Identifier\",\"type\":\"string\"},\"quantity\":{\"default\":1,\"description\":\"The number of rewards to send to the recipient\",\"format\":\"int32\",\"minimum\":1,\"title\":\"Rewards quantity\",\"type\":\"integer\"},\"recipient\":{\"description\":\"Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. Use to set and store the recipient’s contact information. When deliveryMethod is NONE or EMBEDDED, setting these parameters will allow the platform to store this information for reporting, auditing, and reconciliation.\",\"properties\":{\"address\":{\"description\":\"Required if deliveryMethod is ADDRESS. May be required for some UTIDs. This field is optional for digital orders, NOTE: Some digital cash options may require including an address.\",\"properties\":{\"city\":{\"description\":\"Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 30 characters, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, hyphen, ampersand, and apostrophe.\",\"maxLength\":60,\"minLength\":0,\"title\":\"City\",\"type\":\"string\"},\"companyName\":{\"description\":\"Optional, Typically used when shipping to a corporate address.\",\"title\":\"Company Name\",\"type\":\"string\"},\"country\":{\"description\":\"Required if deliveryMethod is ADDRESS, not applicable for digital rewards.\",\"maxLength\":2,\"minLength\":2,\"title\":\"Country Code\",\"type\":\"string\"},\"postalCode\":{\"description\":\"Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 5 characters, not blank, Digits 0-9 and alpha (a-z, A-Z). For US addresses this must include the five digit US ZIP Code only.\",\"maxLength\":12,\"minLength\":0,\"title\":\"Postal Code\",\"type\":\"string\"},\"stateOrProvince\":{\"description\":\"Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Address region must be a valid 2-character uppercase abbreviation for a U.S. state, territory, or military base; a Canadian province; or contain an international region less than 36 characters.\",\"maxLength\":60,\"minLength\":0,\"title\":\"State or Province\",\"type\":\"string\"},\"streetLine1\":{\"description\":\"Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.\",\"maxLength\":200,\"minLength\":0,\"title\":\"Street Line 1\",\"type\":\"string\"},\"streetLine2\":{\"description\":\"Optional if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.\",\"maxLength\":100,\"minLength\":0,\"title\":\"Street Line 2\",\"type\":\"string\"}},\"title\":\"Recipient Address\",\"type\":\"object\"},\"email\":{\"description\":\"Required if deliveryMethod is EMAIL. May be required for some UTIDs.  It is useful to include when deliveryMethod is PHONE to easily switch between email and phone delivery\",\"title\":\"Email\",\"type\":\"string\"},\"firstName\":{\"description\":\"Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use < or > or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.\",\"title\":\"First Name\",\"type\":\"string\"},\"lastName\":{\"description\":\"Required if deliveryMethod is ADDRESS, otherwise optional. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use < or > or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.\",\"title\":\"Last Name\",\"type\":\"string\"},\"mobileNumber\":{\"description\":\"Required if deliveryMethod is PHONE. May be required for some UTIDs. Format: +CCCPPPPPPPPPPPP (where C is the country code, 1-3 digits, and P is the phone number, up to 12 digits). Follows ITU E.164, allowing (+) and up to 15 digits for the combined country code and phone number.\",\"title\":\"Mobile Number\",\"type\":\"string\"}},\"title\":\"Recipient Details\",\"type\":\"object\"},\"shippingMethod\":{\"description\":\"Enumeration for the selected shipping method. Required for deliveryMethod of ADDRESS or BULKSHIPMENT.\",\"enum\":[\"upsground\",\"upsgroundsignature\",\"ups2ndday\",\"ups2nddaysignature\",\"upsnextday\",\"upsnextdaysignature\",\"uspspriority\",\"uspsprioritysig\",\"usps1stclass\"],\"title\":\"Shipping Method\",\"type\":\"string\"},\"utid\":{\"description\":\"the unique identifier for the reward you are sending as provided in the Get Catalog call\",\"pattern\":\"^[uU][\\\\d]+$\",\"title\":\"Unique Tango Card Identifier\",\"type\":\"string\"}},\"required\":[\"amount\",\"deliveryMethod\",\"externalRefLineItemID\",\"recipient\",\"utid\"],\"type\":\"object\"},\"title\":\"LineItem/s\",\"type\":\"array\"},\"notes\":{\"description\":\"Optional order notes. Must be between 0 and 1024 characters in length.\",\"maxLength\":1024,\"minLength\":0,\"title\":\"Notes\",\"type\":\"string\"},\"purchaseOrderNumber\":{\"description\":\"The Purchase Order Number associated with this order.\",\"title\":\"Purchase Order Number\",\"type\":\"string\"},\"sender\":{\"description\":\"Optional.  Use to set the sender’s name and email address if different than the default platform setting.\",\"properties\":{\"email\":{\"description\":\"always optional\",\"title\":\"Email\",\"type\":\"string\"},\"firstName\":{\"description\":\"always optional (100 character max)\",\"title\":\"First Name\",\"type\":\"string\"},\"lastName\":{\"description\":\"always optional (100 character max)\",\"title\":\"Last Name\",\"type\":\"string\"}},\"title\":\"Sender Details\",\"type\":\"object\"}},\"required\":[\"accountIdentifier\",\"customerIdentifier\",\"externalRefID\",\"lineItems\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"duplicateLineItemRefIds\":{\"additionalProperties\":{\"format\":\"int32\",\"type\":\"integer\"},\"description\":\"If any duplicate duplicateLineItemRefIds exist in the request\",\"title\":\"Duplicate line item ref ids\",\"type\":\"object\"},\"externalRefID\":{\"description\":\"Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.\",\"title\":\"External Reference ID\",\"type\":\"string\"},\"failedLineItems\":{\"description\":\"Failed line items list (business validations)\",\"items\":{\"properties\":{\"errors\":{\"items\":{\"properties\":{\"errorCodeName\":{\"type\":\"string\"},\"errorCodeValue\":{\"format\":\"int32\",\"type\":\"integer\"},\"field\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"externalRefLineItemID\":{\"type\":\"string\"},\"lineItemId\":{\"type\":\"string\"},\"utid\":{\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Failed line items\",\"type\":\"array\"},\"status\":{\"description\":\"This status reflects about cart status or validation status based on the processing\",\"title\":\"Order status\",\"type\":\"string\"},\"totalLineItems\":{\"description\":\"Total number of line items submitted in the request\",\"format\":\"int32\",\"title\":\"Total number of line items submitted\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"202\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/200/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Accepted\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"402\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Insufficient Funds\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unprocessable Entity\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Exceeded the allowable TPS rate limit\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/asyncOrders"
+          segments: [
+            {
+              lit: "asyncOrders"
+            }
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "account_identifier"
+                orig: "account_identifier"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "campaign"
+                orig: "campaign"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "currency_code"
+                orig: "currency_code"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "customer_identifier"
+                orig: "customer_identifier"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "delivery_method"
+                orig: "delivery_method"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "elements_per_block"
+                orig: "elements_per_block"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "end_date"
+                orig: "end_date"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "external_ref_id"
+                orig: "external_ref_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "line_item_note"
+                orig: "line_item_note"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "line_item_status"
+                orig: "line_item_status"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "max_amount"
+                orig: "max_amount"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "max_result"
+                orig: "max_result"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "min_amount"
+                orig: "min_amount"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "next_cursor"
+                orig: "next_cursor"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "note"
+                orig: "note"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "order_status"
+                orig: "order_status"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "prev_cursor"
+                orig: "prev_cursor"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "ptid"
+                orig: "ptid"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "purchase_order_number"
+                orig: "purchase_order_number"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "recipient_email"
+                orig: "recipient_email"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "recipient_first_name"
+                orig: "recipient_first_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "recipient_last_name"
+                orig: "recipient_last_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "recipient_mobile_number"
+                orig: "recipient_mobile_number"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "reward_name"
+                orig: "reward_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "send_email"
+                orig: "send_email"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "sender_email"
+                orig: "sender_email"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "sender_first_name"
+                orig: "sender_first_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "sender_last_name"
+                orig: "sender_last_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "start_date"
+                orig: "start_date"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "utid"
+                orig: "utid"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /asyncOrders"
+            json: "{\"operationId\":\"listAsyncOrders\",\"parameters\":[{\"description\":\"specify the account to be queried.\",\"in\":\"query\",\"name\":\"accountIdentifier\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the customer to be queried\",\"in\":\"query\",\"name\":\"customerIdentifier\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the external reference ID to be queried\",\"in\":\"query\",\"name\":\"externalRefID\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the starting date or date time to be queried according to RFC 3339, i.e. \\\"2016-01-01\\\" or \\\"2016-01-01T00:00:00Z\\\". See https://www.ietf.org/rfc/rfc3339.txt\\n\",\"in\":\"query\",\"name\":\"startDate\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the ending date or date time to be queried according to RFC 3339, i.e. \\\"2016-01-01\\\" or \\\"2016-01-01T00:00:00Z\\\". See https://www.ietf.org/rfc/rfc3339.txt\\n\",\"in\":\"query\",\"name\":\"endDate\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the number of maxResults per page.\",\"in\":\"query\",\"name\":\"maxResults\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the number of elements in a block.\",\"in\":\"query\",\"name\":\"elementsPerBlock\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the page number to return.\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the minimum face value of the reward to be queried.\",\"in\":\"query\",\"name\":\"minAmount\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the maximum face value of the reward to be queried.\",\"in\":\"query\",\"name\":\"maxAmount\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the currency code of the reward to be queried.\",\"in\":\"query\",\"name\":\"currencyCode\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the unique identifier of the reward to be queried.\",\"in\":\"query\",\"name\":\"utid\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the unique identifier of the physical delivery template to be queried.\",\"in\":\"query\",\"name\":\"ptid\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the reward name of the reward to be queried.\",\"in\":\"query\",\"name\":\"rewardName\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the sender's first name to be queried.\",\"in\":\"query\",\"name\":\"senderFirstName\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the sender's last name to be queried.\",\"in\":\"query\",\"name\":\"senderLastName\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the sender email address to be queried.\",\"in\":\"query\",\"name\":\"senderEmail\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the recipient's email address to be queried.\",\"in\":\"query\",\"name\":\"recipientEmail\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the recipient's mobile number to be queried.\",\"in\":\"query\",\"name\":\"recipientMobileNumber\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the recipient's first name to be queried.\",\"in\":\"query\",\"name\":\"recipientFirstName\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the recipient's last name to be queried.\",\"in\":\"query\",\"name\":\"recipientLastName\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"deprecated\":true,\"description\":\"specify if sendEmail is true or false to be queried.\",\"in\":\"query\",\"name\":\"sendEmail\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the delivery method to be queried.\",\"in\":\"query\",\"name\":\"deliveryMethod\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the order status to be queried.\",\"in\":\"query\",\"name\":\"orderStatus\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the line item status to be queried.\",\"in\":\"query\",\"name\":\"lineItemStatus\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the campaign to be queried.\",\"in\":\"query\",\"name\":\"campaign\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the notes to be queried.\",\"in\":\"query\",\"name\":\"notes\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the notes to be queried.\",\"in\":\"query\",\"name\":\"lineItemNotes\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the purchaseOrderNumber to be queried.\",\"in\":\"query\",\"name\":\"purchaseOrderNumber\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"prevCursor\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"nextCursor\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"maxResults\":{\"description\":\"Maximum number of results per page\",\"format\":\"int64\",\"type\":\"integer\"},\"nextCursor\":{\"description\":\"Cursor for the next page of results\",\"type\":\"string\"},\"nextPageAvailable\":{\"description\":\"Indicates if a next page is available\",\"type\":\"boolean\"},\"orders\":{\"items\":{\"properties\":{\"accountIdentifier\":{\"title\":\"Account Identifier\",\"type\":\"string\"},\"accountNumber\":{\"title\":\"Account Number\",\"type\":\"string\"},\"amountCharged\":{\"description\":\"Initial value and the total charged amount on the account\",\"properties\":{\"currencyCode\":{\"type\":\"string\"},\"shippingFee\":{\"type\":\"number\"},\"total\":{\"type\":\"number\"},\"value\":{\"type\":\"number\"}},\"type\":\"object\"},\"campaign\":{\"title\":\"Reward Campaign\",\"type\":\"string\"},\"createdAt\":{\"title\":\"Created Date\",\"type\":\"string\"},\"customerIdentifier\":{\"title\":\"Customer Identifier\",\"type\":\"string\"},\"externalRefID\":{\"title\":\"External Reference ID\",\"type\":\"string\"},\"fulfillBy\":{\"title\":\"fulfill By\",\"type\":\"string\"},\"notes\":{\"title\":\"Notes\",\"type\":\"string\"},\"orderStatus\":{\"title\":\"Order Status\",\"type\":\"string\"},\"purchaseOrderNumber\":{\"title\":\"Purchase Order Number\",\"type\":\"string\"},\"referenceOrderID\":{\"title\":\"Reference Order ID\",\"type\":\"string\"},\"sender\":{\"properties\":{\"address\":{\"properties\":{\"city\":{\"type\":\"string\"},\"companyName\":{\"type\":\"string\"},\"country\":{\"type\":\"string\"},\"postalCode\":{\"type\":\"string\"},\"stateOrProvince\":{\"type\":\"string\"},\"streetLine1\":{\"type\":\"string\"},\"streetLine2\":{\"type\":[\"string\",\"null\"]}},\"type\":\"object\"},\"email\":{\"type\":\"string\"},\"firstName\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"mobileNumber\":{\"type\":\"string\"}},\"title\":\"Sender Details\",\"type\":\"object\"},\"totalLineItemsRows\":{\"format\":\"int64\",\"title\":\"Total Line Items for Order\",\"type\":\"integer\"}},\"required\":[\"accountIdentifier\",\"accountNumber\",\"campaign\",\"createdAt\",\"customerIdentifier\",\"referenceOrderID\"],\"type\":\"object\"},\"title\":\"Order elements for the current page\",\"type\":\"array\"},\"prevCursor\":{\"description\":\"Cursor for the previous page of results\",\"type\":\"string\"},\"prevPageAvailable\":{\"description\":\"Indicates if a previous page is available\",\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/asyncOrders"
+          segments: [
+            {
+              lit: "asyncOrders"
+            }
+          ]
+          select: {
+            exist: [
+              "account_identifier"
+              "campaign"
+              "currency_code"
+              "customer_identifier"
+              "delivery_method"
+              "elements_per_block"
+              "end_date"
+              "external_ref_id"
+              "line_item_note"
+              "line_item_status"
+              "max_amount"
+              "max_result"
+              "min_amount"
+              "next_cursor"
+              "note"
+              "order_status"
+              "page"
+              "prev_cursor"
+              "ptid"
+              "purchase_order_number"
+              "recipient_email"
+              "recipient_first_name"
+              "recipient_last_name"
+              "recipient_mobile_number"
+              "reward_name"
+              "send_email"
+              "sender_email"
+              "sender_first_name"
+              "sender_last_name"
+              "start_date"
+              "utid"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.orders`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

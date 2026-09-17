@@ -2,63 +2,151 @@
   "existing": {
     "order": {
       "ORDER00": {
-        "accountIdentifier": "s6e",
-        "amount": 111,
-        "campaign": "s70",
-        "created": "s71",
-        "customerIdentifier": "s72",
+        "accountIdentifier": "s154",
+        "accountNumber": "s155",
+        "amount": 342,
+        "amountCharged": {},
+        "asyncOrderEntity": {},
+        "campaign": "s159",
+        "createdAt": "s15a",
+        "customFields": {},
+        "customerIdentifier": "s15c",
+        "deliveryMethod": "s15d",
+        "denomination": {},
+        "emailSubject": "s15f",
+        "etid": "s160",
+        "expirationDate": "s161",
+        "externalRefID": "s162",
+        "id": "ORDER00",
+        "lineItemStatus": "s164",
+        "message": "s165",
+        "notes": "s166",
+        "orderClientSource": "s167",
+        "orderExternalRefIdDupe": true,
+        "orderStatus": "s169",
+        "ptid": "s16a",
+        "purchaseOrderNumber": "s16b",
         "recipient": {},
-        "referenceOrderID": "s74",
-        "rewardName": "s75",
+        "redemptionInstructions": "s16d",
+        "referenceLineItemID": "s16e",
+        "referenceOrderID": "s16f",
+        "reward": {},
+        "rewardName": "s171",
         "sendEmail": true,
-        "status": "s77",
-        "utid": "s78",
-        "id": "ORDER00"
+        "sender": {},
+        "status": "s174",
+        "utid": "s175"
       },
       "ORDER01": {
-        "accountIdentifier": "sdc",
-        "amount": 221,
-        "campaign": "sde",
-        "created": "sdf",
-        "customerIdentifier": "se0",
+        "accountIdentifier": "s2a8",
+        "accountNumber": "s2a9",
+        "amount": 682,
+        "amountCharged": {},
+        "asyncOrderEntity": {},
+        "campaign": "s2ad",
+        "createdAt": "s2ae",
+        "customFields": {},
+        "customerIdentifier": "s2b0",
+        "deliveryMethod": "s2b1",
+        "denomination": {},
+        "emailSubject": "s2b3",
+        "etid": "s2b4",
+        "expirationDate": "s2b5",
+        "externalRefID": "s2b6",
+        "id": "ORDER01",
+        "lineItemStatus": "s2b8",
+        "message": "s2b9",
+        "notes": "s2ba",
+        "orderClientSource": "s2bb",
+        "orderExternalRefIdDupe": true,
+        "orderStatus": "s2bd",
+        "ptid": "s2be",
+        "purchaseOrderNumber": "s2bf",
         "recipient": {},
-        "referenceOrderID": "se2",
-        "rewardName": "se3",
+        "redemptionInstructions": "s2c1",
+        "referenceLineItemID": "s2c2",
+        "referenceOrderID": "s2c3",
+        "reward": {},
+        "rewardName": "s2c5",
         "sendEmail": true,
-        "status": "se5",
-        "utid": "se6",
-        "id": "ORDER01"
+        "sender": {},
+        "status": "s2c8",
+        "utid": "s2c9"
       },
       "ORDER02": {
-        "accountIdentifier": "s14a",
-        "amount": 331,
-        "campaign": "s14c",
-        "created": "s14d",
-        "customerIdentifier": "s14e",
+        "accountIdentifier": "s3fc",
+        "accountNumber": "s3fd",
+        "amount": 1022,
+        "amountCharged": {},
+        "asyncOrderEntity": {},
+        "campaign": "s401",
+        "createdAt": "s402",
+        "customFields": {},
+        "customerIdentifier": "s404",
+        "deliveryMethod": "s405",
+        "denomination": {},
+        "emailSubject": "s407",
+        "etid": "s408",
+        "expirationDate": "s409",
+        "externalRefID": "s40a",
+        "id": "ORDER02",
+        "lineItemStatus": "s40c",
+        "message": "s40d",
+        "notes": "s40e",
+        "orderClientSource": "s40f",
+        "orderExternalRefIdDupe": true,
+        "orderStatus": "s411",
+        "ptid": "s412",
+        "purchaseOrderNumber": "s413",
         "recipient": {},
-        "referenceOrderID": "s150",
-        "rewardName": "s151",
+        "redemptionInstructions": "s415",
+        "referenceLineItemID": "s416",
+        "referenceOrderID": "s417",
+        "reward": {},
+        "rewardName": "s419",
         "sendEmail": true,
-        "status": "s153",
-        "utid": "s154",
-        "id": "ORDER02"
+        "sender": {},
+        "status": "s41c",
+        "utid": "s41d"
       }
     }
   },
   "new": {
     "order": {
       "order_ref01": {
-        "accountIdentifier": "s1b8",
-        "amount": 441,
-        "campaign": "s1ba",
-        "created": "s1bb",
-        "customerIdentifier": "s1bc",
+        "accountIdentifier": "s550",
+        "accountNumber": "s551",
+        "amount": 1362,
+        "amountCharged": {},
+        "asyncOrderEntity": {},
+        "campaign": "s555",
+        "createdAt": "s556",
+        "customFields": {},
+        "customerIdentifier": "s558",
+        "deliveryMethod": "s559",
+        "denomination": {},
+        "emailSubject": "s55b",
+        "etid": "s55c",
+        "expirationDate": "s55d",
+        "externalRefID": "s55e",
+        "lineItemStatus": "s560",
+        "message": "s561",
+        "notes": "s562",
+        "orderClientSource": "s563",
+        "orderExternalRefIdDupe": true,
+        "orderStatus": "s565",
+        "ptid": "s566",
+        "purchaseOrderNumber": "s567",
         "recipient": {},
-        "referenceOrderID": "s1be",
-        "rewardName": "s1bf",
+        "redemptionInstructions": "s569",
+        "referenceLineItemID": "s56a",
+        "referenceOrderID": "s56b",
+        "reward": {},
+        "rewardName": "s56d",
         "sendEmail": true,
-        "status": "s1c1",
-        "utid": "s1c2"
+        "sender": {},
+        "status": "s570",
+        "utid": "s571"
       }
     }
   },
@@ -75,42 +163,220 @@
               "schema": {
                 "properties": {
                   "accountIdentifier": {
+                    "description": "Specify the account this order will be deducted from",
+                    "pattern": "^[-a-zA-Z0-9]{5,100}$",
+                    "title": "Account Identifier",
                     "type": "string"
                   },
                   "amount": {
+                    "description": "Specify the face value of of the reward. Always required, including for fixed value items.",
+                    "minimum": 0,
+                    "title": "Amount",
                     "type": "number"
                   },
                   "campaign": {
+                    "description": "Optional. Campaign that may be used to administratively categorize a specific order. Must be between 0 and 1024 characters in length.",
+                    "maxLength": 1024,
+                    "minLength": 0,
+                    "title": "Campaign",
                     "type": "string"
                   },
+                  "customFields": {
+                    "additionalProperties": {},
+                    "description": "Optional. A map of custom field key-value pairs configured at the account level for your platform. Only fields that have been configured for the account are accepted — any fields passed that are not configured will be silently ignored. Fields marked as required in the configuration must be provided; omitting a required field will result in a validation error. Fields marked as optional may be omitted. If no custom fields have been configured for the account, this property can be omitted entirely.",
+                    "title": "Custom Fields",
+                    "type": "object"
+                  },
                   "customerIdentifier": {
+                    "description": "Specify the customer associated with the order. Must be the customer the accountIdentifier is associated with.",
+                    "pattern": "^[-a-zA-Z0-9]{5,100}$",
+                    "title": "Customer Identifier",
+                    "type": "string"
+                  },
+                  "deliveryMethod": {
+                    "default": "EMAIL",
+                    "description": "Specify delivery method for the order",
+                    "enum": [
+                      "NONE",
+                      "EMAIL",
+                      "PHONE",
+                      "ADDRESS",
+                      "EMBEDDED",
+                      "EMBEDDED_COMPONENT",
+                      "WHATSAPP"
+                    ],
+                    "title": "Delivery Method",
+                    "type": "string"
+                  },
+                  "emailSubject": {
+                    "description": "Optional. Used with deliveryMethod is EMAIL. The ETID email subject will be used for the specified reward if not specified.",
+                    "title": "Email subject",
+                    "type": "string"
+                  },
+                  "etid": {
+                    "description": "Optional. Used with deliveryMethod of EMAIL or PHONE. The unique identifier for the electronic template you would like to use. If not specified, the system will use the default etid.",
+                    "example": "E000000",
+                    "pattern": "^[eE][\\d]{6}$",
+                    "title": "Email Template Identifier",
+                    "type": "string"
+                  },
+                  "expirationDate": {
+                    "description": "Optional for Promo Links, the exact calendar date the Promo Link will expire.",
+                    "title": "Expiration Date",
+                    "type": "string"
+                  },
+                  "externalRefID": {
+                    "description": "Optional. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response, order details, and order history.",
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "title": "External Reference ID",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "Optional gift message",
+                    "title": "Message",
+                    "type": "string"
+                  },
+                  "notes": {
+                    "description": "Optional order notes. Must be between 0 and 1024 characters in length.",
+                    "maxLength": 1024,
+                    "minLength": 0,
+                    "title": "Notes",
+                    "type": "string"
+                  },
+                  "ptid": {
+                    "description": "Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page.",
+                    "pattern": "^[pP][\\d]+$",
+                    "title": "Physical Delivery Template Identifier",
+                    "type": "string"
+                  },
+                  "purchaseOrderNumber": {
+                    "description": "The Purchase Order Number associated with this order.",
+                    "title": "Purchase Order Number",
                     "type": "string"
                   },
                   "recipient": {
+                    "description": "Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. May be required for some UTIDs. Use to set and store the recipient’s contact information. When deliveryMethod is NONE or EMBEDDED, setting these parameters will allow the platform to store this information for reporting, auditing, and reconciliation.",
                     "properties": {
+                      "address": {
+                        "description": "Required if deliveryMethod is ADDRESS. May be required for some UTIDs. This field is optional for digital orders, NOTE: Some digital cash options may require including an address.",
+                        "properties": {
+                          "city": {
+                            "description": "Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 30 characters, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, hyphen, ampersand, and apostrophe.",
+                            "maxLength": 60,
+                            "minLength": 0,
+                            "title": "City",
+                            "type": "string"
+                          },
+                          "companyName": {
+                            "description": "Optional, Typically used when shipping to a corporate address.",
+                            "title": "Company Name",
+                            "type": "string"
+                          },
+                          "country": {
+                            "description": "Required if deliveryMethod is ADDRESS, not applicable for digital rewards.",
+                            "maxLength": 2,
+                            "minLength": 2,
+                            "title": "Country Code",
+                            "type": "string"
+                          },
+                          "postalCode": {
+                            "description": "Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 5 characters, not blank, Digits 0-9 and alpha (a-z, A-Z). For US addresses this must include the five digit US ZIP Code only.",
+                            "maxLength": 12,
+                            "minLength": 0,
+                            "title": "Postal Code",
+                            "type": "string"
+                          },
+                          "stateOrProvince": {
+                            "description": "Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Address region must be a valid 2-character uppercase abbreviation for a U.S. state, territory, or military base; a Canadian province; or contain an international region less than 36 characters.",
+                            "maxLength": 60,
+                            "minLength": 0,
+                            "title": "State or Province",
+                            "type": "string"
+                          },
+                          "streetLine1": {
+                            "description": "Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.",
+                            "maxLength": 200,
+                            "minLength": 0,
+                            "title": "Street Line 1",
+                            "type": "string"
+                          },
+                          "streetLine2": {
+                            "description": "Optional if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.",
+                            "maxLength": 100,
+                            "minLength": 0,
+                            "title": "Street Line 2",
+                            "type": "string"
+                          }
+                        },
+                        "title": "Recipient Address",
+                        "type": "object"
+                      },
                       "email": {
+                        "description": "Required if deliveryMethod is EMAIL. May be required for some UTIDs.  It is useful to include when deliveryMethod is PHONE to easily switch between email and phone delivery",
+                        "title": "Email",
                         "type": "string"
                       },
                       "firstName": {
+                        "description": "Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use < or > or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.",
+                        "title": "First Name",
                         "type": "string"
                       },
                       "lastName": {
+                        "description": "Required if deliveryMethod is ADDRESS, otherwise optional. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use < or > or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.",
+                        "title": "Last Name",
+                        "type": "string"
+                      },
+                      "mobileNumber": {
+                        "description": "Required if deliveryMethod is PHONE. May be required for some UTIDs. Format: +CCCPPPPPPPPPPPP (where C is the country code, 1-3 digits, and P is the phone number, up to 12 digits). Follows ITU E.164, allowing (+) and up to 15 digits for the combined country code and phone number.",
+                        "title": "Mobile Number",
                         "type": "string"
                       }
                     },
+                    "title": "Recipient Details",
                     "type": "object"
                   },
                   "sendEmail": {
+                    "deprecated": true,
+                    "description": "Deprecated Oct 1, 2025. Should Tango Card send the email to the recipient?",
+                    "example": true,
+                    "title": "Send Email",
                     "type": "boolean"
                   },
+                  "sender": {
+                    "description": "Optional.  Use to set the sender’s name and email address if different than the default platform setting.",
+                    "properties": {
+                      "email": {
+                        "description": "always optional",
+                        "title": "Email",
+                        "type": "string"
+                      },
+                      "firstName": {
+                        "description": "always optional (100 character max)",
+                        "title": "First Name",
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "description": "always optional (100 character max)",
+                        "title": "Last Name",
+                        "type": "string"
+                      }
+                    },
+                    "title": "Sender Details",
+                    "type": "object"
+                  },
                   "utid": {
+                    "description": "The unique identifier for the reward you are sending as provided in the Get Catalog call",
+                    "pattern": "^[uU][\\d]+$",
+                    "title": "Unique Tango Card Identifier",
                     "type": "string"
                   }
                 },
                 "required": [
                   "accountIdentifier",
-                  "customerIdentifier",
                   "amount",
+                  "customerIdentifier",
+                  "deliveryMethod",
                   "utid"
                 ],
                 "type": "object"
@@ -125,22 +391,301 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "amount": {
-                      "type": "number"
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
                     },
-                    "created": {
+                    "amountCharged": {
+                      "properties": {
+                        "currencyCode": {
+                          "type": "string"
+                        },
+                        "exchangeRate": {
+                          "type": "number"
+                        },
+                        "fee": {
+                          "type": "number"
+                        },
+                        "total": {
+                          "type": "number"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      },
+                      "title": "Amount Charged",
+                      "type": "object"
+                    },
+                    "campaign": {
+                      "title": "Reward Campaign",
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "title": "Created Date",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    },
+                    "deliveryMethod": {
+                      "enum": [
+                        "NONE",
+                        "EMAIL",
+                        "PHONE",
+                        "ADDRESS",
+                        "EMBEDDED",
+                        "BULKSHIPMENT",
+                        "QRCODE",
+                        "BULKDIGITAL",
+                        "EMBEDDED_COMPONENT",
+                        "WHATSAPP"
+                      ],
+                      "title": "Delivery Method",
+                      "type": "string"
+                    },
+                    "denomination": {
+                      "properties": {
+                        "$ref": "#/responses/200/content/application~1json/schema/properties/amountCharged/properties"
+                      },
+                      "title": "Denomination",
+                      "type": "object"
+                    },
+                    "emailSubject": {
+                      "title": "Email Subject",
+                      "type": "string"
+                    },
+                    "externalRefID": {
+                      "title": "External Reference ID",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Email Message",
+                      "type": "string"
+                    },
+                    "ptid": {
+                      "title": "Ptid - Unique Printed Reward Link Template ID.",
+                      "type": "string"
+                    },
+                    "purchaseOrderNumber": {
+                      "title": "Purchase Order Number",
+                      "type": "string"
+                    },
+                    "recipient": {
+                      "properties": {
+                        "address": {
+                          "properties": {
+                            "city": {
+                              "title": "City",
+                              "type": "string"
+                            },
+                            "companyName": {
+                              "title": "Company Name",
+                              "type": "string"
+                            },
+                            "country": {
+                              "title": "Country Code",
+                              "type": "string"
+                            },
+                            "postalCode": {
+                              "title": "Postal Code",
+                              "type": "string"
+                            },
+                            "stateOrProvince": {
+                              "title": "State or Province",
+                              "type": "string"
+                            },
+                            "streetLine1": {
+                              "title": "Street Line 1",
+                              "type": "string"
+                            },
+                            "streetLine2": {
+                              "title": "Street Line 2",
+                              "type": "string"
+                            }
+                          },
+                          "title": "Address",
+                          "type": "object"
+                        },
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "title": "Last Name",
+                          "type": "string"
+                        },
+                        "mobileNumber": {
+                          "title": "Mobile Number",
+                          "type": "string"
+                        }
+                      },
+                      "title": "Recipient Details",
+                      "type": "object"
+                    },
+                    "redemptionInstructions": {
+                      "title": "Redemption Instructions",
+                      "type": "string"
+                    },
+                    "referenceLineItemID": {
+                      "title": "Reference Line Item ID",
                       "type": "string"
                     },
                     "referenceOrderID": {
+                      "title": "Reference Order ID",
                       "type": "string"
+                    },
+                    "reward": {
+                      "properties": {
+                        "credentialList": {
+                          "items": {
+                            "properties": {
+                              "credentialType": {
+                                "type": "string"
+                              },
+                              "label": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "title": "Verbose list of credentials",
+                          "type": "array"
+                        },
+                        "credentials": {
+                          "title": "Credentials as a map with String label key and credential value String",
+                          "type": "string"
+                        },
+                        "redemptionInstructions": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "credentials"
+                      ],
+                      "title": "The Reward",
+                      "type": "object"
                     },
                     "rewardName": {
+                      "title": "Reward Name",
                       "type": "string"
                     },
+                    "sendEmail": {
+                      "deprecated": true,
+                      "title": "Send Email?",
+                      "type": "boolean"
+                    },
+                    "sender": {
+                      "properties": {
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "title": "Last Name",
+                          "type": "string"
+                        }
+                      },
+                      "title": "Sender Details",
+                      "type": "object"
+                    },
                     "status": {
+                      "title": "Reward Status",
                       "type": "string"
                     },
                     "utid": {
+                      "title": "Utid - Unique Tango Card ID.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "amountCharged",
+                    "campaign",
+                    "createdAt",
+                    "customerIdentifier",
+                    "denomination",
+                    "emailSubject",
+                    "externalRefID",
+                    "message",
+                    "recipient",
+                    "referenceLineItemID",
+                    "referenceOrderID",
+                    "reward",
+                    "rewardName",
+                    "sender",
+                    "status",
+                    "utid"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK / Existing order found for given external ref ID"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/200/content/application~1json/schema/properties"
+                  },
+                  "required": {
+                    "$ref": "#/responses/200/content/application~1json/schema/required"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
                       "type": "string"
                     }
                   },
@@ -148,17 +693,116 @@
                 }
               }
             },
-            "description": "The created order"
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "402": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Insufficient Funds"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict; Duplicate Exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Exceeded the allowable TPS rate limit"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "security": [
           {
             "basicAuth": []
+          },
+          {
+            "bearerToken": []
           }
         ],
         "securitySchemes": {
           "basicAuth": {
             "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
             "type": "http"
           }
         },
@@ -171,19 +815,314 @@
         "operationId": "listOrders",
         "parameters": [
           {
+            "description": "specify the account to be queried.",
             "in": "query",
-            "name": "offset",
+            "name": "accountIdentifier",
             "required": false,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the customer to be queried",
+            "in": "query",
+            "name": "customerIdentifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the external reference ID to be queried",
+            "in": "query",
+            "name": "externalRefID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the starting date or date time to be queried according to RFC 3339, i.e. \"2016-01-01\" or \"2016-01-01T00:00:00Z\". See https://www.ietf.org/rfc/rfc3339.txt\n",
+            "in": "query",
+            "name": "startDate",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the ending date or date time to be queried according to RFC 3339, i.e. \"2016-01-01\" or \"2016-01-01T00:00:00Z\". See https://www.ietf.org/rfc/rfc3339.txt\n",
+            "in": "query",
+            "name": "endDate",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the number of elements in a block.",
+            "in": "query",
+            "name": "elementsPerBlock",
+            "required": false,
+            "schema": {
+              "format": "int32",
               "type": "integer"
             }
           },
           {
+            "description": "specify the page number to return.",
             "in": "query",
-            "name": "limit",
+            "name": "page",
             "required": false,
             "schema": {
+              "format": "int32",
               "type": "integer"
+            }
+          },
+          {
+            "description": "specify the minimum face value of the reward to be queried.",
+            "in": "query",
+            "name": "minAmount",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "specify the maximum face value of the reward to be queried.",
+            "in": "query",
+            "name": "maxAmount",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "specify the currency code of the reward to be queried.",
+            "in": "query",
+            "name": "currencyCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the unique identifier of the reward to be queried.",
+            "in": "query",
+            "name": "utid",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the unique identifier of the physical delivery template to be queried.",
+            "in": "query",
+            "name": "ptid",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the reward name of the reward to be queried.",
+            "in": "query",
+            "name": "rewardName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the sender's first name to be queried.",
+            "in": "query",
+            "name": "senderFirstName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the sender's last name to be queried.",
+            "in": "query",
+            "name": "senderLastName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the sender email address to be queried.",
+            "in": "query",
+            "name": "senderEmail",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the recipient's email address to be queried.",
+            "in": "query",
+            "name": "recipientEmail",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the recipient's mobile number to be queried.",
+            "in": "query",
+            "name": "recipientMobileNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the recipient's first name to be queried.",
+            "in": "query",
+            "name": "recipientFirstName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the recipient's last name to be queried.",
+            "in": "query",
+            "name": "recipientLastName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "specify if sendEmail is true or false to be queried.",
+            "in": "query",
+            "name": "sendEmail",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "specify the delivery method to be queried.",
+            "in": "query",
+            "name": "deliveryMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "NONE",
+                "EMAIL",
+                "PHONE",
+                "ADDRESS",
+                "EMBEDDED",
+                "BULKSHIPMENT",
+                "QRCODE",
+                "BULKDIGITAL",
+                "EMBEDDED_COMPONENT",
+                "WHATSAPP"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "specify the status to be queried.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "PENDING",
+                "QUEUED",
+                "PENDING_MR",
+                "ON_HOLD",
+                "CANCELLED",
+                "COMPLETE",
+                "FAILED",
+                "PARTIAL",
+                "DELETED",
+                "PENDING_KYB",
+                "PENDING_PAYMENT"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the order status to be queried.",
+            "in": "query",
+            "name": "orderStatus",
+            "required": false,
+            "schema": {
+              "enum": [
+                "PENDING",
+                "QUEUED",
+                "PENDING_MR",
+                "ON_HOLD",
+                "CANCELLED",
+                "COMPLETE",
+                "FAILED",
+                "PARTIAL",
+                "DELETED",
+                "PENDING_KYB",
+                "PENDING_PAYMENT"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the line item status to be queried.",
+            "in": "query",
+            "name": "lineItemStatus",
+            "required": false,
+            "schema": {
+              "enum": [
+                "COMPLETE",
+                "PENDING",
+                "FAILED",
+                "DELETED",
+                "CANCELLED",
+                "RETURNED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the campaign to be queried.",
+            "in": "query",
+            "name": "campaign",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the notes to be queried.",
+            "in": "query",
+            "name": "notes",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the notes to be queried.",
+            "in": "query",
+            "name": "lineItemNotes",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "specify the purchaseOrderNumber to be queried.",
+            "in": "query",
+            "name": "purchaseOrderNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -197,48 +1136,915 @@
                     "orders": {
                       "items": {
                         "properties": {
-                          "amount": {
-                            "type": "number"
-                          },
-                          "created": {
+                          "accountIdentifier": {
+                            "title": "Account Identifier",
                             "type": "string"
                           },
+                          "accountNumber": {
+                            "title": "Account Number",
+                            "type": "string"
+                          },
+                          "amountCharged": {
+                            "properties": {
+                              "currencyCode": {
+                                "type": "string"
+                              },
+                              "exchangeRate": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              },
+                              "total": {
+                                "type": "number"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "title": "Amount Charged",
+                            "type": "object"
+                          },
+                          "asyncOrderEntity": {
+                            "properties": {
+                              "createdAt": {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "duplicateLineItemRefIds": {
+                                "additionalProperties": {
+                                  "format": "int32",
+                                  "type": "integer"
+                                },
+                                "description": "If any duplicate duplicateLineItemRefIds exist in the request",
+                                "title": "Duplicate line item ref ids",
+                                "type": "object"
+                              },
+                              "externalRefID": {
+                                "description": "Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.",
+                                "title": "External Reference ID",
+                                "type": "string"
+                              },
+                              "failedLineItems": {
+                                "description": "Failed line items list (business validations)",
+                                "items": {
+                                  "properties": {
+                                    "errors": {
+                                      "items": {
+                                        "properties": {
+                                          "errorCodeName": {
+                                            "type": "string"
+                                          },
+                                          "errorCodeValue": {
+                                            "format": "int32",
+                                            "type": "integer"
+                                          },
+                                          "field": {
+                                            "type": "string"
+                                          },
+                                          "message": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "type": "object"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "externalRefLineItemID": {
+                                      "type": "string"
+                                    },
+                                    "lineItemId": {
+                                      "type": "string"
+                                    },
+                                    "utid": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "title": "Failed line items",
+                                "type": "array"
+                              },
+                              "status": {
+                                "description": "This status reflects about cart status or validation status based on the processing",
+                                "title": "Order status",
+                                "type": "string"
+                              },
+                              "totalLineItems": {
+                                "description": "Total number of line items submitted in the request",
+                                "format": "int32",
+                                "title": "Total number of line items submitted",
+                                "type": "integer"
+                              }
+                            },
+                            "title": "Async order entity",
+                            "type": "object"
+                          },
+                          "campaign": {
+                            "title": "Reward Campaign",
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "title": "Created Date",
+                            "type": "string"
+                          },
+                          "customerIdentifier": {
+                            "title": "Customer Identifier",
+                            "type": "string"
+                          },
+                          "deliveryMethod": {
+                            "enum": [
+                              "NONE",
+                              "EMAIL",
+                              "PHONE",
+                              "ADDRESS",
+                              "EMBEDDED",
+                              "BULKSHIPMENT",
+                              "QRCODE",
+                              "BULKDIGITAL",
+                              "EMBEDDED_COMPONENT",
+                              "WHATSAPP"
+                            ],
+                            "title": "Delivery Method",
+                            "type": "string"
+                          },
+                          "denomination": {
+                            "properties": {
+                              "currencyCode": {
+                                "type": "string"
+                              },
+                              "exchangeRate": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              },
+                              "total": {
+                                "type": "number"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "title": "Denomination",
+                            "type": "object"
+                          },
+                          "emailSubject": {
+                            "title": "Email Subject",
+                            "type": "string"
+                          },
+                          "etid": {
+                            "title": "Reward Email Template",
+                            "type": "string"
+                          },
+                          "externalRefID": {
+                            "title": "External Reference ID",
+                            "type": "string"
+                          },
+                          "lineItemStatus": {
+                            "title": "Line Item Status",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Email Message",
+                            "type": "string"
+                          },
+                          "notes": {
+                            "title": "Notes",
+                            "type": "string"
+                          },
+                          "orderClientSource": {
+                            "title": "Order Client Source",
+                            "type": "string"
+                          },
+                          "orderExternalRefIdDupe": {
+                            "title": "Order External Ref Id Dupe",
+                            "type": "boolean"
+                          },
+                          "orderStatus": {
+                            "title": "Order Status",
+                            "type": "string"
+                          },
+                          "ptid": {
+                            "title": "Physical Reward Template Identifier",
+                            "type": "string"
+                          },
+                          "purchaseOrderNumber": {
+                            "title": "Purchase Order Number",
+                            "type": "string"
+                          },
+                          "recipient": {
+                            "properties": {
+                              "address": {
+                                "properties": {
+                                  "city": {
+                                    "title": "City",
+                                    "type": "string"
+                                  },
+                                  "companyName": {
+                                    "title": "Company Name",
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "title": "Country Code",
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "title": "Postal Code",
+                                    "type": "string"
+                                  },
+                                  "stateOrProvince": {
+                                    "title": "State or Province",
+                                    "type": "string"
+                                  },
+                                  "streetLine1": {
+                                    "title": "Street Line 1",
+                                    "type": "string"
+                                  },
+                                  "streetLine2": {
+                                    "title": "Street Line 2",
+                                    "type": "string"
+                                  }
+                                },
+                                "title": "Address",
+                                "type": "object"
+                              },
+                              "email": {
+                                "title": "Email",
+                                "type": "string"
+                              },
+                              "firstName": {
+                                "title": "First Name",
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "title": "Last Name",
+                                "type": "string"
+                              },
+                              "mobileNumber": {
+                                "title": "Mobile Number",
+                                "type": "string"
+                              }
+                            },
+                            "title": "Recipient Details",
+                            "type": "object"
+                          },
                           "referenceOrderID": {
+                            "title": "Reference Order ID",
                             "type": "string"
                           },
                           "rewardName": {
+                            "title": "Reward Name",
                             "type": "string"
                           },
+                          "sendEmail": {
+                            "deprecated": true,
+                            "title": "Send Email?",
+                            "type": "boolean"
+                          },
+                          "sender": {
+                            "properties": {
+                              "email": {
+                                "title": "Email",
+                                "type": "string"
+                              },
+                              "firstName": {
+                                "title": "First Name",
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "title": "Last Name",
+                                "type": "string"
+                              }
+                            },
+                            "title": "Sender Details",
+                            "type": "object"
+                          },
                           "status": {
+                            "title": "Reward Status",
                             "type": "string"
                           },
                           "utid": {
+                            "title": "Utid - Unique Tango Card ID.",
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "accountIdentifier",
+                          "accountNumber",
+                          "amountCharged",
+                          "campaign",
+                          "createdAt",
+                          "customerIdentifier",
+                          "emailSubject",
+                          "etid",
+                          "message",
+                          "referenceOrderID",
+                          "rewardName",
+                          "status",
+                          "utid"
+                        ],
                         "type": "object"
                       },
+                      "title": "Order elements for the current page",
                       "type": "array"
                     },
                     "page": {
+                      "properties": {
+                        "elementsPerBlock": {
+                          "format": "int32",
+                          "title": "Total number of elements per page",
+                          "type": "integer"
+                        },
+                        "number": {
+                          "format": "int32",
+                          "title": "Current page number",
+                          "type": "integer"
+                        },
+                        "resultCount": {
+                          "format": "int32",
+                          "title": "Total number of elements in the current page",
+                          "type": "integer"
+                        },
+                        "totalCount": {
+                          "format": "int64",
+                          "title": "Total number of elements",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "elementsPerBlock",
+                        "number",
+                        "resultCount",
+                        "totalCount"
+                      ],
+                      "title": "Page data for matching orders",
                       "type": "object"
+                    }
+                  },
+                  "required": [
+                    "orders",
+                    "page"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
                     }
                   },
                   "type": "object"
                 }
               }
             },
-            "description": "Orders"
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
           }
         },
         "security": [
           {
             "basicAuth": []
+          },
+          {
+            "bearerToken": []
           }
         ],
         "securitySchemes": {
           "basicAuth": {
             "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /orders/{referenceOrderID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getOrder",
+        "parameters": [
+          {
+            "description": "Reference order ID is returned in the order response payload",
+            "in": "path",
+            "name": "referenceOrderID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "accountNumber": {
+                      "title": "Account Number",
+                      "type": "string"
+                    },
+                    "amountCharged": {
+                      "properties": {
+                        "currencyCode": {
+                          "type": "string"
+                        },
+                        "exchangeRate": {
+                          "type": "number"
+                        },
+                        "fee": {
+                          "type": "number"
+                        },
+                        "total": {
+                          "type": "number"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      },
+                      "title": "Amount Charged",
+                      "type": "object"
+                    },
+                    "asyncOrderEntity": {
+                      "properties": {
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "duplicateLineItemRefIds": {
+                          "additionalProperties": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "description": "If any duplicate duplicateLineItemRefIds exist in the request",
+                          "title": "Duplicate line item ref ids",
+                          "type": "object"
+                        },
+                        "externalRefID": {
+                          "description": "Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.",
+                          "title": "External Reference ID",
+                          "type": "string"
+                        },
+                        "failedLineItems": {
+                          "description": "Failed line items list (business validations)",
+                          "items": {
+                            "properties": {
+                              "errors": {
+                                "items": {
+                                  "properties": {
+                                    "errorCodeName": {
+                                      "type": "string"
+                                    },
+                                    "errorCodeValue": {
+                                      "format": "int32",
+                                      "type": "integer"
+                                    },
+                                    "field": {
+                                      "type": "string"
+                                    },
+                                    "message": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "externalRefLineItemID": {
+                                "type": "string"
+                              },
+                              "lineItemId": {
+                                "type": "string"
+                              },
+                              "utid": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "title": "Failed line items",
+                          "type": "array"
+                        },
+                        "status": {
+                          "description": "This status reflects about cart status or validation status based on the processing",
+                          "title": "Order status",
+                          "type": "string"
+                        },
+                        "totalLineItems": {
+                          "description": "Total number of line items submitted in the request",
+                          "format": "int32",
+                          "title": "Total number of line items submitted",
+                          "type": "integer"
+                        }
+                      },
+                      "title": "Async order entity",
+                      "type": "object"
+                    },
+                    "campaign": {
+                      "title": "Reward Campaign",
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "title": "Created Date",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    },
+                    "deliveryMethod": {
+                      "enum": [
+                        "NONE",
+                        "EMAIL",
+                        "PHONE",
+                        "ADDRESS",
+                        "EMBEDDED",
+                        "BULKSHIPMENT",
+                        "QRCODE",
+                        "BULKDIGITAL",
+                        "EMBEDDED_COMPONENT",
+                        "WHATSAPP"
+                      ],
+                      "title": "Delivery Method",
+                      "type": "string"
+                    },
+                    "denomination": {
+                      "properties": {
+                        "$ref": "#/responses/200/content/application~1json/schema/properties/amountCharged/properties"
+                      },
+                      "title": "Denomination",
+                      "type": "object"
+                    },
+                    "emailSubject": {
+                      "title": "Email Subject",
+                      "type": "string"
+                    },
+                    "etid": {
+                      "title": "Reward Email Template",
+                      "type": "string"
+                    },
+                    "externalRefID": {
+                      "title": "External Reference ID",
+                      "type": "string"
+                    },
+                    "lineItemStatus": {
+                      "title": "Line Item Status",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Email Message",
+                      "type": "string"
+                    },
+                    "notes": {
+                      "title": "Notes",
+                      "type": "string"
+                    },
+                    "orderClientSource": {
+                      "title": "Order Client Source",
+                      "type": "string"
+                    },
+                    "orderExternalRefIdDupe": {
+                      "title": "Order External Ref Id Dupe",
+                      "type": "boolean"
+                    },
+                    "orderStatus": {
+                      "title": "Order Status",
+                      "type": "string"
+                    },
+                    "ptid": {
+                      "title": "Physical Reward Template Identifier",
+                      "type": "string"
+                    },
+                    "purchaseOrderNumber": {
+                      "title": "Purchase Order Number",
+                      "type": "string"
+                    },
+                    "recipient": {
+                      "properties": {
+                        "address": {
+                          "properties": {
+                            "city": {
+                              "title": "City",
+                              "type": "string"
+                            },
+                            "companyName": {
+                              "title": "Company Name",
+                              "type": "string"
+                            },
+                            "country": {
+                              "title": "Country Code",
+                              "type": "string"
+                            },
+                            "postalCode": {
+                              "title": "Postal Code",
+                              "type": "string"
+                            },
+                            "stateOrProvince": {
+                              "title": "State or Province",
+                              "type": "string"
+                            },
+                            "streetLine1": {
+                              "title": "Street Line 1",
+                              "type": "string"
+                            },
+                            "streetLine2": {
+                              "title": "Street Line 2",
+                              "type": "string"
+                            }
+                          },
+                          "title": "Address",
+                          "type": "object"
+                        },
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "title": "Last Name",
+                          "type": "string"
+                        },
+                        "mobileNumber": {
+                          "title": "Mobile Number",
+                          "type": "string"
+                        }
+                      },
+                      "title": "Recipient Details",
+                      "type": "object"
+                    },
+                    "referenceLineItemID": {
+                      "title": "Reference LineItem ID",
+                      "type": "string"
+                    },
+                    "referenceOrderID": {
+                      "title": "Reference Order ID",
+                      "type": "string"
+                    },
+                    "reward": {
+                      "properties": {
+                        "credentialList": {
+                          "items": {
+                            "properties": {
+                              "credentialType": {
+                                "type": "string"
+                              },
+                              "label": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "title": "Verbose list of credentials",
+                          "type": "array"
+                        },
+                        "credentials": {
+                          "title": "Credentials as a map with String label key and credential value String",
+                          "type": "string"
+                        },
+                        "redemptionInstructions": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "credentials"
+                      ],
+                      "title": "The Reward",
+                      "type": "object"
+                    },
+                    "rewardName": {
+                      "title": "Reward Name",
+                      "type": "string"
+                    },
+                    "sendEmail": {
+                      "deprecated": true,
+                      "title": "Send Email?",
+                      "type": "boolean"
+                    },
+                    "sender": {
+                      "properties": {
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "title": "Last Name",
+                          "type": "string"
+                        }
+                      },
+                      "title": "Sender Details",
+                      "type": "object"
+                    },
+                    "status": {
+                      "title": "Reward Status",
+                      "type": "string"
+                    },
+                    "utid": {
+                      "title": "Utid - Unique Tango Card ID.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "accountIdentifier",
+                    "accountNumber",
+                    "amountCharged",
+                    "campaign",
+                    "createdAt",
+                    "customerIdentifier",
+                    "emailSubject",
+                    "etid",
+                    "message",
+                    "referenceOrderID",
+                    "reward",
+                    "rewardName",
+                    "status",
+                    "utid"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
             "type": "http"
           }
         },

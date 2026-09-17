@@ -21,13 +21,27 @@ class CatalogDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if ($setup["live"]) {
+            foreach (["choice_product01"] as $_liveKey) {
+                if (!isset($setup["idmap"][$_liveKey]) || $setup["idmap"][$_liveKey] === null) {
+                    $this->markTestSkipped("live test needs $_liveKey via *_ENTID env var (synthetic IDs only)");
+                    return;
+                }
+            }
+        }
         $client = $setup["client"];
 
+        $params = [];
+        if ($setup["live"]) {
+            $params["choice_product_id"] = $setup["idmap"]["choice_product01"];
+        } else {
+            $params["choice_product_id"] = "direct01";
+        }
 
         $result = $client->direct([
-            "path" => "catalogs",
+            "path" => "choiceProducts/{choice_product_id}/catalog",
             "method" => "GET",
-            "params" => [],
+            "params" => $params,
         ]);
         if ($setup["live"]) {
             // Live mode is lenient: synthetic IDs frequently 4xx and the

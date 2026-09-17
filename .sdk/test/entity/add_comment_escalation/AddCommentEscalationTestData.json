@@ -1,0 +1,282 @@
+{
+  "existing": {
+    "add_comment_escalation": {
+      "ADD_COMMENT_ESCALATION00": {
+        "assignee": 100,
+        "commentText": "s65",
+        "id": "ADD_COMMENT_ESCALATION00",
+        "inquiryCategoryCode": 103,
+        "inquiryIdNumber": 104,
+        "inquirySource": "s69",
+        "inquiryTypeCode": 106,
+        "issueDescription": "s6b",
+        "status": "s6c",
+        "userId": "s6d"
+      },
+      "ADD_COMMENT_ESCALATION01": {
+        "assignee": 200,
+        "commentText": "sc9",
+        "id": "ADD_COMMENT_ESCALATION01",
+        "inquiryCategoryCode": 203,
+        "inquiryIdNumber": 204,
+        "inquirySource": "scd",
+        "inquiryTypeCode": 206,
+        "issueDescription": "scf",
+        "status": "sd0",
+        "userId": "sd1"
+      },
+      "ADD_COMMENT_ESCALATION02": {
+        "assignee": 300,
+        "commentText": "s12d",
+        "id": "ADD_COMMENT_ESCALATION02",
+        "inquiryCategoryCode": 303,
+        "inquiryIdNumber": 304,
+        "inquirySource": "s131",
+        "inquiryTypeCode": 306,
+        "issueDescription": "s133",
+        "status": "s134",
+        "userId": "s135"
+      }
+    }
+  },
+  "new": {
+    "add_comment_escalation": {
+      "add_comment_escalation_ref01": {
+        "assignee": 400,
+        "commentText": "s191",
+        "inquiryCategoryCode": 403,
+        "inquiryIdNumber": 404,
+        "inquirySource": "s195",
+        "inquiryTypeCode": 406,
+        "issueDescription": "s197",
+        "status": "s198",
+        "userId": "s199"
+      }
+    }
+  },
+  "requests": {
+    "POST /prepaidCardService/addCommentEscalation/{referenceLineItemID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "addCommentEscalation",
+        "parameters": [
+          {
+            "description": "Reference Line Item ID",
+            "in": "path",
+            "name": "referenceLineItemID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "assignee": {
+                    "description": "Assignee ID.",
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "commentText": {
+                    "description": "Free-text comment to add to the prepaid card.",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "inquiryCategoryCode": {
+                    "description": "Inquiry category code.",
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "inquiryIdNumber": {
+                    "description": "Inquiry ID number.",
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "inquirySource": {
+                    "description": "Origination source identifier (e.g. TMO_SUPPORT_APP). Maximum 24 characters.",
+                    "maxLength": 24,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "inquiryTypeCode": {
+                    "description": "Inquiry type code.",
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "issueDescription": {
+                    "description": "Short description of the issue. Maximum 255 characters.",
+                    "maxLength": 255,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "Status of the inquiry (e.g. OPEN).",
+                    "type": "string"
+                  },
+                  "userId": {
+                    "description": "Agent or CSR user ID. Falls back to the authenticated principal if not provided.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "commentText",
+                  "issueDescription"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

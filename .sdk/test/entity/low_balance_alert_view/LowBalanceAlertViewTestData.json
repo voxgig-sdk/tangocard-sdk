@@ -1,0 +1,904 @@
+{
+  "existing": {
+    "low_balance_alert_view": {
+      "LOW_BALANCE_ALERT_VIEW00": {
+        "accountIdentifier": "s46",
+        "balanceAlertDisplayName": "s47",
+        "balanceAlertID": "s48",
+        "balanceAlertNotification": [],
+        "balanceAlertThreshold": 74,
+        "createdAt": "s4b",
+        "customerIdentifier": "s4c",
+        "account_identifier": "ACCOUNT_IDENTIFIER01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "account_id": "ACCOUNT01",
+        "balance_alert_id": "BALANCE_ALERT01",
+        "id": "LOW_BALANCE_ALERT_VIEW00"
+      },
+      "LOW_BALANCE_ALERT_VIEW01": {
+        "accountIdentifier": "s8c",
+        "balanceAlertDisplayName": "s8d",
+        "balanceAlertID": "s8e",
+        "balanceAlertNotification": [],
+        "balanceAlertThreshold": 144,
+        "createdAt": "s91",
+        "customerIdentifier": "s92",
+        "account_identifier": "ACCOUNT_IDENTIFIER01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "account_id": "ACCOUNT01",
+        "balance_alert_id": "BALANCE_ALERT01",
+        "id": "LOW_BALANCE_ALERT_VIEW01"
+      },
+      "LOW_BALANCE_ALERT_VIEW02": {
+        "accountIdentifier": "sd2",
+        "balanceAlertDisplayName": "sd3",
+        "balanceAlertID": "sd4",
+        "balanceAlertNotification": [],
+        "balanceAlertThreshold": 214,
+        "createdAt": "sd7",
+        "customerIdentifier": "sd8",
+        "account_identifier": "ACCOUNT_IDENTIFIER01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "account_id": "ACCOUNT01",
+        "balance_alert_id": "BALANCE_ALERT01",
+        "id": "LOW_BALANCE_ALERT_VIEW02"
+      }
+    }
+  },
+  "new": {
+    "low_balance_alert_view": {
+      "low_balance_alert_view_ref01": {
+        "accountIdentifier": "s118",
+        "balanceAlertDisplayName": "s119",
+        "balanceAlertID": "s11a",
+        "balanceAlertNotification": [],
+        "balanceAlertThreshold": 284,
+        "createdAt": "s11d",
+        "customerIdentifier": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "POST /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "setLowBalanceAlert",
+        "parameters": [
+          {
+            "description": "The customerIdentifier for the Customer / Account combination.",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The accountIdentifier for the Customer / Account combination.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "balanceAlertDisplayName": {
+                    "type": "string"
+                  },
+                  "balanceAlertNotification": {
+                    "items": {
+                      "properties": {
+                        "emailAddress": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "balanceAlertThreshold": {
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "balanceAlertDisplayName": {
+                      "title": "Balance Alert Display Name",
+                      "type": "string"
+                    },
+                    "balanceAlertID": {
+                      "format": "uuid",
+                      "title": "Balance Alert ID",
+                      "type": "string"
+                    },
+                    "balanceAlertNotification": {
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "Balance Alert Notification",
+                      "type": "array",
+                      "uniqueItems": true
+                    },
+                    "balanceAlertThreshold": {
+                      "title": "Balance Alert Threshold",
+                      "type": "number"
+                    },
+                    "createdAt": {
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Conflict; Duplicate Exists"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getLowBalanceAlert",
+        "parameters": [
+          {
+            "description": "The customerIdentifier for the Customer / Account combination.",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The accountIdentifier for the Customer / Account combination.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The specific balance alert ID.",
+            "in": "path",
+            "name": "balanceAlertID",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "balanceAlertDisplayName": {
+                      "title": "Balance Alert Display Name",
+                      "type": "string"
+                    },
+                    "balanceAlertID": {
+                      "format": "uuid",
+                      "title": "Balance Alert ID",
+                      "type": "string"
+                    },
+                    "balanceAlertNotification": {
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "Balance Alert Notification",
+                      "type": "array",
+                      "uniqueItems": true
+                    },
+                    "balanceAlertThreshold": {
+                      "title": "Balance Alert Threshold",
+                      "type": "number"
+                    },
+                    "createdAt": {
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PATCH /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateLowBalanceAlert",
+        "parameters": [
+          {
+            "description": "The customerIdentifier for the Customer / Account combination under which you update the low balance alert.",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The accountIdentifier for the Customer / Account combination under which you update the low balance alert.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The lowBalanceIdentifier for the Customer / Account / low balance combination under which you update the low balance alert.",
+            "in": "path",
+            "name": "balanceAlertID",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "balanceAlertDisplayName": {
+                    "description": "A friendly name for this low balance alert (will be displayed in the Tango Portal).",
+                    "title": "Balance Alert Display Name",
+                    "type": "string"
+                  },
+                  "balanceAlertNotification": {
+                    "description": "Send low balance notification emails to the following address(es). A provided list replaces the existing list, an empty list clears all existing emails, and a null/omitted value leaves the list unchanged.",
+                    "items": {
+                      "properties": {
+                        "emailAddress": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "title": "Balance Alert Notification",
+                    "type": "array"
+                  },
+                  "balanceAlertThreshold": {
+                    "description": "The threshold amount that will trigger the low balance alert.",
+                    "title": "Balance Alert Threshold",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "title": "Account Identifier",
+                      "type": "string"
+                    },
+                    "balanceAlertDisplayName": {
+                      "title": "Balance Alert Display Name",
+                      "type": "string"
+                    },
+                    "balanceAlertID": {
+                      "format": "uuid",
+                      "title": "Balance Alert ID",
+                      "type": "string"
+                    },
+                    "balanceAlertNotification": {
+                      "items": {
+                        "properties": {
+                          "emailAddress": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": "Balance Alert Notification",
+                      "type": "array",
+                      "uniqueItems": true
+                    },
+                    "balanceAlertThreshold": {
+                      "title": "Balance Alert Threshold",
+                      "type": "number"
+                    },
+                    "createdAt": {
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "title": "Customer Identifier",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "errors": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "httpCode": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "httpPhrase": {
+                          "type": "string"
+                        },
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "A Generic Example ",
+                          "example": "The error message will show here for error codes",
+                          "title": "message",
+                          "type": "string"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "requestId": {
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "i18nKey": {
+                          "type": "string"
+                        },
+                        "i18nTokenReplacements": {
+                          "items": {},
+                          "type": "array"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Conflict; Duplicate Exists"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/0/properties"
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "$ref": "#/responses/400/content/application~1json/schema/oneOf/1/properties"
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

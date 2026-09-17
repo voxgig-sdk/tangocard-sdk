@@ -53,14 +53,143 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
+	core.NewAccountEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAccountEntity(client, entopts)
+	}
+	core.NewAddCommentEscalationEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAddCommentEscalationEntity(client, entopts)
+	}
+	core.NewAllEventTypeEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAllEventTypeEntity(client, entopts)
+	}
+	core.NewAsyncOrderEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAsyncOrderEntity(client, entopts)
+	}
+	core.NewAsyncOrderDetailViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAsyncOrderDetailViewEntity(client, entopts)
+	}
+	core.NewAsyncOrderLineItemsViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAsyncOrderLineItemsViewEntity(client, entopts)
+	}
+	core.NewAsyncReasonCodesViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAsyncReasonCodesViewEntity(client, entopts)
+	}
+	core.NewAsyncUpdateLineItemViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewAsyncUpdateLineItemViewEntity(client, entopts)
+	}
+	core.NewBalanceAlertViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewBalanceAlertViewEntity(client, entopts)
+	}
+	core.NewBrandCategoriesViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewBrandCategoriesViewEntity(client, entopts)
+	}
 	core.NewCatalogEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewCatalogEntity(client, entopts)
+	}
+	core.NewChoiceProductEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewChoiceProductEntity(client, entopts)
+	}
+	core.NewCountryViewSummaryEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewCountryViewSummaryEntity(client, entopts)
+	}
+	core.NewCreateAccountCriterionEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewCreateAccountCriterionEntity(client, entopts)
+	}
+	core.NewCreateCustomerCriterionEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewCreateCustomerCriterionEntity(client, entopts)
+	}
+	core.NewCredentialTypeViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewCredentialTypeViewEntity(client, entopts)
+	}
+	core.NewCreditCardEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewCreditCardEntity(client, entopts)
+	}
+	core.NewCreditCardDepositEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewCreditCardDepositEntity(client, entopts)
+	}
+	core.NewCreditCardUnregisterEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewCreditCardUnregisterEntity(client, entopts)
 	}
 	core.NewCustomerEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewCustomerEntity(client, entopts)
 	}
+	core.NewEmailTemplateListViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewEmailTemplateListViewEntity(client, entopts)
+	}
+	core.NewEmailTemplateViewVerboseEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewEmailTemplateViewVerboseEntity(client, entopts)
+	}
+	core.NewEmbeddableResponseDtoEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewEmbeddableResponseDtoEntity(client, entopts)
+	}
+	core.NewExchangeRatesWithDisclaimerEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewExchangeRatesWithDisclaimerEntity(client, entopts)
+	}
+	core.NewLineItemEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewLineItemEntity(client, entopts)
+	}
+	core.NewLowBalanceAlertListViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewLowBalanceAlertListViewEntity(client, entopts)
+	}
+	core.NewLowBalanceAlertViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewLowBalanceAlertViewEntity(client, entopts)
+	}
+	core.NewMobileCountryEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewMobileCountryEntity(client, entopts)
+	}
+	core.NewN14WebhookEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewN14WebhookEntity(client, entopts)
+	}
+	core.NewN1CustomerEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewN1CustomerEntity(client, entopts)
+	}
+	core.NewN2AccountEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewN2AccountEntity(client, entopts)
+	}
+	core.NewN3FundEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewN3FundEntity(client, entopts)
+	}
+	core.NewN8LineItemEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewN8LineItemEntity(client, entopts)
+	}
+	core.NewN9DigitalTemplateEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewN9DigitalTemplateEntity(client, entopts)
+	}
 	core.NewOrderEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewOrderEntity(client, entopts)
+	}
+	core.NewOrderViewSummaryEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewOrderViewSummaryEntity(client, entopts)
+	}
+	core.NewPrepaidCardInfoEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewPrepaidCardInfoEntity(client, entopts)
+	}
+	core.NewPrepaidCardTransactionEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewPrepaidCardTransactionEntity(client, entopts)
+	}
+	core.NewReissueCardEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewReissueCardEntity(client, entopts)
+	}
+	core.NewReplacementReasonEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewReplacementReasonEntity(client, entopts)
+	}
+	core.NewResendEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewResendEntity(client, entopts)
+	}
+	core.NewRewardReasonsMapEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewRewardReasonsMapEntity(client, entopts)
+	}
+	core.NewTransferFundEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewTransferFundEntity(client, entopts)
+	}
+	core.NewUpdateAccountEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewUpdateAccountEntity(client, entopts)
+	}
+	core.NewUpdateWebhookSubscriptionResponseViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewUpdateWebhookSubscriptionResponseViewEntity(client, entopts)
+	}
+	core.NewWebhookEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewWebhookEntity(client, entopts)
 	}
 }
 

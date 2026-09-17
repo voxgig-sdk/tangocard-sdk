@@ -1,15 +1,59 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Order | Tango Card RaaS API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Order | Tango API</title><link rel="stylesheet" href="../assets/style.css"></head>
 <body><a class="skip" href="#content">Skip to content</a>
-<header class="site-header"><a class="site-title" href="../index.html">Tango Card RaaS API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/tangocard-sdk">voxgig-sdk/tangocard-sdk</a></div></header>
+<header class="site-header"><a class="site-title" href="../index.html">Tango API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/tangocard-sdk">voxgig-sdk/tangocard-sdk</a></div></header>
 <div class="site-notice" role="note"></div>
-<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Tango Card RaaS API</a></details>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Tango API</a></details>
 <details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/account.html">Account</a>
+<a href="../api/add_comment_escalation.html">AddCommentEscalation</a>
+<a href="../api/all_event_type.html">AllEventType</a>
+<a href="../api/async_order.html">AsyncOrder</a>
+<a href="../api/async_order_detail_view.html">AsyncOrderDetailView</a>
+<a href="../api/async_order_line_items_view.html">AsyncOrderLineItemsView</a>
+<a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
+<a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
+<a href="../api/balance_alert_view.html">BalanceAlertView</a>
+<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
 <a href="../api/catalog.html">Catalog</a>
+<a href="../api/choice_product.html">ChoiceProduct</a>
+<a href="../api/country_view_summary.html">CountryViewSummary</a>
+<a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
+<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
+<a href="../api/credential_type_view.html">CredentialTypeView</a>
+<a href="../api/credit_card.html">CreditCard</a>
+<a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
+<a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
 <a href="../api/customer.html">Customer</a>
+<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
+<a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
+<a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
+<a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
+<a href="../api/line_item.html">LineItem</a>
+<a href="../api/low_balance_alert_list_view.html">LowBalanceAlertListView</a>
+<a href="../api/low_balance_alert_view.html">LowBalanceAlertView</a>
+<a href="../api/mobile_country.html">MobileCountry</a>
+<a href="../api/n14_webhook.html">N14Webhook</a>
+<a href="../api/n1_customer.html">N1Customer</a>
+<a href="../api/n2_account.html">N2Account</a>
+<a href="../api/n3_fund.html">N3Fund</a>
+<a href="../api/n8_line_item.html">N8LineItem</a>
+<a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
 <a aria-current="page" href="../api/order.html">Order</a><div class="nav-sections"><a class="nav-section" href="#post-orders">POST /orders</a>
-<a class="nav-section" href="#get-orders">GET /orders</a></div></details>
+<a class="nav-section" href="#get-orders">GET /orders</a>
+<a class="nav-section" href="#get-ordersreferenceorderid">GET /orders/{referenceOrderID}</a></div>
+<a href="../api/order_view_summary.html">OrderViewSummary</a>
+<a href="../api/prepaid_card_info.html">PrepaidCardInfo</a>
+<a href="../api/prepaid_card_transaction.html">PrepaidCardTransaction</a>
+<a href="../api/reissue_card.html">ReissueCard</a>
+<a href="../api/replacement_reason.html">ReplacementReason</a>
+<a href="../api/resend.html">Resend</a>
+<a href="../api/reward_reasons_map.html">RewardReasonsMap</a>
+<a href="../api/transfer_fund.html">TransferFund</a>
+<a href="../api/update_account.html">UpdateAccount</a>
+<a href="../api/update_webhook_subscription_response_view.html">UpdateWebhookSubscriptionResponseView</a>
+<a href="../api/webhook.html">Webhook</a></details>
 <details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
 <a href="../guides/first-call.html">Make your first API call</a>
 <a href="../guides/errors.html">Handle errors</a>
@@ -46,13 +90,19 @@
 <td><code>POST</code></td>
 <td><a href="#post-orders"><code>/orders</code></a></td>
 <td><code>create</code></td>
-<td>The created order</td>
+<td>OK / Existing order found for given external ref ID</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><a href="#get-orders"><code>/orders</code></a></td>
 <td><code>list</code></td>
-<td>Orders</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-ordersreferenceorderid"><code>/orders/{referenceOrderID}</code></a></td>
+<td><code>load</code></td>
+<td>OK</td>
 </tr>
 </tbody>
 </table>
@@ -71,74 +121,212 @@
 <td><code>accountIdentifier</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
+<td>Specify the account this order will be deducted from</td>
+</tr>
+<tr>
+<td><code>accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
 <td></td>
 </tr>
 <tr>
 <td><code>amount</code></td>
 <td><code>number</code></td>
+<td>Yes</td>
+<td>Specify the face value of the reward.</td>
+</tr>
+<tr>
+<td><code>amountCharged</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity</code></td>
+<td><code>object</code></td>
 <td>No</td>
 <td></td>
 </tr>
 <tr>
 <td><code>campaign</code></td>
 <td><code>string</code></td>
-<td>No</td>
-<td></td>
+<td>Yes</td>
+<td>Optional.</td>
 </tr>
 <tr>
-<td><code>created</code></td>
-<td><code>string</code></td>
-<td>No</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customerIdentifier</code></td>
+<td><code>createdAt</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
 <td></td>
 </tr>
 <tr>
+<td><code>customFields</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Specify the customer associated with the order.</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Specify delivery method for the order</td>
+</tr>
+<tr>
+<td><code>denomination</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>emailSubject</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>etid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>expirationDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional for Promo Links, the exact calendar date the Promo Link will expire.</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItemStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Optional gift message</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional order notes.</td>
+</tr>
+<tr>
+<td><code>orderClientSource</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orderExternalRefIdDupe</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orderStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page.</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The Purchase Order Number associated with this order.</td>
+</tr>
+<tr>
 <td><code>recipient</code></td>
 <td><code>object</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is EMAIL, PHONE, or ADDRESS.</td>
+</tr>
+<tr>
+<td><code>redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>referenceLineItemID</code></td>
+<td><code>string</code></td>
 <td>No</td>
 <td></td>
 </tr>
 <tr>
 <td><code>referenceOrderID</code></td>
 <td><code>string</code></td>
-<td>No</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
 <td></td>
 </tr>
 <tr>
 <td><code>rewardName</code></td>
 <td><code>string</code></td>
-<td>No</td>
+<td>Yes</td>
 <td></td>
 </tr>
 <tr>
 <td><code>sendEmail</code></td>
 <td><code>boolean</code></td>
 <td>No</td>
-<td></td>
+<td>Deprecated Oct 1, 2025.</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional.</td>
 </tr>
 <tr>
 <td><code>status</code></td>
 <td><code>string</code></td>
-<td>No</td>
+<td>Yes</td>
 <td></td>
 </tr>
 <tr>
 <td><code>utid</code></td>
 <td><code>string</code></td>
-<td>No</td>
-<td></td>
+<td>Yes</td>
+<td>The unique identifier for the reward you are sending as provided in the Get Catalog call</td>
 </tr>
 </tbody>
 </table>
 <h2 id="create">create</h2>
 <h3 id="post-orders" class="operation" data-method="post"><code>POST</code> /orders</h3>
 <p>Operation ID: <code>createOrder</code>.</p>
-<p>Authentication: basic token (<code>basicAuth</code>).</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
 <h4 id="request-body">Request body</h4>
 <p><code>application/json</code></p>
 <table>
@@ -155,66 +343,204 @@
 <td><code>accountIdentifier</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Specify the account this order will be deducted from</td>
 </tr>
 <tr>
 <td><code>amount</code></td>
 <td><code>number</code></td>
 <td>Yes</td>
-<td></td>
+<td>Specify the face value of the reward. Always required, including for fixed value items.</td>
 </tr>
 <tr>
 <td><code>campaign</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Optional. Campaign that may be used to administratively categorize a specific order. Must be between 0 and 1024 characters in length.</td>
+</tr>
+<tr>
+<td><code>customFields</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional. A map of custom field key-value pairs configured at the account level for your platform. Only fields that have been configured for the account are accepted, any fields passed that are not configured will be silently ignored. Fields marked as required in the configuration must be provided; omitting a required field will result in a validation error. Fields marked as optional may be omitted. If no custom fields have been configured for the account, this property can be omitted entirely.</td>
 </tr>
 <tr>
 <td><code>customerIdentifier</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Specify the customer associated with the order. Must be the customer the accountIdentifier is associated with.</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, EMBEDDED_COMPONENT, ...</code></td>
+<td>Yes</td>
+<td>Specify delivery method for the order</td>
+</tr>
+<tr>
+<td><code>emailSubject</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Used with deliveryMethod is EMAIL. The ETID email subject will be used for the specified reward if not specified.</td>
+</tr>
+<tr>
+<td><code>etid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Used with deliveryMethod of EMAIL or PHONE. The unique identifier for the electronic template you would like to use. If not specified, the system will use the default etid.</td>
+</tr>
+<tr>
+<td><code>expirationDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional for Promo Links, the exact calendar date the Promo Link will expire.</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response, order details, and order history.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional gift message</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional order notes. Must be between 0 and 1024 characters in length.</td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page.</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The Purchase Order Number associated with this order.</td>
 </tr>
 <tr>
 <td><code>recipient</code></td>
 <td><code>object</code></td>
 <td>No</td>
-<td></td>
+<td>Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. May be required for some UTIDs. Use to set and store the recipient’s contact information. When deliveryMethod is NONE or EMBEDDED, setting these parameters will allow the platform to store this information for reporting, auditing, and reconciliation.</td>
+</tr>
+<tr>
+<td><code>recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS. May be required for some UTIDs. This field is optional for digital orders, NOTE: Some digital cash options may require including an address.</td>
+</tr>
+<tr>
+<td><code>recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 30 characters, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, hyphen, ampersand, and apostrophe.</td>
+</tr>
+<tr>
+<td><code>recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional, Typically used when shipping to a corporate address.</td>
+</tr>
+<tr>
+<td><code>recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards.</td>
+</tr>
+<tr>
+<td><code>recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 5 characters, not blank, Digits 0-9 and alpha (a-z, A-Z). For US addresses this must include the five digit US ZIP Code only.</td>
+</tr>
+<tr>
+<td><code>recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Address region must be a valid 2-character uppercase abbreviation for a U.S. state, territory, or military base; a Canadian province; or contain an international region less than 36 characters.</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional if deliveryMethod is ADDRESS, not applicable for digital rewards. Allows 35 characters max, not blank, Digits 0-9, alpha (a-z, A-Z), space, period, comma, hyphen, forward slash (/), ampersand, percent, pound (#), at (@), and apostrophe.</td>
 </tr>
 <tr>
 <td><code>recipient.email</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Required if deliveryMethod is EMAIL. May be required for some UTIDs. It is useful to include when deliveryMethod is PHONE to easily switch between email and phone delivery</td>
 </tr>
 <tr>
 <td><code>recipient.firstName</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Required if deliveryMethod is EMAIL, PHONE, or ADDRESS. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use &lt; or &gt; or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.</td>
 </tr>
 <tr>
 <td><code>recipient.lastName</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Required if deliveryMethod is ADDRESS, otherwise optional. May be required for some UTIDs. Digital rewards: allows 100 characters, cannot use &lt; or &gt; or / in the name. Physical rewards: allows 25 characters max, Digits 0-9, alpha (a-z, A-Z), space period, comma, ampersand, and hyphen.</td>
+</tr>
+<tr>
+<td><code>recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required if deliveryMethod is PHONE. May be required for some UTIDs. Format: +CCCPPPPPPPPPPPP (where C is the country code, 1-3 digits, and P is the phone number, up to 12 digits). Follows ITU E.164, allowing (+) and up to 15 digits for the combined country code and phone number.</td>
 </tr>
 <tr>
 <td><code>sendEmail</code></td>
 <td><code>boolean</code></td>
 <td>No</td>
-<td></td>
+<td>Deprecated Oct 1, 2025. Should Tango Card send the email to the recipient?</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional. Use to set the sender’s name and email address if different than the default platform setting.</td>
+</tr>
+<tr>
+<td><code>sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>always optional</td>
+</tr>
+<tr>
+<td><code>sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>always optional (100 character max)</td>
+</tr>
+<tr>
+<td><code>sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>always optional (100 character max)</td>
 </tr>
 <tr>
 <td><code>utid</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>The unique identifier for the reward you are sending as provided in the Get Catalog call</td>
 </tr>
 </tbody>
 </table>
 <h4 id="responses">Responses</h4>
-<h5 id="200-the-created-order" class="status" data-status="2xx">200: The created order</h5>
+<h5 id="200-ok--existing-order-found-for-given-external-ref-id" class="status" data-status="2xx">200: OK / Existing order found for given external ref ID</h5>
 <p><code>application/json</code></p>
 <table>
 <thead>
@@ -227,19 +553,253 @@
 </thead>
 <tbody>
 <tr>
-<td><code>amount</code></td>
-<td><code>number</code></td>
-<td>No</td>
-<td></td>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
 </tr>
 <tr>
-<td><code>created</code></td>
+<td><code>amountCharged</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>amountCharged.currencyCode</code></td>
 <td><code>string</code></td>
 <td>No</td>
 <td></td>
 </tr>
 <tr>
+<td><code>amountCharged.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Campaign</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>denomination</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Denomination</td>
+</tr>
+<tr>
+<td><code>denomination.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>emailSubject</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Subject</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>External Reference ID</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Message</td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Ptid - Unique Printed Reward Link Template ID.</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Address</td>
+</tr>
+<tr>
+<td><code>recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Company Name</td>
+</tr>
+<tr>
+<td><code>recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Country Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Postal Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>State or Province</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 1</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 2</td>
+</tr>
+<tr>
+<td><code>recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number</td>
+</tr>
+<tr>
+<td><code>redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Redemption Instructions</td>
+</tr>
+<tr>
+<td><code>referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Line Item ID</td>
+</tr>
+<tr>
 <td><code>referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>reward</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The Reward</td>
+</tr>
+<tr>
+<td><code>reward.credentialList</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Verbose list of credentials</td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].credentialType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].label</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentials</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Credentials as a map with String label key and credential value String</td>
+</tr>
+<tr>
+<td><code>reward.redemptionInstructions</code></td>
 <td><code>string</code></td>
 <td>No</td>
 <td></td>
@@ -247,18 +807,270 @@
 <tr>
 <td><code>rewardName</code></td>
 <td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>sendEmail</code></td>
+<td><code>boolean</code></td>
 <td>No</td>
-<td></td>
+<td>Send Email?</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
 </tr>
 <tr>
 <td><code>status</code></td>
 <td><code>string</code></td>
-<td>No</td>
-<td></td>
+<td>Yes</td>
+<td>Reward Status</td>
 </tr>
 <tr>
 <td><code>utid</code></td>
 <td><code>string</code></td>
+<td>Yes</td>
+<td>Utid - Unique Tango Card ID.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="201-created" class="status" data-status="2xx">201: Created</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="402-insufficient-funds" class="status" data-status="4xx">402: Insufficient Funds</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="409-conflict-duplicate-exists" class="status" data-status="4xx">409: Conflict; Duplicate Exists</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="422-unprocessable-entity" class="status" data-status="4xx">422: Unprocessable Entity</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-exceeded-the-allowable-tps-rate-limit" class="status" data-status="4xx">429: Exceeded the allowable TPS rate limit</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="503-service-unavailable" class="status" data-status="5xx">503: Service Unavailable</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -267,14 +1079,41 @@
 <h2 id="list">list</h2>
 <h3 id="get-orders" class="operation" data-method="get"><code>GET</code> /orders</h3>
 <p>Operation ID: <code>listOrders</code>.</p>
-<p>Authentication: basic token (<code>basicAuth</code>).</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
 <h4 id="parameters">Parameters</h4>
 <p>| Parameter | In | Type | Required | Description |
 | --- | --- | --- | --- |
-| <code>offset</code> | <code>query</code> | <code>integer</code> | No |  |
-| <code>limit</code> | <code>query</code> | <code>integer</code> | No |  |</p>
+| <code>accountIdentifier</code> | <code>query</code> | <code>string</code> | No | specify the account to be queried. |
+| <code>customerIdentifier</code> | <code>query</code> | <code>string</code> | No | specify the customer to be queried |
+| <code>externalRefID</code> | <code>query</code> | <code>string</code> | No | specify the external reference ID to be queried |
+| <code>startDate</code> | <code>query</code> | <code>string</code> | No | specify the starting date or date time to be queried according to RFC 3339, that is &quot;2016-01-01&quot; or &quot;2016-01-01T00:00:00Z&quot;. See https://www.ietf.org/rfc/rfc3339.txt |
+| <code>endDate</code> | <code>query</code> | <code>string</code> | No | specify the ending date or date time to be queried according to RFC 3339, that is &quot;2016-01-01&quot; or &quot;2016-01-01T00:00:00Z&quot;. See https://www.ietf.org/rfc/rfc3339.txt |
+| <code>elementsPerBlock</code> | <code>query</code> | <code>integer (int32)</code> | No | specify the number of elements in a block. |
+| <code>page</code> | <code>query</code> | <code>integer (int32)</code> | No | specify the page number to return. |
+| <code>minAmount</code> | <code>query</code> | <code>number</code> | No | specify the minimum face value of the reward to be queried. |
+| <code>maxAmount</code> | <code>query</code> | <code>number</code> | No | specify the maximum face value of the reward to be queried. |
+| <code>currencyCode</code> | <code>query</code> | <code>string</code> | No | specify the currency code of the reward to be queried. |
+| <code>utid</code> | <code>query</code> | <code>string</code> | No | specify the unique identifier of the reward to be queried. |
+| <code>ptid</code> | <code>query</code> | <code>string</code> | No | specify the unique identifier of the physical delivery template to be queried. |
+| <code>rewardName</code> | <code>query</code> | <code>string</code> | No | specify the reward name of the reward to be queried. |
+| <code>senderFirstName</code> | <code>query</code> | <code>string</code> | No | specify the sender's first name to be queried. |
+| <code>senderLastName</code> | <code>query</code> | <code>string</code> | No | specify the sender's last name to be queried. |
+| <code>senderEmail</code> | <code>query</code> | <code>string</code> | No | specify the sender email address to be queried. |
+| <code>recipientEmail</code> | <code>query</code> | <code>string</code> | No | specify the recipient's email address to be queried. |
+| <code>recipientMobileNumber</code> | <code>query</code> | <code>string</code> | No | specify the recipient's mobile number to be queried. |
+| <code>recipientFirstName</code> | <code>query</code> | <code>string</code> | No | specify the recipient's first name to be queried. |
+| <code>recipientLastName</code> | <code>query</code> | <code>string</code> | No | specify the recipient's last name to be queried. |
+| <code>sendEmail</code> | <code>query</code> | <code>boolean</code> | No | specify if sendEmail is true or false to be queried. |
+| <code>deliveryMethod</code> | <code>query</code> | <code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code> | No | specify the delivery method to be queried. |
+| <code>status</code> | <code>query</code> | <code>enum: PENDING, QUEUED, PENDING_MR, ON_HOLD, CANCELLED, COMPLETE, ...</code> | No | specify the status to be queried. |
+| <code>orderStatus</code> | <code>query</code> | <code>enum: PENDING, QUEUED, PENDING_MR, ON_HOLD, CANCELLED, COMPLETE, ...</code> | No | specify the order status to be queried. |
+| <code>lineItemStatus</code> | <code>query</code> | <code>enum: COMPLETE, PENDING, FAILED, DELETED, CANCELLED, RETURNED</code> | No | specify the line item status to be queried. |
+| <code>campaign</code> | <code>query</code> | <code>string</code> | No | specify the campaign to be queried. |
+| <code>notes</code> | <code>query</code> | <code>string</code> | No | specify the notes to be queried. |
+| <code>lineItemNotes</code> | <code>query</code> | <code>string</code> | No | specify the notes to be queried. |
+| <code>purchaseOrderNumber</code> | <code>query</code> | <code>string</code> | No | specify the purchaseOrderNumber to be queried. |</p>
 <h4 id="responses-1">Responses</h4>
-<h5 id="200-orders" class="status" data-status="2xx">200: Orders</h5>
+<h5 id="200-ok" class="status" data-status="2xx">200: OK</h5>
 <p><code>application/json</code></p>
 <table>
 <thead>
@@ -289,48 +1128,1105 @@
 <tr>
 <td><code>orders</code></td>
 <td><code>array of object</code></td>
+<td>Yes</td>
+<td>Order elements for the current page</td>
+</tr>
+<tr>
+<td><code>orders[].accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
+</tr>
+<tr>
+<td><code>orders[].accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Number</td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged.currencyCode</code></td>
+<td><code>string</code></td>
 <td>No</td>
 <td></td>
 </tr>
 <tr>
-<td><code>orders[].amount</code></td>
+<td><code>orders[].amountCharged.exchangeRate</code></td>
 <td><code>number</code></td>
 <td>No</td>
 <td></td>
 </tr>
 <tr>
-<td><code>orders[].created</code></td>
+<td><code>orders[].amountCharged.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Async order entity</td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.duplicateLineItemRefIds</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>If any duplicate duplicateLineItemRefIds exist in the request</td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.</td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Failed line items list (business validations)</td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].errors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].errors[].errorCodeName</code></td>
 <td><code>string</code></td>
 <td>No</td>
 <td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].errors[].errorCodeValue</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].errors[].field</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].errors[].message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].externalRefLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].lineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.failedLineItems[].utid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This status reflects about cart status or validation status based on the processing</td>
+</tr>
+<tr>
+<td><code>orders[].asyncOrderEntity.totalLineItems</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>Total number of line items submitted in the request</td>
+</tr>
+<tr>
+<td><code>orders[].campaign</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Campaign</td>
+</tr>
+<tr>
+<td><code>orders[].createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>orders[].customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>orders[].deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>orders[].denomination</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Denomination</td>
+</tr>
+<tr>
+<td><code>orders[].denomination.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].denomination.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].denomination.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].denomination.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].denomination.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orders[].emailSubject</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Subject</td>
+</tr>
+<tr>
+<td><code>orders[].etid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Email Template</td>
+</tr>
+<tr>
+<td><code>orders[].externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>External Reference ID</td>
+</tr>
+<tr>
+<td><code>orders[].lineItemStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Line Item Status</td>
+</tr>
+<tr>
+<td><code>orders[].message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Message</td>
+</tr>
+<tr>
+<td><code>orders[].notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td><code>orders[].orderClientSource</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Order Client Source</td>
+</tr>
+<tr>
+<td><code>orders[].orderExternalRefIdDupe</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Order External Ref Id Dupe</td>
+</tr>
+<tr>
+<td><code>orders[].orderStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td><code>orders[].ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Physical Reward Template Identifier</td>
+</tr>
+<tr>
+<td><code>orders[].purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>orders[].recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Address</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Company Name</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Country Code</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Postal Code</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>State or Province</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 1</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 2</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>orders[].recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number</td>
 </tr>
 <tr>
 <td><code>orders[].referenceOrderID</code></td>
 <td><code>string</code></td>
-<td>No</td>
-<td></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
 </tr>
 <tr>
 <td><code>orders[].rewardName</code></td>
 <td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>orders[].sendEmail</code></td>
+<td><code>boolean</code></td>
 <td>No</td>
-<td></td>
+<td>Send Email?</td>
+</tr>
+<tr>
+<td><code>orders[].sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>orders[].sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>orders[].sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>orders[].sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
 </tr>
 <tr>
 <td><code>orders[].status</code></td>
 <td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Status</td>
+</tr>
+<tr>
+<td><code>orders[].utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Utid - Unique Tango Card ID.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Page data for matching orders</td>
+</tr>
+<tr>
+<td><code>page.elementsPerBlock</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>Total number of elements per page</td>
+</tr>
+<tr>
+<td><code>page.number</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>Current page number</td>
+</tr>
+<tr>
+<td><code>page.resultCount</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>Total number of elements in the current page</td>
+</tr>
+<tr>
+<td><code>page.totalCount</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Total number of elements</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request-1" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
 <td>No</td>
 <td></td>
 </tr>
 <tr>
-<td><code>orders[].utid</code></td>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
 <td><code>string</code></td>
 <td>No</td>
 <td></td>
 </tr>
 <tr>
-<td><code>page</code></td>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-1" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-1" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="load">load</h2>
+<h3 id="get-ordersreferenceorderid" class="operation" data-method="get"><code>GET</code> /orders/{referenceOrderID}</h3>
+<p>Operation ID: <code>getOrder</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceOrderID</code> | <code>path</code> | <code>string</code> | Yes | Reference order ID is returned in the order response payload |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-ok-1" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
+</tr>
+<tr>
+<td><code>accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Number</td>
+</tr>
+<tr>
+<td><code>amountCharged</code></td>
 <td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>amountCharged.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Async order entity</td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.duplicateLineItemRefIds</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>If any duplicate duplicateLineItemRefIds exist in the request</td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required. Idempotent field that can be used for client-side order cross reference and prevent accidental order duplication. Will be returned in order response.</td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Failed line items list (business validations)</td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].errors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].errors[].errorCodeName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].errors[].errorCodeValue</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].errors[].field</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].errors[].message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].externalRefLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].lineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.failedLineItems[].utid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This status reflects about cart status or validation status based on the processing</td>
+</tr>
+<tr>
+<td><code>asyncOrderEntity.totalLineItems</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>Total number of line items submitted in the request</td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Campaign</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>denomination</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Denomination</td>
+</tr>
+<tr>
+<td><code>denomination.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>emailSubject</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Subject</td>
+</tr>
+<tr>
+<td><code>etid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Email Template</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>External Reference ID</td>
+</tr>
+<tr>
+<td><code>lineItemStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Line Item Status</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Message</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td><code>orderClientSource</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Order Client Source</td>
+</tr>
+<tr>
+<td><code>orderExternalRefIdDupe</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Order External Ref Id Dupe</td>
+</tr>
+<tr>
+<td><code>orderStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Physical Reward Template Identifier</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Address</td>
+</tr>
+<tr>
+<td><code>recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Company Name</td>
+</tr>
+<tr>
+<td><code>recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Country Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Postal Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>State or Province</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 1</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 2</td>
+</tr>
+<tr>
+<td><code>recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number</td>
+</tr>
+<tr>
+<td><code>referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reference LineItem ID</td>
+</tr>
+<tr>
+<td><code>referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>reward</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The Reward</td>
+</tr>
+<tr>
+<td><code>reward.credentialList</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Verbose list of credentials</td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].credentialType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].label</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentials</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Credentials as a map with String label key and credential value String</td>
+</tr>
+<tr>
+<td><code>reward.redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rewardName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>sendEmail</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Send Email?</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Status</td>
+</tr>
+<tr>
+<td><code>utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Utid - Unique Tango Card ID.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request-2" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-2" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-2" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-not-found" class="status" data-status="4xx">404: Not Found</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
 <td>No</td>
 <td></td>
 </tr>

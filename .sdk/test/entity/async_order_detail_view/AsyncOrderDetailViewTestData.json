@@ -1,0 +1,1164 @@
+{
+  "existing": {
+    "async_order_detail_view": {
+      "ASYNC_ORDER_DETAIL_VIEW00": {
+        "accountIdentifier": "saa",
+        "amountCharged": {},
+        "campaign": "sac",
+        "completedAt": "sad",
+        "createdAt": "sae",
+        "customerIdentifier": "saf",
+        "externalRefID": "sb0",
+        "id": "ASYNC_ORDER_DETAIL_VIEW00",
+        "lineItems": [],
+        "notes": "sb3",
+        "orderErrors": [],
+        "orderStatus": "sb5",
+        "pagination": {},
+        "purchaseOrderNumber": "sb7",
+        "referenceOrderID": "sb8",
+        "sender": {},
+        "totalLineItems": 186,
+        "account_identifier": "ACCOUNT_IDENTIFIER01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "external_ref_id": "EXTERNAL_REF01"
+      },
+      "ASYNC_ORDER_DETAIL_VIEW01": {
+        "accountIdentifier": "s154",
+        "amountCharged": {},
+        "campaign": "s156",
+        "completedAt": "s157",
+        "createdAt": "s158",
+        "customerIdentifier": "s159",
+        "externalRefID": "s15a",
+        "id": "ASYNC_ORDER_DETAIL_VIEW01",
+        "lineItems": [],
+        "notes": "s15d",
+        "orderErrors": [],
+        "orderStatus": "s15f",
+        "pagination": {},
+        "purchaseOrderNumber": "s161",
+        "referenceOrderID": "s162",
+        "sender": {},
+        "totalLineItems": 356,
+        "account_identifier": "ACCOUNT_IDENTIFIER01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "external_ref_id": "EXTERNAL_REF01"
+      },
+      "ASYNC_ORDER_DETAIL_VIEW02": {
+        "accountIdentifier": "s1fe",
+        "amountCharged": {},
+        "campaign": "s200",
+        "completedAt": "s201",
+        "createdAt": "s202",
+        "customerIdentifier": "s203",
+        "externalRefID": "s204",
+        "id": "ASYNC_ORDER_DETAIL_VIEW02",
+        "lineItems": [],
+        "notes": "s207",
+        "orderErrors": [],
+        "orderStatus": "s209",
+        "pagination": {},
+        "purchaseOrderNumber": "s20b",
+        "referenceOrderID": "s20c",
+        "sender": {},
+        "totalLineItems": 526,
+        "account_identifier": "ACCOUNT_IDENTIFIER01",
+        "customer_identifier": "CUSTOMER_IDENTIFIER01",
+        "external_ref_id": "EXTERNAL_REF01"
+      }
+    }
+  },
+  "new": {
+    "async_order_detail_view": {
+      "async_order_detail_view_ref01": {
+        "accountIdentifier": "s2a8",
+        "amountCharged": {},
+        "campaign": "s2aa",
+        "completedAt": "s2ab",
+        "createdAt": "s2ac",
+        "customerIdentifier": "s2ad",
+        "externalRefID": "s2ae",
+        "lineItems": [],
+        "notes": "s2b1",
+        "orderErrors": [],
+        "orderStatus": "s2b3",
+        "pagination": {},
+        "purchaseOrderNumber": "s2b5",
+        "referenceOrderID": "s2b6",
+        "sender": {},
+        "totalLineItems": 696
+      }
+    }
+  },
+  "requests": {
+    "GET /asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getAsyncOrder",
+        "parameters": [
+          {
+            "description": "specify the customer to be queried",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account to be queried.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "description": "External reference ID of the async order",
+            "in": "path",
+            "name": "externalRefID",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Cursor for navigating to previous page",
+            "example": "NjE=",
+            "in": "query",
+            "name": "prevCursor",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Cursor for navigating to next page",
+            "example": "NjI=",
+            "in": "query",
+            "name": "nextCursor",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of line items to return",
+            "example": 100,
+            "in": "query",
+            "name": "maxResults",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "format": "int32",
+              "maximum": 500,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Specify the externalRefLineItemIDs to be queried. A maximum of 50 externalRefLineItemIDs can be provided.",
+            "in": "query",
+            "name": "externalRefLineItemIDs",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Specify the referenceLineItemIDs to be queried. A maximum of 50 referenceLineItemIDs can be provided.",
+            "in": "query",
+            "name": "referenceLineItemIDs",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Specify true to return only failed line items",
+            "in": "query",
+            "name": "failedOnly",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "description": "Account identifier",
+                      "type": "string"
+                    },
+                    "amountCharged": {
+                      "description": "Initial value and the total charged amount on the account",
+                      "properties": {
+                        "currencyCode": {
+                          "type": "string"
+                        },
+                        "shippingFee": {
+                          "type": "number"
+                        },
+                        "total": {
+                          "type": "number"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "campaign": {
+                      "description": "Campaign name",
+                      "type": "string"
+                    },
+                    "completedAt": {
+                      "description": "Order completion timestamp",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "description": "Order creation timestamp",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "description": "Customer identifier",
+                      "type": "string"
+                    },
+                    "externalRefID": {
+                      "description": "External reference ID provided by client",
+                      "type": "string"
+                    },
+                    "lineItems": {
+                      "description": "list of line items",
+                      "items": {
+                        "properties": {
+                          "amount": {
+                            "type": "number"
+                          },
+                          "amountCharged": {
+                            "properties": {
+                              "currencyCode": {
+                                "type": "string"
+                              },
+                              "exchangeRate": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              },
+                              "total": {
+                                "type": "number"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "bulkShipping": {
+                            "properties": {
+                              "address": {
+                                "properties": {
+                                  "city": {
+                                    "title": "City",
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "title": "Country Code",
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "title": "Postal Code",
+                                    "type": "string"
+                                  },
+                                  "stateOrProvince": {
+                                    "title": "State or Province",
+                                    "type": "string"
+                                  },
+                                  "streetLine1": {
+                                    "title": "Street Line 1",
+                                    "type": "string"
+                                  },
+                                  "streetLine2": {
+                                    "title": "Street Line 2",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "companyName": {
+                                "type": "string"
+                              },
+                              "contactEmail": {
+                                "type": "string"
+                              },
+                              "contactFirstName": {
+                                "type": "string"
+                              },
+                              "contactLastName": {
+                                "type": "string"
+                              },
+                              "contactMobileNumber": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "deliveryMethod": {
+                            "enum": [
+                              "NONE",
+                              "EMAIL",
+                              "PHONE",
+                              "ADDRESS",
+                              "EMBEDDED",
+                              "BULKSHIPMENT",
+                              "QRCODE",
+                              "BULKDIGITAL",
+                              "EMBEDDED_COMPONENT",
+                              "WHATSAPP"
+                            ],
+                            "type": "string"
+                          },
+                          "deliveryStatus": {
+                            "type": "string"
+                          },
+                          "externalRefLineItemID": {
+                            "type": "string"
+                          },
+                          "lineItemErrors": {
+                            "items": {
+                              "properties": {
+                                "errorCode": {
+                                  "type": "string"
+                                },
+                                "errorMessage": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "lineItemStatus": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "recipient": {
+                            "properties": {
+                              "address": {
+                                "properties": {
+                                  "city": {
+                                    "type": "string"
+                                  },
+                                  "companyName": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "type": "string"
+                                  },
+                                  "stateOrProvince": {
+                                    "type": "string"
+                                  },
+                                  "streetLine1": {
+                                    "type": "string"
+                                  },
+                                  "streetLine2": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "firstName": {
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "type": "string"
+                              },
+                              "mobileNumber": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "referenceLineItemId": {
+                            "type": "string"
+                          },
+                          "rewardName": {
+                            "type": "string"
+                          },
+                          "scheduledDeliveryDate": {
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "notes": {
+                      "description": "Order notes",
+                      "type": "string"
+                    },
+                    "orderErrors": {
+                      "description": "Order level errors",
+                      "items": {
+                        "properties": {
+                          "$ref": "#/responses/200/content/application~1json/schema/properties/lineItems/items/properties/lineItemErrors/items/properties"
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "orderStatus": {
+                      "description": "Current status of the order",
+                      "type": "string"
+                    },
+                    "pagination": {
+                      "description": "Pagination information",
+                      "properties": {
+                        "maxResults": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "nextCursor": {
+                          "type": "string"
+                        },
+                        "nextPageAvailable": {
+                          "type": "boolean"
+                        },
+                        "numberOfElements": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "prevCursor": {
+                          "type": "string"
+                        },
+                        "prevPageAvailable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "purchaseOrderNumber": {
+                      "description": "Purchase order number",
+                      "type": "string"
+                    },
+                    "referenceOrderID": {
+                      "description": "Internal reference order ID",
+                      "type": "string"
+                    },
+                    "sender": {
+                      "description": "Sender information",
+                      "properties": {
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "title": "Last Name",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "totalLineItems": {
+                      "description": "Total number of line items",
+                      "format": "int64",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Exceeded the allowable TPS rate limit"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PATCH /asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateAsyncOrder",
+        "parameters": [
+          {
+            "description": "Specify the customer to be queried",
+            "in": "path",
+            "name": "customerIdentifier",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specify the account to be queried.",
+            "in": "path",
+            "name": "accountIdentifier",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "description": "External reference ID of the async order",
+            "in": "path",
+            "name": "externalRefID",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "campaign": {
+                    "description": "Optional. Campaign that may be used to administratively categorize a specific order. Must be between 0 and 1024 characters in length.",
+                    "title": "Campaign",
+                    "type": "string"
+                  },
+                  "notes": {
+                    "description": "Optional order notes (up to 150 characters)",
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "title": "Notes",
+                    "type": "string"
+                  },
+                  "purchaseOrderNumber": {
+                    "description": "The Purchase Order Number associated with this order.",
+                    "title": "Purchase Order Number",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accountIdentifier": {
+                      "description": "Account identifier",
+                      "type": "string"
+                    },
+                    "amountCharged": {
+                      "description": "Initial value and the total charged amount on the account",
+                      "properties": {
+                        "currencyCode": {
+                          "type": "string"
+                        },
+                        "shippingFee": {
+                          "type": "number"
+                        },
+                        "total": {
+                          "type": "number"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "campaign": {
+                      "description": "Campaign name",
+                      "type": "string"
+                    },
+                    "completedAt": {
+                      "description": "Order completion timestamp",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "description": "Order creation timestamp",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "customerIdentifier": {
+                      "description": "Customer identifier",
+                      "type": "string"
+                    },
+                    "externalRefID": {
+                      "description": "External reference ID provided by client",
+                      "type": "string"
+                    },
+                    "lineItems": {
+                      "description": "list of line items",
+                      "items": {
+                        "properties": {
+                          "amount": {
+                            "type": "number"
+                          },
+                          "amountCharged": {
+                            "properties": {
+                              "currencyCode": {
+                                "type": "string"
+                              },
+                              "exchangeRate": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              },
+                              "total": {
+                                "type": "number"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "bulkShipping": {
+                            "properties": {
+                              "address": {
+                                "properties": {
+                                  "city": {
+                                    "title": "City",
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "title": "Country Code",
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "title": "Postal Code",
+                                    "type": "string"
+                                  },
+                                  "stateOrProvince": {
+                                    "title": "State or Province",
+                                    "type": "string"
+                                  },
+                                  "streetLine1": {
+                                    "title": "Street Line 1",
+                                    "type": "string"
+                                  },
+                                  "streetLine2": {
+                                    "title": "Street Line 2",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "companyName": {
+                                "type": "string"
+                              },
+                              "contactEmail": {
+                                "type": "string"
+                              },
+                              "contactFirstName": {
+                                "type": "string"
+                              },
+                              "contactLastName": {
+                                "type": "string"
+                              },
+                              "contactMobileNumber": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "deliveryMethod": {
+                            "enum": [
+                              "NONE",
+                              "EMAIL",
+                              "PHONE",
+                              "ADDRESS",
+                              "EMBEDDED",
+                              "BULKSHIPMENT",
+                              "QRCODE",
+                              "BULKDIGITAL",
+                              "EMBEDDED_COMPONENT",
+                              "WHATSAPP"
+                            ],
+                            "type": "string"
+                          },
+                          "deliveryStatus": {
+                            "type": "string"
+                          },
+                          "externalRefLineItemID": {
+                            "type": "string"
+                          },
+                          "lineItemErrors": {
+                            "items": {
+                              "properties": {
+                                "errorCode": {
+                                  "type": "string"
+                                },
+                                "errorMessage": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "lineItemStatus": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "recipient": {
+                            "properties": {
+                              "address": {
+                                "properties": {
+                                  "city": {
+                                    "type": "string"
+                                  },
+                                  "companyName": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "type": "string"
+                                  },
+                                  "stateOrProvince": {
+                                    "type": "string"
+                                  },
+                                  "streetLine1": {
+                                    "type": "string"
+                                  },
+                                  "streetLine2": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "firstName": {
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "type": "string"
+                              },
+                              "mobileNumber": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "referenceLineItemId": {
+                            "type": "string"
+                          },
+                          "rewardName": {
+                            "type": "string"
+                          },
+                          "scheduledDeliveryDate": {
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "notes": {
+                      "description": "Order notes",
+                      "type": "string"
+                    },
+                    "orderErrors": {
+                      "description": "Order level errors",
+                      "items": {
+                        "properties": {
+                          "$ref": "#/responses/200/content/application~1json/schema/properties/lineItems/items/properties/lineItemErrors/items/properties"
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "orderStatus": {
+                      "description": "Current status of the order",
+                      "type": "string"
+                    },
+                    "pagination": {
+                      "description": "Pagination information",
+                      "properties": {
+                        "maxResults": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "nextCursor": {
+                          "type": "string"
+                        },
+                        "nextPageAvailable": {
+                          "type": "boolean"
+                        },
+                        "numberOfElements": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "prevCursor": {
+                          "type": "string"
+                        },
+                        "prevPageAvailable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "purchaseOrderNumber": {
+                      "description": "Purchase order number",
+                      "type": "string"
+                    },
+                    "referenceOrderID": {
+                      "description": "Internal reference order ID",
+                      "type": "string"
+                    },
+                    "sender": {
+                      "description": "Sender information",
+                      "properties": {
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "title": "Last Name",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "totalLineItems": {
+                      "description": "Total number of line items",
+                      "format": "int64",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Exceeded the allowable TPS rate limit"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

@@ -61,7 +61,7 @@ class TestCustomerEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["list"]:
+        for _op in ["create", "list", "load"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "customer." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -73,19 +73,34 @@ class TestCustomerEntity:
                         "set TANGOCARD_TEST_CUSTOMER_ENTID JSON to run live")
         client = setup["client"]
 
-        # Bootstrap entity data from existing test data.
-        customer_ref01_data_raw = vs.items(helpers.to_map(
-            vs.getpath(setup["data"], "existing.customer")))
-        customer_ref01_data = None
-        if len(customer_ref01_data_raw) > 0:
-            customer_ref01_data = helpers.to_map(customer_ref01_data_raw[0][1])
+        # CREATE
+        customer_ref01_ent = client.Customer(None)
+        customer_ref01_data = helpers.to_map(vs.getprop(
+            vs.getpath(setup["data"], "new.customer"), "customer_ref01"))
+
+        customer_ref01_data = helpers.to_map(runner.entity_data(customer_ref01_ent.create(customer_ref01_data, None)))
+        assert customer_ref01_data is not None
+        assert customer_ref01_data["id"] is not None
 
         # LIST
-        customer_ref01_ent = client.Customer(None)
         customer_ref01_match = {}
 
         customer_ref01_list_result = customer_ref01_ent.list(customer_ref01_match, None)
         assert isinstance(customer_ref01_list_result, list)
+
+        found_item = vs.select(
+            runner.entity_list_to_data(customer_ref01_list_result),
+            {"id": customer_ref01_data["id"]})
+        assert not vs.isempty(found_item)
+
+        # LOAD
+        customer_ref01_match_dt0 = {
+            "id": customer_ref01_data["id"],
+        }
+        customer_ref01_data_dt0_loaded = customer_ref01_ent.load(customer_ref01_match_dt0, None)
+        customer_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(customer_ref01_data_dt0_loaded))
+        assert customer_ref01_data_dt0_load_result is not None
+        assert customer_ref01_data_dt0_load_result["id"] == customer_ref01_data["id"]
 
 
 

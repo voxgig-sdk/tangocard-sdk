@@ -1,0 +1,56 @@
+# BasicLineItemFlow
+
+main: kit: flow: BasicLineItemFlow:
+{
+  entity: "line_item",
+  kind: "basic",
+  name: "BasicLineItemFlow",
+  step: [
+    {
+      input: {
+        ref: "line_item_ref01"
+      }
+
+      match: {
+        reference_line_item_id: "reference_line_item01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "line_item_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "line_item_ref01",
+        srcdatavar: "line_item_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "line_item01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-line_item_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLineItemFlow"
+}

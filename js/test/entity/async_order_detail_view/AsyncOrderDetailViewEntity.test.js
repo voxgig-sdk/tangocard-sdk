@@ -1,0 +1,163 @@
+
+const envlocal = __dirname + '/../../../.env.local'
+require('../../utility').loadEnvLocal(envlocal)
+
+const Path = require('node:path')
+const Fs = require('node:fs')
+
+const { test, describe, afterEach } = require('node:test')
+const assert = require('node:assert')
+const { createLiveTransport } = require('../../live-runner')
+const { runLiveEntity } = require('../../live-entity')
+
+
+const { TangocardSDK, BaseFeature, stdutil, config } = require('../../..')
+
+const {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+} = require('../../utility')
+
+
+describe('AsyncOrderDetailViewEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when TANGOCARD_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TANGOCARD_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = TangocardSDK.test()
+    const ent = testsdk.AsyncOrderDetailView()
+    assert(null != ent)
+  })
+
+
+  test('basic', async (t) => {
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"accountIdentifier","req":false,"short":"Account identifier","type":"`$STRING`","index$":0},{"active":true,"name":"amountCharged","req":false,"short":"Initial value and the total charged amount on the account","type":"`$OBJECT`","index$":1},{"active":true,"name":"campaign","req":false,"short":"Campaign name","type":"`$STRING`","index$":2},{"active":true,"format":"date-time","name":"completedAt","req":false,"short":"Order completion timestamp","type":"`$STRING`","index$":3},{"active":true,"format":"date-time","name":"createdAt","req":false,"short":"Order creation timestamp","type":"`$STRING`","index$":4},{"active":true,"name":"customerIdentifier","req":false,"short":"Customer identifier","type":"`$STRING`","index$":5},{"active":true,"name":"externalRefID","req":false,"short":"External reference ID provided by client","type":"`$STRING`","index$":6},{"active":true,"name":"id","req":false,"type":"`$STRING`","index$":7},{"active":true,"name":"lineItems","req":false,"short":"list of line items","type":"`$ARRAY`","index$":8},{"active":true,"name":"notes","req":false,"short":"Order notes","type":"`$STRING`","index$":9},{"active":true,"name":"orderErrors","req":false,"short":"Order level errors","type":"`$ARRAY`","index$":10},{"active":true,"name":"orderStatus","req":false,"short":"Current status of the order","type":"`$STRING`","index$":11},{"active":true,"name":"pagination","req":false,"short":"Pagination information","type":"`$OBJECT`","index$":12},{"active":true,"name":"purchaseOrderNumber","req":false,"short":"Purchase order number","type":"`$STRING`","index$":13},{"active":true,"name":"referenceOrderID","req":false,"short":"Internal reference order ID","type":"`$STRING`","index$":14},{"active":true,"name":"sender","req":false,"short":"Sender information","type":"`$OBJECT`","index$":15},{"active":true,"format":"int64","name":"totalLineItems","req":false,"short":"Total number of line items","type":"`$INTEGER`","index$":16}],"id":{"field":"id","from":{"account_identifier":"accountIdentifier","external_ref_id":"externalRefID"},"name":"id","parts":["account_identifier","external_ref_id"],"sep":"/"},"name":"async_order_detail_view","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"account_identifier","orig":"account_identifier","reqd":true,"type":"`$STRING`","index$":0},{"active":true,"kind":"param","name":"customer_identifier","orig":"customer_identifier","reqd":true,"type":"`$STRING`","index$":1},{"active":true,"kind":"param","name":"external_ref_id","orig":"external_ref_id","reqd":true,"type":"`$STRING`","index$":2}],"query":[{"active":true,"kind":"query","name":"external_ref_line_item_i_d","orig":"external_ref_line_item_i_d","reqd":false,"type":"`$ARRAY`","index$":0},{"active":true,"example":false,"kind":"query","name":"failed_only","orig":"failed_only","reqd":false,"type":"`$BOOLEAN`","index$":1},{"active":true,"example":100,"kind":"query","name":"max_result","orig":"max_result","reqd":false,"type":"`$INTEGER`","index$":2},{"active":true,"example":"NjI=","kind":"query","name":"next_cursor","orig":"next_cursor","reqd":false,"type":"`$STRING`","index$":3},{"active":true,"example":"NjE=","kind":"query","name":"prev_cursor","orig":"prev_cursor","reqd":false,"type":"`$STRING`","index$":4},{"active":true,"kind":"query","name":"reference_line_item_i_d","orig":"reference_line_item_i_d","reqd":false,"type":"`$ARRAY`","index$":5}]},"contract":{"id":"GET /asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}","json":"{\"operationId\":\"getAsyncOrder\",\"parameters\":[{\"description\":\"specify the customer to be queried\",\"in\":\"path\",\"name\":\"customerIdentifier\",\"required\":true,\"schema\":{\"minLength\":1,\"type\":\"string\"}},{\"description\":\"Specify the account to be queried.\",\"in\":\"path\",\"name\":\"accountIdentifier\",\"required\":true,\"schema\":{\"minLength\":1,\"type\":\"string\"}},{\"description\":\"External reference ID of the async order\",\"in\":\"path\",\"name\":\"externalRefID\",\"required\":true,\"schema\":{\"minLength\":1,\"type\":\"string\"}},{\"description\":\"Cursor for navigating to previous page\",\"example\":\"NjE=\",\"in\":\"query\",\"name\":\"prevCursor\",\"required\":false,\"schema\":{\"default\":\"\",\"type\":\"string\"}},{\"description\":\"Cursor for navigating to next page\",\"example\":\"NjI=\",\"in\":\"query\",\"name\":\"nextCursor\",\"required\":false,\"schema\":{\"default\":\"\",\"type\":\"string\"}},{\"description\":\"Maximum number of line items to return\",\"example\":100,\"in\":\"query\",\"name\":\"maxResults\",\"required\":false,\"schema\":{\"default\":100,\"format\":\"int32\",\"maximum\":500,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Specify the externalRefLineItemIDs to be queried. A maximum of 50 externalRefLineItemIDs can be provided.\",\"in\":\"query\",\"name\":\"externalRefLineItemIDs\",\"required\":false,\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}},{\"description\":\"Specify the referenceLineItemIDs to be queried. A maximum of 50 referenceLineItemIDs can be provided.\",\"in\":\"query\",\"name\":\"referenceLineItemIDs\",\"required\":false,\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}},{\"description\":\"Specify true to return only failed line items\",\"in\":\"query\",\"name\":\"failedOnly\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accountIdentifier\":{\"description\":\"Account identifier\",\"type\":\"string\"},\"amountCharged\":{\"description\":\"Initial value and the total charged amount on the account\",\"properties\":{\"currencyCode\":{\"type\":\"string\"},\"shippingFee\":{\"type\":\"number\"},\"total\":{\"type\":\"number\"},\"value\":{\"type\":\"number\"}},\"type\":\"object\"},\"campaign\":{\"description\":\"Campaign name\",\"type\":\"string\"},\"completedAt\":{\"description\":\"Order completion timestamp\",\"format\":\"date-time\",\"type\":\"string\"},\"createdAt\":{\"description\":\"Order creation timestamp\",\"format\":\"date-time\",\"type\":\"string\"},\"customerIdentifier\":{\"description\":\"Customer identifier\",\"type\":\"string\"},\"externalRefID\":{\"description\":\"External reference ID provided by client\",\"type\":\"string\"},\"lineItems\":{\"description\":\"list of line items\",\"items\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"amountCharged\":{\"properties\":{\"currencyCode\":{\"type\":\"string\"},\"exchangeRate\":{\"type\":\"number\"},\"fee\":{\"type\":\"number\"},\"total\":{\"type\":\"number\"},\"value\":{\"type\":\"number\"}},\"type\":\"object\"},\"bulkShipping\":{\"properties\":{\"address\":{\"properties\":{\"city\":{\"title\":\"City\",\"type\":\"string\"},\"country\":{\"title\":\"Country Code\",\"type\":\"string\"},\"postalCode\":{\"title\":\"Postal Code\",\"type\":\"string\"},\"stateOrProvince\":{\"title\":\"State or Province\",\"type\":\"string\"},\"streetLine1\":{\"title\":\"Street Line 1\",\"type\":\"string\"},\"streetLine2\":{\"title\":\"Street Line 2\",\"type\":\"string\"}},\"type\":\"object\"},\"companyName\":{\"type\":\"string\"},\"contactEmail\":{\"type\":\"string\"},\"contactFirstName\":{\"type\":\"string\"},\"contactLastName\":{\"type\":\"string\"},\"contactMobileNumber\":{\"type\":\"string\"}},\"type\":\"object\"},\"deliveryMethod\":{\"enum\":[\"NONE\",\"EMAIL\",\"PHONE\",\"ADDRESS\",\"EMBEDDED\",\"BULKSHIPMENT\",\"QRCODE\",\"BULKDIGITAL\",\"EMBEDDED_COMPONENT\",\"WHATSAPP\"],\"type\":\"string\"},\"deliveryStatus\":{\"type\":\"string\"},\"externalRefLineItemID\":{\"type\":\"string\"},\"lineItemErrors\":{\"items\":{\"properties\":{\"errorCode\":{\"type\":\"string\"},\"errorMessage\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"lineItemStatus\":{\"type\":\"string\"},\"quantity\":{\"format\":\"int32\",\"type\":\"integer\"},\"recipient\":{\"properties\":{\"address\":{\"properties\":{\"city\":{\"type\":\"string\"},\"companyName\":{\"type\":\"string\"},\"country\":{\"type\":\"string\"},\"postalCode\":{\"type\":\"string\"},\"stateOrProvince\":{\"type\":\"string\"},\"streetLine1\":{\"type\":\"string\"},\"streetLine2\":{\"type\":[\"string\",\"null\"]}},\"type\":\"object\"},\"email\":{\"type\":\"string\"},\"firstName\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"mobileNumber\":{\"type\":\"string\"}},\"type\":\"object\"},\"referenceLineItemId\":{\"type\":\"string\"},\"rewardName\":{\"type\":\"string\"},\"scheduledDeliveryDate\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"notes\":{\"description\":\"Order notes\",\"type\":\"string\"},\"orderErrors\":{\"description\":\"Order level errors\",\"items\":{\"properties\":{\"$ref\":\"#/responses/200/content/application~1json/schema/properties/lineItems/items/properties/lineItemErrors/items/properties\"},\"type\":\"object\"},\"type\":\"array\"},\"orderStatus\":{\"description\":\"Current status of the order\",\"type\":\"string\"},\"pagination\":{\"description\":\"Pagination information\",\"properties\":{\"maxResults\":{\"format\":\"int32\",\"type\":\"integer\"},\"nextCursor\":{\"type\":\"string\"},\"nextPageAvailable\":{\"type\":\"boolean\"},\"numberOfElements\":{\"format\":\"int32\",\"type\":\"integer\"},\"prevCursor\":{\"type\":\"string\"},\"prevPageAvailable\":{\"type\":\"boolean\"}},\"type\":\"object\"},\"purchaseOrderNumber\":{\"description\":\"Purchase order number\",\"type\":\"string\"},\"referenceOrderID\":{\"description\":\"Internal reference order ID\",\"type\":\"string\"},\"sender\":{\"description\":\"Sender information\",\"properties\":{\"email\":{\"title\":\"Email\",\"type\":\"string\"},\"firstName\":{\"title\":\"First Name\",\"type\":\"string\"},\"lastName\":{\"title\":\"Last Name\",\"type\":\"string\"}},\"type\":\"object\"},\"totalLineItems\":{\"description\":\"Total number of line items\",\"format\":\"int64\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unprocessable Entity\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Exceeded the allowable TPS rate limit\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}","rename":{"param":{"accountIdentifier":"account_identifier","customerIdentifier":"customer_identifier","externalRefID":"external_ref_id"}},"segments":[{"lit":"asyncOrders"},{"lit":"customers"},{"var":"customer_identifier"},{"lit":"accounts"},{"var":"account_identifier"},{"var":"external_ref_id"}],"select":{"exist":["account_identifier","customer_identifier","external_ref_id","external_ref_line_item_i_d","failed_only","max_result","next_cursor","prev_cursor","reference_line_item_i_d"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"},"update":{"input":"data","name":"update","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"account_identifier","orig":"account_identifier","reqd":true,"type":"`$STRING`","index$":0},{"active":true,"kind":"param","name":"customer_identifier","orig":"customer_identifier","reqd":true,"type":"`$STRING`","index$":1},{"active":true,"kind":"param","name":"external_ref_id","orig":"external_ref_id","reqd":true,"type":"`$STRING`","index$":2}]},"contract":{"id":"PATCH /asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}","json":"{\"operationId\":\"updateAsyncOrder\",\"parameters\":[{\"description\":\"Specify the customer to be queried\",\"in\":\"path\",\"name\":\"customerIdentifier\",\"required\":true,\"schema\":{\"minLength\":1,\"type\":\"string\"}},{\"description\":\"Specify the account to be queried.\",\"in\":\"path\",\"name\":\"accountIdentifier\",\"required\":true,\"schema\":{\"minLength\":1,\"type\":\"string\"}},{\"description\":\"External reference ID of the async order\",\"in\":\"path\",\"name\":\"externalRefID\",\"required\":true,\"schema\":{\"minLength\":1,\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"campaign\":{\"description\":\"Optional. Campaign that may be used to administratively categorize a specific order. Must be between 0 and 1024 characters in length.\",\"title\":\"Campaign\",\"type\":\"string\"},\"notes\":{\"description\":\"Optional order notes (up to 150 characters)\",\"maxLength\":150,\"minLength\":0,\"title\":\"Notes\",\"type\":\"string\"},\"purchaseOrderNumber\":{\"description\":\"The Purchase Order Number associated with this order.\",\"title\":\"Purchase Order Number\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accountIdentifier\":{\"description\":\"Account identifier\",\"type\":\"string\"},\"amountCharged\":{\"description\":\"Initial value and the total charged amount on the account\",\"properties\":{\"currencyCode\":{\"type\":\"string\"},\"shippingFee\":{\"type\":\"number\"},\"total\":{\"type\":\"number\"},\"value\":{\"type\":\"number\"}},\"type\":\"object\"},\"campaign\":{\"description\":\"Campaign name\",\"type\":\"string\"},\"completedAt\":{\"description\":\"Order completion timestamp\",\"format\":\"date-time\",\"type\":\"string\"},\"createdAt\":{\"description\":\"Order creation timestamp\",\"format\":\"date-time\",\"type\":\"string\"},\"customerIdentifier\":{\"description\":\"Customer identifier\",\"type\":\"string\"},\"externalRefID\":{\"description\":\"External reference ID provided by client\",\"type\":\"string\"},\"lineItems\":{\"description\":\"list of line items\",\"items\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"amountCharged\":{\"properties\":{\"currencyCode\":{\"type\":\"string\"},\"exchangeRate\":{\"type\":\"number\"},\"fee\":{\"type\":\"number\"},\"total\":{\"type\":\"number\"},\"value\":{\"type\":\"number\"}},\"type\":\"object\"},\"bulkShipping\":{\"properties\":{\"address\":{\"properties\":{\"city\":{\"title\":\"City\",\"type\":\"string\"},\"country\":{\"title\":\"Country Code\",\"type\":\"string\"},\"postalCode\":{\"title\":\"Postal Code\",\"type\":\"string\"},\"stateOrProvince\":{\"title\":\"State or Province\",\"type\":\"string\"},\"streetLine1\":{\"title\":\"Street Line 1\",\"type\":\"string\"},\"streetLine2\":{\"title\":\"Street Line 2\",\"type\":\"string\"}},\"type\":\"object\"},\"companyName\":{\"type\":\"string\"},\"contactEmail\":{\"type\":\"string\"},\"contactFirstName\":{\"type\":\"string\"},\"contactLastName\":{\"type\":\"string\"},\"contactMobileNumber\":{\"type\":\"string\"}},\"type\":\"object\"},\"deliveryMethod\":{\"enum\":[\"NONE\",\"EMAIL\",\"PHONE\",\"ADDRESS\",\"EMBEDDED\",\"BULKSHIPMENT\",\"QRCODE\",\"BULKDIGITAL\",\"EMBEDDED_COMPONENT\",\"WHATSAPP\"],\"type\":\"string\"},\"deliveryStatus\":{\"type\":\"string\"},\"externalRefLineItemID\":{\"type\":\"string\"},\"lineItemErrors\":{\"items\":{\"properties\":{\"errorCode\":{\"type\":\"string\"},\"errorMessage\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"lineItemStatus\":{\"type\":\"string\"},\"quantity\":{\"format\":\"int32\",\"type\":\"integer\"},\"recipient\":{\"properties\":{\"address\":{\"properties\":{\"city\":{\"type\":\"string\"},\"companyName\":{\"type\":\"string\"},\"country\":{\"type\":\"string\"},\"postalCode\":{\"type\":\"string\"},\"stateOrProvince\":{\"type\":\"string\"},\"streetLine1\":{\"type\":\"string\"},\"streetLine2\":{\"type\":[\"string\",\"null\"]}},\"type\":\"object\"},\"email\":{\"type\":\"string\"},\"firstName\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"mobileNumber\":{\"type\":\"string\"}},\"type\":\"object\"},\"referenceLineItemId\":{\"type\":\"string\"},\"rewardName\":{\"type\":\"string\"},\"scheduledDeliveryDate\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"notes\":{\"description\":\"Order notes\",\"type\":\"string\"},\"orderErrors\":{\"description\":\"Order level errors\",\"items\":{\"properties\":{\"$ref\":\"#/responses/200/content/application~1json/schema/properties/lineItems/items/properties/lineItemErrors/items/properties\"},\"type\":\"object\"},\"type\":\"array\"},\"orderStatus\":{\"description\":\"Current status of the order\",\"type\":\"string\"},\"pagination\":{\"description\":\"Pagination information\",\"properties\":{\"maxResults\":{\"format\":\"int32\",\"type\":\"integer\"},\"nextCursor\":{\"type\":\"string\"},\"nextPageAvailable\":{\"type\":\"boolean\"},\"numberOfElements\":{\"format\":\"int32\",\"type\":\"integer\"},\"prevCursor\":{\"type\":\"string\"},\"prevPageAvailable\":{\"type\":\"boolean\"}},\"type\":\"object\"},\"purchaseOrderNumber\":{\"description\":\"Purchase order number\",\"type\":\"string\"},\"referenceOrderID\":{\"description\":\"Internal reference order ID\",\"type\":\"string\"},\"sender\":{\"description\":\"Sender information\",\"properties\":{\"email\":{\"title\":\"Email\",\"type\":\"string\"},\"firstName\":{\"title\":\"First Name\",\"type\":\"string\"},\"lastName\":{\"title\":\"Last Name\",\"type\":\"string\"}},\"type\":\"object\"},\"totalLineItems\":{\"description\":\"Total number of line items\",\"format\":\"int64\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Exceeded the allowable TPS rate limit\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"PATCH","orig":"/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}","rename":{"param":{"accountIdentifier":"account_identifier","customerIdentifier":"customer_identifier","externalRefID":"external_ref_id"}},"segments":[{"lit":"asyncOrders"},{"lit":"customers"},{"var":"customer_identifier"},{"lit":"accounts"},{"var":"account_identifier"},{"var":"external_ref_id"}],"select":{"exist":["account_identifier","customer_identifier","external_ref_id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"update"}},"relations":{"ancestors":[["customer","account"]]},"key$":"async_order_detail_view","name__orig":"async_order_detail_view","Name":"AsyncOrderDetailView","name_":"async_order_detail_view","name-":"async-order-detail-view","NAME":"ASYNC_ORDER_DETAIL_VIEW","index$":4}, {"active":true,"entity":"async_order_detail_view","key$":"BasicAsyncOrderDetailViewFlow","kind":"basic","name":"BasicAsyncOrderDetailViewFlow","param":{},"step":[{"active":true,"data":{"account_identifier":"accountentifier01","customer_identifier":"customerentifier01"},"input":{"ref":"async_order_detail_view_ref01","srcdatavar":"async_order_detail_view_ref01_data","suffix":"_up0","textfield":"accountIdentifier"},"match":{},"op":"update","spec":[{"apply":"TextFieldMark","def":{"mark":"Mark01-async_order_detail_view_ref01"}}],"valid":[],"index$":0},{"active":true,"data":{},"input":{"ref":"async_order_detail_view_ref01","srcdatavar":"async_order_detail_view_ref01_data","suffix":"_dt0"},"match":{"account_identifier":"accountentifier01","customer_identifier":"customerentifier01","id":"async_order_detail_view01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-async_order_detail_view_ref01"}}],"index$":1}]}, 'AsyncOrderDetailView')
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+    let async_order_detail_view_ref01_data = Object.values(setup.data.existing.async_order_detail_view)[0]
+
+    // UPDATE
+    const async_order_detail_view_ref01_ent = client.AsyncOrderDetailView()
+    const async_order_detail_view_ref01_data_up0 = {}
+    async_order_detail_view_ref01_data_up0.id = async_order_detail_view_ref01_data.id
+    async_order_detail_view_ref01_data_up0 ['account_identifier'] = setup.idmap['account_identifier']
+    async_order_detail_view_ref01_data_up0 ['customer_identifier'] = setup.idmap['customer_identifier']
+
+    const async_order_detail_view_ref01_markdef_up0 = { name: 'accountIdentifier', value: 'Mark01-async_order_detail_view_ref01_' + setup.now }
+    async_order_detail_view_ref01_data_up0 [async_order_detail_view_ref01_markdef_up0.name] = async_order_detail_view_ref01_markdef_up0.value
+
+    const async_order_detail_view_ref01_resdata_up0 = (await async_order_detail_view_ref01_ent.update(async_order_detail_view_ref01_data_up0)).data()
+    assert(async_order_detail_view_ref01_resdata_up0.id === async_order_detail_view_ref01_data_up0.id)
+
+    assert(async_order_detail_view_ref01_resdata_up0[async_order_detail_view_ref01_markdef_up0.name] === async_order_detail_view_ref01_markdef_up0.value)
+
+
+    // LOAD
+    const async_order_detail_view_ref01_match_dt0 = {}
+    async_order_detail_view_ref01_match_dt0.id = async_order_detail_view_ref01_data.id
+    const async_order_detail_view_ref01_data_dt0 = (await async_order_detail_view_ref01_ent.load(async_order_detail_view_ref01_match_dt0)).data()
+    assert(async_order_detail_view_ref01_data_dt0.id === async_order_detail_view_ref01_data.id)
+
+
+  })
+})
+
+
+
+function basicSetup(extra) {
+  // TODO: fix test def options
+  const options = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname,
+      '../../../../.sdk/test/entity/async_order_detail_view/AsyncOrderDetailViewTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = TangocardSDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['async_order_detail_view01','async_order_detail_view02','async_order_detail_view03','customer01','customer02','customer03','account01','account02','account03'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'TANGOCARD_TEST_ASYNC_ORDER_DETAIL_VIEW_ENTID': idmap,
+    'TANGOCARD_TEST_LIVE': 'FALSE',
+    'TANGOCARD_TEST_EXPLAIN': 'FALSE',
+    'TANGOCARD_APIKEY': '',
+  })
+
+  idmap = env['TANGOCARD_TEST_ASYNC_ORDER_DETAIL_VIEW_ENTID']
+
+  const live = 'TRUE' === env.TANGOCARD_TEST_LIVE
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['TANGOCARD_TEST_ASYNC_ORDER_DETAIL_VIEW_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new TangocardSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        apikey: env.TANGOCARD_APIKEY,
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when
+      // the last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey and
+      // server values above and handed the SDK undefined.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.TANGOCARD_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

@@ -1,0 +1,169 @@
+# Entity: low_balance_alert_list_view
+
+main: kit: entity: low_balance_alert_list_view: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accountIdentifier"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "balanceAlertDisplayName"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      format: "uuid"
+      name: "balanceAlertID"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "balanceAlertNotification"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "balanceAlertThreshold"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "createdAt"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "customerIdentifier"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "low_balance_alert_list_view"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "account_identifier"
+                orig: "account_identifier"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "param"
+                name: "customer_identifier"
+                orig: "customer_identifier"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "balance_alert_display_name"
+                orig: "balance_alert_display_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "balance_alert_notification"
+                orig: "balance_alert_notification"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+              {
+                kind: "query"
+                name: "balance_alert_threshold"
+                orig: "balance_alert_threshold"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "elements_per_block"
+                orig: "elements_per_block"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance"
+            json: "{\"operationId\":\"listBalanceAlerts\",\"parameters\":[{\"description\":\"The customerIdentifier for the Customer / Account combination.\",\"in\":\"path\",\"name\":\"customerIdentifier\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The accountIdentifier for the Customer / Account combination.\",\"in\":\"path\",\"name\":\"accountIdentifier\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"specify the number of elements in a block.\",\"in\":\"query\",\"name\":\"elementsPerBlock\",\"required\":false,\"schema\":{\"format\":\"int32\",\"type\":\"integer\"}},{\"description\":\"specify the page number to return.\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"format\":\"int32\",\"type\":\"integer\"}},{\"description\":\"A friendly name for this low balance alert (will be displayed in the Tango Portal) to be queried.\",\"in\":\"query\",\"name\":\"balanceAlertDisplayName\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"The threshold amount that will trigger the low balance alert to be queried.\",\"in\":\"query\",\"name\":\"balanceAlertThreshold\",\"required\":false,\"schema\":{\"type\":\"number\"}},{\"description\":\" Low balance notification emails address(es) to be queried.\",\"in\":\"query\",\"name\":\"balanceAlertNotification\",\"required\":false,\"schema\":{\"items\":{\"properties\":{\"emailAddress\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"lowBalanceAlerts\":{\"items\":{\"properties\":{\"accountIdentifier\":{\"title\":\"Account Identifier\",\"type\":\"string\"},\"balanceAlertDisplayName\":{\"title\":\"Balance Alert Display Name\",\"type\":\"string\"},\"balanceAlertID\":{\"format\":\"uuid\",\"title\":\"Balance Alert ID\",\"type\":\"string\"},\"balanceAlertNotification\":{\"items\":{\"properties\":{\"emailAddress\":{\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Balance Alert Notification\",\"type\":\"array\",\"uniqueItems\":true},\"balanceAlertThreshold\":{\"title\":\"Balance Alert Threshold\",\"type\":\"number\"},\"createdAt\":{\"title\":\"Created At\",\"type\":\"string\"},\"customerIdentifier\":{\"title\":\"Customer Identifier\",\"type\":\"string\"}},\"type\":\"object\"},\"title\":\"Low balance alerts for the current page\",\"type\":\"array\"},\"page\":{\"properties\":{\"number\":{\"format\":\"int32\",\"type\":\"integer\"},\"size\":{\"format\":\"int32\",\"type\":\"integer\"},\"totalElements\":{\"format\":\"int64\",\"type\":\"integer\"},\"totalPages\":{\"format\":\"int32\",\"type\":\"integer\"}},\"title\":\"Page data for matching low balance alerts\",\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},{\"properties\":{\"i18nKey\":{\"type\":\"string\"},\"i18nTokenReplacements\":{\"items\":{},\"type\":\"array\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}]}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/0/properties\"},\"type\":\"object\"},{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/1/properties\"},\"type\":\"object\"}]}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/0/properties\"},\"type\":\"object\"},{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/1/properties\"},\"type\":\"object\"}]}}},\"description\":\"Forbidden\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/0/properties\"},\"type\":\"object\"},{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/1/properties\"},\"type\":\"object\"}]}}},\"description\":\"Unprocessable Entity\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/0/properties\"},\"type\":\"object\"},{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/1/properties\"},\"type\":\"object\"}]}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/0/properties\"},\"type\":\"object\"},{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/oneOf/1/properties\"},\"type\":\"object\"}]}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance"
+          rename: {
+            param: {
+              accountIdentifier: "account_identifier"
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          segments: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_identifier"
+            }
+            {
+              lit: "lowbalance"
+            }
+          ]
+          select: {
+            exist: [
+              "account_identifier"
+              "balance_alert_display_name"
+              "balance_alert_notification"
+              "balance_alert_threshold"
+              "customer_identifier"
+              "elements_per_block"
+              "page"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "customer"
+        "account"
+      ]
+    ]
+  }
+
+
+
+}

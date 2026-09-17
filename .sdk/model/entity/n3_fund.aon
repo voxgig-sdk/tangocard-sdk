@@ -1,0 +1,10 @@
+# Entity: n3_fund
+
+main: kit: entity: n3_fund: {
+
+  alias: field: {}
+
+  name: "n3_fund"
+
+
+}

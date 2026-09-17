@@ -1,0 +1,2228 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LineItem | Tango API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Tango API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/tangocard-sdk">voxgig-sdk/tangocard-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Tango API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/account.html">Account</a>
+<a href="../api/add_comment_escalation.html">AddCommentEscalation</a>
+<a href="../api/all_event_type.html">AllEventType</a>
+<a href="../api/async_order.html">AsyncOrder</a>
+<a href="../api/async_order_detail_view.html">AsyncOrderDetailView</a>
+<a href="../api/async_order_line_items_view.html">AsyncOrderLineItemsView</a>
+<a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
+<a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
+<a href="../api/balance_alert_view.html">BalanceAlertView</a>
+<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/catalog.html">Catalog</a>
+<a href="../api/choice_product.html">ChoiceProduct</a>
+<a href="../api/country_view_summary.html">CountryViewSummary</a>
+<a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
+<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
+<a href="../api/credential_type_view.html">CredentialTypeView</a>
+<a href="../api/credit_card.html">CreditCard</a>
+<a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
+<a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
+<a href="../api/customer.html">Customer</a>
+<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
+<a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
+<a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
+<a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
+<a aria-current="page" href="../api/line_item.html">LineItem</a><div class="nav-sections"><a class="nav-section" href="#post-lineitemsreferencelineitemidcancel">POST /lineItems/{referenceLineItemID}/cancel</a>
+<a class="nav-section" href="#post-lineitemsreferencelineitemidfreeze">POST /lineItems/{referenceLineItemID}/freeze</a>
+<a class="nav-section" href="#post-lineitemsreferencelineitemidunfreeze">POST /lineItems/{referenceLineItemID}/unfreeze</a>
+<a class="nav-section" href="#get-lineitems">GET /lineItems</a>
+<a class="nav-section" href="#get-lineitemsreferencelineitemid">GET /lineItems/{referenceLineItemID}</a></div>
+<a href="../api/low_balance_alert_list_view.html">LowBalanceAlertListView</a>
+<a href="../api/low_balance_alert_view.html">LowBalanceAlertView</a>
+<a href="../api/mobile_country.html">MobileCountry</a>
+<a href="../api/n14_webhook.html">N14Webhook</a>
+<a href="../api/n1_customer.html">N1Customer</a>
+<a href="../api/n2_account.html">N2Account</a>
+<a href="../api/n3_fund.html">N3Fund</a>
+<a href="../api/n8_line_item.html">N8LineItem</a>
+<a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
+<a href="../api/order.html">Order</a>
+<a href="../api/order_view_summary.html">OrderViewSummary</a>
+<a href="../api/prepaid_card_info.html">PrepaidCardInfo</a>
+<a href="../api/prepaid_card_transaction.html">PrepaidCardTransaction</a>
+<a href="../api/reissue_card.html">ReissueCard</a>
+<a href="../api/replacement_reason.html">ReplacementReason</a>
+<a href="../api/resend.html">Resend</a>
+<a href="../api/reward_reasons_map.html">RewardReasonsMap</a>
+<a href="../api/transfer_fund.html">TransferFund</a>
+<a href="../api/update_account.html">UpdateAccount</a>
+<a href="../api/update_webhook_subscription_response_view.html">UpdateWebhookSubscriptionResponseView</a>
+<a href="../api/webhook.html">Webhook</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="lineitem">LineItem</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-lineitemsreferencelineitemidcancel"><code>/lineItems/{referenceLineItemID}/cancel</code></a></td>
+<td><code>create</code></td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-lineitemsreferencelineitemidfreeze"><code>/lineItems/{referenceLineItemID}/freeze</code></a></td>
+<td><code>create</code></td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-lineitemsreferencelineitemidunfreeze"><code>/lineItems/{referenceLineItemID}/unfreeze</code></a></td>
+<td><code>create</code></td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-lineitems"><code>/lineItems</code></a></td>
+<td><code>list</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-lineitemsreferencelineitemid"><code>/lineItems/{referenceLineItemID}</code></a></td>
+<td><code>load</code></td>
+<td>OK</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountIssued</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>canCancel</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>canFreeze</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dateIssued</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>deliveryStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>emailStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>etid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>expirationDate</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>externalReferenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItemActionHistory</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItemActionReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItemErrors</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>Errors related to the line item</td>
+</tr>
+<tr>
+<td><code>lineNumber</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orderNotes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orderSource</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>orderStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>quantity of line items</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>redemptionHistory</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reissuedFromReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reissued from reference line item ID</td>
+</tr>
+<tr>
+<td><code>reissuedToReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reissued to reference line item ID</td>
+</tr>
+<tr>
+<td><code>remainingBalance</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rewardName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rewardStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rewardViewHistory</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-lineitemsreferencelineitemidcancel" class="operation" data-method="post"><code>POST</code> /lineItems/{referenceLineItemID}/cancel</h3>
+<p>Operation ID: <code>cancelLineItem</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceLineItemID</code> | <code>path</code> | <code>string</code> | Yes | Reference line item ID is returned in the line items response. |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required when reasonCode is OTHER</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>enum: DELIVERY_INFO, REWARD_AMOUNT, REWARD_TYPE, RECIPIENT, CURRENCY, RECIPIENT_REQUESTED, ...</code></td>
+<td>Yes</td>
+<td>Required reason code for change</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="202-accepted" class="status" data-status="2xx">202: Accepted</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>string</code>.</p>
+<p>Example response:</p>
+<pre><code class="language-json">&quot;\&quot;Accepted\&quot;&quot;
+</code></pre>
+<h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="422-unprocessable-entity" class="status" data-status="4xx">422: Unprocessable Entity</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-lineitemsreferencelineitemidfreeze" class="operation" data-method="post"><code>POST</code> /lineItems/{referenceLineItemID}/freeze</h3>
+<p>Operation ID: <code>freezeLineItem</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceLineItemID</code> | <code>path</code> | <code>string</code> | Yes | Reference line item ID is returned in the line items response. |</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required when reasonCode is &quot;OTHER&quot;, enter the reason why the line item is being C/F/UF</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>enum: DELIVERY_INFO, REWARD_AMOUNT, REWARD_TYPE, VERIFY_ORDER, FRAUD, OTHER</code></td>
+<td>Yes</td>
+<td>Enter the reason why this line item is being Cancelled, Frozen, Unfrozen (respectively)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-1">Responses</h4>
+<h5 id="202-accepted-1" class="status" data-status="2xx">202: Accepted</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>string</code>.</p>
+<p>Example response:</p>
+<pre><code class="language-json">&quot;\&quot;Accepted\&quot;&quot;
+</code></pre>
+<h5 id="400-bad-request-1" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-1" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="422-unprocessable-entity-1" class="status" data-status="4xx">422: Unprocessable Entity</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-lineitemsreferencelineitemidunfreeze" class="operation" data-method="post"><code>POST</code> /lineItems/{referenceLineItemID}/unfreeze</h3>
+<p>Operation ID: <code>unfreezeLineItem</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceLineItemID</code> | <code>path</code> | <code>string</code> | Yes | Reference line item ID is returned in the line items response. |</p>
+<h4 id="request-body-2">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required when ReasonCode is Other</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>enum: DELIVERY_INFO, REWARD_AMOUNT, REWARD_TYPE, VERIFY_ORDER, FRAUD, OTHER</code></td>
+<td>Yes</td>
+<td>Required reason code for change</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-2">Responses</h4>
+<h5 id="202-accepted-2" class="status" data-status="2xx">202: Accepted</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>string</code>.</p>
+<p>Example response:</p>
+<pre><code class="language-json">&quot;\&quot;Accepted\&quot;&quot;
+</code></pre>
+<h5 id="400-bad-request-2" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-2" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="422-unprocessable-entity-2" class="status" data-status="4xx">422: Unprocessable Entity</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-lineitems" class="operation" data-method="get"><code>GET</code> /lineItems</h3>
+<p>Operation ID: <code>listLineItems</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters-3">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceOrderID</code> | <code>query</code> | <code>string</code> | No | Specify the reference order ID to be queried. |
+| <code>externalRefID</code> | <code>query</code> | <code>string</code> | No | Specify the external reference order ID to be queried. |
+| <code>utid</code> | <code>query</code> | <code>string</code> | No | The unique identifier for the reward as provided in the Get Catalog call |
+| <code>ptid</code> | <code>query</code> | <code>string</code> | No | The unique identifier for the Print Reward Link Template provided in the Tango Portal on the Printed Template page. Only applicable when sending a Printed Reward Link. |
+| <code>etid</code> | <code>query</code> | <code>string</code> | No | The unique identifier for the electronic template. Only applicable when deliveryMethod is EMAIL or PHONE |
+| <code>status</code> | <code>query</code> | <code>enum: COMPLETE, PENDING, FAILED, CANCELLED</code> | No | Specify the line item status to be queried. |
+| <code>emailStatus</code> | <code>query</code> | <code>enum: DELIVERED, NOT_DELIVERED, PENDING, SENT, DEFERRED, DROPPED, ...</code> | No | Specify the email status to be queried. |
+| <code>deliveryMethod</code> | <code>query</code> | <code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code> | No | Specify the delivery method to be queried. |
+| <code>deliveryStatus</code> | <code>query</code> | <code>enum: PENDING, PROCESSING, DISPATCHED, DELIVERED, FAILED, ENGAGED</code> | No | Specify the delivery status to be queried. |
+| <code>orderStatus</code> | <code>query</code> | <code>enum: COMPLETE, PENDING, FAILED, CANCELLED, PARTIAL</code> | No | Specify the order status to be queried. |
+| <code>orderSource</code> | <code>query</code> | <code>enum: RA, RG, BE, BI, CI, QW, ...</code> | No | Specify the order source to be queried. |
+| <code>recipientEmail</code> | <code>query</code> | <code>string</code> | No | Specify the recipient email address to be queried. |
+| <code>recipientMobileNumber</code> | <code>query</code> | <code>string</code> | No | Specify the recipient mobile number to be queried. |
+| <code>recipientFirstName</code> | <code>query</code> | <code>string</code> | No | Specify the recipient first name to be queried. |
+| <code>recipientLastName</code> | <code>query</code> | <code>string</code> | No | Specify the recipient last name to be queried. |
+| <code>accountIdentifier</code> | <code>query</code> | <code>string</code> | No | Specify the account identifier to be queried. |
+| <code>campaign</code> | <code>query</code> | <code>string</code> | No | Specify the campaign to be queried. |
+| <code>purchaseOrderNumber</code> | <code>query</code> | <code>string</code> | No | Specify the purchaseOrderNumber to be queried. |
+| <code>orderNotes</code> | <code>query</code> | <code>string</code> | No | Specify the orderNotes to be queried. |
+| <code>recipientStreetLine1</code> | <code>query</code> | <code>string</code> | No | Specify the recipientStreetLine1 to be queried. |
+| <code>recipientStreetLine2</code> | <code>query</code> | <code>string</code> | No | Specify the recipientStreetLine2 to be queried. |
+| <code>recipientCity</code> | <code>query</code> | <code>string</code> | No | Specify the recipientCity to be queried. |
+| <code>recipientStateOrProvince</code> | <code>query</code> | <code>string</code> | No | Specify the recipientStateOrProvince to be queried. |
+| <code>recipientPostalCode</code> | <code>query</code> | <code>string</code> | No | Specify the recipientPostalCode to be queried. |
+| <code>recipientCountry</code> | <code>query</code> | <code>string</code> | No | Specify the recipientCountry to be queried. |
+| <code>startDate</code> | <code>query</code> | <code>string</code> | No | specify the starting date or date time to be queried according to RFC 3339, that is &quot;2016-01-01&quot; or &quot;2016-01-01T00:00:00Z&quot;. See https://www.ietf.org/rfc/rfc3339.txt |
+| <code>endDate</code> | <code>query</code> | <code>string</code> | No | specify the ending date or date time to be queried according to RFC 3339, that is &quot;2016-01-01&quot; or &quot;2016-01-01T00:00:00Z&quot;. See https://www.ietf.org/rfc/rfc3339.txt |
+| <code>columnSortName</code> | <code>query</code> | <code>enum: accountNumber, amountIssued, dateIssued, emailStatus, deliveryMethod, externalReferenceId, ...</code> | No | Specify the column name to sort by. |
+| <code>columnSortAscending</code> | <code>query</code> | <code>string</code> | No | Specify the sorting line-items ascending. |
+| <code>elementsPerBlock</code> | <code>query</code> | <code>integer (int32)</code> | No | Specify the number of elements in a block. |
+| <code>pagePrevious</code> | <code>query</code> | <code>boolean</code> | No | Return the previous page instead of the next page. |
+| <code>pageKeys</code> | <code>query</code> | <code>array of string</code> | No | Specify the page keys to query the next page. |
+| <code>minRemainingBalance</code> | <code>query</code> | <code>number</code> | No | Specify the minimum remaining balance to be queried. |
+| <code>maxRemainingBalance</code> | <code>query</code> | <code>number</code> | No | Specify the maximum remaining balance to be queried. |
+| <code>hasRemainingBalance</code> | <code>query</code> | <code>boolean</code> | No | If true, return any line item that has a remaining balance. |</p>
+<h4 id="responses-3">Responses</h4>
+<h5 id="200-ok" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keysetPage</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Keyset (seek) page data for matching line items</td>
+</tr>
+<tr>
+<td><code>keysetPage.nextPageKeys</code></td>
+<td><code>array of string</code></td>
+<td>Yes</td>
+<td>Keys to get next page</td>
+</tr>
+<tr>
+<td><code>keysetPage.previousPageKeys</code></td>
+<td><code>array of string</code></td>
+<td>Yes</td>
+<td>Keys to get previous page</td>
+</tr>
+<tr>
+<td><code>keysetPage.resultCount</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>Total number of elements in the current page</td>
+</tr>
+<tr>
+<td><code>keysetPage.totalCount</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Total number of elements</td>
+</tr>
+<tr>
+<td><code>lineItems</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>Line item elements for the current page</td>
+</tr>
+<tr>
+<td><code>lineItems[].accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
+</tr>
+<tr>
+<td><code>lineItems[].accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Number</td>
+</tr>
+<tr>
+<td><code>lineItems[].amountCharged</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>lineItems[].amountCharged.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountCharged.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountCharged.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountIssued</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Issued</td>
+</tr>
+<tr>
+<td><code>lineItems[].amountIssued.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountIssued.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountIssued.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountIssued.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].amountIssued.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].campaign</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Campaign</td>
+</tr>
+<tr>
+<td><code>lineItems[].canCancel</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Can Cancel</td>
+</tr>
+<tr>
+<td><code>lineItems[].canFreeze</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Can Freeze</td>
+</tr>
+<tr>
+<td><code>lineItems[].customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>lineItems[].dateIssued</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>Date Issued</td>
+</tr>
+<tr>
+<td><code>lineItems[].deliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>lineItems[].deliveryStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Delivery Status</td>
+</tr>
+<tr>
+<td><code>lineItems[].emailStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Status</td>
+</tr>
+<tr>
+<td><code>lineItems[].etid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Etid</td>
+</tr>
+<tr>
+<td><code>lineItems[].expirationDate</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>Expiration Date</td>
+</tr>
+<tr>
+<td><code>lineItems[].externalReferenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>External Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>lineItems[].lineItemActionReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Line Item Action Reason</td>
+</tr>
+<tr>
+<td><code>lineItems[].lineItemErrors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Errors related to the line item</td>
+</tr>
+<tr>
+<td><code>lineItems[].lineItemErrors[].error_code</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].lineItemErrors[].error_message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItems[].lineNumber</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>Line Number</td>
+</tr>
+<tr>
+<td><code>lineItems[].orderNotes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Order Notes</td>
+</tr>
+<tr>
+<td><code>lineItems[].orderSource</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Order Source</td>
+</tr>
+<tr>
+<td><code>lineItems[].orderStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td><code>lineItems[].ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Ptid</td>
+</tr>
+<tr>
+<td><code>lineItems[].purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>lineItems[].quantity</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>quantity of line items</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Address</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Company Name</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Country Code</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Postal Code</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>State or Province</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 1</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 2</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>lineItems[].recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number</td>
+</tr>
+<tr>
+<td><code>lineItems[].referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>lineItems[].referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>lineItems[].reissuedFromReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reissued from reference line item ID</td>
+</tr>
+<tr>
+<td><code>lineItems[].reissuedToReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reissued to reference line item ID</td>
+</tr>
+<tr>
+<td><code>lineItems[].remainingBalance</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td>Remaining Balance</td>
+</tr>
+<tr>
+<td><code>lineItems[].rewardName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>lineItems[].rewardStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reward Status</td>
+</tr>
+<tr>
+<td><code>lineItems[].sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>lineItems[].sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>lineItems[].sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>lineItems[].sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>lineItems[].status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Line Item Status</td>
+</tr>
+<tr>
+<td><code>lineItems[].utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Utid</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request-3" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-3" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-internal-server-error" class="status" data-status="5xx">500: Internal Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="load">load</h2>
+<h3 id="get-lineitemsreferencelineitemid" class="operation" data-method="get"><code>GET</code> /lineItems/{referenceLineItemID}</h3>
+<p>Operation ID: <code>getLineItem</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters-4">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceLineItemID</code> | <code>path</code> | <code>string</code> | Yes | Reference line item ID is returned in the line items response. |</p>
+<h4 id="responses-4">Responses</h4>
+<h5 id="200-ok-1" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
+</tr>
+<tr>
+<td><code>accountNumber</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Number</td>
+</tr>
+<tr>
+<td><code>amountCharged</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>amountCharged.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountIssued</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Issued</td>
+</tr>
+<tr>
+<td><code>amountIssued.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Campaign</td>
+</tr>
+<tr>
+<td><code>canCancel</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Can Cancel</td>
+</tr>
+<tr>
+<td><code>canFreeze</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Can Freeze</td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>dateIssued</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>Date Issued</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>deliveryStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Delivery Status</td>
+</tr>
+<tr>
+<td><code>emailStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Status</td>
+</tr>
+<tr>
+<td><code>etid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Etid</td>
+</tr>
+<tr>
+<td><code>expirationDate</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>Expiration Date</td>
+</tr>
+<tr>
+<td><code>externalReferenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>External Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>lineItemActionHistory</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Line Item Action History</td>
+</tr>
+<tr>
+<td><code>lineItemActionHistory[].action</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The action performed on the line item</td>
+</tr>
+<tr>
+<td><code>lineItemActionHistory[].actionDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The date when the action was performed</td>
+</tr>
+<tr>
+<td><code>lineItemActionHistory[].newReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The new reference line item ID after the action was performed (Only applicable for reissues</td>
+</tr>
+<tr>
+<td><code>lineItemActionHistory[].oldReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The previous reference line item ID before the action was performed (Only applicable for reissues</td>
+</tr>
+<tr>
+<td><code>lineItemActionHistory[].reason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The reason for the action</td>
+</tr>
+<tr>
+<td><code>lineItemActionReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Line Item Action Reason</td>
+</tr>
+<tr>
+<td><code>lineItemErrors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Errors related to the line item</td>
+</tr>
+<tr>
+<td><code>lineItemErrors[].error_code</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineItemErrors[].error_message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lineNumber</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>Line Number</td>
+</tr>
+<tr>
+<td><code>orderNotes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Order Notes</td>
+</tr>
+<tr>
+<td><code>orderSource</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Order Source</td>
+</tr>
+<tr>
+<td><code>orderStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Ptid</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>quantity of line items</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Address</td>
+</tr>
+<tr>
+<td><code>recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Company Name</td>
+</tr>
+<tr>
+<td><code>recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Country Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Postal Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>State or Province</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 1</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 2</td>
+</tr>
+<tr>
+<td><code>recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number</td>
+</tr>
+<tr>
+<td><code>redemptionHistory</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Redemption History</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].amountCharged</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].amountCharged.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].amountIssued</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Issued</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].amountIssued.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].canCancel</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Can Cancel</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].canFreeze</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Can Freeze</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].dateIssued</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>Date Issued</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].deliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].deliveryStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Delivery Status</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].emailStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Status</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].etid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Etid</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].externalReferenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>External Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].lineItemErrors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Errors related to the line item</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].lineItemErrors[].$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].lineNumber</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>Line Number</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].orderSource</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Order Source</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].orderStatus</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Ptid</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].quantity</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>quantity of line items</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].recipient.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].remainingBalance</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td>Remaining Balance</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].rewardName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].rewardStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reward Status</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Line Item Status</td>
+</tr>
+<tr>
+<td><code>redemptionHistory[].utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Utid</td>
+</tr>
+<tr>
+<td><code>referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>reissuedFromReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reissued from reference line item ID</td>
+</tr>
+<tr>
+<td><code>reissuedToReferenceLineItemId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reissued to reference line item ID</td>
+</tr>
+<tr>
+<td><code>remainingBalance</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td>Remaining Balance</td>
+</tr>
+<tr>
+<td><code>resendHistory</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Resend History</td>
+</tr>
+<tr>
+<td><code>resendHistory[].dateIssued</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].deliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].deliveryStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].etid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].reasonCode</code></td>
+<td><code>enum: NOT_RECEIVED, LOST_DELETED, DELIVERY_INFO, DELIVERY_METHOD, REMINDER, OTHER</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resendHistory[].sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The Reward</td>
+</tr>
+<tr>
+<td><code>reward.credentialList</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Verbose list of credentials</td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].credentialType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].label</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentials</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Credentials as a map with String label key and credential value String</td>
+</tr>
+<tr>
+<td><code>reward.redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rewardName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>rewardStatus</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reward Status</td>
+</tr>
+<tr>
+<td><code>rewardViewHistory</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Reward View History</td>
+</tr>
+<tr>
+<td><code>rewardViewHistory[].date</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The date and time of the reward view history</td>
+</tr>
+<tr>
+<td><code>rewardViewHistory[].status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status of the reward view</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>sender.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Line Item Status</td>
+</tr>
+<tr>
+<td><code>utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Utid</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request-4" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object</code>.</p>
+<h5 id="401-unauthorized-1" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-4" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-not-found" class="status" data-status="4xx">404: Not Found</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

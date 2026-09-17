@@ -110,7 +110,7 @@ function catalog_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["catalog01", "catalog02", "catalog03"] as $k) {
+    foreach (["catalog01", "catalog02", "catalog03", "choice_product01", "choice_product02", "choice_product03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

@@ -1,0 +1,22 @@
+# BasicUpdateAccountFlow
+
+main: kit: flow: BasicUpdateAccountFlow:
+{
+  entity: "update_account",
+  kind: "basic",
+  name: "BasicUpdateAccountFlow",
+  step: [
+    {
+      input: {
+        ref: "update_account_ref01"
+      }
+
+      match: {
+        reference_line_item_i_d: "reference_line_item_i_d01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicUpdateAccountFlow"
+}

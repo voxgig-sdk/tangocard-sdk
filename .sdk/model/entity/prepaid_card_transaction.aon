@@ -1,0 +1,96 @@
+# Entity: prepaid_card_transaction
+
+main: kit: entity: prepaid_card_transaction: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "journal"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "page"
+      req: true
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "prepaid_card_transaction"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "reference_line_item_id"
+                orig: "reference_line_item_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                example: 0
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /prepaidCardService/getCardTransactions/{referenceLineItemID}"
+            json: "{\"operationId\":\"getCardTransactions\",\"parameters\":[{\"description\":\"Reference Line Item ID\",\"in\":\"path\",\"name\":\"referenceLineItemID\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Page number\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"default\":0,\"format\":\"int32\",\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"journal\":{\"items\":{\"properties\":{\"status\":{\"type\":\"string\"},\"transactionAmount\":{\"properties\":{\"currencyCode\":{\"type\":\"string\"},\"value\":{\"type\":\"number\"}},\"type\":\"object\"},\"transactionDate\":{\"type\":\"string\"},\"transactionDetails\":{\"type\":\"string\"},\"transactionType\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"page\":{\"properties\":{\"elementsPerBlock\":{\"format\":\"int32\",\"title\":\"Total number of elements per page\",\"type\":\"integer\"},\"number\":{\"format\":\"int32\",\"title\":\"Current page number\",\"type\":\"integer\"},\"resultCount\":{\"format\":\"int32\",\"title\":\"Total number of elements in the current page\",\"type\":\"integer\"},\"totalCount\":{\"format\":\"int64\",\"title\":\"Total number of elements\",\"type\":\"integer\"}},\"required\":[\"elementsPerBlock\",\"number\",\"resultCount\",\"totalCount\"],\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/401/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/401/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unprocessable Entity\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/401/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/prepaidCardService/getCardTransactions/{referenceLineItemID}"
+          rename: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          segments: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "getCardTransactions"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+          ]
+          select: {
+            exist: [
+              "page"
+              "reference_line_item_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "get_card_transaction"
+      ]
+    ]
+  }
+
+
+
+}

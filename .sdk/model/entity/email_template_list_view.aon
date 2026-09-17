@@ -1,0 +1,10 @@
+# Entity: email_template_list_view
+
+main: kit: entity: email_template_list_view: {
+
+  alias: field: {}
+
+  name: "email_template_list_view"
+
+
+}

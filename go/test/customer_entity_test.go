@@ -80,7 +80,7 @@ func TestCustomerEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"list"} {
+		for _, _op := range []string{"create", "list", "load"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "customer." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -97,27 +97,54 @@ func TestCustomerEntity(t *testing.T) {
 		}
 		client := setup.client
 
-		// Bootstrap entity data from existing test data (no create step in flow).
-		customerRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.customer")))
-		var customerRef01Data map[string]any
-		if len(customerRef01DataRaw) > 0 {
-			customerRef01Data = core.ToMapAny(customerRef01DataRaw[0][1])
+		// CREATE
+		customerRef01Ent := client.Customer(nil)
+		customerRef01Data := core.ToMapAny(vs.GetProp(
+			vs.GetPath(setup.data, []any{"new", "customer"}), "customer_ref01"))
+
+		customerRef01DataResult, err := customerRef01Ent.Create(customerRef01Data, nil)
+		if err != nil {
+			t.Fatalf("create failed: %v", err)
 		}
-		// Discard guards against Go's unused-var check when the flow's steps
-		// happen not to consume the bootstrap data (e.g. list-only flows).
-		_ = customerRef01Data
+		customerRef01Data = core.ToMapAny(entityData(customerRef01DataResult))
+		if customerRef01Data == nil {
+			t.Fatal("expected create result to be a map")
+		}
+		if customerRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 		// LIST
-		customerRef01Ent := client.Customer(nil)
 		customerRef01Match := map[string]any{}
 
 		customerRef01ListResult, err := customerRef01Ent.List(customerRef01Match, nil)
 		if err != nil {
 			t.Fatalf("list failed: %v", err)
 		}
-		_, customerRef01ListOk := customerRef01ListResult.([]any)
+		customerRef01List, customerRef01ListOk := customerRef01ListResult.([]any)
 		if !customerRef01ListOk {
 			t.Fatalf("expected list result to be an array, got %T", customerRef01ListResult)
+		}
+
+		foundItem := vs.Select(entityListToData(customerRef01List), map[string]any{"id": customerRef01Data["id"]})
+		if vs.IsEmpty(foundItem) {
+			t.Fatal("expected to find created entity in list")
+		}
+
+		// LOAD
+		customerRef01MatchDt0 := map[string]any{
+			"id": customerRef01Data["id"],
+		}
+		customerRef01DataDt0Loaded, err := customerRef01Ent.Load(customerRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		customerRef01DataDt0LoadResult := core.ToMapAny(entityData(customerRef01DataDt0Loaded))
+		if customerRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if customerRef01DataDt0LoadResult["id"] != customerRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

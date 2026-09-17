@@ -1,0 +1,9 @@
+# BasicN9DigitalTemplateFlow
+
+main: kit: flow: BasicN9DigitalTemplateFlow:
+{
+  entity: "n9_digital_template",
+  kind: "basic",
+  name: "BasicN9DigitalTemplateFlow",
+  "key$": "BasicN9DigitalTemplateFlow"
+}

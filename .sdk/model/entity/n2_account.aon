@@ -1,0 +1,10 @@
+# Entity: n2_account
+
+main: kit: entity: n2_account: {
+
+  alias: field: {}
+
+  name: "n2_account"
+
+
+}

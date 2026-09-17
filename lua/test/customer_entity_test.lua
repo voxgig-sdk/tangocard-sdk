@@ -60,7 +60,7 @@ describe("CustomerEntity", function()
     local setup = customer_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"list"}) do
+    for _, _op in ipairs({"create", "list", "load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "customer." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -75,21 +75,38 @@ describe("CustomerEntity", function()
     end
     local client = setup.client
 
-    -- Bootstrap entity data from existing test data.
-    local customer_ref01_data_raw = vs.items(helpers.to_map(
-      vs.getpath(setup.data, "existing.customer")))
-    local customer_ref01_data = nil
-    if #customer_ref01_data_raw > 0 then
-      customer_ref01_data = helpers.to_map(customer_ref01_data_raw[1][2])
-    end
+    -- CREATE
+    local customer_ref01_ent = client:Customer(nil)
+    local customer_ref01_data = helpers.to_map(vs.getprop(
+      vs.getpath(setup.data, "new.customer"), "customer_ref01"))
+
+    local customer_ref01_data_result, err = customer_ref01_ent:create(customer_ref01_data, nil)
+    assert.is_nil(err)
+    customer_ref01_data = helpers.to_map(type(customer_ref01_data_result) == 'table' and customer_ref01_data_result.data_get and customer_ref01_data_result:data_get() or customer_ref01_data_result)
+    assert.is_not_nil(customer_ref01_data)
+    assert.is_not_nil(customer_ref01_data["id"])
 
     -- LIST
-    local customer_ref01_ent = client:Customer(nil)
     local customer_ref01_match = {}
 
     local customer_ref01_list_result, err = customer_ref01_ent:list(customer_ref01_match, nil)
     assert.is_nil(err)
     assert.is_table(customer_ref01_list_result)
+
+    local found_item = vs.select(
+      runner.entity_list_to_data(customer_ref01_list_result),
+      { id = customer_ref01_data["id"] })
+    assert.is_false(vs.isempty(found_item))
+
+    -- LOAD
+    local customer_ref01_match_dt0 = {
+      id = customer_ref01_data["id"],
+    }
+    local customer_ref01_data_dt0_loaded, err = customer_ref01_ent:load(customer_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local customer_ref01_data_dt0_load_result = helpers.to_map(type(customer_ref01_data_dt0_loaded) == 'table' and customer_ref01_data_dt0_loaded.data_get and customer_ref01_data_dt0_loaded:data_get() or customer_ref01_data_dt0_loaded)
+    assert.is_not_nil(customer_ref01_data_dt0_load_result)
+    assert.are.equal(customer_ref01_data_dt0_load_result["id"], customer_ref01_data["id"])
 
   end)
 end)

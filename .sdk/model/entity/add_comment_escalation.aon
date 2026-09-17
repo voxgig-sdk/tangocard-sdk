@@ -1,0 +1,135 @@
+# Entity: add_comment_escalation
+
+main: kit: entity: add_comment_escalation: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      format: "int32"
+      name: "assignee"
+      req: false
+      short: "Assignee ID."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "commentText"
+      req: true
+      short: "Free-text comment to add to the prepaid card."
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      format: "int32"
+      name: "inquiryCategoryCode"
+      req: false
+      short: "Inquiry category code."
+      type: "`$INTEGER`"
+    }
+    {
+      format: "int32"
+      name: "inquiryIdNumber"
+      req: false
+      short: "Inquiry ID number."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "inquirySource"
+      req: false
+      short: "Origination source identifier (e.g."
+      type: "`$STRING`"
+    }
+    {
+      format: "int32"
+      name: "inquiryTypeCode"
+      req: false
+      short: "Inquiry type code."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "issueDescription"
+      req: true
+      short: "Short description of the issue."
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      short: "Status of the inquiry (e.g."
+      type: "`$STRING`"
+    }
+    {
+      name: "userId"
+      req: false
+      short: "Agent or CSR user ID."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "add_comment_escalation"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "reference_line_item_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "POST /prepaidCardService/addCommentEscalation/{referenceLineItemID}"
+            json: "{\"operationId\":\"addCommentEscalation\",\"parameters\":[{\"description\":\"Reference Line Item ID\",\"in\":\"path\",\"name\":\"referenceLineItemID\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"assignee\":{\"description\":\"Assignee ID.\",\"format\":\"int32\",\"type\":\"integer\"},\"commentText\":{\"description\":\"Free-text comment to add to the prepaid card.\",\"minLength\":1,\"type\":\"string\"},\"inquiryCategoryCode\":{\"description\":\"Inquiry category code.\",\"format\":\"int32\",\"type\":\"integer\"},\"inquiryIdNumber\":{\"description\":\"Inquiry ID number.\",\"format\":\"int32\",\"type\":\"integer\"},\"inquirySource\":{\"description\":\"Origination source identifier (e.g. TMO_SUPPORT_APP). Maximum 24 characters.\",\"maxLength\":24,\"minLength\":0,\"type\":\"string\"},\"inquiryTypeCode\":{\"description\":\"Inquiry type code.\",\"format\":\"int32\",\"type\":\"integer\"},\"issueDescription\":{\"description\":\"Short description of the issue. Maximum 255 characters.\",\"maxLength\":255,\"minLength\":0,\"type\":\"string\"},\"status\":{\"description\":\"Status of the inquiry (e.g. OPEN).\",\"type\":\"string\"},\"userId\":{\"description\":\"Agent or CSR user ID. Falls back to the authenticated principal if not provided.\",\"type\":\"string\"}},\"required\":[\"commentText\",\"issueDescription\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"status\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Not Found\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unprocessable Entity\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/prepaidCardService/addCommentEscalation/{referenceLineItemID}"
+          rename: {
+            param: {
+              referenceLineItemID: "id"
+            }
+          }
+          segments: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "addCommentEscalation"
+            }
+            {
+              var: "id"
+            }
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

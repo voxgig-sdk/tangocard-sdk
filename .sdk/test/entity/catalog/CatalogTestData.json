@@ -2,41 +2,265 @@
   "existing": {
     "catalog": {
       "CATALOG00": {
-        "brandKey": "s28",
-        "brandName": "s29",
-        "imageUrls": [],
-        "items": []
+        "barcodeType": "s8c",
+        "brandKey": "s8d",
+        "brandName": "s8e",
+        "brandRequirements": {},
+        "categories": [],
+        "createdDate": "s91",
+        "description": "s92",
+        "disclaimer": "s93",
+        "imageUrls": {},
+        "items": [],
+        "lastUpdateDate": "s96",
+        "shortDescription": "s97",
+        "status": "s98",
+        "terms": "s99",
+        "choice_product_id": "CHOICE_PRODUCT01"
       },
       "CATALOG01": {
-        "brandKey": "s50",
-        "brandName": "s51",
-        "imageUrls": [],
-        "items": []
+        "barcodeType": "s118",
+        "brandKey": "s119",
+        "brandName": "s11a",
+        "brandRequirements": {},
+        "categories": [],
+        "createdDate": "s11d",
+        "description": "s11e",
+        "disclaimer": "s11f",
+        "imageUrls": {},
+        "items": [],
+        "lastUpdateDate": "s122",
+        "shortDescription": "s123",
+        "status": "s124",
+        "terms": "s125",
+        "choice_product_id": "CHOICE_PRODUCT01"
       },
       "CATALOG02": {
-        "brandKey": "s78",
-        "brandName": "s79",
-        "imageUrls": [],
-        "items": []
+        "barcodeType": "s1a4",
+        "brandKey": "s1a5",
+        "brandName": "s1a6",
+        "brandRequirements": {},
+        "categories": [],
+        "createdDate": "s1a9",
+        "description": "s1aa",
+        "disclaimer": "s1ab",
+        "imageUrls": {},
+        "items": [],
+        "lastUpdateDate": "s1ae",
+        "shortDescription": "s1af",
+        "status": "s1b0",
+        "terms": "s1b1",
+        "choice_product_id": "CHOICE_PRODUCT01"
       }
     }
   },
   "new": {
     "catalog": {
       "catalog_ref01": {
-        "brandKey": "sa0",
-        "brandName": "sa1",
-        "imageUrls": [],
-        "items": []
+        "barcodeType": "s230",
+        "brandKey": "s231",
+        "brandName": "s232",
+        "brandRequirements": {},
+        "categories": [],
+        "createdDate": "s235",
+        "description": "s236",
+        "disclaimer": "s237",
+        "imageUrls": {},
+        "items": [],
+        "lastUpdateDate": "s23a",
+        "shortDescription": "s23b",
+        "status": "s23c",
+        "terms": "s23d"
       }
     }
   },
   "requests": {
-    "GET /catalogs": {
+    "GET /choiceProducts/{choiceProductUtid}/catalog": {
       "provenance": "operation-contract",
       "contract": {
-        "operationId": "listBrands",
-        "parameters": [],
+        "operationId": "getChoiceProductCatalog",
+        "parameters": [
+          {
+            "description": "Utid - Unique Tango Card ID",
+            "in": "path",
+            "name": "choiceProductUtid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "When true, will return the additional brand fields: status, disclaimer, description, shortDescription, terms, brandRequirements collection, and imageUrls collection.",
+            "in": "query",
+            "name": "verbose",
+            "required": false,
+            "schema": {
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Returns the brand and item details for a specific brand ID.",
+            "in": "query",
+            "name": "brandKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns the brand and item details for a specific brand name.",
+            "in": "query",
+            "name": "brandName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns the brand and item details for a specific utid. The utid is the unique identifier for a specific reward.",
+            "in": "query",
+            "name": "utid",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns the brand and item details of the specified reward name.",
+            "in": "query",
+            "name": "rewardName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns all brands and item details with the specified status.  Possible statuses are: \"test\", \"active\", \"inactive\", \"deleted\"",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns all brands and item details with the specified rewardType.",
+            "in": "query",
+            "name": "rewardType",
+            "required": false,
+            "schema": {
+              "enum": [
+                "all",
+                "gift card",
+                "promo",
+                "donation",
+                "reward link",
+                "payment ach",
+                "payment card",
+                "reporting",
+                "payment-paypal",
+                "tango open loop",
+                "cash equivalent",
+                "physical gift card"
+              ],
+              "items": {
+                "enum": [
+                  "all",
+                  "gift card",
+                  "promo",
+                  "donation",
+                  "reward link",
+                  "payment ach",
+                  "payment card",
+                  "reporting",
+                  "payment-paypal",
+                  "tango open loop",
+                  "cash equivalent",
+                  "physical gift card"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          {
+            "description": "Return all brands and item details associated with a specific currency.",
+            "in": "query",
+            "name": "currencyCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns all brands and item details from a specific country.",
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "Returns all brands and item details for a specific fulfillment type.",
+            "in": "query",
+            "name": "fulfillmentType",
+            "required": false,
+            "schema": {
+              "items": {
+                "enum": [
+                  "DIGITAL",
+                  "PHYSICAL"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          {
+            "description": "Returns all brands and item details for a specific item attribute.",
+            "in": "query",
+            "name": "itemAttribute",
+            "required": false,
+            "schema": {
+              "enum": [
+                "EMAIL",
+                "PHONE",
+                "ADDRESS",
+                "EMBEDDED"
+              ],
+              "items": {
+                "enum": [
+                  "EMAIL",
+                  "PHONE",
+                  "ADDRESS",
+                  "EMBEDDED"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          {
+            "description": "Returns all brands and item details for specific brand categories.",
+            "in": "query",
+            "name": "categoryIds",
+            "required": false,
+            "schema": {
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          }
+        ],
         "protocol": "http",
         "responses": {
           "200": {
@@ -47,45 +271,967 @@
                     "brands": {
                       "items": {
                         "properties": {
+                          "barcodeType": {
+                            "title": "Barcode type code for this brand",
+                            "type": "string"
+                          },
                           "brandKey": {
+                            "title": "Brand Key",
                             "type": "string"
                           },
                           "brandName": {
+                            "title": "Brand Display Name",
+                            "type": "string"
+                          },
+                          "brandRequirements": {
+                            "properties": {
+                              "alwaysShowDisclaimer": {
+                                "title": "Always Show Disclaimer",
+                                "type": "boolean"
+                              },
+                              "disclaimerInstructions": {
+                                "title": "Disclaimer Instructions",
+                                "type": "string"
+                              },
+                              "displayInstructions": {
+                                "title": "Display Instructions",
+                                "type": "string"
+                              },
+                              "termsAndConditionsInstructions": {
+                                "title": "Terms and Conditions Instructions",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "alwaysShowDisclaimer",
+                              "disclaimerInstructions",
+                              "displayInstructions",
+                              "termsAndConditionsInstructions"
+                            ],
+                            "title": "Brand Requirements",
+                            "type": "object"
+                          },
+                          "categories": {
+                            "items": {
+                              "properties": {
+                                "description": {
+                                  "title": "Description",
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "format": "uuid",
+                                  "title": "Identifier",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "description",
+                                "identifier"
+                              ],
+                              "type": "object"
+                            },
+                            "title": "List of categories associated with this Brand",
+                            "type": "array"
+                          },
+                          "createdDate": {
+                            "title": "Created Date",
+                            "type": "string"
+                          },
+                          "description": {
+                            "title": "Brand Description",
+                            "type": "string"
+                          },
+                          "disclaimer": {
+                            "title": "Brand Disclaimer",
                             "type": "string"
                           },
                           "imageUrls": {
-                            "items": {
+                            "additionalProperties": {
                               "type": "string"
                             },
-                            "type": "array"
+                            "title": "Brand Images in various sizes",
+                            "type": "object"
                           },
                           "items": {
                             "items": {
+                              "properties": {
+                                "attributes": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "title": "Attributes",
+                                  "type": "array",
+                                  "uniqueItems": true
+                                },
+                                "countries": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "title": "Countries",
+                                  "type": "array",
+                                  "uniqueItems": true
+                                },
+                                "createdDate": {
+                                  "title": "Created Date",
+                                  "type": "string"
+                                },
+                                "credentialTypes": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "title": "Credential Types",
+                                  "type": "array",
+                                  "uniqueItems": true
+                                },
+                                "currencyCode": {
+                                  "title": "Currency Code",
+                                  "type": "string"
+                                },
+                                "exchangeRateRule": {
+                                  "title": "Exchange Rate Rule",
+                                  "type": "string"
+                                },
+                                "faceValue": {
+                                  "title": "Face Value",
+                                  "type": "number"
+                                },
+                                "fee": {
+                                  "properties": {
+                                    "type": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "title": "Fee",
+                                  "type": "object"
+                                },
+                                "fulfillmentType": {
+                                  "deprecated": true,
+                                  "enum": [
+                                    "DIGITAL",
+                                    "PHYSICAL"
+                                  ],
+                                  "title": "Fulfillment Type",
+                                  "type": "string"
+                                },
+                                "isExpirable": {
+                                  "title": "Item Is Expirable",
+                                  "type": "boolean"
+                                },
+                                "isWholeAmountValueRequired": {
+                                  "title": "Whole Value Required",
+                                  "type": "boolean"
+                                },
+                                "lastUpdateDate": {
+                                  "title": "Last Updated Date",
+                                  "type": "string"
+                                },
+                                "maxValue": {
+                                  "title": "Max Value",
+                                  "type": "number"
+                                },
+                                "minValue": {
+                                  "title": "Min Value",
+                                  "type": "number"
+                                },
+                                "quantityConstraints": {
+                                  "properties": {
+                                    "maxQuantity": {
+                                      "example": 1,
+                                      "format": "int32",
+                                      "title": "Maximum Quantity",
+                                      "type": "integer"
+                                    },
+                                    "minQuantity": {
+                                      "example": 1,
+                                      "format": "int32",
+                                      "title": "Minimum Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "maxQuantity",
+                                    "minQuantity"
+                                  ],
+                                  "title": "Quantity Constraints",
+                                  "type": "object"
+                                },
+                                "redemptionInstructions": {
+                                  "title": "Redemption Instructions",
+                                  "type": "string"
+                                },
+                                "rewardName": {
+                                  "title": "Reward Name",
+                                  "type": "string"
+                                },
+                                "rewardType": {
+                                  "title": "Reward Type",
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "title": "Status",
+                                  "type": "string"
+                                },
+                                "utid": {
+                                  "title": "Utid - Unique Tango Card ID.",
+                                  "type": "string"
+                                },
+                                "valueType": {
+                                  "title": "Value Type",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "attributes",
+                                "countries",
+                                "createdDate",
+                                "credentialTypes",
+                                "currencyCode",
+                                "fee",
+                                "isExpirable",
+                                "isWholeAmountValueRequired",
+                                "lastUpdateDate",
+                                "quantityConstraints",
+                                "redemptionInstructions",
+                                "rewardName",
+                                "rewardType",
+                                "status",
+                                "utid",
+                                "valueType"
+                              ],
                               "type": "object"
                             },
+                            "title": "List of Items associated with this Brand",
                             "type": "array"
+                          },
+                          "lastUpdateDate": {
+                            "title": "Last Updated Date",
+                            "type": "string"
+                          },
+                          "shortDescription": {
+                            "title": "Short Description",
+                            "type": "string"
+                          },
+                          "status": {
+                            "title": "Brand Status",
+                            "type": "string"
+                          },
+                          "terms": {
+                            "title": "Brand Terms and Conditions",
+                            "type": "string"
                           }
                         },
+                        "required": [
+                          "brandKey",
+                          "brandName",
+                          "categories",
+                          "createdDate",
+                          "description",
+                          "disclaimer",
+                          "imageUrls",
+                          "items",
+                          "lastUpdateDate",
+                          "shortDescription",
+                          "status",
+                          "terms"
+                        ],
                         "type": "object"
                       },
+                      "title": "List of Brands inside of this Catalog",
                       "type": "array"
+                    },
+                    "catalogName": {
+                      "title": "Catalog Name",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "brands",
+                    "catalogName"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
                     }
                   },
                   "type": "object"
                 }
               }
             },
-            "description": "Catalog"
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
           }
         },
         "security": [
           {
             "basicAuth": []
+          },
+          {
+            "bearerToken": []
           }
         ],
         "securitySchemes": {
           "basicAuth": {
             "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /catalogs": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCatalog",
+        "parameters": [
+          {
+            "description": "When true, will return the additional brand fields: status, disclaimer, description, shortDescription, terms, brandRequirements collection, and imageUrls collection.",
+            "in": "query",
+            "name": "verbose",
+            "required": false,
+            "schema": {
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Returns the brand and item details for a specific brand ID.",
+            "in": "query",
+            "name": "brandKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns the brand and item details for a specific brand name.",
+            "in": "query",
+            "name": "brandName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns the brand and item details for a specific utid. The utid is the unique identifier for a specific reward.",
+            "in": "query",
+            "name": "utid",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns the brand and item details of the specified reward name.",
+            "in": "query",
+            "name": "rewardName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns all brands and item details with the specified status.  Possible statuses are: \"test\", \"active\", \"inactive\", \"deleted\"",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns all brands and item details with the specified rewardType.",
+            "in": "query",
+            "name": "rewardType",
+            "required": false,
+            "schema": {
+              "enum": [
+                "all",
+                "gift card",
+                "promo",
+                "donation",
+                "reward link",
+                "payment ach",
+                "payment card",
+                "reporting",
+                "payment-paypal",
+                "tango open loop",
+                "cash equivalent",
+                "physical gift card"
+              ],
+              "items": {
+                "enum": [
+                  "all",
+                  "gift card",
+                  "promo",
+                  "donation",
+                  "reward link",
+                  "payment ach",
+                  "payment card",
+                  "reporting",
+                  "payment-paypal",
+                  "tango open loop",
+                  "cash equivalent",
+                  "physical gift card"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          {
+            "description": "Return all brands and item details associated with a specific currency.",
+            "in": "query",
+            "name": "currencyCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns all brands and item details from a specific country.",
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "Returns all brands and item details for a specific fulfillment type.",
+            "in": "query",
+            "name": "fulfillmentType",
+            "required": false,
+            "schema": {
+              "items": {
+                "enum": [
+                  "DIGITAL",
+                  "PHYSICAL"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          {
+            "description": "Returns all brands and item details for a specific item attribute.",
+            "in": "query",
+            "name": "itemAttribute",
+            "required": false,
+            "schema": {
+              "enum": [
+                "EMAIL",
+                "PHONE",
+                "ADDRESS",
+                "EMBEDDED"
+              ],
+              "items": {
+                "enum": [
+                  "EMAIL",
+                  "PHONE",
+                  "ADDRESS",
+                  "EMBEDDED"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          {
+            "description": "Returns all brands and item details for specific brand categories.",
+            "in": "query",
+            "name": "categoryIds",
+            "required": false,
+            "schema": {
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "brands": {
+                      "items": {
+                        "properties": {
+                          "barcodeType": {
+                            "title": "Barcode type code for this brand",
+                            "type": "string"
+                          },
+                          "brandKey": {
+                            "title": "Brand Key",
+                            "type": "string"
+                          },
+                          "brandName": {
+                            "title": "Brand Display Name",
+                            "type": "string"
+                          },
+                          "brandRequirements": {
+                            "properties": {
+                              "alwaysShowDisclaimer": {
+                                "title": "Always Show Disclaimer",
+                                "type": "boolean"
+                              },
+                              "disclaimerInstructions": {
+                                "title": "Disclaimer Instructions",
+                                "type": "string"
+                              },
+                              "displayInstructions": {
+                                "title": "Display Instructions",
+                                "type": "string"
+                              },
+                              "termsAndConditionsInstructions": {
+                                "title": "Terms and Conditions Instructions",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "alwaysShowDisclaimer",
+                              "disclaimerInstructions",
+                              "displayInstructions",
+                              "termsAndConditionsInstructions"
+                            ],
+                            "title": "Brand Requirements",
+                            "type": "object"
+                          },
+                          "categories": {
+                            "items": {
+                              "properties": {
+                                "description": {
+                                  "title": "Description",
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "format": "uuid",
+                                  "title": "Identifier",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "description",
+                                "identifier"
+                              ],
+                              "type": "object"
+                            },
+                            "title": "List of categories associated with this Brand",
+                            "type": "array"
+                          },
+                          "createdDate": {
+                            "title": "Created Date",
+                            "type": "string"
+                          },
+                          "description": {
+                            "title": "Brand Description",
+                            "type": "string"
+                          },
+                          "disclaimer": {
+                            "title": "Brand Disclaimer",
+                            "type": "string"
+                          },
+                          "imageUrls": {
+                            "additionalProperties": {
+                              "type": "string"
+                            },
+                            "title": "Brand Images in various sizes",
+                            "type": "object"
+                          },
+                          "items": {
+                            "items": {
+                              "properties": {
+                                "attributes": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "title": "Attributes",
+                                  "type": "array",
+                                  "uniqueItems": true
+                                },
+                                "countries": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "title": "Countries",
+                                  "type": "array",
+                                  "uniqueItems": true
+                                },
+                                "createdDate": {
+                                  "title": "Created Date",
+                                  "type": "string"
+                                },
+                                "credentialTypes": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "title": "Credential Types",
+                                  "type": "array",
+                                  "uniqueItems": true
+                                },
+                                "currencyCode": {
+                                  "title": "Currency Code",
+                                  "type": "string"
+                                },
+                                "exchangeRateRule": {
+                                  "title": "Exchange Rate Rule",
+                                  "type": "string"
+                                },
+                                "faceValue": {
+                                  "title": "Face Value",
+                                  "type": "number"
+                                },
+                                "fee": {
+                                  "properties": {
+                                    "type": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "title": "Fee",
+                                  "type": "object"
+                                },
+                                "fulfillmentType": {
+                                  "deprecated": true,
+                                  "enum": [
+                                    "DIGITAL",
+                                    "PHYSICAL"
+                                  ],
+                                  "title": "Fulfillment Type",
+                                  "type": "string"
+                                },
+                                "isExpirable": {
+                                  "title": "Item Is Expirable",
+                                  "type": "boolean"
+                                },
+                                "isWholeAmountValueRequired": {
+                                  "title": "Whole Value Required",
+                                  "type": "boolean"
+                                },
+                                "lastUpdateDate": {
+                                  "title": "Last Updated Date",
+                                  "type": "string"
+                                },
+                                "maxValue": {
+                                  "title": "Max Value",
+                                  "type": "number"
+                                },
+                                "minValue": {
+                                  "title": "Min Value",
+                                  "type": "number"
+                                },
+                                "quantityConstraints": {
+                                  "properties": {
+                                    "maxQuantity": {
+                                      "example": 1,
+                                      "format": "int32",
+                                      "title": "Maximum Quantity",
+                                      "type": "integer"
+                                    },
+                                    "minQuantity": {
+                                      "example": 1,
+                                      "format": "int32",
+                                      "title": "Minimum Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "maxQuantity",
+                                    "minQuantity"
+                                  ],
+                                  "title": "Quantity Constraints",
+                                  "type": "object"
+                                },
+                                "redemptionInstructions": {
+                                  "title": "Redemption Instructions",
+                                  "type": "string"
+                                },
+                                "rewardName": {
+                                  "title": "Reward Name",
+                                  "type": "string"
+                                },
+                                "rewardType": {
+                                  "title": "Reward Type",
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "title": "Status",
+                                  "type": "string"
+                                },
+                                "utid": {
+                                  "title": "Utid - Unique Tango Card ID.",
+                                  "type": "string"
+                                },
+                                "valueType": {
+                                  "title": "Value Type",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "attributes",
+                                "countries",
+                                "createdDate",
+                                "credentialTypes",
+                                "currencyCode",
+                                "fee",
+                                "isExpirable",
+                                "isWholeAmountValueRequired",
+                                "lastUpdateDate",
+                                "quantityConstraints",
+                                "redemptionInstructions",
+                                "rewardName",
+                                "rewardType",
+                                "status",
+                                "utid",
+                                "valueType"
+                              ],
+                              "type": "object"
+                            },
+                            "title": "List of Items associated with this Brand",
+                            "type": "array"
+                          },
+                          "lastUpdateDate": {
+                            "title": "Last Updated Date",
+                            "type": "string"
+                          },
+                          "shortDescription": {
+                            "title": "Short Description",
+                            "type": "string"
+                          },
+                          "status": {
+                            "title": "Brand Status",
+                            "type": "string"
+                          },
+                          "terms": {
+                            "title": "Brand Terms and Conditions",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "brandKey",
+                          "brandName",
+                          "categories",
+                          "createdDate",
+                          "description",
+                          "disclaimer",
+                          "imageUrls",
+                          "items",
+                          "lastUpdateDate",
+                          "shortDescription",
+                          "status",
+                          "terms"
+                        ],
+                        "type": "object"
+                      },
+                      "title": "List of Brands inside of this Catalog",
+                      "type": "array"
+                    },
+                    "catalogName": {
+                      "title": "Catalog Name",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "brands",
+                    "catalogName"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
             "type": "http"
           }
         },

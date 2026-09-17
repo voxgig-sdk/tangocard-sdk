@@ -1,0 +1,27 @@
+# BasicLowBalanceAlertListViewFlow
+
+main: kit: flow: BasicLowBalanceAlertListViewFlow:
+{
+  entity: "low_balance_alert_list_view",
+  kind: "basic",
+  name: "BasicLowBalanceAlertListViewFlow",
+  step: [
+    {
+      match: {
+        account_identifier: "accountentifier01",
+        customer_identifier: "customerentifier01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "low_balance_alert_list_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLowBalanceAlertListViewFlow"
+}

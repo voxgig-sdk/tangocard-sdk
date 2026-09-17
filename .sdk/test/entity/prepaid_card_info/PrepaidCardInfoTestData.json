@@ -1,0 +1,297 @@
+{
+  "existing": {
+    "prepaid_card_info": {
+      "PREPAID_CARD_INFO00": {
+        "balance": {},
+        "card": {},
+        "comments": [],
+        "registration": {},
+        "reference_line_item_id": "REFERENCE_LINE_ITEM01",
+        "id": "PREPAID_CARD_INFO00"
+      },
+      "PREPAID_CARD_INFO01": {
+        "balance": {},
+        "card": {},
+        "comments": [],
+        "registration": {},
+        "reference_line_item_id": "REFERENCE_LINE_ITEM01",
+        "id": "PREPAID_CARD_INFO01"
+      },
+      "PREPAID_CARD_INFO02": {
+        "balance": {},
+        "card": {},
+        "comments": [],
+        "registration": {},
+        "reference_line_item_id": "REFERENCE_LINE_ITEM01",
+        "id": "PREPAID_CARD_INFO02"
+      }
+    }
+  },
+  "new": {
+    "prepaid_card_info": {
+      "prepaid_card_info_ref01": {
+        "balance": {},
+        "card": {},
+        "comments": [],
+        "registration": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /prepaidCardService/getCardInfo/{referenceLineItemID}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCardInfo",
+        "parameters": [
+          {
+            "description": "Reference Line Item ID",
+            "in": "path",
+            "name": "referenceLineItemID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "balance": {
+                      "properties": {
+                        "availableBalance": {
+                          "properties": {
+                            "currencyCode": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "number"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "card": {
+                      "properties": {
+                        "accountStatus": {
+                          "type": "string"
+                        },
+                        "cardBrand": {
+                          "type": "string"
+                        },
+                        "cardStatus": {
+                          "type": "string"
+                        },
+                        "cardStatusReason": {
+                          "type": "string"
+                        },
+                        "createdDate": {
+                          "type": "string"
+                        },
+                        "expirationDate": {
+                          "type": "string"
+                        },
+                        "last4": {
+                          "type": "string"
+                        },
+                        "shipDate": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "comments": {
+                      "items": {
+                        "properties": {
+                          "addedBy": {
+                            "type": "string"
+                          },
+                          "additionalInformation": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "eventType": {
+                            "type": "string"
+                          },
+                          "memoSource": {
+                            "type": "string"
+                          },
+                          "received": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "registration": {
+                      "properties": {
+                        "address1": {
+                          "type": "string"
+                        },
+                        "address2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "homePhone": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "mobilePhone": {
+                          "type": "string"
+                        },
+                        "postal": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/401/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/401/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/401/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

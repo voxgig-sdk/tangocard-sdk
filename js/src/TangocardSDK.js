@@ -1,8 +1,51 @@
 // Tangocard Js SDK
 
+const { AccountEntity } = require('./entity/AccountEntity')
+const { AddCommentEscalationEntity } = require('./entity/AddCommentEscalationEntity')
+const { AllEventTypeEntity } = require('./entity/AllEventTypeEntity')
+const { AsyncOrderEntity } = require('./entity/AsyncOrderEntity')
+const { AsyncOrderDetailViewEntity } = require('./entity/AsyncOrderDetailViewEntity')
+const { AsyncOrderLineItemsViewEntity } = require('./entity/AsyncOrderLineItemsViewEntity')
+const { AsyncReasonCodesViewEntity } = require('./entity/AsyncReasonCodesViewEntity')
+const { AsyncUpdateLineItemViewEntity } = require('./entity/AsyncUpdateLineItemViewEntity')
+const { BalanceAlertViewEntity } = require('./entity/BalanceAlertViewEntity')
+const { BrandCategoriesViewEntity } = require('./entity/BrandCategoriesViewEntity')
 const { CatalogEntity } = require('./entity/CatalogEntity')
+const { ChoiceProductEntity } = require('./entity/ChoiceProductEntity')
+const { CountryViewSummaryEntity } = require('./entity/CountryViewSummaryEntity')
+const { CreateAccountCriterionEntity } = require('./entity/CreateAccountCriterionEntity')
+const { CreateCustomerCriterionEntity } = require('./entity/CreateCustomerCriterionEntity')
+const { CredentialTypeViewEntity } = require('./entity/CredentialTypeViewEntity')
+const { CreditCardEntity } = require('./entity/CreditCardEntity')
+const { CreditCardDepositEntity } = require('./entity/CreditCardDepositEntity')
+const { CreditCardUnregisterEntity } = require('./entity/CreditCardUnregisterEntity')
 const { CustomerEntity } = require('./entity/CustomerEntity')
+const { EmailTemplateListViewEntity } = require('./entity/EmailTemplateListViewEntity')
+const { EmailTemplateViewVerboseEntity } = require('./entity/EmailTemplateViewVerboseEntity')
+const { EmbeddableResponseDtoEntity } = require('./entity/EmbeddableResponseDtoEntity')
+const { ExchangeRatesWithDisclaimerEntity } = require('./entity/ExchangeRatesWithDisclaimerEntity')
+const { LineItemEntity } = require('./entity/LineItemEntity')
+const { LowBalanceAlertListViewEntity } = require('./entity/LowBalanceAlertListViewEntity')
+const { LowBalanceAlertViewEntity } = require('./entity/LowBalanceAlertViewEntity')
+const { MobileCountryEntity } = require('./entity/MobileCountryEntity')
+const { N14WebhookEntity } = require('./entity/N14WebhookEntity')
+const { N1CustomerEntity } = require('./entity/N1CustomerEntity')
+const { N2AccountEntity } = require('./entity/N2AccountEntity')
+const { N3FundEntity } = require('./entity/N3FundEntity')
+const { N8LineItemEntity } = require('./entity/N8LineItemEntity')
+const { N9DigitalTemplateEntity } = require('./entity/N9DigitalTemplateEntity')
 const { OrderEntity } = require('./entity/OrderEntity')
+const { OrderViewSummaryEntity } = require('./entity/OrderViewSummaryEntity')
+const { PrepaidCardInfoEntity } = require('./entity/PrepaidCardInfoEntity')
+const { PrepaidCardTransactionEntity } = require('./entity/PrepaidCardTransactionEntity')
+const { ReissueCardEntity } = require('./entity/ReissueCardEntity')
+const { ReplacementReasonEntity } = require('./entity/ReplacementReasonEntity')
+const { ResendEntity } = require('./entity/ResendEntity')
+const { RewardReasonsMapEntity } = require('./entity/RewardReasonsMapEntity')
+const { TransferFundEntity } = require('./entity/TransferFundEntity')
+const { UpdateAccountEntity } = require('./entity/UpdateAccountEntity')
+const { UpdateWebhookSubscriptionResponseViewEntity } = require('./entity/UpdateWebhookSubscriptionResponseViewEntity')
+const { WebhookEntity } = require('./entity/WebhookEntity')
 
 
 const { inspect } = require('node:util')
@@ -295,12 +338,174 @@ class TangocardSDK {
 
 
 
+  // Entity access: `client.Account().list()` / `client.Account().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Account(entopts) {
+    const self = this
+    return new AccountEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.AddCommentEscalation().list()` / `client.AddCommentEscalation().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  AddCommentEscalation(entopts) {
+    const self = this
+    return new AddCommentEscalationEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.AllEventType().list()` / `client.AllEventType().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  AllEventType(entopts) {
+    const self = this
+    return new AllEventTypeEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.AsyncOrder().list()` / `client.AsyncOrder().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  AsyncOrder(entopts) {
+    const self = this
+    return new AsyncOrderEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.AsyncOrderDetailView().list()` / `client.AsyncOrderDetailView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  AsyncOrderDetailView(entopts) {
+    const self = this
+    return new AsyncOrderDetailViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.AsyncOrderLineItemsView().list()` / `client.AsyncOrderLineItemsView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  AsyncOrderLineItemsView(entopts) {
+    const self = this
+    return new AsyncOrderLineItemsViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.AsyncReasonCodesView().list()` / `client.AsyncReasonCodesView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  AsyncReasonCodesView(entopts) {
+    const self = this
+    return new AsyncReasonCodesViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.AsyncUpdateLineItemView().list()` / `client.AsyncUpdateLineItemView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  AsyncUpdateLineItemView(entopts) {
+    const self = this
+    return new AsyncUpdateLineItemViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.BalanceAlertView().list()` / `client.BalanceAlertView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  BalanceAlertView(entopts) {
+    const self = this
+    return new BalanceAlertViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.BrandCategoriesView().list()` / `client.BrandCategoriesView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  BrandCategoriesView(entopts) {
+    const self = this
+    return new BrandCategoriesViewEntity(self, entopts)
+  }
+
+
   // Entity access: `client.Catalog().list()` / `client.Catalog().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
   Catalog(entopts) {
     const self = this
     return new CatalogEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.ChoiceProduct().list()` / `client.ChoiceProduct().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ChoiceProduct(entopts) {
+    const self = this
+    return new ChoiceProductEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CountryViewSummary().list()` / `client.CountryViewSummary().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CountryViewSummary(entopts) {
+    const self = this
+    return new CountryViewSummaryEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CreateAccountCriterion().list()` / `client.CreateAccountCriterion().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CreateAccountCriterion(entopts) {
+    const self = this
+    return new CreateAccountCriterionEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CreateCustomerCriterion().list()` / `client.CreateCustomerCriterion().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CreateCustomerCriterion(entopts) {
+    const self = this
+    return new CreateCustomerCriterionEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CredentialTypeView().list()` / `client.CredentialTypeView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CredentialTypeView(entopts) {
+    const self = this
+    return new CredentialTypeViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CreditCard().list()` / `client.CreditCard().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CreditCard(entopts) {
+    const self = this
+    return new CreditCardEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CreditCardDeposit().list()` / `client.CreditCardDeposit().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CreditCardDeposit(entopts) {
+    const self = this
+    return new CreditCardDepositEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CreditCardUnregister().list()` / `client.CreditCardUnregister().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CreditCardUnregister(entopts) {
+    const self = this
+    return new CreditCardUnregisterEntity(self, entopts)
   }
 
 
@@ -313,12 +518,237 @@ class TangocardSDK {
   }
 
 
+  // Entity access: `client.EmailTemplateListView().list()` / `client.EmailTemplateListView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  EmailTemplateListView(entopts) {
+    const self = this
+    return new EmailTemplateListViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.EmailTemplateViewVerbose().list()` / `client.EmailTemplateViewVerbose().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  EmailTemplateViewVerbose(entopts) {
+    const self = this
+    return new EmailTemplateViewVerboseEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.EmbeddableResponseDto().list()` / `client.EmbeddableResponseDto().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  EmbeddableResponseDto(entopts) {
+    const self = this
+    return new EmbeddableResponseDtoEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.ExchangeRatesWithDisclaimer().list()` / `client.ExchangeRatesWithDisclaimer().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ExchangeRatesWithDisclaimer(entopts) {
+    const self = this
+    return new ExchangeRatesWithDisclaimerEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.LineItem().list()` / `client.LineItem().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  LineItem(entopts) {
+    const self = this
+    return new LineItemEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.LowBalanceAlertListView().list()` / `client.LowBalanceAlertListView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  LowBalanceAlertListView(entopts) {
+    const self = this
+    return new LowBalanceAlertListViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.LowBalanceAlertView().list()` / `client.LowBalanceAlertView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  LowBalanceAlertView(entopts) {
+    const self = this
+    return new LowBalanceAlertViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.MobileCountry().list()` / `client.MobileCountry().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  MobileCountry(entopts) {
+    const self = this
+    return new MobileCountryEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.N14Webhook().list()` / `client.N14Webhook().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  N14Webhook(entopts) {
+    const self = this
+    return new N14WebhookEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.N1Customer().list()` / `client.N1Customer().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  N1Customer(entopts) {
+    const self = this
+    return new N1CustomerEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.N2Account().list()` / `client.N2Account().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  N2Account(entopts) {
+    const self = this
+    return new N2AccountEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.N3Fund().list()` / `client.N3Fund().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  N3Fund(entopts) {
+    const self = this
+    return new N3FundEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.N8LineItem().list()` / `client.N8LineItem().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  N8LineItem(entopts) {
+    const self = this
+    return new N8LineItemEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.N9DigitalTemplate().list()` / `client.N9DigitalTemplate().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  N9DigitalTemplate(entopts) {
+    const self = this
+    return new N9DigitalTemplateEntity(self, entopts)
+  }
+
+
   // Entity access: `client.Order().list()` / `client.Order().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
   Order(entopts) {
     const self = this
     return new OrderEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.OrderViewSummary().list()` / `client.OrderViewSummary().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  OrderViewSummary(entopts) {
+    const self = this
+    return new OrderViewSummaryEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.PrepaidCardInfo().list()` / `client.PrepaidCardInfo().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  PrepaidCardInfo(entopts) {
+    const self = this
+    return new PrepaidCardInfoEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.PrepaidCardTransaction().list()` / `client.PrepaidCardTransaction().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  PrepaidCardTransaction(entopts) {
+    const self = this
+    return new PrepaidCardTransactionEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.ReissueCard().list()` / `client.ReissueCard().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ReissueCard(entopts) {
+    const self = this
+    return new ReissueCardEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.ReplacementReason().list()` / `client.ReplacementReason().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ReplacementReason(entopts) {
+    const self = this
+    return new ReplacementReasonEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Resend().list()` / `client.Resend().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Resend(entopts) {
+    const self = this
+    return new ResendEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.RewardReasonsMap().list()` / `client.RewardReasonsMap().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  RewardReasonsMap(entopts) {
+    const self = this
+    return new RewardReasonsMapEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.TransferFund().list()` / `client.TransferFund().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  TransferFund(entopts) {
+    const self = this
+    return new TransferFundEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.UpdateAccount().list()` / `client.UpdateAccount().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  UpdateAccount(entopts) {
+    const self = this
+    return new UpdateAccountEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.UpdateWebhookSubscriptionResponseView().list()` / `client.UpdateWebhookSubscriptionResponseView().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  UpdateWebhookSubscriptionResponseView(entopts) {
+    const self = this
+    return new UpdateWebhookSubscriptionResponseViewEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Webhook().list()` / `client.Webhook().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Webhook(entopts) {
+    const self = this
+    return new WebhookEntity(self, entopts)
   }
 
 

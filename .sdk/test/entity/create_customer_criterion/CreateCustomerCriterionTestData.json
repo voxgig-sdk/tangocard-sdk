@@ -1,0 +1,15 @@
+{
+  "existing": {
+    "create_customer_criterion": {
+      "CREATE_CUSTOMER_CRITERION00": {},
+      "CREATE_CUSTOMER_CRITERION01": {},
+      "CREATE_CUSTOMER_CRITERION02": {}
+    }
+  },
+  "new": {
+    "create_customer_criterion": {
+      "create_customer_criterion_ref01": {}
+    }
+  },
+  "requests": {}
+}

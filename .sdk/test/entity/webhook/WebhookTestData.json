@@ -1,0 +1,520 @@
+{
+  "existing": {
+    "webhook": {
+      "WEBHOOK00": {
+        "categories": [],
+        "createdAt": "s79",
+        "eventTypes": [],
+        "expiresAt": "s7b",
+        "headers": [],
+        "hmacSharedSecretKey": "s7d",
+        "id": "WEBHOOK00",
+        "payloadVerificationMethod": "s7f",
+        "signingCertificate": "s80",
+        "updatedAt": "s81",
+        "url": "s82",
+        "webhookId": "s83"
+      },
+      "WEBHOOK01": {
+        "categories": [],
+        "createdAt": "sf1",
+        "eventTypes": [],
+        "expiresAt": "sf3",
+        "headers": [],
+        "hmacSharedSecretKey": "sf5",
+        "id": "WEBHOOK01",
+        "payloadVerificationMethod": "sf7",
+        "signingCertificate": "sf8",
+        "updatedAt": "sf9",
+        "url": "sfa",
+        "webhookId": "sfb"
+      },
+      "WEBHOOK02": {
+        "categories": [],
+        "createdAt": "s169",
+        "eventTypes": [],
+        "expiresAt": "s16b",
+        "headers": [],
+        "hmacSharedSecretKey": "s16d",
+        "id": "WEBHOOK02",
+        "payloadVerificationMethod": "s16f",
+        "signingCertificate": "s170",
+        "updatedAt": "s171",
+        "url": "s172",
+        "webhookId": "s173"
+      }
+    }
+  },
+  "new": {
+    "webhook": {
+      "webhook_ref01": {
+        "categories": [],
+        "createdAt": "s1e1",
+        "eventTypes": [],
+        "expiresAt": "s1e3",
+        "headers": [],
+        "hmacSharedSecretKey": "s1e5",
+        "payloadVerificationMethod": "s1e7",
+        "signingCertificate": "s1e8",
+        "updatedAt": "s1e9",
+        "url": "s1ea",
+        "webhookId": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "POST /webhooks/{webhookId}/replay": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "redeliverSubscriptionEvents",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "webhookId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fromRevision",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "toRevision",
+            "required": false,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "POST /webhooks/{webhookId}/renew": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "renewSubscription",
+        "parameters": [
+          {
+            "description": "The webhook identifier",
+            "in": "path",
+            "name": "webhookId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response from renewing a webhook subscription.",
+                  "properties": {
+                    "expiresAt": {
+                      "description": "The date and time the webhook expires.",
+                      "format": "date-time",
+                      "title": "Webhook Expiration",
+                      "type": "string"
+                    },
+                    "webhookId": {
+                      "description": "The ID of the webhook.",
+                      "format": "uuid",
+                      "title": "Webhook ID",
+                      "type": "string"
+                    }
+                  },
+                  "title": "Renew Webhook Subscription Response",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getSubscription",
+        "parameters": [
+          {
+            "description": "The webhook identifier",
+            "in": "path",
+            "name": "webhookId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response from getting a webhook.",
+                  "properties": {
+                    "categories": {
+                      "description": "The categories the customer wants to subscribe to.",
+                      "items": {
+                        "type": "string"
+                      },
+                      "title": "Subscription Categories",
+                      "type": "array"
+                    },
+                    "createdAt": {
+                      "description": "The date and time the webhook was created.",
+                      "format": "date-time",
+                      "title": "Webhook Created At",
+                      "type": "string"
+                    },
+                    "eventTypes": {
+                      "description": "The event types the customer wants to subscribe to.",
+                      "items": {
+                        "type": "string"
+                      },
+                      "title": "Subscription Event Types",
+                      "type": "array"
+                    },
+                    "expiresAt": {
+                      "description": "The date and time the webhook expires.",
+                      "format": "date-time",
+                      "title": "Webhook Expires At",
+                      "type": "string"
+                    },
+                    "headers": {
+                      "description": "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener.",
+                      "items": {
+                        "description": "The header to be included in the webhook request.",
+                        "properties": {
+                          "name": {
+                            "description": "The name of the header.",
+                            "minLength": 1,
+                            "title": "Header Name",
+                            "type": "string"
+                          },
+                          "value": {
+                            "description": "The value of the header.",
+                            "minLength": 1,
+                            "title": "Header Value",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "value"
+                        ],
+                        "title": "Subscription Header",
+                        "type": "object"
+                      },
+                      "title": "Webhook Headers",
+                      "type": "array"
+                    },
+                    "hmacSharedSecretKey": {
+                      "description": "The HMAC secret key used to sign the webhook payload. Required when payloadVerificationMethod is HMAC. The key must be base64 encoded.",
+                      "title": "Hmac Shared Secret Key",
+                      "type": "string"
+                    },
+                    "payloadVerificationMethod": {
+                      "description": "Method to verify webhook payload integrity.",
+                      "enum": [
+                        "HMAC",
+                        "X509",
+                        "NONE"
+                      ],
+                      "type": "string"
+                    },
+                    "signingCertificate": {
+                      "description": "The public X509 certificate used to sign the webhook payload. The certificate is base64 encoded.",
+                      "title": "Signing Certificate",
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "description": "The date and time when the webhook was last updated.",
+                      "format": "date-time",
+                      "title": "Webhook Updated At",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "The URL of the customer's webhook listener.",
+                      "title": "Webhook URL",
+                      "type": "string"
+                    },
+                    "webhookId": {
+                      "description": "The ID of the webhook.",
+                      "format": "uuid",
+                      "title": "Webhook ID",
+                      "type": "string"
+                    }
+                  },
+                  "title": "Get Webhook Response",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "httpCode": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "httpPhrase": {
+                      "type": "string"
+                    },
+                    "i18nKey": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A Generic Example ",
+                      "example": "The error message will show here for error codes",
+                      "title": "message",
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "$ref": "#/responses/400/content/application~1json/schema/properties"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "bearerToken": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "scheme": "basic",
+            "type": "http"
+          },
+          "bearerToken": {
+            "bearerFormat": "JWT",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

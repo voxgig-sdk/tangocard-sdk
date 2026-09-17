@@ -1,0 +1,71 @@
+# BasicEmailTemplateViewVerboseFlow
+
+main: kit: flow: BasicEmailTemplateViewVerboseFlow:
+{
+  entity: "email_template_view_verbose",
+  kind: "basic",
+  name: "BasicEmailTemplateViewVerboseFlow",
+  step: [
+    {
+      input: {
+        ref: "email_template_view_verbose_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "email_template_view_verbose_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "email_template_view_verbose_ref01",
+        srcdatavar: "email_template_view_verbose_ref01_data",
+        suffix: "_up0",
+        textfield: "accentColor"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-email_template_view_verbose_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "email_template_view_verbose_ref01",
+        srcdatavar: "email_template_view_verbose_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "email_template_view_verbose01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-email_template_view_verbose_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEmailTemplateViewVerboseFlow"
+}

@@ -80,7 +80,7 @@ func TestOrderEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"create", "list"} {
+		for _, _op := range []string{"create", "list", "load"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "order." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -110,6 +110,9 @@ func TestOrderEntity(t *testing.T) {
 		if orderRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
+		if orderRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 		// LIST
 		orderRef01Match := map[string]any{}
@@ -118,9 +121,30 @@ func TestOrderEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("list failed: %v", err)
 		}
-		_, orderRef01ListOk := orderRef01ListResult.([]any)
+		orderRef01List, orderRef01ListOk := orderRef01ListResult.([]any)
 		if !orderRef01ListOk {
 			t.Fatalf("expected list result to be an array, got %T", orderRef01ListResult)
+		}
+
+		foundItem := vs.Select(entityListToData(orderRef01List), map[string]any{"id": orderRef01Data["id"]})
+		if vs.IsEmpty(foundItem) {
+			t.Fatal("expected to find created entity in list")
+		}
+
+		// LOAD
+		orderRef01MatchDt0 := map[string]any{
+			"id": orderRef01Data["id"],
+		}
+		orderRef01DataDt0Loaded, err := orderRef01Ent.Load(orderRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		orderRef01DataDt0LoadResult := core.ToMapAny(entityData(orderRef01DataDt0Loaded))
+		if orderRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if orderRef01DataDt0LoadResult["id"] != orderRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

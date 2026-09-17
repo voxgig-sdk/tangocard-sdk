@@ -1,0 +1,29 @@
+# BasicN8LineItemFlow
+
+main: kit: flow: BasicN8LineItemFlow:
+{
+  entity: "n8_line_item",
+  kind: "basic",
+  name: "BasicN8LineItemFlow",
+  step: [
+    {
+      input: {
+        ref: "n8_line_item_ref01",
+        srcdatavar: "n8_line_item_ref01_data",
+        suffix: "_up0",
+        textfield: "campaign"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-n8_line_item_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicN8LineItemFlow"
+}

@@ -1,0 +1,92 @@
+# Entity: n8_line_item
+
+main: kit: entity: n8_line_item: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "campaign"
+      req: false
+      short: "optional campaign that may be used to administratively categorize a specific order."
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "orderNotes"
+      req: false
+      short: "Optional order notes (up to 150 characters)"
+      type: "`$STRING`"
+    }
+    {
+      name: "purchaseOrderNumber"
+      req: false
+      short: "The Purchase Order Number associated with this order."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "n8_line_item"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "reference_line_item_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "PATCH /lineItems/{referenceLineItemID}"
+            json: "{\"operationId\":\"updateLineItem\",\"parameters\":[{\"description\":\"Reference line item ID is returned in the line item's response.\",\"in\":\"path\",\"name\":\"referenceLineItemID\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"campaign\":{\"description\":\"optional campaign that may be used to administratively categorize a specific order.\",\"pattern\":\"^[a-zA-Z0-9 ]{0,100}$\",\"title\":\"Campaign\",\"type\":\"string\"},\"orderNotes\":{\"description\":\"Optional order notes (up to 150 characters)\",\"maxLength\":150,\"minLength\":0,\"title\":\"Order Notes\",\"type\":\"string\"},\"purchaseOrderNumber\":{\"description\":\"The Purchase Order Number associated with this order.\",\"title\":\"Purchase Order Number\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"202\":{\"content\":{\"application/json\":{\"example\":\"\\\"Accepted\\\"\",\"schema\":{\"type\":\"string\"}}},\"description\":\"Accepted\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"items\":{},\"type\":\"array\"},\"httpCode\":{\"format\":\"int32\",\"type\":\"integer\"},\"httpPhrase\":{\"type\":\"string\"},\"i18nKey\":{\"type\":\"string\"},\"message\":{\"description\":\"A Generic Example \",\"example\":\"The error message will show here for error codes\",\"title\":\"message\",\"type\":\"string\"},\"path\":{\"type\":\"string\"},\"requestId\":{\"type\":\"string\"},\"timestamp\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Conflict; Duplicate Exists\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"$ref\":\"#/responses/400/content/application~1json/schema/properties\"},\"type\":\"object\"}}},\"description\":\"Unprocessable Entity\"}},\"security\":[{\"basicAuth\":[]},{\"bearerToken\":[]}],\"securitySchemes\":{\"basicAuth\":{\"scheme\":\"basic\",\"type\":\"http\"},\"bearerToken\":{\"bearerFormat\":\"JWT\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "PATCH"
+          orig: "/lineItems/{referenceLineItemID}"
+          rename: {
+            param: {
+              referenceLineItemID: "id"
+            }
+          }
+          segments: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "id"
+            }
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

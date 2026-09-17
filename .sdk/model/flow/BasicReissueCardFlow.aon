@@ -1,0 +1,22 @@
+# BasicReissueCardFlow
+
+main: kit: flow: BasicReissueCardFlow:
+{
+  entity: "reissue_card",
+  kind: "basic",
+  name: "BasicReissueCardFlow",
+  step: [
+    {
+      input: {
+        ref: "reissue_card_ref01"
+      }
+
+      match: {
+        reference_line_item_i_d: "reference_line_item_i_d01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicReissueCardFlow"
+}

@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OrderViewSummary | Tango API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Tango API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/tangocard-sdk">voxgig-sdk/tangocard-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Tango API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/account.html">Account</a>
+<a href="../api/add_comment_escalation.html">AddCommentEscalation</a>
+<a href="../api/all_event_type.html">AllEventType</a>
+<a href="../api/async_order.html">AsyncOrder</a>
+<a href="../api/async_order_detail_view.html">AsyncOrderDetailView</a>
+<a href="../api/async_order_line_items_view.html">AsyncOrderLineItemsView</a>
+<a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
+<a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
+<a href="../api/balance_alert_view.html">BalanceAlertView</a>
+<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/catalog.html">Catalog</a>
+<a href="../api/choice_product.html">ChoiceProduct</a>
+<a href="../api/country_view_summary.html">CountryViewSummary</a>
+<a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
+<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
+<a href="../api/credential_type_view.html">CredentialTypeView</a>
+<a href="../api/credit_card.html">CreditCard</a>
+<a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
+<a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
+<a href="../api/customer.html">Customer</a>
+<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
+<a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
+<a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
+<a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
+<a href="../api/line_item.html">LineItem</a>
+<a href="../api/low_balance_alert_list_view.html">LowBalanceAlertListView</a>
+<a href="../api/low_balance_alert_view.html">LowBalanceAlertView</a>
+<a href="../api/mobile_country.html">MobileCountry</a>
+<a href="../api/n14_webhook.html">N14Webhook</a>
+<a href="../api/n1_customer.html">N1Customer</a>
+<a href="../api/n2_account.html">N2Account</a>
+<a href="../api/n3_fund.html">N3Fund</a>
+<a href="../api/n8_line_item.html">N8LineItem</a>
+<a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
+<a href="../api/order.html">Order</a>
+<a aria-current="page" href="../api/order_view_summary.html">OrderViewSummary</a><div class="nav-sections"><a class="nav-section" href="#post-lineitemsreferencelineitemidreissue">POST /lineItems/{referenceLineItemID}/reissue</a></div>
+<a href="../api/prepaid_card_info.html">PrepaidCardInfo</a>
+<a href="../api/prepaid_card_transaction.html">PrepaidCardTransaction</a>
+<a href="../api/reissue_card.html">ReissueCard</a>
+<a href="../api/replacement_reason.html">ReplacementReason</a>
+<a href="../api/resend.html">Resend</a>
+<a href="../api/reward_reasons_map.html">RewardReasonsMap</a>
+<a href="../api/transfer_fund.html">TransferFund</a>
+<a href="../api/update_account.html">UpdateAccount</a>
+<a href="../api/update_webhook_subscription_response_view.html">UpdateWebhookSubscriptionResponseView</a>
+<a href="../api/webhook.html">Webhook</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="orderviewsummary">OrderViewSummary</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-lineitemsreferencelineitemidreissue"><code>/lineItems/{referenceLineItemID}/reissue</code></a></td>
+<td><code>create</code></td>
+<td>Created</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>amount</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional order notes (up to 150 characters).</td>
+</tr>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required when reasonCode is &quot;OTHER&quot;, enter the reason why the line item is being reissued.</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Required.</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-lineitemsreferencelineitemidreissue" class="operation" data-method="post"><code>POST</code> /lineItems/{referenceLineItemID}/reissue</h3>
+<p>Operation ID: <code>reissueLineItem</code>.</p>
+<p>Authentication: basic token (<code>basicAuth</code>) or bearer token (<code>bearerToken</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>referenceLineItemID</code> | <code>path</code> | <code>string</code> | Yes | Reference line item ID is returned in the line item's response. |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>amount</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td>Optional. Specify the new face value of the reward.</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, EMBEDDED, EMBEDDED_COMPONENT, WHATSAPP, ...</code></td>
+<td>No</td>
+<td>Optional. Specify delivery method for the order.</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional order notes (up to 150 characters).</td>
+</tr>
+<tr>
+<td><code>otherReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Required when reasonCode is &quot;OTHER&quot;, enter the reason why the line item is being reissued.</td>
+</tr>
+<tr>
+<td><code>reasonCode</code></td>
+<td><code>enum: DELIVERY_INFO, REWARD_AMOUNT, REWARD_TYPE, RECIPIENT, CURRENCY, RECIPIENT_REQUESTED, ...</code></td>
+<td>Yes</td>
+<td>Required. Enter the reason why this line item is being reissued.</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Optional. Use to update recipient name or email address.</td>
+</tr>
+<tr>
+<td><code>recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Updated recipient email address.</td>
+</tr>
+<tr>
+<td><code>recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Updated recipient first name. Allows 100 characters, cannot use &lt; or &gt; or / in the name. Physical rewards: allows 25 character max, Digits 0-9, alpha (a-z, A-Z), space period, comma and hyphen.</td>
+</tr>
+<tr>
+<td><code>recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Updated recipient last name. Allows 100 characters, cannot use &lt; or &gt; or / in the name. Physical rewards: allows 25 character max, Digits 0-9, alpha (a-z, A-Z), space period, comma and hyphen.</td>
+</tr>
+<tr>
+<td><code>recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional. Updated recipient mobile number. Required if delivery method is SMS.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="201-created" class="status" data-status="2xx">201: Created</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
+</tr>
+<tr>
+<td><code>amountCharged</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>amountCharged.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Campaign</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>denomination</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Denomination</td>
+</tr>
+<tr>
+<td><code>denomination.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>emailSubject</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Subject</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>External Reference ID</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Message</td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Ptid - Unique Printed Reward Link Template ID.</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Address</td>
+</tr>
+<tr>
+<td><code>recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Company Name</td>
+</tr>
+<tr>
+<td><code>recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Country Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Postal Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>State or Province</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 1</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 2</td>
+</tr>
+<tr>
+<td><code>recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number</td>
+</tr>
+<tr>
+<td><code>redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Redemption Instructions</td>
+</tr>
+<tr>
+<td><code>referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>reward</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The Reward</td>
+</tr>
+<tr>
+<td><code>reward.credentialList</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Verbose list of credentials</td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].credentialType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].label</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentials</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Credentials as a map with String label key and credential value String</td>
+</tr>
+<tr>
+<td><code>reward.redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rewardName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>sendEmail</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Send Email?</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Status</td>
+</tr>
+<tr>
+<td><code>utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Utid - Unique Tango Card ID.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="422-unprocessable-entity" class="status" data-status="4xx">422: Unprocessable Entity</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-internal-server-error" class="status" data-status="5xx">500: Internal Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

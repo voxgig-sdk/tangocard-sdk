@@ -1,0 +1,50 @@
+{
+  point: "warning"
+  note: "No paths defined for entity=create_customer_criterion"
+  entm: {
+    name: "create_customer_criterion"
+    orig: "CreateCustomerCriteria"
+    path: {
+    }
+  }
+
+}
+
+
+{
+  point: "warning"
+  note: "No paths defined for entity=email_template_list_view"
+  entm: {
+    name: "email_template_list_view"
+    orig: "EmailTemplateListView"
+    path: {
+    }
+  }
+
+}
+
+
+{
+  point: "warning"
+  note: "No paths defined for entity=n2_account"
+  entm: {
+    name: "n2_account"
+    orig: "2. Accounts"
+    path: {
+    }
+  }
+
+}
+
+
+{
+  point: "warning"
+  note: "No paths defined for entity=n3_fund"
+  entm: {
+    name: "n3_fund"
+    orig: "3. Fund"
+    path: {
+    }
+  }
+
+}
