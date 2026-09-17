@@ -7,7 +7,7 @@
 # SDK Details.
 name: 'tangocard'
 origin: 'voxgig-sdk'
-def: 'tangocard-raas-only.json'
+def: 'tangocard-openapi.json'
 
 
 # API Information
