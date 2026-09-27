@@ -1,0 +1,340 @@
+# Entity: account
+
+main: kit: entity: account: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      t: "`$STRING`"
+    }
+    accountNumber: {
+      h: "Account Number"
+      n: "accountNumber"
+      r: true
+      t: "`$STRING`"
+    }
+    contactEmail: {
+      h: "Contact Email"
+      n: "contactEmail"
+      r: false
+      sh: "optional, an email address for a designated representative for this account."
+      t: "`$STRING`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    currencyCode: {
+      h: "Currency Code"
+      n: "currencyCode"
+      r: true
+      t: "`$STRING`"
+    }
+    currentBalance: {
+      h: "Current Balance"
+      n: "currentBalance"
+      r: true
+      t: "`$NUMBER`"
+    }
+    displayName: {
+      h: "Display Name"
+      n: "displayName"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "optional, a friendly name for this account."
+      t: "`$STRING`"
+    }
+    fundingNotification: {
+      h: "Funding Notification"
+      n: "fundingNotification"
+      r: false
+      sh: "optional, send funding notification emails to the following address(es)."
+      t: "`$ARRAY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "account"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /accounts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "account_number"
+                or: "account_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "contact_email"
+                or: "contact_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "currency_code"
+                or: "currency_code"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "display_name"
+                or: "display_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "funding_notification_email"
+                or: "funding_notification_email"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "max_balance"
+                or: "max_balance"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "max_date_created_at"
+                or: "max_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "min_balance"
+                or: "min_balance"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "min_date_created_at"
+                or: "min_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "paginate"
+                or: "paginate"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/accounts"
+          q: {
+            exist: [
+              "account_number"
+              "contact_email"
+              "currency_code"
+              "display_name"
+              "funding_notification_email"
+              "max_balance"
+              "max_date_created_at"
+              "max_result"
+              "min_balance"
+              "min_date_created_at"
+              "next_cursor"
+              "paginate"
+              "prev_cursor"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "accounts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /accounts/{accountIdentifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/accounts/{accountIdentifier}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "id"
+            }
+          }
+          s: [
+            {
+              lit: "accounts"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /customers/{customerIdentifier}/accounts/{accountIdentifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/customers/{customerIdentifier}/accounts/{accountIdentifier}"
+          q: {
+            exist: [
+              "customer_identifier"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "id"
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.customer")]
+  ]
+
+}

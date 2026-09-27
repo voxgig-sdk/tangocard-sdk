@@ -19,7 +19,6 @@ import type {
   AsyncOrderLineItemsViewListMatch,
 } from '../TangocardTypes'
 
-// TODO: needs Entity superclass
 class AsyncOrderLineItemsViewEntity extends TangocardEntityBase<AsyncOrderLineItemsView> {
 
   constructor(client: TangocardSDK, entopts: any) {

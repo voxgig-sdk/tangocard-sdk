@@ -98,7 +98,7 @@ func prepaid_card_infoBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"prepaid_card_info01", "prepaid_card_info02", "prepaid_card_info03", "get_card_info01", "get_card_info02", "get_card_info03"},
+		[]any{"prepaid_card_info01", "prepaid_card_info02", "prepaid_card_info03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

@@ -19,7 +19,6 @@ import type {
   ExchangeRatesWithDisclaimerListMatch,
 } from '../TangocardTypes'
 
-// TODO: needs Entity superclass
 class ExchangeRatesWithDisclaimerEntity extends TangocardEntityBase<ExchangeRatesWithDisclaimer> {
 
   constructor(client: TangocardSDK, entopts: any) {

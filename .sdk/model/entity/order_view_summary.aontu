@@ -1,0 +1,111 @@
+# Entity: order_view_summary
+
+main: kit: entity: order_view_summary: {
+
+  alias: field: {}
+
+  fields: {
+    amount: {
+      h: "Amount"
+      n: "amount"
+      r: false
+      sh: "Optional."
+      t: "`$NUMBER`"
+    }
+    deliveryMethod: {
+      h: "Delivery Method"
+      n: "deliveryMethod"
+      r: false
+      sh: "Optional."
+      t: "`$STRING`"
+    }
+    notes: {
+      h: "Notes"
+      n: "notes"
+      r: false
+      sh: "Optional order notes (up to 150 characters)."
+      t: "`$STRING`"
+    }
+    otherReason: {
+      h: "Other Reason"
+      n: "otherReason"
+      r: false
+      sh: "Required when reasonCode is \"OTHER\", enter the reason why the line item is being reissued."
+      t: "`$STRING`"
+    }
+    reasonCode: {
+      h: "Reason Code"
+      n: "reasonCode"
+      r: true
+      sh: "Required."
+      t: "`$STRING`"
+    }
+    recipient: {
+      h: "Recipient"
+      n: "recipient"
+      r: false
+      sh: "Optional."
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "order_view_summary"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /lineItems/{referenceLineItemID}/reissue"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/lineItems/{referenceLineItemID}/reissue"
+          q: {
+            exist: [
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+            {
+              lit: "reissue"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.line_item")]
+  ]
+
+}

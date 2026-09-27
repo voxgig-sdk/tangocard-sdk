@@ -1,0 +1,96 @@
+# Entity: balance_alert_view
+
+main: kit: entity: balance_alert_view: {
+
+  alias: field: {}
+
+  name: "balance_alert_view"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_id"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "balance_alert_id"
+                or: "balance_alert_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}"
+          q: {
+            exist: [
+              "account_id"
+              "balance_alert_id"
+              "customer_identifier"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "account_id"
+              balanceAlertID: "balance_alert_id"
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_id"
+            }
+            {
+              lit: "lowbalance"
+            }
+            {
+              var: "balance_alert_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.customer") path("$.main.kit.entity.account")]
+  ]
+
+}

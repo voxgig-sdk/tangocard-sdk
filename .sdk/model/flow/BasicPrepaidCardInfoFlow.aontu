@@ -1,0 +1,32 @@
+# BasicPrepaidCardInfoFlow
+
+main: kit: flow: BasicPrepaidCardInfoFlow:
+{
+  entity: "prepaid_card_info",
+  kind: "basic",
+  name: "BasicPrepaidCardInfoFlow",
+  step: [
+    {
+      i: {
+        ref: "prepaid_card_info_ref01",
+        srcdatavar: "prepaid_card_info_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "prepaid_card_info01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-prepaid_card_info_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPrepaidCardInfoFlow"
+}

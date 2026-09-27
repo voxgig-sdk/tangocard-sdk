@@ -77,9 +77,9 @@ Create a new `AsyncUpdateLineItemView` entity instance. Pass `nil` for no initia
 
 Create a new `BalanceAlertView` entity instance. Pass `nil` for no initial data.
 
-#### `BrandCategoriesView(data)`
+#### `BrandCategory(data)`
 
-Create a new `BrandCategoriesView` entity instance. Pass `nil` for no initial data.
+Create a new `BrandCategory` entity instance. Pass `nil` for no initial data.
 
 #### `Catalog(data)`
 
@@ -96,10 +96,6 @@ Create a new `CountryViewSummary` entity instance. Pass `nil` for no initial dat
 #### `CreateAccountCriterion(data)`
 
 Create a new `CreateAccountCriterion` entity instance. Pass `nil` for no initial data.
-
-#### `CreateCustomerCriterion(data)`
-
-Create a new `CreateCustomerCriterion` entity instance. Pass `nil` for no initial data.
 
 #### `CredentialTypeView(data)`
 
@@ -120,10 +116,6 @@ Create a new `CreditCardUnregister` entity instance. Pass `nil` for no initial d
 #### `Customer(data)`
 
 Create a new `Customer` entity instance. Pass `nil` for no initial data.
-
-#### `EmailTemplateListView(data)`
-
-Create a new `EmailTemplateListView` entity instance. Pass `nil` for no initial data.
 
 #### `EmailTemplateViewVerbose(data)`
 
@@ -160,14 +152,6 @@ Create a new `N14Webhook` entity instance. Pass `nil` for no initial data.
 #### `N1Customer(data)`
 
 Create a new `N1Customer` entity instance. Pass `nil` for no initial data.
-
-#### `N2Account(data)`
-
-Create a new `N2Account` entity instance. Pass `nil` for no initial data.
-
-#### `N3Fund(data)`
-
-Create a new `N3Fund` entity instance. Pass `nil` for no initial data.
 
 #### `N8LineItem(data)`
 
@@ -869,10 +853,10 @@ Return the entity name.
 
 ---
 
-## BrandCategoriesViewEntity
+## BrandCategoryEntity
 
 ```lua
-local brand_categories_view = client:BrandCategoriesView(nil)
+local brand_category = client:BrandCategory(nil)
 ```
 
 ### Fields
@@ -889,7 +873,7 @@ local brand_categories_view = client:BrandCategoriesView(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:BrandCategoriesView():list()
+local results, err = client:BrandCategory():list()
 ```
 
 ### Common Methods
@@ -912,7 +896,7 @@ Set the entity match criteria.
 
 #### `make() -> Entity`
 
-Create a new `BrandCategoriesViewEntity` instance with the same client and
+Create a new `BrandCategoryEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -1158,42 +1142,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CreateAccountCriterionEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## CreateCustomerCriterionEntity
-
-```lua
-local create_customer_criterion = client:CreateCustomerCriterion(nil)
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `CreateCustomerCriterionEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -1581,42 +1529,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CustomerEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## EmailTemplateListViewEntity
-
-```lua
-local email_template_list_view = client:EmailTemplateListView(nil)
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `EmailTemplateListViewEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -2321,78 +2233,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `N1CustomerEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## N2AccountEntity
-
-```lua
-local n2_account = client:N2Account(nil)
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `N2AccountEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## N3FundEntity
-
-```lua
-local n3_fund = client:N3Fund(nil)
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `N3FundEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -3335,14 +3175,14 @@ Return the entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -3388,7 +3228,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -3419,7 +3259,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -3450,7 +3290,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -3478,7 +3318,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -3513,7 +3353,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -3544,7 +3384,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -3578,7 +3418,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -3609,7 +3449,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

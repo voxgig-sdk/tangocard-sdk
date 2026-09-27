@@ -72,7 +72,7 @@ function prepaid_card_info_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "prepaid_card_info01", "prepaid_card_info02", "prepaid_card_info03", "get_card_info01", "get_card_info02", "get_card_info03" },
+    { "prepaid_card_info01", "prepaid_card_info02", "prepaid_card_info03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

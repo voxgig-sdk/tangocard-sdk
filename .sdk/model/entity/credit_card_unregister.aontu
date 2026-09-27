@@ -1,0 +1,78 @@
+# Entity: credit_card_unregister
+
+main: kit: entity: credit_card_unregister: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      sh: "Specify the account this credit card is associated with."
+      t: "`$STRING`"
+    }
+    createdDate: {
+      h: "Created Date"
+      n: "createdDate"
+      r: true
+      t: "`$STRING`"
+    }
+    creditCardToken: {
+      h: "Credit Card Token"
+      n: "creditCardToken"
+      r: true
+      sh: "Specify the credit card token to unregister."
+      t: "`$STRING`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: true
+      sh: "Specify the customer associated with the credit card."
+      t: "`$STRING`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    token: {
+      h: "Token"
+      n: "token"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "credit_card_unregister"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /creditCardUnregisters"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/creditCardUnregisters"
+          s: [
+            {
+              lit: "creditCardUnregisters"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

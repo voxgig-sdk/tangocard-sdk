@@ -78,9 +78,9 @@ Create a new `AsyncUpdateLineItemViewEntity` instance. Pass `None` for no initia
 
 Create a new `BalanceAlertViewEntity` instance. Pass `None` for no initial data.
 
-#### `BrandCategoriesView(data=None)`
+#### `BrandCategory(data=None)`
 
-Create a new `BrandCategoriesViewEntity` instance. Pass `None` for no initial data.
+Create a new `BrandCategoryEntity` instance. Pass `None` for no initial data.
 
 #### `Catalog(data=None)`
 
@@ -97,10 +97,6 @@ Create a new `CountryViewSummaryEntity` instance. Pass `None` for no initial dat
 #### `CreateAccountCriterion(data=None)`
 
 Create a new `CreateAccountCriterionEntity` instance. Pass `None` for no initial data.
-
-#### `CreateCustomerCriterion(data=None)`
-
-Create a new `CreateCustomerCriterionEntity` instance. Pass `None` for no initial data.
 
 #### `CredentialTypeView(data=None)`
 
@@ -121,10 +117,6 @@ Create a new `CreditCardUnregisterEntity` instance. Pass `None` for no initial d
 #### `Customer(data=None)`
 
 Create a new `CustomerEntity` instance. Pass `None` for no initial data.
-
-#### `EmailTemplateListView(data=None)`
-
-Create a new `EmailTemplateListViewEntity` instance. Pass `None` for no initial data.
 
 #### `EmailTemplateViewVerbose(data=None)`
 
@@ -161,14 +153,6 @@ Create a new `N14WebhookEntity` instance. Pass `None` for no initial data.
 #### `N1Customer(data=None)`
 
 Create a new `N1CustomerEntity` instance. Pass `None` for no initial data.
-
-#### `N2Account(data=None)`
-
-Create a new `N2AccountEntity` instance. Pass `None` for no initial data.
-
-#### `N3Fund(data=None)`
-
-Create a new `N3FundEntity` instance. Pass `None` for no initial data.
 
 #### `N8LineItem(data=None)`
 
@@ -863,10 +847,10 @@ Return the entity name.
 
 ---
 
-## BrandCategoriesViewEntity
+## BrandCategoryEntity
 
 ```python
-brand_categories_view = client.BrandCategoriesView()
+brand_category = client.BrandCategory()
 ```
 
 ### Fields
@@ -883,9 +867,9 @@ brand_categories_view = client.BrandCategoriesView()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.BrandCategoriesView().list()
-for brand_categories_view in results:
-    print(brand_categories_view)
+results = client.BrandCategory().list()
+for brand_category in results:
+    print(brand_category)
 ```
 
 ### Common Methods
@@ -908,7 +892,7 @@ Set the entity match criteria.
 
 #### `make() -> Entity`
 
-Create a new `BrandCategoriesViewEntity` instance with the same options.
+Create a new `BrandCategoryEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -1154,41 +1138,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CreateAccountCriterionEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## CreateCustomerCriterionEntity
-
-```python
-create_customer_criterion = client.CreateCustomerCriterion()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `CreateCustomerCriterionEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -1575,41 +1524,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CustomerEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## EmailTemplateListViewEntity
-
-```python
-email_template_list_view = client.EmailTemplateListView()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `EmailTemplateListViewEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -2315,76 +2229,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `N1CustomerEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## N2AccountEntity
-
-```python
-n2_account = client.N2Account()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `N2AccountEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## N3FundEntity
-
-```python
-n3_fund = client.N3Fund()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `N3FundEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -3316,14 +3160,14 @@ Return the entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -3369,7 +3213,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -3400,7 +3244,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -3431,7 +3275,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -3459,7 +3303,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -3494,7 +3338,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -3525,7 +3369,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -3559,7 +3403,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -3590,7 +3434,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

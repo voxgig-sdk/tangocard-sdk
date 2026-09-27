@@ -11,18 +11,16 @@ const AsyncOrderLineItemsViewEntity_1 = require("./entity/AsyncOrderLineItemsVie
 const AsyncReasonCodesViewEntity_1 = require("./entity/AsyncReasonCodesViewEntity");
 const AsyncUpdateLineItemViewEntity_1 = require("./entity/AsyncUpdateLineItemViewEntity");
 const BalanceAlertViewEntity_1 = require("./entity/BalanceAlertViewEntity");
-const BrandCategoriesViewEntity_1 = require("./entity/BrandCategoriesViewEntity");
+const BrandCategoryEntity_1 = require("./entity/BrandCategoryEntity");
 const CatalogEntity_1 = require("./entity/CatalogEntity");
 const ChoiceProductEntity_1 = require("./entity/ChoiceProductEntity");
 const CountryViewSummaryEntity_1 = require("./entity/CountryViewSummaryEntity");
 const CreateAccountCriterionEntity_1 = require("./entity/CreateAccountCriterionEntity");
-const CreateCustomerCriterionEntity_1 = require("./entity/CreateCustomerCriterionEntity");
 const CredentialTypeViewEntity_1 = require("./entity/CredentialTypeViewEntity");
 const CreditCardEntity_1 = require("./entity/CreditCardEntity");
 const CreditCardDepositEntity_1 = require("./entity/CreditCardDepositEntity");
 const CreditCardUnregisterEntity_1 = require("./entity/CreditCardUnregisterEntity");
 const CustomerEntity_1 = require("./entity/CustomerEntity");
-const EmailTemplateListViewEntity_1 = require("./entity/EmailTemplateListViewEntity");
 const EmailTemplateViewVerboseEntity_1 = require("./entity/EmailTemplateViewVerboseEntity");
 const EmbeddableResponseDtoEntity_1 = require("./entity/EmbeddableResponseDtoEntity");
 const ExchangeRatesWithDisclaimerEntity_1 = require("./entity/ExchangeRatesWithDisclaimerEntity");
@@ -32,8 +30,6 @@ const LowBalanceAlertViewEntity_1 = require("./entity/LowBalanceAlertViewEntity"
 const MobileCountryEntity_1 = require("./entity/MobileCountryEntity");
 const N14WebhookEntity_1 = require("./entity/N14WebhookEntity");
 const N1CustomerEntity_1 = require("./entity/N1CustomerEntity");
-const N2AccountEntity_1 = require("./entity/N2AccountEntity");
-const N3FundEntity_1 = require("./entity/N3FundEntity");
 const N8LineItemEntity_1 = require("./entity/N8LineItemEntity");
 const N9DigitalTemplateEntity_1 = require("./entity/N9DigitalTemplateEntity");
 const OrderEntity_1 = require("./entity/OrderEntity");
@@ -129,7 +125,6 @@ class TangocardSDK {
             ctrl: fetchargs.ctrl || {},
         }, this._rootctx);
         const options = this._options;
-        // Build spec directly from SDK options + user-provided fetch args.
         const spec = {
             base: options.base,
             prefix: options.prefix,
@@ -143,14 +138,12 @@ class TangocardSDK {
             step: 'start',
         };
         ctx.spec = spec;
-        // Merge user-provided headers over SDK defaults.
         if (fetchargs.headers) {
             const uheaders = fetchargs.headers;
             for (let key in uheaders) {
                 spec.headers[key] = uheaders[key];
             }
         }
-        // Apply SDK auth (apikey, auth prefix, etc.)
         const authResult = prepareAuth(ctx);
         if (authResult instanceof Error) {
             return authResult;
@@ -225,18 +218,6 @@ class TangocardSDK {
             return { ok: false, err };
         }
     }
-    // Raw GraphQL access: the pressure valve that makes the generated
-    // surface's deliberate omissions (per-call selection sets, typed filter
-    // builders, batching, subscriptions) livable — the whole schema stays
-    // reachable.
-    //
-    // Thin wrapper over the same prepare/fetch path `direct` uses, with the
-    // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
-    // HTTP 200 as a top-level `errors` array, so status alone would report a
-    // failed query as ok.
-    //
-    // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
-    // ratelimit or paging features apply.
     async graphql(query, variables, ctrl) {
         const options = this._options;
         if (!options.allow.op.includes('graphql')) {
@@ -333,12 +314,12 @@ class TangocardSDK {
         const self = this;
         return new BalanceAlertViewEntity_1.BalanceAlertViewEntity(self, entopts);
     }
-    // Entity access: `client.BrandCategoriesView().list()` / `client.BrandCategoriesView().load({ id })`.
+    // Entity access: `client.BrandCategory().list()` / `client.BrandCategory().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
     // constructor as entopts), not initial entity data.
-    BrandCategoriesView(entopts) {
+    BrandCategory(entopts) {
         const self = this;
-        return new BrandCategoriesViewEntity_1.BrandCategoriesViewEntity(self, entopts);
+        return new BrandCategoryEntity_1.BrandCategoryEntity(self, entopts);
     }
     // Entity access: `client.Catalog().list()` / `client.Catalog().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
@@ -367,13 +348,6 @@ class TangocardSDK {
     CreateAccountCriterion(entopts) {
         const self = this;
         return new CreateAccountCriterionEntity_1.CreateAccountCriterionEntity(self, entopts);
-    }
-    // Entity access: `client.CreateCustomerCriterion().list()` / `client.CreateCustomerCriterion().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    CreateCustomerCriterion(entopts) {
-        const self = this;
-        return new CreateCustomerCriterionEntity_1.CreateCustomerCriterionEntity(self, entopts);
     }
     // Entity access: `client.CredentialTypeView().list()` / `client.CredentialTypeView().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
@@ -409,13 +383,6 @@ class TangocardSDK {
     Customer(entopts) {
         const self = this;
         return new CustomerEntity_1.CustomerEntity(self, entopts);
-    }
-    // Entity access: `client.EmailTemplateListView().list()` / `client.EmailTemplateListView().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    EmailTemplateListView(entopts) {
-        const self = this;
-        return new EmailTemplateListViewEntity_1.EmailTemplateListViewEntity(self, entopts);
     }
     // Entity access: `client.EmailTemplateViewVerbose().list()` / `client.EmailTemplateViewVerbose().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
@@ -479,20 +446,6 @@ class TangocardSDK {
     N1Customer(entopts) {
         const self = this;
         return new N1CustomerEntity_1.N1CustomerEntity(self, entopts);
-    }
-    // Entity access: `client.N2Account().list()` / `client.N2Account().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    N2Account(entopts) {
-        const self = this;
-        return new N2AccountEntity_1.N2AccountEntity(self, entopts);
-    }
-    // Entity access: `client.N3Fund().list()` / `client.N3Fund().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    N3Fund(entopts) {
-        const self = this;
-        return new N3FundEntity_1.N3FundEntity(self, entopts);
     }
     // Entity access: `client.N8LineItem().list()` / `client.N8LineItem().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity

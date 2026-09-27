@@ -1,0 +1,22 @@
+# BasicExchangeRatesWithDisclaimerFlow
+
+main: kit: flow: BasicExchangeRatesWithDisclaimerFlow:
+{
+  entity: "exchange_rates_with_disclaimer",
+  kind: "basic",
+  name: "BasicExchangeRatesWithDisclaimerFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "exchange_rates_with_disclaimer_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicExchangeRatesWithDisclaimerFlow"
+}

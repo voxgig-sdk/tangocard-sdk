@@ -1,0 +1,272 @@
+# Entity: customer
+
+main: kit: entity: customer: {
+
+  alias: field: {}
+
+  fields: {
+    accounts: {
+      h: "Accounts"
+      n: "accounts"
+      r: true
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: true
+      sh: "A unique identifier for this customer."
+      t: "`$STRING`"
+    }
+    displayName: {
+      h: "Display Name"
+      n: "displayName"
+      r: true
+      sh: "A friendly name for this customer."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "customer"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /customers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/customers"
+          s: [
+            {
+              lit: "customers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /customers"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "account_display_name"
+                or: "account_display_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "account_max_date_created_at"
+                or: "account_max_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "account_min_date_created_at"
+                or: "account_min_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "account_number"
+                or: "account_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "account_status"
+                or: "account_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "customer_max_date_created_at"
+                or: "customer_max_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "customer_min_date_created_at"
+                or: "customer_min_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "display_name"
+                or: "display_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "paginate"
+                or: "paginate"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/customers"
+          q: {
+            exist: [
+              "account_display_name"
+              "account_identifier"
+              "account_max_date_created_at"
+              "account_min_date_created_at"
+              "account_number"
+              "account_status"
+              "customer_max_date_created_at"
+              "customer_min_date_created_at"
+              "display_name"
+              "max_result"
+              "next_cursor"
+              "paginate"
+              "prev_cursor"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /customers/{customerIdentifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/customers/{customerIdentifier}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              customerIdentifier: "id"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

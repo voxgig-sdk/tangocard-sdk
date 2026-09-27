@@ -1,0 +1,52 @@
+# BasicCustomerFlow
+
+main: kit: flow: BasicCustomerFlow:
+{
+  entity: "customer",
+  kind: "basic",
+  name: "BasicCustomerFlow",
+  step: [
+    {
+      i: {
+        ref: "customer_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "customer_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "customer_ref01",
+        srcdatavar: "customer_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "customer01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-customer_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCustomerFlow"
+}

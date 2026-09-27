@@ -1,0 +1,314 @@
+# Entity: email_template_view_verbose
+
+main: kit: entity: email_template_view_verbose: {
+
+  alias: field: {}
+
+  fields: {
+    accentColor: {
+      h: "Accent Color"
+      n: "accentColor"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email."
+      t: "`$STRING`"
+    }
+    accessControl: {
+      h: "Access Control"
+      n: "accessControl"
+      r: false
+      sh: "(Optional) Which Customers and/or Accounts should have access to this template."
+      t: "`$ARRAY`"
+    }
+    accessControls: {
+      h: "Access Controls"
+      n: "accessControls"
+      r: false
+      t: "`$ARRAY`"
+    }
+    closing: {
+      h: "Closing"
+      n: "closing"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "After the reward credential, a space to close the email message to the recipient."
+      t: "`$STRING`"
+    }
+    customerServiceMessage: {
+      h: "Customer Service Message"
+      n: "customerServiceMessage"
+      r: false
+      sh: "If left null, Tango Card's Customer Support contact information will be included."
+      t: "`$STRING`"
+    }
+    defaults: {
+      h: "Defaults"
+      n: "defaults"
+      r: false
+      sh: "If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order."
+      t: "`$ARRAY`"
+    }
+    etid: {
+      h: "Etid"
+      n: "etid"
+      r: true
+      t: "`$STRING`"
+    }
+    fromName: {
+      h: "From Name"
+      n: "fromName"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The name that will appear in the From line of the email and the {from_name} in the text message."
+      t: "`$STRING`"
+    }
+    headerImage: {
+      h: "Header Image"
+      n: "headerImage"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "A Base64 encoded string of an image that will show as the header of the email."
+      t: "`$STRING`"
+    }
+    headerImageAltText: {
+      h: "Header Image Alt Text"
+      n: "headerImageAltText"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The Alt Text for the Header Image in the email."
+      t: "`$STRING`"
+    }
+    messageBody: {
+      h: "Message Body"
+      n: "messageBody"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The message body for the email."
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "A unique name to give the template."
+      t: "`$STRING`"
+    }
+    smsMessageBody: {
+      h: "Sms Message Body"
+      n: "smsMessageBody"
+      r: false
+      sh: "The message body for the SMS."
+      t: "`$STRING`"
+    }
+    subject: {
+      h: "Subject"
+      n: "subject"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The Subject of the email."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "email_template_view_verbose"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /digitalTemplates"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/digitalTemplates"
+          s: [
+            {
+              lit: "digitalTemplates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /digitalTemplates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "elements_per_block"
+                or: "elements_per_block"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/digitalTemplates"
+          q: {
+            exist: [
+              "elements_per_block"
+              "page"
+            ]
+          }
+          s: [
+            {
+              lit: "digitalTemplates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /digitalTemplates/{etid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "etid"
+                or: "etid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/digitalTemplates/{etid}"
+          q: {
+            exist: [
+              "etid"
+            ]
+          }
+          s: [
+            {
+              lit: "digitalTemplates"
+            }
+            {
+              var: "etid"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /digitalTemplates/{etid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "etid"
+                or: "etid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/digitalTemplates/{etid}"
+          q: {
+            exist: [
+              "etid"
+            ]
+          }
+          s: [
+            {
+              lit: "digitalTemplates"
+            }
+            {
+              var: "etid"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

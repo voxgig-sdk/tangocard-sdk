@@ -15,18 +15,16 @@
 <a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
 <a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
 <a href="../api/balance_alert_view.html">BalanceAlertView</a>
-<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/brand_category.html">BrandCategory</a>
 <a href="../api/catalog.html">Catalog</a>
 <a href="../api/choice_product.html">ChoiceProduct</a>
 <a href="../api/country_view_summary.html">CountryViewSummary</a>
 <a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
-<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
 <a href="../api/credential_type_view.html">CredentialTypeView</a>
 <a href="../api/credit_card.html">CreditCard</a>
 <a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
 <a aria-current="page" href="../api/credit_card_unregister.html">CreditCardUnregister</a><div class="nav-sections"><a class="nav-section" href="#post-creditcardunregisters">POST /creditCardUnregisters</a></div>
 <a href="../api/customer.html">Customer</a>
-<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
 <a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
 <a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
 <a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
@@ -36,8 +34,6 @@
 <a href="../api/mobile_country.html">MobileCountry</a>
 <a href="../api/n14_webhook.html">N14Webhook</a>
 <a href="../api/n1_customer.html">N1Customer</a>
-<a href="../api/n2_account.html">N2Account</a>
-<a href="../api/n3_fund.html">N3Fund</a>
 <a href="../api/n8_line_item.html">N8LineItem</a>
 <a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
 <a href="../api/order.html">Order</a>
@@ -64,14 +60,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="creditcardunregister">CreditCardUnregister</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="creditcardunregister">CreditCardUnregister</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -92,6 +88,36 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">created, err := client.CreditCardUnregister(nil).Create(map[string]any{&quot;accountIdentifier&quot;: &quot;example&quot;, &quot;createdDate&quot;: &quot;example&quot;, &quot;creditCardToken&quot;: &quot;example&quot;, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;message&quot;: &quot;example&quot;, &quot;token&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+</code></pre>
+<h3 id="javascript">JavaScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/js.html#set-up-the-client">JavaScript setup</a>, then call the operations:</p>
+<pre><code class="language-js">const created = await client.CreditCardUnregister().create({ accountIdentifier: &quot;example&quot;, createdDate: &quot;example&quot;, creditCardToken: &quot;example&quot;, customerIdentifier: &quot;example&quot;, message: &quot;example&quot;, token: &quot;example&quot; })
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local created, err = client:CreditCardUnregister():create({ accountIdentifier = &quot;example&quot;, createdDate = &quot;example&quot;, creditCardToken = &quot;example&quot;, customerIdentifier = &quot;example&quot;, message = &quot;example&quot;, token = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$created = $client-&gt;CreditCardUnregister()-&gt;create([&quot;accountIdentifier&quot; =&gt; &quot;example&quot;, &quot;createdDate&quot; =&gt; &quot;example&quot;, &quot;creditCardToken&quot; =&gt; &quot;example&quot;, &quot;customerIdentifier&quot; =&gt; &quot;example&quot;, &quot;message&quot; =&gt; &quot;example&quot;, &quot;token&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">created = client.CreditCardUnregister().create({ &quot;accountIdentifier&quot;: &quot;example&quot;, &quot;createdDate&quot;: &quot;example&quot;, &quot;creditCardToken&quot;: &quot;example&quot;, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;message&quot;: &quot;example&quot;, &quot;token&quot;: &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const created = await client.CreditCardUnregister().create({ accountIdentifier: &quot;example&quot;, createdDate: &quot;example&quot;, creditCardToken: &quot;example&quot;, customerIdentifier: &quot;example&quot;, message: &quot;example&quot;, token: &quot;example&quot; })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -113,7 +139,7 @@
 <td><code>createdDate</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Created Date</td>
 </tr>
 <tr>
 <td><code>creditCardToken</code></td>
@@ -131,13 +157,13 @@
 <td><code>message</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Message</td>
 </tr>
 <tr>
 <td><code>token</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Token</td>
 </tr>
 </tbody>
 </table>
@@ -285,8 +311,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -305,8 +373,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -325,8 +435,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -345,8 +497,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>

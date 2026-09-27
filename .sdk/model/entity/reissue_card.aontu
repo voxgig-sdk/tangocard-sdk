@@ -1,0 +1,105 @@
+# Entity: reissue_card
+
+main: kit: entity: reissue_card: {
+
+  alias: field: {}
+
+  fields: {
+    commentText: {
+      h: "Comment Text"
+      n: "commentText"
+      r: false
+      sh: "Optional comment for the card replacement."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: true
+      sh: "Reason for the card replacement."
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      sh: "Status of the reissue request."
+      t: "`$STRING`"
+    }
+    updatedBy: {
+      h: "Updated By"
+      n: "updatedBy"
+      r: true
+      sh: "Identifier of the agent initiating the request."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "reissue_card"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /prepaidCardService/reissueCard/{referenceLineItemID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/prepaidCardService/reissueCard/{referenceLineItemID}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "id"
+            }
+          }
+          s: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "reissueCard"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

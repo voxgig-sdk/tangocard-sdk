@@ -64,7 +64,7 @@ def _balance_alert_view_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["balance_alert_view01", "balance_alert_view02", "balance_alert_view03", "customer01", "customer02", "customer03", "account01", "account02", "account03", "lowbalance01", "lowbalance02", "lowbalance03"],
+        ["balance_alert_view01", "balance_alert_view02", "balance_alert_view03", "customer01", "customer02", "customer03", "account01", "account02", "account03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

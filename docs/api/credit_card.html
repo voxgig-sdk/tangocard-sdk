@@ -15,12 +15,11 @@
 <a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
 <a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
 <a href="../api/balance_alert_view.html">BalanceAlertView</a>
-<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/brand_category.html">BrandCategory</a>
 <a href="../api/catalog.html">Catalog</a>
 <a href="../api/choice_product.html">ChoiceProduct</a>
 <a href="../api/country_view_summary.html">CountryViewSummary</a>
 <a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
-<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
 <a href="../api/credential_type_view.html">CredentialTypeView</a>
 <a aria-current="page" href="../api/credit_card.html">CreditCard</a><div class="nav-sections"><a class="nav-section" href="#post-creditcards">POST /creditCards</a>
 <a class="nav-section" href="#get-creditcards">GET /creditCards</a>
@@ -28,7 +27,6 @@
 <a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
 <a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
 <a href="../api/customer.html">Customer</a>
-<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
 <a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
 <a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
 <a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
@@ -38,8 +36,6 @@
 <a href="../api/mobile_country.html">MobileCountry</a>
 <a href="../api/n14_webhook.html">N14Webhook</a>
 <a href="../api/n1_customer.html">N1Customer</a>
-<a href="../api/n2_account.html">N2Account</a>
-<a href="../api/n3_fund.html">N3Fund</a>
 <a href="../api/n8_line_item.html">N8LineItem</a>
 <a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
 <a href="../api/order.html">Order</a>
@@ -66,14 +62,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="creditcard">CreditCard</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="creditcard">CreditCard</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -106,6 +102,46 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">credit_card, err := client.CreditCard(nil).Load(map[string]any{&quot;id&quot;: &quot;example_id&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(credit_card)
+created, err := client.CreditCard(nil).Create(map[string]any{&quot;accountIdentifier&quot;: &quot;example&quot;, &quot;accountNumber&quot;: &quot;example&quot;, &quot;activationDate&quot;: &quot;example&quot;, &quot;billingAddress&quot;: map[string]any{}, &quot;contactInformation&quot;: []any{}, &quot;createdDate&quot;: &quot;example&quot;, &quot;creditCard&quot;: map[string]any{}, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;expirationDate&quot;: &quot;example&quot;, &quot;ipAddress&quot;: &quot;example&quot;, &quot;label&quot;: &quot;example&quot;, &quot;lastFourDigits&quot;: &quot;example&quot;, &quot;status&quot;: &quot;example&quot;, &quot;token&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+</code></pre>
+<h3 id="javascript">JavaScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/js.html#set-up-the-client">JavaScript setup</a>, then call the operations:</p>
+<pre><code class="language-js">const credit_card = await client.CreditCard().load({ id: &quot;example_id&quot; })
+const created = await client.CreditCard().create({ accountIdentifier: &quot;example&quot;, accountNumber: &quot;example&quot;, activationDate: &quot;example&quot;, billingAddress: {}, contactInformation: [], createdDate: &quot;example&quot;, creditCard: {}, customerIdentifier: &quot;example&quot;, expirationDate: &quot;example&quot;, ipAddress: &quot;example&quot;, label: &quot;example&quot;, lastFourDigits: &quot;example&quot;, status: &quot;example&quot;, token: &quot;example&quot; })
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local credit_card, err = client:CreditCard():load({ id = &quot;example_id&quot; })
+local created, err = client:CreditCard():create({ accountIdentifier = &quot;example&quot;, accountNumber = &quot;example&quot;, activationDate = &quot;example&quot;, billingAddress = {}, contactInformation = {}, createdDate = &quot;example&quot;, creditCard = {}, customerIdentifier = &quot;example&quot;, expirationDate = &quot;example&quot;, ipAddress = &quot;example&quot;, label = &quot;example&quot;, lastFourDigits = &quot;example&quot;, status = &quot;example&quot;, token = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$credit_card = $client-&gt;CreditCard()-&gt;load([&quot;id&quot; =&gt; &quot;example_id&quot;]);
+$created = $client-&gt;CreditCard()-&gt;create([&quot;accountIdentifier&quot; =&gt; &quot;example&quot;, &quot;accountNumber&quot; =&gt; &quot;example&quot;, &quot;activationDate&quot; =&gt; &quot;example&quot;, &quot;billingAddress&quot; =&gt; [], &quot;contactInformation&quot; =&gt; [], &quot;createdDate&quot; =&gt; &quot;example&quot;, &quot;creditCard&quot; =&gt; [], &quot;customerIdentifier&quot; =&gt; &quot;example&quot;, &quot;expirationDate&quot; =&gt; &quot;example&quot;, &quot;ipAddress&quot; =&gt; &quot;example&quot;, &quot;label&quot; =&gt; &quot;example&quot;, &quot;lastFourDigits&quot; =&gt; &quot;example&quot;, &quot;status&quot; =&gt; &quot;example&quot;, &quot;token&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">credit_card = client.CreditCard().load({&quot;id&quot;: &quot;example_id&quot;})
+created = client.CreditCard().create({ &quot;accountIdentifier&quot;: &quot;example&quot;, &quot;accountNumber&quot;: &quot;example&quot;, &quot;activationDate&quot;: &quot;example&quot;, &quot;billingAddress&quot;: {}, &quot;contactInformation&quot;: [], &quot;createdDate&quot;: &quot;example&quot;, &quot;creditCard&quot;: {}, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;expirationDate&quot;: &quot;example&quot;, &quot;ipAddress&quot;: &quot;example&quot;, &quot;label&quot;: &quot;example&quot;, &quot;lastFourDigits&quot;: &quot;example&quot;, &quot;status&quot;: &quot;example&quot;, &quot;token&quot;: &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const credit_card = await client.CreditCard().load({ id: &quot;example_id&quot; })
+const created = await client.CreditCard().create({ accountIdentifier: &quot;example&quot;, accountNumber: &quot;example&quot;, activationDate: &quot;example&quot;, billingAddress: {}, contactInformation: [], createdDate: &quot;example&quot;, creditCard: {}, customerIdentifier: &quot;example&quot;, expirationDate: &quot;example&quot;, ipAddress: &quot;example&quot;, label: &quot;example&quot;, lastFourDigits: &quot;example&quot;, status: &quot;example&quot;, token: &quot;example&quot; })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -127,13 +163,13 @@
 <td><code>accountNumber</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Account Number</td>
 </tr>
 <tr>
 <td><code>activationDate</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Activation Date</td>
 </tr>
 <tr>
 <td><code>billingAddress</code></td>
@@ -151,7 +187,7 @@
 <td><code>createdDate</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Created Date</td>
 </tr>
 <tr>
 <td><code>creditCard</code></td>
@@ -169,13 +205,13 @@
 <td><code>expirationDate</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Expiration Date</td>
 </tr>
 <tr>
 <td><code>id</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Id</td>
 </tr>
 <tr>
 <td><code>ipAddress</code></td>
@@ -193,19 +229,19 @@
 <td><code>lastFourDigits</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Last Four Digits</td>
 </tr>
 <tr>
 <td><code>status</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Status</td>
 </tr>
 <tr>
 <td><code>token</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Token</td>
 </tr>
 </tbody>
 </table>
@@ -521,8 +557,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -541,8 +619,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -561,8 +681,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -581,8 +743,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -601,8 +805,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -709,8 +955,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -729,8 +1017,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -749,8 +1079,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -769,8 +1141,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -951,8 +1365,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -971,8 +1427,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -991,8 +1489,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1011,8 +1551,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1031,8 +1613,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>

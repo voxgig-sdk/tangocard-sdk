@@ -19,7 +19,6 @@ import type {
   LowBalanceAlertListViewListMatch,
 } from '../TangocardTypes'
 
-// TODO: needs Entity superclass
 class LowBalanceAlertListViewEntity extends TangocardEntityBase<LowBalanceAlertListView> {
 
   constructor(client: TangocardSDK, entopts: any) {

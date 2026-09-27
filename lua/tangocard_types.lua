@@ -1,7 +1,7 @@
 -- Typed models for the Tangocard SDK (LuaLS annotations).
 --
--- GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
--- params (op.<name>.points[].args.params[]). Field/param types come from the
+-- GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+-- params (op.<name>.points[].g.params[]). Field/param types come from the
 -- canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 -- @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
 -- edit by hand.
@@ -243,11 +243,11 @@
 ---@field balance_alert_id string
 ---@field customer_identifier string
 
----@class BrandCategoriesView
+---@class BrandCategory
 ---@field description? string
 ---@field identifier? string
 
----@class BrandCategoriesViewListMatch
+---@class BrandCategoryListMatch
 ---@field description? string
 ---@field identifier? string
 
@@ -323,8 +323,6 @@
 ---@field currencyCode? string
 ---@field displayName string
 ---@field fundingNotification? table
-
----@class CreateCustomerCriterion
 
 ---@class CredentialTypeView
 ---@field credentialType string
@@ -452,8 +450,6 @@
 ---@field displayName string
 ---@field id? string
 ---@field status string
-
----@class EmailTemplateListView
 
 ---@class EmailTemplateViewVerbose
 ---@field accentColor string
@@ -797,10 +793,6 @@
 ---@field paginate? boolean
 ---@field prev_cursor? string
 ---@field status? string
-
----@class N2Account
-
----@class N3Fund
 
 ---@class N8LineItem
 ---@field campaign? string

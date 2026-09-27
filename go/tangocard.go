@@ -80,8 +80,8 @@ func init() {
 	core.NewBalanceAlertViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewBalanceAlertViewEntity(client, entopts)
 	}
-	core.NewBrandCategoriesViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
-		return entity.NewBrandCategoriesViewEntity(client, entopts)
+	core.NewBrandCategoryEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
+		return entity.NewBrandCategoryEntity(client, entopts)
 	}
 	core.NewCatalogEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewCatalogEntity(client, entopts)
@@ -94,9 +94,6 @@ func init() {
 	}
 	core.NewCreateAccountCriterionEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewCreateAccountCriterionEntity(client, entopts)
-	}
-	core.NewCreateCustomerCriterionEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
-		return entity.NewCreateCustomerCriterionEntity(client, entopts)
 	}
 	core.NewCredentialTypeViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewCredentialTypeViewEntity(client, entopts)
@@ -112,9 +109,6 @@ func init() {
 	}
 	core.NewCustomerEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewCustomerEntity(client, entopts)
-	}
-	core.NewEmailTemplateListViewEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
-		return entity.NewEmailTemplateListViewEntity(client, entopts)
 	}
 	core.NewEmailTemplateViewVerboseEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewEmailTemplateViewVerboseEntity(client, entopts)
@@ -142,12 +136,6 @@ func init() {
 	}
 	core.NewN1CustomerEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewN1CustomerEntity(client, entopts)
-	}
-	core.NewN2AccountEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
-		return entity.NewN2AccountEntity(client, entopts)
-	}
-	core.NewN3FundEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
-		return entity.NewN3FundEntity(client, entopts)
 	}
 	core.NewN8LineItemEntityFunc = func(client *core.TangocardSDK, entopts map[string]any) core.TangocardEntity {
 		return entity.NewN8LineItemEntity(client, entopts)

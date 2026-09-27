@@ -127,7 +127,7 @@ func low_balance_alert_viewBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"low_balance_alert_view01", "low_balance_alert_view02", "low_balance_alert_view03", "customer01", "customer02", "customer03", "account01", "account02", "account03", "lowbalance01", "lowbalance02", "lowbalance03", "accountentifier01", "customerentifier01"},
+		[]any{"low_balance_alert_view01", "low_balance_alert_view02", "low_balance_alert_view03", "customer01", "customer02", "customer03", "account01", "account02", "account03", "accountentifier01", "customerentifier01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

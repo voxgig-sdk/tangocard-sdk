@@ -70,7 +70,7 @@ function prepaid_card_transaction_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["prepaid_card_transaction01", "prepaid_card_transaction02", "prepaid_card_transaction03", "get_card_transaction01", "get_card_transaction02", "get_card_transaction03"] as $k) {
+    foreach (["prepaid_card_transaction01", "prepaid_card_transaction02", "prepaid_card_transaction03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

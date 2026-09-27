@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 // Typed models for the Tangocard SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 //
@@ -312,15 +312,15 @@ class BalanceAlertViewRemoveMatch
     public string $customer_identifier;
 }
 
-/** BrandCategoriesView entity data model. */
-class BrandCategoriesView
+/** BrandCategory entity data model. */
+class BrandCategory
 {
     public ?string $description = null;
     public ?string $identifier = null;
 }
 
-/** Request payload for BrandCategoriesView#list. */
-class BrandCategoriesViewListMatch
+/** Request payload for BrandCategory#list. */
+class BrandCategoryListMatch
 {
     public ?string $description = null;
     public ?string $identifier = null;
@@ -424,11 +424,6 @@ class CreateAccountCriterionCreateData
     public ?string $currencyCode = null;
     public string $displayName;
     public ?array $fundingNotification = null;
-}
-
-/** CreateCustomerCriterion entity data model. */
-class CreateCustomerCriterion
-{
 }
 
 /** CredentialTypeView entity data model. */
@@ -598,11 +593,6 @@ class CustomerCreateData
     public string $displayName;
     public ?string $id = null;
     public string $status;
-}
-
-/** EmailTemplateListView entity data model. */
-class EmailTemplateListView
-{
 }
 
 /** EmailTemplateViewVerbose entity data model. */
@@ -1030,16 +1020,6 @@ class N1CustomerLoadMatch
     public ?bool $paginate = null;
     public ?string $prev_cursor = null;
     public ?string $status = null;
-}
-
-/** N2Account entity data model. */
-class N2Account
-{
-}
-
-/** N3Fund entity data model. */
-class N3Fund
-{
 }
 
 /** N8LineItem entity data model. */

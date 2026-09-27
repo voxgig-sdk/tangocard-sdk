@@ -503,21 +503,21 @@ class TangocardSDK
     }
 
 
-    private $_brand_categories_view = null;
+    private $_brand_category = null;
 
-    // Canonical facade: $client->BrandCategoriesView()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->brand_categories_view()
+    // Canonical facade: $client->BrandCategory()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->brand_category()
     // resolves here too.
-    public function BrandCategoriesView($data = null)
+    public function BrandCategory($data = null)
     {
-        require_once __DIR__ . '/entity/brand_categories_view_entity.php';
+        require_once __DIR__ . '/entity/brand_category_entity.php';
         if ($data === null) {
-            if ($this->_brand_categories_view === null) {
-                $this->_brand_categories_view = new BrandCategoriesViewEntity($this, null);
+            if ($this->_brand_category === null) {
+                $this->_brand_category = new BrandCategoryEntity($this, null);
             }
-            return $this->_brand_categories_view;
+            return $this->_brand_category;
         }
-        return new BrandCategoriesViewEntity($this, $data);
+        return new BrandCategoryEntity($this, $data);
     }
 
 
@@ -590,24 +590,6 @@ class TangocardSDK
             return $this->_create_account_criterion;
         }
         return new CreateAccountCriterionEntity($this, $data);
-    }
-
-
-    private $_create_customer_criterion = null;
-
-    // Canonical facade: $client->CreateCustomerCriterion()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->create_customer_criterion()
-    // resolves here too.
-    public function CreateCustomerCriterion($data = null)
-    {
-        require_once __DIR__ . '/entity/create_customer_criterion_entity.php';
-        if ($data === null) {
-            if ($this->_create_customer_criterion === null) {
-                $this->_create_customer_criterion = new CreateCustomerCriterionEntity($this, null);
-            }
-            return $this->_create_customer_criterion;
-        }
-        return new CreateCustomerCriterionEntity($this, $data);
     }
 
 
@@ -698,24 +680,6 @@ class TangocardSDK
             return $this->_customer;
         }
         return new CustomerEntity($this, $data);
-    }
-
-
-    private $_email_template_list_view = null;
-
-    // Canonical facade: $client->EmailTemplateListView()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->email_template_list_view()
-    // resolves here too.
-    public function EmailTemplateListView($data = null)
-    {
-        require_once __DIR__ . '/entity/email_template_list_view_entity.php';
-        if ($data === null) {
-            if ($this->_email_template_list_view === null) {
-                $this->_email_template_list_view = new EmailTemplateListViewEntity($this, null);
-            }
-            return $this->_email_template_list_view;
-        }
-        return new EmailTemplateListViewEntity($this, $data);
     }
 
 
@@ -878,42 +842,6 @@ class TangocardSDK
             return $this->_n1_customer;
         }
         return new N1CustomerEntity($this, $data);
-    }
-
-
-    private $_n2_account = null;
-
-    // Canonical facade: $client->N2Account()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->n2_account()
-    // resolves here too.
-    public function N2Account($data = null)
-    {
-        require_once __DIR__ . '/entity/n2_account_entity.php';
-        if ($data === null) {
-            if ($this->_n2_account === null) {
-                $this->_n2_account = new N2AccountEntity($this, null);
-            }
-            return $this->_n2_account;
-        }
-        return new N2AccountEntity($this, $data);
-    }
-
-
-    private $_n3_fund = null;
-
-    // Canonical facade: $client->N3Fund()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->n3_fund()
-    // resolves here too.
-    public function N3Fund($data = null)
-    {
-        require_once __DIR__ . '/entity/n3_fund_entity.php';
-        if ($data === null) {
-            if ($this->_n3_fund === null) {
-                $this->_n3_fund = new N3FundEntity($this, null);
-            }
-            return $this->_n3_fund;
-        }
-        return new N3FundEntity($this, $data);
     }
 
 

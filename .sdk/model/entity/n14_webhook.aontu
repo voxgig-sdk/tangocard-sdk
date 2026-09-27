@@ -1,0 +1,510 @@
+# Entity: n14_webhook
+
+main: kit: entity: n14_webhook: {
+
+  alias: field: {}
+
+  fields: {
+    categories: {
+      h: "Categories"
+      n: "categories"
+      r: false
+      sh: "The categories the customer wants to subscribe to."
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "The date and time the webhook was created."
+      t: "`$STRING`"
+    }
+    eventTypes: {
+      h: "Event Types"
+      n: "eventTypes"
+      r: false
+      sh: "The event types the customer wants to subscribe to."
+      t: "`$ARRAY`"
+    }
+    expiresAt: {
+      fo: "date-time"
+      h: "Expires At"
+      n: "expiresAt"
+      r: false
+      sh: "The date and time the webhook expires."
+      t: "`$STRING`"
+    }
+    headers: {
+      h: "Headers"
+      n: "headers"
+      r: false
+      sh: "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener."
+      t: "`$ARRAY`"
+    }
+    hmacSharedSecretKey: {
+      h: "Hmac Shared Secret Key"
+      n: "hmacSharedSecretKey"
+      r: false
+      sh: "The HMAC secret key used to sign the webhook payload."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    payloadVerificationMethod: {
+      h: "Payload Verification Method"
+      n: "payloadVerificationMethod"
+      r: false
+      sh: "Method to verify webhook payload authenticity"
+      t: "`$STRING`"
+    }
+    signingCertificate: {
+      h: "Signing Certificate"
+      n: "signingCertificate"
+      r: false
+      sh: "The public X509 certificate used to sign the webhook payload."
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      sh: "The date and time when the webhook was last updated."
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The URL of the customer's webhook listener."
+      t: "`$STRING`"
+    }
+    webhookId: {
+      fo: "uuid"
+      h: "Webhook Id"
+      n: "webhookId"
+      r: false
+      sh: "The ID of the webhook."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "n14_webhook"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /webhooks/{webhookId}/tests/{testName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "test_name"
+                or: "test_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "webhook_id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/webhooks/{webhookId}/tests/{testName}"
+          q: {
+            exist: [
+              "test_name"
+              "webhook_id"
+            ]
+          }
+          r: {
+            param: {
+              testName: "test_name"
+              webhookId: "webhook_id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "webhook_id"
+            }
+            {
+              lit: "tests"
+            }
+            {
+              var: "test_name"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /webhooks/{webhookId}/tests"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "webhook_id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/webhooks/{webhookId}/tests"
+          q: {
+            exist: [
+              "webhook_id"
+            ]
+          }
+          r: {
+            param: {
+              webhookId: "webhook_id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "webhook_id"
+            }
+            {
+              lit: "tests"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /webhooks"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/webhooks"
+          s: [
+            {
+              lit: "webhooks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /webhooks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "category"
+                or: "category"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "created_at_from"
+                or: "created_at_from"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "created_at_to"
+                or: "created_at_to"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "event_type"
+                or: "event_type"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "expires_at_from"
+                or: "expires_at_from"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "expires_at_to"
+                or: "expires_at_to"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "header_name"
+                or: "header_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "header_value"
+                or: "header_value"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "url"
+                or: "url"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/webhooks"
+          q: {
+            exist: [
+              "category"
+              "created_at_from"
+              "created_at_to"
+              "event_type"
+              "expires_at_from"
+              "expires_at_to"
+              "header_name"
+              "header_value"
+              "max_result"
+              "next_cursor"
+              "prev_cursor"
+              "url"
+            ]
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /webhooks/{webhookId}/events"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "webhook_id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "from_revision"
+                or: "from_revision"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "to_revision"
+                or: "to_revision"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/webhooks/{webhookId}/events"
+          q: {
+            exist: [
+              "from_revision"
+              "max_result"
+              "next_cursor"
+              "prev_cursor"
+              "to_revision"
+              "webhook_id"
+            ]
+          }
+          r: {
+            param: {
+              webhookId: "webhook_id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "webhook_id"
+            }
+            {
+              lit: "events"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /webhooks/{webhookId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/webhooks/{webhookId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              webhookId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.webhook")]
+    [path("$.main.kit.entity.webhook")]
+  ]
+
+}

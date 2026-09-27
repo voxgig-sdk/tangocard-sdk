@@ -1,0 +1,32 @@
+# BasicEmbeddableResponseDtoFlow
+
+main: kit: flow: BasicEmbeddableResponseDtoFlow:
+{
+  entity: "embeddable_response_dto",
+  kind: "basic",
+  name: "BasicEmbeddableResponseDtoFlow",
+  step: [
+    {
+      i: {
+        ref: "embeddable_response_dto_ref01",
+        srcdatavar: "embeddable_response_dto_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "embeddable_response_dto01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-embeddable_response_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEmbeddableResponseDtoFlow"
+}

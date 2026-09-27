@@ -1,0 +1,30 @@
+# BasicAsyncOrderFlow
+
+main: kit: flow: BasicAsyncOrderFlow:
+{
+  entity: "async_order",
+  kind: "basic",
+  name: "BasicAsyncOrderFlow",
+  step: [
+    {
+      i: {
+        ref: "async_order_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "async_order_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAsyncOrderFlow"
+}

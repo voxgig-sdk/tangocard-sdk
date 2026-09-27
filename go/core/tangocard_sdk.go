@@ -264,7 +264,6 @@ func (sdk *TangocardSDK) rawRequest(fetchargs map[string]any) (map[string]any, e
 		if !noBody {
 			if jf := vs.GetProp(fm, "json"); jf != nil {
 				if f, ok := jf.(func() any); ok {
-					// f() returns nil on parse error in our fetcher.
 					jsonData = f()
 				}
 			}
@@ -281,17 +280,6 @@ func (sdk *TangocardSDK) rawRequest(fetchargs map[string]any) (map[string]any, e
 	return map[string]any{"ok": false, "err": ctx.MakeError("direct_invalid", "invalid response type")}, nil
 }
 
-// Raw GraphQL access: the pressure valve that makes the generated surface's
-// deliberate omissions (per-call selection sets, typed filter builders,
-// batching, subscriptions) livable — the whole schema stays reachable.
-//
-// Thin wrapper over the same prepare/fetch path Direct uses, with the one
-// thing raw Direct cannot do for GraphQL: a GraphQL failure rides HTTP 200
-// as a top-level `errors` array, so status alone would report a failed query
-// as ok.
-//
-// NOTE: like Direct, this bypasses the feature pipeline — no retry,
-// ratelimit or paging features apply.
 func (sdk *TangocardSDK) Graphql(
 	query string, variables map[string]any, ctrl map[string]any,
 ) (map[string]any, error) {
@@ -410,11 +398,11 @@ func (sdk *TangocardSDK) BalanceAlertView(data map[string]any) TangocardEntity {
 }
 
 
-// BrandCategoriesView returns a BrandCategoriesView entity bound to this client.
-// Idiomatic usage: client.BrandCategoriesView(nil).List(nil, nil) or
-// client.BrandCategoriesView(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *TangocardSDK) BrandCategoriesView(data map[string]any) TangocardEntity {
-	return NewBrandCategoriesViewEntityFunc(sdk, data)
+// BrandCategory returns a BrandCategory entity bound to this client.
+// Idiomatic usage: client.BrandCategory(nil).List(nil, nil) or
+// client.BrandCategory(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *TangocardSDK) BrandCategory(data map[string]any) TangocardEntity {
+	return NewBrandCategoryEntityFunc(sdk, data)
 }
 
 
@@ -447,14 +435,6 @@ func (sdk *TangocardSDK) CountryViewSummary(data map[string]any) TangocardEntity
 // client.CreateAccountCriterion(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TangocardSDK) CreateAccountCriterion(data map[string]any) TangocardEntity {
 	return NewCreateAccountCriterionEntityFunc(sdk, data)
-}
-
-
-// CreateCustomerCriterion returns a CreateCustomerCriterion entity bound to this client.
-// Idiomatic usage: client.CreateCustomerCriterion(nil).List(nil, nil) or
-// client.CreateCustomerCriterion(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *TangocardSDK) CreateCustomerCriterion(data map[string]any) TangocardEntity {
-	return NewCreateCustomerCriterionEntityFunc(sdk, data)
 }
 
 
@@ -495,14 +475,6 @@ func (sdk *TangocardSDK) CreditCardUnregister(data map[string]any) TangocardEnti
 // client.Customer(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TangocardSDK) Customer(data map[string]any) TangocardEntity {
 	return NewCustomerEntityFunc(sdk, data)
-}
-
-
-// EmailTemplateListView returns a EmailTemplateListView entity bound to this client.
-// Idiomatic usage: client.EmailTemplateListView(nil).List(nil, nil) or
-// client.EmailTemplateListView(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *TangocardSDK) EmailTemplateListView(data map[string]any) TangocardEntity {
-	return NewEmailTemplateListViewEntityFunc(sdk, data)
 }
 
 
@@ -575,22 +547,6 @@ func (sdk *TangocardSDK) N14Webhook(data map[string]any) TangocardEntity {
 // client.N1Customer(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TangocardSDK) N1Customer(data map[string]any) TangocardEntity {
 	return NewN1CustomerEntityFunc(sdk, data)
-}
-
-
-// N2Account returns a N2Account entity bound to this client.
-// Idiomatic usage: client.N2Account(nil).List(nil, nil) or
-// client.N2Account(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *TangocardSDK) N2Account(data map[string]any) TangocardEntity {
-	return NewN2AccountEntityFunc(sdk, data)
-}
-
-
-// N3Fund returns a N3Fund entity bound to this client.
-// Idiomatic usage: client.N3Fund(nil).List(nil, nil) or
-// client.N3Fund(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *TangocardSDK) N3Fund(data map[string]any) TangocardEntity {
-	return NewN3FundEntityFunc(sdk, data)
 }
 
 

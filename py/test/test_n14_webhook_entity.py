@@ -137,7 +137,7 @@ def _n14_webhook_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["n14_webhook01", "n14_webhook02", "n14_webhook03", "webhook01", "webhook02", "webhook03", "test01", "test02", "test03"],
+        ["n14_webhook01", "n14_webhook02", "n14_webhook03", "webhook01", "webhook02", "webhook03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

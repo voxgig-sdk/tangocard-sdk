@@ -78,9 +78,9 @@ Create a new `AsyncUpdateLineItemViewEntity` instance. Pass `null` for no initia
 
 Create a new `BalanceAlertViewEntity` instance. Pass `null` for no initial data.
 
-#### `BrandCategoriesView($data = null)`
+#### `BrandCategory($data = null)`
 
-Create a new `BrandCategoriesViewEntity` instance. Pass `null` for no initial data.
+Create a new `BrandCategoryEntity` instance. Pass `null` for no initial data.
 
 #### `Catalog($data = null)`
 
@@ -97,10 +97,6 @@ Create a new `CountryViewSummaryEntity` instance. Pass `null` for no initial dat
 #### `CreateAccountCriterion($data = null)`
 
 Create a new `CreateAccountCriterionEntity` instance. Pass `null` for no initial data.
-
-#### `CreateCustomerCriterion($data = null)`
-
-Create a new `CreateCustomerCriterionEntity` instance. Pass `null` for no initial data.
 
 #### `CredentialTypeView($data = null)`
 
@@ -121,10 +117,6 @@ Create a new `CreditCardUnregisterEntity` instance. Pass `null` for no initial d
 #### `Customer($data = null)`
 
 Create a new `CustomerEntity` instance. Pass `null` for no initial data.
-
-#### `EmailTemplateListView($data = null)`
-
-Create a new `EmailTemplateListViewEntity` instance. Pass `null` for no initial data.
 
 #### `EmailTemplateViewVerbose($data = null)`
 
@@ -161,14 +153,6 @@ Create a new `N14WebhookEntity` instance. Pass `null` for no initial data.
 #### `N1Customer($data = null)`
 
 Create a new `N1CustomerEntity` instance. Pass `null` for no initial data.
-
-#### `N2Account($data = null)`
-
-Create a new `N2AccountEntity` instance. Pass `null` for no initial data.
-
-#### `N3Fund($data = null)`
-
-Create a new `N3FundEntity` instance. Pass `null` for no initial data.
 
 #### `N8LineItem($data = null)`
 
@@ -871,10 +855,10 @@ Return the entity name.
 
 ---
 
-## BrandCategoriesViewEntity
+## BrandCategoryEntity
 
 ```php
-$brand_categories_view = $client->BrandCategoriesView();
+$brand_category = $client->BrandCategory();
 ```
 
 ### Fields
@@ -891,7 +875,7 @@ $brand_categories_view = $client->BrandCategoriesView();
 List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->BrandCategoriesView()->list();
+$results = $client->BrandCategory()->list();
 ```
 
 ### Common Methods
@@ -912,9 +896,9 @@ Get the entity match criteria.
 
 Set the entity match criteria.
 
-#### `make(): BrandCategoriesViewEntity`
+#### `make(): BrandCategoryEntity`
 
-Create a new `BrandCategoriesViewEntity` instance with the same client and
+Create a new `BrandCategoryEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -1160,42 +1144,6 @@ Set the entity match criteria.
 #### `make(): CreateAccountCriterionEntity`
 
 Create a new `CreateAccountCriterionEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## CreateCustomerCriterionEntity
-
-```php
-$create_customer_criterion = $client->CreateCustomerCriterion();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): CreateCustomerCriterionEntity`
-
-Create a new `CreateCustomerCriterionEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -1583,42 +1531,6 @@ Set the entity match criteria.
 #### `make(): CustomerEntity`
 
 Create a new `CustomerEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## EmailTemplateListViewEntity
-
-```php
-$email_template_list_view = $client->EmailTemplateListView();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): EmailTemplateListViewEntity`
-
-Create a new `EmailTemplateListViewEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -2323,78 +2235,6 @@ Set the entity match criteria.
 #### `make(): N1CustomerEntity`
 
 Create a new `N1CustomerEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## N2AccountEntity
-
-```php
-$n2_account = $client->N2Account();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): N2AccountEntity`
-
-Create a new `N2AccountEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## N3FundEntity
-
-```php
-$n3_fund = $client->N3Fund();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): N3FundEntity`
-
-Create a new `N3FundEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -3337,14 +3177,14 @@ Return the entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -3390,7 +3230,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -3421,7 +3261,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -3452,7 +3292,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -3480,7 +3320,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -3515,7 +3355,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -3546,7 +3386,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -3580,7 +3420,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -3611,7 +3451,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

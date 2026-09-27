@@ -122,7 +122,7 @@ def _email_template_view_verbose_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["email_template_view_verbose01", "email_template_view_verbose02", "email_template_view_verbose03", "digital_template01", "digital_template02", "digital_template03"],
+        ["email_template_view_verbose01", "email_template_view_verbose02", "email_template_view_verbose03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

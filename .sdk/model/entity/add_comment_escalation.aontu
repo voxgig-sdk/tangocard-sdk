@@ -1,0 +1,144 @@
+# Entity: add_comment_escalation
+
+main: kit: entity: add_comment_escalation: {
+
+  alias: field: {}
+
+  fields: {
+    assignee: {
+      fo: "int32"
+      h: "Assignee"
+      n: "assignee"
+      r: false
+      sh: "Assignee ID."
+      t: "`$INTEGER`"
+    }
+    commentText: {
+      h: "Comment Text"
+      n: "commentText"
+      r: true
+      sh: "Free-text comment to add to the prepaid card."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    inquiryCategoryCode: {
+      fo: "int32"
+      h: "Inquiry Category Code"
+      n: "inquiryCategoryCode"
+      r: false
+      sh: "Inquiry category code."
+      t: "`$INTEGER`"
+    }
+    inquiryIdNumber: {
+      fo: "int32"
+      h: "Inquiry Id Number"
+      n: "inquiryIdNumber"
+      r: false
+      sh: "Inquiry ID number."
+      t: "`$INTEGER`"
+    }
+    inquirySource: {
+      h: "Inquiry Source"
+      n: "inquirySource"
+      r: false
+      sh: "Origination source identifier (e.g."
+      t: "`$STRING`"
+    }
+    inquiryTypeCode: {
+      fo: "int32"
+      h: "Inquiry Type Code"
+      n: "inquiryTypeCode"
+      r: false
+      sh: "Inquiry type code."
+      t: "`$INTEGER`"
+    }
+    issueDescription: {
+      h: "Issue Description"
+      n: "issueDescription"
+      r: true
+      sh: "Short description of the issue."
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      sh: "Status of the inquiry (e.g."
+      t: "`$STRING`"
+    }
+    userId: {
+      h: "User Id"
+      n: "userId"
+      r: false
+      sh: "Agent or CSR user ID."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "add_comment_escalation"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /prepaidCardService/addCommentEscalation/{referenceLineItemID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/prepaidCardService/addCommentEscalation/{referenceLineItemID}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "id"
+            }
+          }
+          s: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "addCommentEscalation"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

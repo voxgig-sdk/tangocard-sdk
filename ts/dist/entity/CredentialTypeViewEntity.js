@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CredentialTypeViewEntity = void 0;
 const TangocardEntityBase_1 = require("../TangocardEntityBase");
-// TODO: needs Entity superclass
 class CredentialTypeViewEntity extends TangocardEntityBase_1.TangocardEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

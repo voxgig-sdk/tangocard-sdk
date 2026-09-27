@@ -1,0 +1,183 @@
+# Entity: n1_customer
+
+main: kit: entity: n1_customer: {
+
+  alias: field: {}
+
+  name: "n1_customer"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /customers/{customerIdentifier}/accounts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "account_number"
+                or: "account_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "contact_email"
+                or: "contact_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "currency_code"
+                or: "currency_code"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "display_name"
+                or: "display_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "funding_notification_email"
+                or: "funding_notification_email"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "max_balance"
+                or: "max_balance"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "max_date_created_at"
+                or: "max_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "min_balance"
+                or: "min_balance"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "min_date_created_at"
+                or: "min_date_created_at"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "paginate"
+                or: "paginate"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/customers/{customerIdentifier}/accounts"
+          q: {
+            exist: [
+              "account_number"
+              "contact_email"
+              "currency_code"
+              "customer_identifier"
+              "display_name"
+              "funding_notification_email"
+              "max_balance"
+              "max_date_created_at"
+              "max_result"
+              "min_balance"
+              "min_date_created_at"
+              "next_cursor"
+              "paginate"
+              "prev_cursor"
+              "status"
+            ]
+          }
+          r: {
+            param: {
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.customer")]
+  ]
+
+}

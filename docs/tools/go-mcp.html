@@ -15,18 +15,16 @@
 <a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
 <a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
 <a href="../api/balance_alert_view.html">BalanceAlertView</a>
-<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/brand_category.html">BrandCategory</a>
 <a href="../api/catalog.html">Catalog</a>
 <a href="../api/choice_product.html">ChoiceProduct</a>
 <a href="../api/country_view_summary.html">CountryViewSummary</a>
 <a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
-<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
 <a href="../api/credential_type_view.html">CredentialTypeView</a>
 <a href="../api/credit_card.html">CreditCard</a>
 <a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
 <a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
 <a href="../api/customer.html">Customer</a>
-<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
 <a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
 <a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
 <a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
@@ -36,8 +34,6 @@
 <a href="../api/mobile_country.html">MobileCountry</a>
 <a href="../api/n14_webhook.html">N14Webhook</a>
 <a href="../api/n1_customer.html">N1Customer</a>
-<a href="../api/n2_account.html">N2Account</a>
-<a href="../api/n3_fund.html">N3Fund</a>
 <a href="../api/n8_line_item.html">N8LineItem</a>
 <a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
 <a href="../api/order.html">Order</a>
@@ -64,14 +60,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details open><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a aria-current="page" href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>Tools</div><h1 id="go-mcp-server">Go MCP server</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>Tools</div><h1 id="go-mcp-server">Go MCP server</h1>
 <p>Go MCP server</p>
 <h2 id="install">Install</h2>
 <p>Not published. Build from the go-mcp directory.</p>
@@ -124,7 +120,7 @@
 <td><code>remove</code></td>
 </tr>
 <tr>
-<td><a href="../api/brand_categories_view.html">BrandCategoriesView</a></td>
+<td><a href="../api/brand_category.html">BrandCategory</a></td>
 <td><code>list</code></td>
 </tr>
 <tr>
@@ -142,10 +138,6 @@
 <tr>
 <td><a href="../api/create_account_criterion.html">CreateAccountCriterion</a></td>
 <td><code>create</code></td>
-</tr>
-<tr>
-<td><a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a></td>
-<td></td>
 </tr>
 <tr>
 <td><a href="../api/credential_type_view.html">CredentialTypeView</a></td>
@@ -166,10 +158,6 @@
 <tr>
 <td><a href="../api/customer.html">Customer</a></td>
 <td><code>create</code>, <code>list</code>, <code>load</code></td>
-</tr>
-<tr>
-<td><a href="../api/email_template_list_view.html">EmailTemplateListView</a></td>
-<td></td>
 </tr>
 <tr>
 <td><a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a></td>
@@ -206,14 +194,6 @@
 <tr>
 <td><a href="../api/n1_customer.html">N1Customer</a></td>
 <td><code>load</code></td>
-</tr>
-<tr>
-<td><a href="../api/n2_account.html">N2Account</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../api/n3_fund.html">N3Fund</a></td>
-<td></td>
 </tr>
 <tr>
 <td><a href="../api/n8_line_item.html">N8LineItem</a></td>
@@ -277,14 +257,14 @@
 <p>Set the server URL and credentials for your environment. Enable only the features your application needs.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><a href="../features/debug.html">Request/response capture ring buffer for debugging</a></li>
-<li><a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a></li>
-<li><a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a></li>
-<li><a href="../features/paging.html">Pagination signals for list operations</a></li>
-<li><a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a></li>
-<li><a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a></li>
-<li><a href="../features/test.html">In-memory mock transport for testing without a live server</a></li>
-<li><a href="../features/timeout.html">Per-request timeout with transport abort</a></li>
+<li><a href="../features/debug.html">Debug capture</a></li>
+<li><a href="../features/idempotency.html">Idempotency</a></li>
+<li><a href="../features/metrics.html">Metrics</a></li>
+<li><a href="../features/paging.html">Paging</a></li>
+<li><a href="../features/ratelimit.html">Rate limiting</a></li>
+<li><a href="../features/retry.html">Retry</a></li>
+<li><a href="../features/test.html">Test transport</a></li>
+<li><a href="../features/timeout.html">Timeout</a></li>
 </ul>
 <h2 id="tools">Tools</h2>
 <h3 id="tangocard_list"><code>tangocard_list</code></h3>
@@ -297,7 +277,7 @@
   &quot;properties&quot;: {
     &quot;entity&quot;: {
       &quot;type&quot;: &quot;string&quot;,
-      &quot;description&quot;: &quot;account | add_comment_escalation | all_event_type | async_order | async_order_detail_view | async_order_line_items_view | async_reason_codes_view | async_update_line_item_view | balance_alert_view | brand_categories_view | catalog | choice_product | country_view_summary | create_account_criterion | create_customer_criterion | credential_type_view | credit_card | credit_card_deposit | credit_card_unregister | customer | email_template_list_view | email_template_view_verbose | embeddable_response_dto | exchange_rates_with_disclaimer | line_item | low_balance_alert_list_view | low_balance_alert_view | mobile_country | n14_webhook | n1_customer | n2_account | n3_fund | n8_line_item | n9_digital_template | order | order_view_summary | prepaid_card_info | prepaid_card_transaction | reissue_card | replacement_reason | resend | reward_reasons_map | transfer_fund | update_account | update_webhook_subscription_response_view | webhook&quot;
+      &quot;description&quot;: &quot;account | add_comment_escalation | all_event_type | async_order | async_order_detail_view | async_order_line_items_view | async_reason_codes_view | async_update_line_item_view | balance_alert_view | brand_category | catalog | choice_product | country_view_summary | create_account_criterion | credential_type_view | credit_card | credit_card_deposit | credit_card_unregister | customer | email_template_view_verbose | embeddable_response_dto | exchange_rates_with_disclaimer | line_item | low_balance_alert_list_view | low_balance_alert_view | mobile_country | n14_webhook | n1_customer | n8_line_item | n9_digital_template | order | order_view_summary | prepaid_card_info | prepaid_card_transaction | reissue_card | replacement_reason | resend | reward_reasons_map | transfer_fund | update_account | update_webhook_subscription_response_view | webhook&quot;
     },
     &quot;query&quot;: {
       &quot;type&quot;: &quot;object&quot;,
@@ -306,7 +286,7 @@
   }
 }
 </code></pre>
-<p>Supported entities: <code>all_event_type</code>, <code>async_order</code>, <code>async_order_line_items_view</code>, <code>brand_categories_view</code>, <code>catalog</code>, <code>choice_product</code>, <code>credential_type_view</code>, <code>customer</code>, <code>email_template_view_verbose</code>, <code>exchange_rates_with_disclaimer</code>, <code>line_item</code>, <code>low_balance_alert_list_view</code>, <code>n14_webhook</code>, <code>order</code>, <code>replacement_reason</code>.</p>
+<p>Supported entities: <code>all_event_type</code>, <code>async_order</code>, <code>async_order_line_items_view</code>, <code>brand_category</code>, <code>catalog</code>, <code>choice_product</code>, <code>credential_type_view</code>, <code>customer</code>, <code>email_template_view_verbose</code>, <code>exchange_rates_with_disclaimer</code>, <code>line_item</code>, <code>low_balance_alert_list_view</code>, <code>n14_webhook</code>, <code>order</code>, <code>replacement_reason</code>.</p>
 <h3 id="tangocard_load"><code>tangocard_load</code></h3>
 <p>Load one record for an entity.</p>
 <pre><code class="language-json">{
@@ -317,7 +297,7 @@
   &quot;properties&quot;: {
     &quot;entity&quot;: {
       &quot;type&quot;: &quot;string&quot;,
-      &quot;description&quot;: &quot;account | add_comment_escalation | all_event_type | async_order | async_order_detail_view | async_order_line_items_view | async_reason_codes_view | async_update_line_item_view | balance_alert_view | brand_categories_view | catalog | choice_product | country_view_summary | create_account_criterion | create_customer_criterion | credential_type_view | credit_card | credit_card_deposit | credit_card_unregister | customer | email_template_list_view | email_template_view_verbose | embeddable_response_dto | exchange_rates_with_disclaimer | line_item | low_balance_alert_list_view | low_balance_alert_view | mobile_country | n14_webhook | n1_customer | n2_account | n3_fund | n8_line_item | n9_digital_template | order | order_view_summary | prepaid_card_info | prepaid_card_transaction | reissue_card | replacement_reason | resend | reward_reasons_map | transfer_fund | update_account | update_webhook_subscription_response_view | webhook&quot;
+      &quot;description&quot;: &quot;account | add_comment_escalation | all_event_type | async_order | async_order_detail_view | async_order_line_items_view | async_reason_codes_view | async_update_line_item_view | balance_alert_view | brand_category | catalog | choice_product | country_view_summary | create_account_criterion | credential_type_view | credit_card | credit_card_deposit | credit_card_unregister | customer | email_template_view_verbose | embeddable_response_dto | exchange_rates_with_disclaimer | line_item | low_balance_alert_list_view | low_balance_alert_view | mobile_country | n14_webhook | n1_customer | n8_line_item | n9_digital_template | order | order_view_summary | prepaid_card_info | prepaid_card_transaction | reissue_card | replacement_reason | resend | reward_reasons_map | transfer_fund | update_account | update_webhook_subscription_response_view | webhook&quot;
     },
     &quot;query&quot;: {
       &quot;type&quot;: &quot;object&quot;,

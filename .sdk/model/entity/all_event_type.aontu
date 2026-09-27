@@ -1,0 +1,97 @@
+# Entity: all_event_type
+
+main: kit: entity: all_event_type: {
+
+  alias: field: {}
+
+  fields: {
+    category: {
+      h: "Category"
+      n: "category"
+      r: false
+      sh: "The category of events can be subscribed to."
+      t: "`$STRING`"
+    }
+    eventTypes: {
+      h: "Event Types"
+      n: "eventTypes"
+      r: false
+      sh: "The event types that can be subscribed to."
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "all_event_type"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /webhooks/eventtypes"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "category"
+                or: "category"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/webhooks/eventtypes"
+          q: {
+            exist: [
+              "category"
+              "max_result"
+              "next_cursor"
+              "prev_cursor"
+            ]
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              lit: "eventtypes"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

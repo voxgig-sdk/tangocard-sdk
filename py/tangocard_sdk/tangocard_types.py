@@ -1,7 +1,7 @@
 # Typed models for the Tangocard SDK.
 #
-# GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-# params (op.<name>.points[].args.params[]). Field/param types come from the
+# GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+# params (op.<name>.points[].g.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
 #
@@ -310,12 +310,12 @@ class BalanceAlertViewRemoveMatch(TypedDict):
     customer_identifier: str
 
 
-class BrandCategoriesView(TypedDict, total=False):
+class BrandCategory(TypedDict, total=False):
     description: str
     identifier: str
 
 
-class BrandCategoriesViewListMatch(TypedDict, total=False):
+class BrandCategoryListMatch(TypedDict, total=False):
     description: str
     identifier: str
 
@@ -409,10 +409,6 @@ class CreateAccountCriterionCreateDataRequired(TypedDict):
 class CreateAccountCriterionCreateData(CreateAccountCriterionCreateDataRequired, total=False):
     currencyCode: str
     fundingNotification: list
-
-
-class CreateCustomerCriterion(TypedDict):
-    pass
 
 
 class CredentialTypeViewRequired(TypedDict):
@@ -575,10 +571,6 @@ class CustomerCreateDataRequired(TypedDict):
 
 class CustomerCreateData(CustomerCreateDataRequired, total=False):
     id: str
-
-
-class EmailTemplateListView(TypedDict):
-    pass
 
 
 class EmailTemplateViewVerboseRequired(TypedDict):
@@ -987,14 +979,6 @@ class N1CustomerLoadMatch(N1CustomerLoadMatchRequired, total=False):
     paginate: bool
     prev_cursor: str
     status: str
-
-
-class N2Account(TypedDict):
-    pass
-
-
-class N3Fund(TypedDict):
-    pass
 
 
 class N8LineItem(TypedDict, total=False):

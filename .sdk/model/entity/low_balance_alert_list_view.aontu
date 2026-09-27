@@ -1,0 +1,169 @@
+# Entity: low_balance_alert_list_view
+
+main: kit: entity: low_balance_alert_list_view: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: false
+      t: "`$STRING`"
+    }
+    balanceAlertDisplayName: {
+      h: "Balance Alert Display Name"
+      n: "balanceAlertDisplayName"
+      r: false
+      t: "`$STRING`"
+    }
+    balanceAlertID: {
+      fo: "uuid"
+      h: "Balance Alert Id"
+      n: "balanceAlertID"
+      r: false
+      t: "`$STRING`"
+    }
+    balanceAlertNotification: {
+      h: "Balance Alert Notification"
+      n: "balanceAlertNotification"
+      r: false
+      t: "`$ARRAY`"
+    }
+    balanceAlertThreshold: {
+      h: "Balance Alert Threshold"
+      n: "balanceAlertThreshold"
+      r: false
+      t: "`$NUMBER`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      t: "`$STRING`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "low_balance_alert_list_view"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "balance_alert_display_name"
+                or: "balance_alert_display_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "balance_alert_notification"
+                or: "balance_alert_notification"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "balance_alert_threshold"
+                or: "balance_alert_threshold"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "elements_per_block"
+                or: "elements_per_block"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance"
+          q: {
+            exist: [
+              "account_identifier"
+              "balance_alert_display_name"
+              "balance_alert_notification"
+              "balance_alert_threshold"
+              "customer_identifier"
+              "elements_per_block"
+              "page"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "account_identifier"
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_identifier"
+            }
+            {
+              lit: "lowbalance"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.customer") path("$.main.kit.entity.account")]
+  ]
+
+}

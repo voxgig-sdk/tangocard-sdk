@@ -1,0 +1,779 @@
+# Entity: line_item
+
+main: kit: entity: line_item: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      t: "`$STRING`"
+    }
+    accountNumber: {
+      h: "Account Number"
+      n: "accountNumber"
+      r: true
+      t: "`$STRING`"
+    }
+    amountCharged: {
+      h: "Amount Charged"
+      n: "amountCharged"
+      r: false
+      t: "`$OBJECT`"
+    }
+    amountIssued: {
+      h: "Amount Issued"
+      n: "amountIssued"
+      r: true
+      t: "`$OBJECT`"
+    }
+    campaign: {
+      h: "Campaign"
+      n: "campaign"
+      r: false
+      t: "`$STRING`"
+    }
+    canCancel: {
+      h: "Can Cancel"
+      n: "canCancel"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    canFreeze: {
+      h: "Can Freeze"
+      n: "canFreeze"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: true
+      t: "`$STRING`"
+    }
+    dateIssued: {
+      fo: "date-time"
+      h: "Date Issued"
+      n: "dateIssued"
+      r: true
+      t: "`$STRING`"
+    }
+    deliveryMethod: {
+      h: "Delivery Method"
+      n: "deliveryMethod"
+      r: false
+      t: "`$STRING`"
+    }
+    deliveryStatus: {
+      h: "Delivery Status"
+      n: "deliveryStatus"
+      r: false
+      t: "`$STRING`"
+    }
+    emailStatus: {
+      h: "Email Status"
+      n: "emailStatus"
+      r: true
+      t: "`$STRING`"
+    }
+    etid: {
+      h: "Etid"
+      n: "etid"
+      r: true
+      t: "`$STRING`"
+    }
+    expirationDate: {
+      fo: "date-time"
+      h: "Expiration Date"
+      n: "expirationDate"
+      r: true
+      t: "`$STRING`"
+    }
+    externalReferenceLineItemID: {
+      h: "External Reference Line Item Id"
+      n: "externalReferenceLineItemID"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    lineItemActionHistory: {
+      h: "Line Item Action History"
+      n: "lineItemActionHistory"
+      r: false
+      t: "`$ARRAY`"
+    }
+    lineItemActionReason: {
+      h: "Line Item Action Reason"
+      n: "lineItemActionReason"
+      r: false
+      t: "`$STRING`"
+    }
+    lineItemErrors: {
+      h: "Line Item Errors"
+      n: "lineItemErrors"
+      r: false
+      sh: "Errors related to the line item"
+      t: "`$ARRAY`"
+    }
+    lineNumber: {
+      fo: "int32"
+      h: "Line Number"
+      n: "lineNumber"
+      r: true
+      t: "`$INTEGER`"
+    }
+    orderNotes: {
+      h: "Order Notes"
+      n: "orderNotes"
+      r: false
+      t: "`$STRING`"
+    }
+    orderSource: {
+      h: "Order Source"
+      n: "orderSource"
+      r: true
+      t: "`$STRING`"
+    }
+    orderStatus: {
+      h: "Order Status"
+      n: "orderStatus"
+      r: true
+      t: "`$STRING`"
+    }
+    ptid: {
+      h: "Ptid"
+      n: "ptid"
+      r: false
+      t: "`$STRING`"
+    }
+    purchaseOrderNumber: {
+      h: "Purchase Order Number"
+      n: "purchaseOrderNumber"
+      r: false
+      t: "`$STRING`"
+    }
+    quantity: {
+      fo: "int32"
+      h: "Quantity"
+      n: "quantity"
+      r: false
+      sh: "quantity of line items"
+      t: "`$INTEGER`"
+    }
+    recipient: {
+      h: "Recipient"
+      n: "recipient"
+      r: false
+      t: "`$OBJECT`"
+    }
+    redemptionHistory: {
+      h: "Redemption History"
+      n: "redemptionHistory"
+      r: false
+      t: "`$ARRAY`"
+    }
+    referenceLineItemID: {
+      h: "Reference Line Item Id"
+      n: "referenceLineItemID"
+      r: true
+      t: "`$STRING`"
+    }
+    referenceOrderID: {
+      h: "Reference Order Id"
+      n: "referenceOrderID"
+      r: true
+      t: "`$STRING`"
+    }
+    reissuedFromReferenceLineItemId: {
+      h: "Reissued From Reference Line Item Id"
+      n: "reissuedFromReferenceLineItemId"
+      r: false
+      sh: "Reissued from reference line item ID"
+      t: "`$STRING`"
+    }
+    reissuedToReferenceLineItemId: {
+      h: "Reissued To Reference Line Item Id"
+      n: "reissuedToReferenceLineItemId"
+      r: false
+      sh: "Reissued to reference line item ID"
+      t: "`$STRING`"
+    }
+    remainingBalance: {
+      h: "Remaining Balance"
+      n: "remainingBalance"
+      r: false
+      t: "`$NUMBER`"
+    }
+    resendHistory: {
+      h: "Resend History"
+      n: "resendHistory"
+      r: false
+      t: "`$ARRAY`"
+    }
+    reward: {
+      h: "Reward"
+      n: "reward"
+      r: true
+      t: "`$OBJECT`"
+    }
+    rewardName: {
+      h: "Reward Name"
+      n: "rewardName"
+      r: true
+      t: "`$STRING`"
+    }
+    rewardStatus: {
+      h: "Reward Status"
+      n: "rewardStatus"
+      r: false
+      t: "`$STRING`"
+    }
+    rewardViewHistory: {
+      h: "Reward View History"
+      n: "rewardViewHistory"
+      r: false
+      t: "`$ARRAY`"
+    }
+    sender: {
+      h: "Sender"
+      n: "sender"
+      r: false
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    utid: {
+      h: "Utid"
+      n: "utid"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "line_item"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /lineItems/{referenceLineItemID}/cancel"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/lineItems/{referenceLineItemID}/cancel"
+          q: {
+            "$action": "cancel"
+            exist: [
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+            {
+              lit: "cancel"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /lineItems/{referenceLineItemID}/freeze"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/lineItems/{referenceLineItemID}/freeze"
+          q: {
+            "$action": "freeze"
+            exist: [
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+            {
+              lit: "freeze"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /lineItems/{referenceLineItemID}/unfreeze"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/lineItems/{referenceLineItemID}/unfreeze"
+          q: {
+            "$action": "unfreeze"
+            exist: [
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+            {
+              lit: "unfreeze"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /lineItems"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "campaign"
+                or: "campaign"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "false"
+                k: "query"
+                n: "column_sort_ascending"
+                or: "column_sort_ascending"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "dateIssued"
+                k: "query"
+                n: "column_sort_name"
+                or: "column_sort_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "delivery_method"
+                or: "delivery_method"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "delivery_status"
+                or: "delivery_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "elements_per_block"
+                or: "elements_per_block"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "email_status"
+                or: "email_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "end_date"
+                or: "end_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "etid"
+                or: "etid"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "external_ref_id"
+                or: "external_ref_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "has_remaining_balance"
+                or: "has_remaining_balance"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "max_remaining_balance"
+                or: "max_remaining_balance"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "min_remaining_balance"
+                or: "min_remaining_balance"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "order_note"
+                or: "order_note"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_source"
+                or: "order_source"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_status"
+                or: "order_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "page_key"
+                or: "page_key"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "page_previous"
+                or: "page_previous"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "ptid"
+                or: "ptid"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "purchase_order_number"
+                or: "purchase_order_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_city"
+                or: "recipient_city"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_country"
+                or: "recipient_country"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_email"
+                or: "recipient_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_first_name"
+                or: "recipient_first_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_last_name"
+                or: "recipient_last_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_mobile_number"
+                or: "recipient_mobile_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_postal_code"
+                or: "recipient_postal_code"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_state_or_province"
+                or: "recipient_state_or_province"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_street_line1"
+                or: "recipient_street_line1"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_street_line2"
+                or: "recipient_street_line2"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reference_order_id"
+                or: "reference_order_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "start_date"
+                or: "start_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "utid"
+                or: "utid"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lineItems"
+          q: {
+            exist: [
+              "account_identifier"
+              "campaign"
+              "column_sort_ascending"
+              "column_sort_name"
+              "delivery_method"
+              "delivery_status"
+              "elements_per_block"
+              "email_status"
+              "end_date"
+              "etid"
+              "external_ref_id"
+              "has_remaining_balance"
+              "max_remaining_balance"
+              "min_remaining_balance"
+              "order_note"
+              "order_source"
+              "order_status"
+              "page_key"
+              "page_previous"
+              "ptid"
+              "purchase_order_number"
+              "recipient_city"
+              "recipient_country"
+              "recipient_email"
+              "recipient_first_name"
+              "recipient_last_name"
+              "recipient_mobile_number"
+              "recipient_postal_code"
+              "recipient_state_or_province"
+              "recipient_street_line1"
+              "recipient_street_line2"
+              "reference_order_id"
+              "start_date"
+              "status"
+              "utid"
+            ]
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /lineItems/{referenceLineItemID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lineItems/{referenceLineItemID}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

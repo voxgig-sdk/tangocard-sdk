@@ -1,0 +1,58 @@
+# BasicAsyncOrderDetailViewFlow
+
+main: kit: flow: BasicAsyncOrderDetailViewFlow:
+{
+  entity: "async_order_detail_view",
+  kind: "basic",
+  name: "BasicAsyncOrderDetailViewFlow",
+  step: [
+    {
+      d: {
+        account_identifier: "accountentifier01",
+        customer_identifier: "customerentifier01"
+      }
+
+      i: {
+        ref: "async_order_detail_view_ref01",
+        srcdatavar: "async_order_detail_view_ref01_data",
+        suffix: "_up0",
+        textfield: "accountIdentifier"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-async_order_detail_view_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "async_order_detail_view_ref01",
+        srcdatavar: "async_order_detail_view_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        account_identifier: "accountentifier01",
+        customer_identifier: "customerentifier01",
+        id: "async_order_detail_view01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-async_order_detail_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAsyncOrderDetailViewFlow"
+}

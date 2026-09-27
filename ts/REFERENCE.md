@@ -158,9 +158,9 @@ Create a new `BalanceAlertView` entity instance.
 
 **Returns:** `BalanceAlertViewEntity` instance.
 
-#### `BrandCategoriesView(data?: object)`
+#### `BrandCategory(data?: object)`
 
-Create a new `BrandCategoriesView` entity instance.
+Create a new `BrandCategory` entity instance.
 
 **Parameters:**
 
@@ -168,7 +168,7 @@ Create a new `BrandCategoriesView` entity instance.
 | --- | --- | --- |
 | `data` | `object` | Initial entity data. |
 
-**Returns:** `BrandCategoriesViewEntity` instance.
+**Returns:** `BrandCategoryEntity` instance.
 
 #### `Catalog(data?: object)`
 
@@ -217,18 +217,6 @@ Create a new `CreateAccountCriterion` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `CreateAccountCriterionEntity` instance.
-
-#### `CreateCustomerCriterion(data?: object)`
-
-Create a new `CreateCustomerCriterion` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `CreateCustomerCriterionEntity` instance.
 
 #### `CredentialTypeView(data?: object)`
 
@@ -289,18 +277,6 @@ Create a new `Customer` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `CustomerEntity` instance.
-
-#### `EmailTemplateListView(data?: object)`
-
-Create a new `EmailTemplateListView` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `EmailTemplateListViewEntity` instance.
 
 #### `EmailTemplateViewVerbose(data?: object)`
 
@@ -409,30 +385,6 @@ Create a new `N1Customer` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `N1CustomerEntity` instance.
-
-#### `N2Account(data?: object)`
-
-Create a new `N2Account` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `N2AccountEntity` instance.
-
-#### `N3Fund(data?: object)`
-
-Create a new `N3Fund` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `N3FundEntity` instance.
 
 #### `N8LineItem(data?: object)`
 
@@ -1238,10 +1190,10 @@ Return a copy of the entity options.
 
 ---
 
-## BrandCategoriesViewEntity
+## BrandCategoryEntity
 
 ```ts
-const brand_categories_view = client.BrandCategoriesView()
+const brand_category = client.BrandCategory()
 ```
 
 ### Fields
@@ -1258,7 +1210,7 @@ const brand_categories_view = client.BrandCategoriesView()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.BrandCategoriesView().list()
+const results = await client.BrandCategory().list()
 ```
 
 ### Common Methods
@@ -1275,7 +1227,7 @@ Get or set the entity match criteria. Works the same as `data()`.
 
 #### `make()`
 
-Create a new `BrandCategoriesViewEntity` instance with the same client and
+Create a new `BrandCategoryEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -1513,40 +1465,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `CreateAccountCriterionEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `TangocardSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## CreateCustomerCriterionEntity
-
-```ts
-const create_customer_criterion = client.CreateCustomerCriterion()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `CreateCustomerCriterionEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -1924,40 +1842,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `CustomerEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `TangocardSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## EmailTemplateListViewEntity
-
-```ts
-const email_template_list_view = client.EmailTemplateListView()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `EmailTemplateListViewEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -2666,74 +2550,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `N1CustomerEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `TangocardSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## N2AccountEntity
-
-```ts
-const n2_account = client.N2Account()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `N2AccountEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `TangocardSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## N3FundEntity
-
-```ts
-const n3_fund = client.N3Fund()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `N3FundEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -3673,14 +3489,14 @@ Return a copy of the entity options.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -3726,7 +3542,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -3757,7 +3573,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -3788,7 +3604,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -3816,7 +3632,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -3851,7 +3667,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -3882,7 +3698,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -3916,7 +3732,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -3947,7 +3763,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

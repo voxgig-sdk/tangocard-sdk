@@ -1,0 +1,49 @@
+# Entity: replacement_reason
+
+main: kit: entity: replacement_reason: {
+
+  alias: field: {}
+
+  fields: {
+    replacementReasons: {
+      h: "Replacement Reasons"
+      n: "replacementReasons"
+      r: false
+      sh: "List of valid replacement reason codes."
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "replacement_reason"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /prepaidCardService/replacementReasons"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/prepaidCardService/replacementReasons"
+          s: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "replacementReasons"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.replacementReasons`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

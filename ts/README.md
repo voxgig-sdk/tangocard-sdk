@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { TangocardSDK } from '@voxgig-sdk/tangocard'
+import { TangocardSDK } from '@voxgig-sdk/tangocard-sdk'
 
 const client = new TangocardSDK({
   apikey: process.env.TANGOCARD_APIKEY,
@@ -73,8 +73,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const rewardreasonsmap = await client.RewardReasonsMap().load()
-  console.log(rewardreasonsmap)
+  const prepaidcardinfo = await client.PrepaidCardInfo().load({ reference_line_item_id: "example" })
+  console.log(prepaidcardinfo)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -140,10 +140,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = TangocardSDK.test()
 
-const rewardreasonsmap = await client.RewardReasonsMap().load()
-// rewardreasonsmap is the entity, populated with mock response data
-// — call rewardreasonsmap.data() for the record itself
-console.log(rewardreasonsmap)
+const prepaidcardinfo = await client.PrepaidCardInfo().load({ reference_line_item_id: 'example_reference_line_item_id' })
+// prepaidcardinfo is the entity, populated with mock response data
+// — call prepaidcardinfo.data() for the record itself
+console.log(prepaidcardinfo)
 ```
 
 You can also use the instance method:
@@ -158,10 +158,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.RewardReasonsMap()
+const entity = client.PrepaidCardInfo()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ reference_line_item_id: 'example_reference_line_item_id' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -258,18 +258,16 @@ new TangocardSDK(options?: {
 | `AsyncReasonCodesView(data?)` | `AsyncReasonCodesViewEntity` | Create an AsyncReasonCodesView entity instance. |
 | `AsyncUpdateLineItemView(data?)` | `AsyncUpdateLineItemViewEntity` | Create an AsyncUpdateLineItemView entity instance. |
 | `BalanceAlertView(data?)` | `BalanceAlertViewEntity` | Create a BalanceAlertView entity instance. |
-| `BrandCategoriesView(data?)` | `BrandCategoriesViewEntity` | Create a BrandCategoriesView entity instance. |
+| `BrandCategory(data?)` | `BrandCategoryEntity` | Create a BrandCategory entity instance. |
 | `Catalog(data?)` | `CatalogEntity` | Create a Catalog entity instance. |
 | `ChoiceProduct(data?)` | `ChoiceProductEntity` | Create a ChoiceProduct entity instance. |
 | `CountryViewSummary(data?)` | `CountryViewSummaryEntity` | Create a CountryViewSummary entity instance. |
 | `CreateAccountCriterion(data?)` | `CreateAccountCriterionEntity` | Create a CreateAccountCriterion entity instance. |
-| `CreateCustomerCriterion(data?)` | `CreateCustomerCriterionEntity` | Create a CreateCustomerCriterion entity instance. |
 | `CredentialTypeView(data?)` | `CredentialTypeViewEntity` | Create a CredentialTypeView entity instance. |
 | `CreditCard(data?)` | `CreditCardEntity` | Create a CreditCard entity instance. |
 | `CreditCardDeposit(data?)` | `CreditCardDepositEntity` | Create a CreditCardDeposit entity instance. |
 | `CreditCardUnregister(data?)` | `CreditCardUnregisterEntity` | Create a CreditCardUnregister entity instance. |
 | `Customer(data?)` | `CustomerEntity` | Create a Customer entity instance. |
-| `EmailTemplateListView(data?)` | `EmailTemplateListViewEntity` | Create an EmailTemplateListView entity instance. |
 | `EmailTemplateViewVerbose(data?)` | `EmailTemplateViewVerboseEntity` | Create an EmailTemplateViewVerbose entity instance. |
 | `EmbeddableResponseDto(data?)` | `EmbeddableResponseDtoEntity` | Create an EmbeddableResponseDto entity instance. |
 | `ExchangeRatesWithDisclaimer(data?)` | `ExchangeRatesWithDisclaimerEntity` | Create an ExchangeRatesWithDisclaimer entity instance. |
@@ -279,8 +277,6 @@ new TangocardSDK(options?: {
 | `MobileCountry(data?)` | `MobileCountryEntity` | Create a MobileCountry entity instance. |
 | `N14Webhook(data?)` | `N14WebhookEntity` | Create a N14Webhook entity instance. |
 | `N1Customer(data?)` | `N1CustomerEntity` | Create a N1Customer entity instance. |
-| `N2Account(data?)` | `N2AccountEntity` | Create a N2Account entity instance. |
-| `N3Fund(data?)` | `N3FundEntity` | Create a N3Fund entity instance. |
 | `N8LineItem(data?)` | `N8LineItemEntity` | Create a N8LineItem entity instance. |
 | `N9DigitalTemplate(data?)` | `N9DigitalTemplateEntity` | Create a N9DigitalTemplate entity instance. |
 | `Order(data?)` | `OrderEntity` | Create an Order entity instance. |
@@ -521,7 +517,7 @@ Operations: remove.
 
 API path: `/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}`
 
-#### BrandCategoriesView
+#### BrandCategory
 
 | Field | Description |
 | --- | --- |
@@ -595,15 +591,6 @@ API path: `/rewardCountries`
 Operations: create.
 
 API path: `/customers/{customerIdentifier}/accounts`
-
-#### CreateCustomerCriterion
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### CredentialTypeView
 
@@ -690,15 +677,6 @@ API path: `/creditCardUnregisters`
 Operations: create, list, load.
 
 API path: `/customers`
-
-#### EmailTemplateListView
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### EmailTemplateViewVerbose
 
@@ -870,24 +848,6 @@ API path: `/webhooks/{webhookId}/tests/{testName}`
 Operations: load.
 
 API path: `/customers/{customerIdentifier}/accounts`
-
-#### N2Account
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### N3Fund
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### N8LineItem
 
@@ -1391,9 +1351,9 @@ Create an instance: `const balance_alert_view = client.BalanceAlertView()`
 | `remove(match)` | Remove the matching entity. |
 
 
-### BrandCategoriesView
+### BrandCategory
 
-Create an instance: `const brand_categories_view = client.BrandCategoriesView()`
+Create an instance: `const brand_category = client.BrandCategory()`
 
 #### Operations
 
@@ -1411,7 +1371,7 @@ Create an instance: `const brand_categories_view = client.BrandCategoriesView()`
 #### Example: List
 
 ```ts
-const brand_categories_views = await client.BrandCategoriesView().list()
+const brand_categorys = await client.BrandCategory().list()
 ```
 
 
@@ -1541,11 +1501,6 @@ const create_account_criterion = await client.CreateAccountCriterion().create({
   displayName: 'example_displayName',
 })
 ```
-
-
-### CreateCustomerCriterion
-
-Create an instance: `const create_customer_criterion = client.CreateCustomerCriterion()`
 
 
 ### CredentialTypeView
@@ -1764,11 +1719,6 @@ const customer = await client.Customer().create({
   status: 'example_status',
 })
 ```
-
-
-### EmailTemplateListView
-
-Create an instance: `const email_template_list_view = client.EmailTemplateListView()`
 
 
 ### EmailTemplateViewVerbose
@@ -2140,16 +2090,6 @@ Create an instance: `const n1_customer = client.N1Customer()`
 ```ts
 const n1_customer = await client.N1Customer().load({ customer_identifier: 'customer_identifier' })
 ```
-
-
-### N2Account
-
-Create an instance: `const n2_account = client.N2Account()`
-
-
-### N3Fund
-
-Create an instance: `const n3_fund = client.N3Fund()`
 
 
 ### N8LineItem
@@ -2607,14 +2547,14 @@ above:
 
 | Feature | What it does |
 |---|---|
-| [`debug`](#debug) | Request/response capture ring buffer for debugging |
-| [`idempotency`](#idempotency) | Idempotency keys for safe retries of mutating operations |
-| [`metrics`](#metrics) | Statistics capture: per-operation counters and latency |
-| [`paging`](#paging) | Pagination signals for list operations |
-| [`ratelimit`](#ratelimit) | Client-side rate limiting via a token bucket |
-| [`retry`](#retry) | Automatic retry of transient failures with exponential backoff |
-| [`test`](#test) | In-memory mock transport for testing without a live server |
-| [`timeout`](#timeout) | Per-request timeout with transport abort |
+| [`debug`](#debug) | Debug capture |
+| [`idempotency`](#idempotency) | Idempotency |
+| [`metrics`](#metrics) | Metrics |
+| [`paging`](#paging) | Paging |
+| [`ratelimit`](#ratelimit) | Rate limiting |
+| [`retry`](#retry) | Retry |
+| [`test`](#test) | Test transport |
+| [`timeout`](#timeout) | Timeout |
 
 > **Order matters for `ratelimit`, `retry`, `timeout`.** These wrap the
 > transport, so each one wraps whatever is already installed: the order you
@@ -2623,7 +2563,7 @@ above:
 
 ### debug
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 | Option | Default |
 |---|---|
@@ -2635,7 +2575,7 @@ Set `feature.debug.active` to enable it, then override any of the options above.
 
 ### idempotency
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 | Option | Default |
 |---|---|
@@ -2648,7 +2588,7 @@ Set `feature.idempotency.active` to enable it, then override any of the options 
 
 ### metrics
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 | Option | Default |
 |---|---|
@@ -2658,7 +2598,7 @@ Set `feature.metrics.active` to enable it, then override any of the options abov
 
 ### paging
 
-Pagination signals for list operations.
+Paging.
 
 | Option | Default |
 |---|---|
@@ -2674,7 +2614,7 @@ Set `feature.paging.active` to enable it, then override any of the options above
 
 ### ratelimit
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 | Option | Default |
 |---|---|
@@ -2690,7 +2630,7 @@ activated earlier.
 
 ### retry
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 | Option | Default |
 |---|---|
@@ -2709,7 +2649,7 @@ activated earlier.
 
 ### test
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 | Option | Default |
 |---|---|
@@ -2719,7 +2659,7 @@ Set `feature.test.active` to enable it, then override any of the options above.
 
 ### timeout
 
-Per-request timeout with transport abort.
+Timeout.
 
 | Option | Default |
 |---|---|
@@ -2771,14 +2711,14 @@ a function that receives the context.
 
 The SDK ships with built-in features:
 
-- **DebugFeature**: Request/response capture ring buffer for debugging
-- **IdempotencyFeature**: Idempotency keys for safe retries of mutating operations
-- **MetricsFeature**: Statistics capture: per-operation counters and latency
-- **PagingFeature**: Pagination signals for list operations
-- **RatelimitFeature**: Client-side rate limiting via a token bucket
-- **RetryFeature**: Automatic retry of transient failures with exponential backoff
-- **TestFeature**: In-memory mock transport for testing without a live server
-- **TimeoutFeature**: Per-request timeout with transport abort
+- **DebugFeature**: Debug capture
+- **IdempotencyFeature**: Idempotency
+- **MetricsFeature**: Metrics
+- **PagingFeature**: Paging
+- **RatelimitFeature**: Rate limiting
+- **RetryFeature**: Retry
+- **TestFeature**: Test transport
+- **TimeoutFeature**: Timeout
 
 Features are initialized in order. Hooks fire in the order features
 were added, so later features can override earlier ones.
@@ -2799,7 +2739,7 @@ tangocard/
 Import the SDK from the package root:
 
 ```ts
-import { TangocardSDK } from '@voxgig-sdk/tangocard'
+import { TangocardSDK } from '@voxgig-sdk/tangocard-sdk'
 ```
 
 ### Entity state
@@ -2809,11 +2749,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const rewardreasonsmap = client.RewardReasonsMap()
-await rewardreasonsmap.load()
+const prepaidcardinfo = client.PrepaidCardInfo()
+await prepaidcardinfo.load({ reference_line_item_id: "example" })
 
-// rewardreasonsmap.data() now returns the rewardreasonsmap data from the last `load`
-// rewardreasonsmap.match() returns the last match criteria
+// prepaidcardinfo.data() now returns the prepaidcardinfo data from the last `load`
+// prepaidcardinfo.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

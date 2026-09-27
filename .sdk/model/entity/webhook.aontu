@@ -1,0 +1,270 @@
+# Entity: webhook
+
+main: kit: entity: webhook: {
+
+  alias: field: {}
+
+  fields: {
+    categories: {
+      h: "Categories"
+      n: "categories"
+      r: false
+      sh: "The categories the customer wants to subscribe to."
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "The date and time the webhook was created."
+      t: "`$STRING`"
+    }
+    eventTypes: {
+      h: "Event Types"
+      n: "eventTypes"
+      r: false
+      sh: "The event types the customer wants to subscribe to."
+      t: "`$ARRAY`"
+    }
+    expiresAt: {
+      fo: "date-time"
+      h: "Expires At"
+      n: "expiresAt"
+      r: false
+      sh: "The date and time the webhook expires."
+      t: "`$STRING`"
+    }
+    headers: {
+      h: "Headers"
+      n: "headers"
+      r: false
+      sh: "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener."
+      t: "`$ARRAY`"
+    }
+    hmacSharedSecretKey: {
+      h: "Hmac Shared Secret Key"
+      n: "hmacSharedSecretKey"
+      r: false
+      sh: "The HMAC secret key used to sign the webhook payload."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    payloadVerificationMethod: {
+      h: "Payload Verification Method"
+      n: "payloadVerificationMethod"
+      r: false
+      sh: "Method to verify webhook payload integrity."
+      t: "`$STRING`"
+    }
+    signingCertificate: {
+      h: "Signing Certificate"
+      n: "signingCertificate"
+      r: false
+      sh: "The public X509 certificate used to sign the webhook payload."
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      sh: "The date and time when the webhook was last updated."
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "The URL of the customer's webhook listener."
+      t: "`$STRING`"
+    }
+    webhookId: {
+      fo: "uuid"
+      h: "Webhook Id"
+      n: "webhookId"
+      r: false
+      sh: "The ID of the webhook."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "webhook"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /webhooks/{webhookId}/replay"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "from_revision"
+                or: "from_revision"
+                r: true
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "to_revision"
+                or: "to_revision"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/webhooks/{webhookId}/replay"
+          q: {
+            "$action": "replay"
+            exist: [
+              "from_revision"
+              "id"
+              "to_revision"
+            ]
+          }
+          r: {
+            param: {
+              webhookId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "replay"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /webhooks/{webhookId}/renew"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/webhooks/{webhookId}/renew"
+          q: {
+            "$action": "renew"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              webhookId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "renew"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /webhooks/{webhookId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/webhooks/{webhookId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              webhookId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,42 @@
+# Entity: async_reason_codes_view
+
+main: kit: entity: async_reason_codes_view: {
+
+  alias: field: {}
+
+  name: "async_reason_codes_view"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /asyncOrders/reasonCodes"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/asyncOrders/reasonCodes"
+          s: [
+            {
+              lit: "asyncOrders"
+            }
+            {
+              lit: "reasonCodes"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.reasonCodes`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

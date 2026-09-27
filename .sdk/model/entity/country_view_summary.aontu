@@ -1,0 +1,111 @@
+# Entity: country_view_summary
+
+main: kit: entity: country_view_summary: {
+
+  alias: field: {}
+
+  fields: {
+    countryName: {
+      h: "Country Name"
+      n: "countryName"
+      r: true
+      t: "`$STRING`"
+    }
+    preferredCurrency: {
+      h: "Preferred Currency"
+      n: "preferredCurrency"
+      r: true
+      t: "`$STRING`"
+    }
+    threeLetterCode: {
+      h: "Three Letter Code"
+      n: "threeLetterCode"
+      r: true
+      t: "`$STRING`"
+    }
+    twoLetterCode: {
+      h: "Two Letter Code"
+      n: "twoLetterCode"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "country_view_summary"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /rewardCountries"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "country"
+                or: "country"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "preferred_currency"
+                or: "preferred_currency"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/rewardCountries"
+          q: {
+            exist: [
+              "country"
+              "max_result"
+              "next_cursor"
+              "preferred_currency"
+              "prev_cursor"
+            ]
+          }
+          s: [
+            {
+              lit: "rewardCountries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

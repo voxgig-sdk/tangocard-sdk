@@ -9,18 +9,16 @@ import { AsyncOrderLineItemsViewEntity } from './entity/AsyncOrderLineItemsViewE
 import { AsyncReasonCodesViewEntity } from './entity/AsyncReasonCodesViewEntity'
 import { AsyncUpdateLineItemViewEntity } from './entity/AsyncUpdateLineItemViewEntity'
 import { BalanceAlertViewEntity } from './entity/BalanceAlertViewEntity'
-import { BrandCategoriesViewEntity } from './entity/BrandCategoriesViewEntity'
+import { BrandCategoryEntity } from './entity/BrandCategoryEntity'
 import { CatalogEntity } from './entity/CatalogEntity'
 import { ChoiceProductEntity } from './entity/ChoiceProductEntity'
 import { CountryViewSummaryEntity } from './entity/CountryViewSummaryEntity'
 import { CreateAccountCriterionEntity } from './entity/CreateAccountCriterionEntity'
-import { CreateCustomerCriterionEntity } from './entity/CreateCustomerCriterionEntity'
 import { CredentialTypeViewEntity } from './entity/CredentialTypeViewEntity'
 import { CreditCardEntity } from './entity/CreditCardEntity'
 import { CreditCardDepositEntity } from './entity/CreditCardDepositEntity'
 import { CreditCardUnregisterEntity } from './entity/CreditCardUnregisterEntity'
 import { CustomerEntity } from './entity/CustomerEntity'
-import { EmailTemplateListViewEntity } from './entity/EmailTemplateListViewEntity'
 import { EmailTemplateViewVerboseEntity } from './entity/EmailTemplateViewVerboseEntity'
 import { EmbeddableResponseDtoEntity } from './entity/EmbeddableResponseDtoEntity'
 import { ExchangeRatesWithDisclaimerEntity } from './entity/ExchangeRatesWithDisclaimerEntity'
@@ -30,8 +28,6 @@ import { LowBalanceAlertViewEntity } from './entity/LowBalanceAlertViewEntity'
 import { MobileCountryEntity } from './entity/MobileCountryEntity'
 import { N14WebhookEntity } from './entity/N14WebhookEntity'
 import { N1CustomerEntity } from './entity/N1CustomerEntity'
-import { N2AccountEntity } from './entity/N2AccountEntity'
-import { N3FundEntity } from './entity/N3FundEntity'
 import { N8LineItemEntity } from './entity/N8LineItemEntity'
 import { N9DigitalTemplateEntity } from './entity/N9DigitalTemplateEntity'
 import { OrderEntity } from './entity/OrderEntity'
@@ -169,7 +165,6 @@ class TangocardSDK {
 
     const options = this._options
 
-    // Build spec directly from SDK options + user-provided fetch args.
     const spec: any = {
       base: options.base,
       prefix: options.prefix,
@@ -185,7 +180,6 @@ class TangocardSDK {
 
     ctx.spec = spec
 
-    // Merge user-provided headers over SDK defaults.
     if (fetchargs.headers) {
       const uheaders = fetchargs.headers
       for (let key in uheaders) {
@@ -195,7 +189,6 @@ class TangocardSDK {
 
     
 
-    // Apply SDK auth (apikey, auth prefix, etc.)
     const authResult = prepareAuth(ctx)
     if (authResult instanceof Error) {
       return authResult
@@ -288,18 +281,6 @@ class TangocardSDK {
 
 
 
-  // Raw GraphQL access: the pressure valve that makes the generated
-  // surface's deliberate omissions (per-call selection sets, typed filter
-  // builders, batching, subscriptions) livable — the whole schema stays
-  // reachable.
-  //
-  // Thin wrapper over the same prepare/fetch path `direct` uses, with the
-  // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
-  // HTTP 200 as a top-level `errors` array, so status alone would report a
-  // failed query as ok.
-  //
-  // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
-  // ratelimit or paging features apply.
   async graphql(query: string, variables?: any, ctrl?: any) {
     const options = this._options
 
@@ -423,12 +404,12 @@ class TangocardSDK {
   }
 
 
-  // Entity access: `client.BrandCategoriesView().list()` / `client.BrandCategoriesView().load({ id })`.
+  // Entity access: `client.BrandCategory().list()` / `client.BrandCategory().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
-  BrandCategoriesView(entopts?: Record<string, any>) {
+  BrandCategory(entopts?: Record<string, any>) {
     const self = this
-    return new BrandCategoriesViewEntity(self, entopts)
+    return new BrandCategoryEntity(self, entopts)
   }
 
 
@@ -465,15 +446,6 @@ class TangocardSDK {
   CreateAccountCriterion(entopts?: Record<string, any>) {
     const self = this
     return new CreateAccountCriterionEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.CreateCustomerCriterion().list()` / `client.CreateCustomerCriterion().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  CreateCustomerCriterion(entopts?: Record<string, any>) {
-    const self = this
-    return new CreateCustomerCriterionEntity(self, entopts)
   }
 
 
@@ -519,15 +491,6 @@ class TangocardSDK {
   Customer(entopts?: Record<string, any>) {
     const self = this
     return new CustomerEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.EmailTemplateListView().list()` / `client.EmailTemplateListView().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  EmailTemplateListView(entopts?: Record<string, any>) {
-    const self = this
-    return new EmailTemplateListViewEntity(self, entopts)
   }
 
 
@@ -609,24 +572,6 @@ class TangocardSDK {
   N1Customer(entopts?: Record<string, any>) {
     const self = this
     return new N1CustomerEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.N2Account().list()` / `client.N2Account().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  N2Account(entopts?: Record<string, any>) {
-    const self = this
-    return new N2AccountEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.N3Fund().list()` / `client.N3Fund().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  N3Fund(entopts?: Record<string, any>) {
-    const self = this
-    return new N3FundEntity(self, entopts)
   }
 
 

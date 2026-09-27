@@ -19,7 +19,6 @@ import type {
   ReplacementReasonListMatch,
 } from '../TangocardTypes'
 
-// TODO: needs Entity superclass
 class ReplacementReasonEntity extends TangocardEntityBase<ReplacementReason> {
 
   constructor(client: TangocardSDK, entopts: any) {

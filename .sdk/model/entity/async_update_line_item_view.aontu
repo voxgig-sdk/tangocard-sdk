@@ -1,0 +1,90 @@
+# Entity: async_update_line_item_view
+
+main: kit: entity: async_update_line_item_view: {
+
+  alias: field: {}
+
+  fields: {
+    deliveryDate: {
+      h: "Delivery Date"
+      n: "deliveryDate"
+      r: false
+      sh: "Optional."
+      t: "`$STRING`"
+    }
+    lineItemNote: {
+      h: "Line Item Note"
+      n: "lineItemNote"
+      r: false
+      sh: "Optional line item notes (up to 150 characters)"
+      t: "`$STRING`"
+    }
+    senderInfo: {
+      h: "Sender Info"
+      n: "senderInfo"
+      r: false
+      sh: "Optional."
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "async_update_line_item_view"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /asyncOrders/lineItems/{referenceLineItemId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/asyncOrders/lineItems/{referenceLineItemId}"
+          q: {
+            exist: [
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemId: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "asyncOrders"
+            }
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.senderInfo`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.line_item")]
+  ]
+
+}

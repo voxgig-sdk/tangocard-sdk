@@ -1,0 +1,362 @@
+# Entity: async_order_detail_view
+
+main: kit: entity: async_order_detail_view: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: false
+      sh: "Account identifier"
+      t: "`$STRING`"
+    }
+    amountCharged: {
+      h: "Amount Charged"
+      n: "amountCharged"
+      r: false
+      sh: "Initial value and the total charged amount on the account"
+      t: "`$OBJECT`"
+    }
+    campaign: {
+      h: "Campaign"
+      n: "campaign"
+      r: false
+      sh: "Campaign name"
+      t: "`$STRING`"
+    }
+    completedAt: {
+      fo: "date-time"
+      h: "Completed At"
+      n: "completedAt"
+      r: false
+      sh: "Order completion timestamp"
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "Order creation timestamp"
+      t: "`$STRING`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: false
+      sh: "Customer identifier"
+      t: "`$STRING`"
+    }
+    externalRefID: {
+      h: "External Ref Id"
+      n: "externalRefID"
+      r: false
+      sh: "External reference ID provided by client"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    lineItems: {
+      h: "Line Items"
+      n: "lineItems"
+      r: false
+      sh: "list of line items"
+      t: "`$ARRAY`"
+    }
+    notes: {
+      h: "Notes"
+      n: "notes"
+      r: false
+      sh: "Order notes"
+      t: "`$STRING`"
+    }
+    orderErrors: {
+      h: "Order Errors"
+      n: "orderErrors"
+      r: false
+      sh: "Order level errors"
+      t: "`$ARRAY`"
+    }
+    orderStatus: {
+      h: "Order Status"
+      n: "orderStatus"
+      r: false
+      sh: "Current status of the order"
+      t: "`$STRING`"
+    }
+    pagination: {
+      h: "Pagination"
+      n: "pagination"
+      r: false
+      sh: "Pagination information"
+      t: "`$OBJECT`"
+    }
+    purchaseOrderNumber: {
+      h: "Purchase Order Number"
+      n: "purchaseOrderNumber"
+      r: false
+      sh: "Purchase order number"
+      t: "`$STRING`"
+    }
+    referenceOrderID: {
+      h: "Reference Order Id"
+      n: "referenceOrderID"
+      r: false
+      sh: "Internal reference order ID"
+      t: "`$STRING`"
+    }
+    sender: {
+      h: "Sender"
+      n: "sender"
+      r: false
+      sh: "Sender information"
+      t: "`$OBJECT`"
+    }
+    totalLineItems: {
+      fo: "int64"
+      h: "Total Line Items"
+      n: "totalLineItems"
+      r: false
+      sh: "Total number of line items"
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    from: {
+      account_identifier: "accountIdentifier"
+      external_ref_id: "externalRefID"
+    }
+    name: "id"
+    parts: [
+      "account_identifier"
+      "external_ref_id"
+    ]
+    sep: "/"
+  }
+
+  name: "async_order_detail_view"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "external_ref_id"
+                or: "external_ref_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "external_ref_line_item_i_d"
+                or: "external_ref_line_item_i_d"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "failed_only"
+                or: "failed_only"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 100
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: "NjI="
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "NjE="
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reference_line_item_i_d"
+                or: "reference_line_item_i_d"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}"
+          q: {
+            exist: [
+              "account_identifier"
+              "customer_identifier"
+              "external_ref_id"
+              "external_ref_line_item_i_d"
+              "failed_only"
+              "max_result"
+              "next_cursor"
+              "prev_cursor"
+              "reference_line_item_i_d"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "account_identifier"
+              customerIdentifier: "customer_identifier"
+              externalRefID: "external_ref_id"
+            }
+          }
+          s: [
+            {
+              lit: "asyncOrders"
+            }
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_identifier"
+            }
+            {
+              var: "external_ref_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "external_ref_id"
+                or: "external_ref_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}"
+          q: {
+            exist: [
+              "account_identifier"
+              "customer_identifier"
+              "external_ref_id"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "account_identifier"
+              customerIdentifier: "customer_identifier"
+              externalRefID: "external_ref_id"
+            }
+          }
+          s: [
+            {
+              lit: "asyncOrders"
+            }
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_identifier"
+            }
+            {
+              var: "external_ref_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.customer") path("$.main.kit.entity.account")]
+  ]
+
+}

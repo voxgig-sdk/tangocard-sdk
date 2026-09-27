@@ -38,7 +38,7 @@ var NewAsyncUpdateLineItemViewEntityFunc func(client *TangocardSDK, entopts map[
 
 var NewBalanceAlertViewEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
-var NewBrandCategoriesViewEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
+var NewBrandCategoryEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
 var NewCatalogEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
@@ -47,8 +47,6 @@ var NewChoiceProductEntityFunc func(client *TangocardSDK, entopts map[string]any
 var NewCountryViewSummaryEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
 var NewCreateAccountCriterionEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
-
-var NewCreateCustomerCriterionEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
 var NewCredentialTypeViewEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
@@ -59,8 +57,6 @@ var NewCreditCardDepositEntityFunc func(client *TangocardSDK, entopts map[string
 var NewCreditCardUnregisterEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
 var NewCustomerEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
-
-var NewEmailTemplateListViewEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
 var NewEmailTemplateViewVerboseEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
@@ -79,10 +75,6 @@ var NewMobileCountryEntityFunc func(client *TangocardSDK, entopts map[string]any
 var NewN14WebhookEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
 var NewN1CustomerEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
-
-var NewN2AccountEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
-
-var NewN3FundEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 
 var NewN8LineItemEntityFunc func(client *TangocardSDK, entopts map[string]any) TangocardEntity
 

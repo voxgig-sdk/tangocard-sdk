@@ -1,0 +1,466 @@
+# Entity: async_order
+
+main: kit: entity: async_order: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      sh: "specify the account this order will be deducted from"
+      t: "`$STRING`"
+    }
+    accountNumber: {
+      h: "Account Number"
+      n: "accountNumber"
+      r: true
+      t: "`$STRING`"
+    }
+    amountCharged: {
+      h: "Amount Charged"
+      n: "amountCharged"
+      r: false
+      sh: "Initial value and the total charged amount on the account"
+      t: "`$OBJECT`"
+    }
+    campaign: {
+      h: "Campaign"
+      n: "campaign"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "Optional."
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: true
+      sh: "specify the customer associated with the order."
+      t: "`$STRING`"
+    }
+    duplicateLineItemRefIds: {
+      h: "Duplicate Line Item Ref Ids"
+      n: "duplicateLineItemRefIds"
+      r: false
+      sh: "If any duplicate duplicateLineItemRefIds exist in the request"
+      t: "`$OBJECT`"
+    }
+    externalRefID: {
+      h: "External Ref Id"
+      n: "externalRefID"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "Required."
+      t: "`$STRING`"
+    }
+    failedLineItems: {
+      h: "Failed Line Items"
+      n: "failedLineItems"
+      r: false
+      sh: "Failed line items list (business validations)"
+      t: "`$ARRAY`"
+    }
+    fulfillBy: {
+      h: "Fulfill By"
+      n: "fulfillBy"
+      r: false
+      t: "`$STRING`"
+    }
+    lineItems: {
+      h: "Line Items"
+      n: "lineItems"
+      r: true
+      sh: "Line Items of the bulk order a required field"
+      t: "`$ARRAY`"
+    }
+    notes: {
+      h: "Notes"
+      n: "notes"
+      r: false
+      sh: "Optional order notes."
+      t: "`$STRING`"
+    }
+    orderStatus: {
+      h: "Order Status"
+      n: "orderStatus"
+      r: false
+      t: "`$STRING`"
+    }
+    purchaseOrderNumber: {
+      h: "Purchase Order Number"
+      n: "purchaseOrderNumber"
+      r: false
+      sh: "The Purchase Order Number associated with this order."
+      t: "`$STRING`"
+    }
+    referenceOrderID: {
+      h: "Reference Order Id"
+      n: "referenceOrderID"
+      r: true
+      t: "`$STRING`"
+    }
+    sender: {
+      h: "Sender"
+      n: "sender"
+      r: false
+      sh: "Optional."
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      sh: "This status reflects about cart status or validation status based on the processing"
+      t: "`$STRING`"
+    }
+    totalLineItems: {
+      fo: "int32"
+      h: "Total Line Items"
+      n: "totalLineItems"
+      r: false
+      sh: "Total number of line items submitted in the request"
+      t: "`$INTEGER`"
+    }
+    totalLineItemsRows: {
+      fo: "int64"
+      h: "Total Line Items Rows"
+      n: "totalLineItemsRows"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "async_order"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /asyncOrders"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/asyncOrders"
+          s: [
+            {
+              lit: "asyncOrders"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /asyncOrders"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "campaign"
+                or: "campaign"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "currency_code"
+                or: "currency_code"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "delivery_method"
+                or: "delivery_method"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "elements_per_block"
+                or: "elements_per_block"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "end_date"
+                or: "end_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "external_ref_id"
+                or: "external_ref_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "line_item_note"
+                or: "line_item_note"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "line_item_status"
+                or: "line_item_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_amount"
+                or: "max_amount"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "min_amount"
+                or: "min_amount"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "note"
+                or: "note"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_status"
+                or: "order_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "ptid"
+                or: "ptid"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "purchase_order_number"
+                or: "purchase_order_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_email"
+                or: "recipient_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_first_name"
+                or: "recipient_first_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_last_name"
+                or: "recipient_last_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_mobile_number"
+                or: "recipient_mobile_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reward_name"
+                or: "reward_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "send_email"
+                or: "send_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "sender_email"
+                or: "sender_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "sender_first_name"
+                or: "sender_first_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "sender_last_name"
+                or: "sender_last_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "start_date"
+                or: "start_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "utid"
+                or: "utid"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/asyncOrders"
+          q: {
+            exist: [
+              "account_identifier"
+              "campaign"
+              "currency_code"
+              "customer_identifier"
+              "delivery_method"
+              "elements_per_block"
+              "end_date"
+              "external_ref_id"
+              "line_item_note"
+              "line_item_status"
+              "max_amount"
+              "max_result"
+              "min_amount"
+              "next_cursor"
+              "note"
+              "order_status"
+              "page"
+              "prev_cursor"
+              "ptid"
+              "purchase_order_number"
+              "recipient_email"
+              "recipient_first_name"
+              "recipient_last_name"
+              "recipient_mobile_number"
+              "reward_name"
+              "send_email"
+              "sender_email"
+              "sender_first_name"
+              "sender_last_name"
+              "start_date"
+              "utid"
+            ]
+          }
+          s: [
+            {
+              lit: "asyncOrders"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.orders`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

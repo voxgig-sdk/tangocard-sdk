@@ -9,18 +9,6 @@ import (
 	sdk "github.com/voxgig-sdk/tangocard-sdk/go"
 )
 
-// registerSDKWords installs three native boru words bound to the SDK:
-// list / load / update. Each is declared with two overloads matching
-// the signature  [query?:(Node or Scalar) entity:atom]:
-//
-//   [entity:Atom]            — no query (e.g. `list book`)
-//   [query:Any entity:Atom]  — query is any Node or Scalar (e.g.
-//                              `load {id:1} book`, `load 1 book`)
-//
-// The entity slot is /q-quoted so a bareword `book` parses as the
-// Atom "book" rather than dispatching as an undefined word. Both
-// overloads are all-forward (BarrierAllForward), so args are collected
-// from the tokens following the word.
 func registerSDKWords(r *eng.Registry, client *sdk.TangocardSDK) {
 	for _, op := range []string{"list", "load", "update"} {
 		op := op
@@ -107,8 +95,8 @@ func entityFor(client *sdk.TangocardSDK, name string) (sdk.TangocardEntity, erro
 		return client.AsyncUpdateLineItemView(nil), nil
 	case "balance_alert_view":
 		return client.BalanceAlertView(nil), nil
-	case "brand_categories_view":
-		return client.BrandCategoriesView(nil), nil
+	case "brand_category":
+		return client.BrandCategory(nil), nil
 	case "catalog":
 		return client.Catalog(nil), nil
 	case "choice_product":
@@ -117,8 +105,6 @@ func entityFor(client *sdk.TangocardSDK, name string) (sdk.TangocardEntity, erro
 		return client.CountryViewSummary(nil), nil
 	case "create_account_criterion":
 		return client.CreateAccountCriterion(nil), nil
-	case "create_customer_criterion":
-		return client.CreateCustomerCriterion(nil), nil
 	case "credential_type_view":
 		return client.CredentialTypeView(nil), nil
 	case "credit_card":
@@ -129,8 +115,6 @@ func entityFor(client *sdk.TangocardSDK, name string) (sdk.TangocardEntity, erro
 		return client.CreditCardUnregister(nil), nil
 	case "customer":
 		return client.Customer(nil), nil
-	case "email_template_list_view":
-		return client.EmailTemplateListView(nil), nil
 	case "email_template_view_verbose":
 		return client.EmailTemplateViewVerbose(nil), nil
 	case "embeddable_response_dto":
@@ -149,10 +133,6 @@ func entityFor(client *sdk.TangocardSDK, name string) (sdk.TangocardEntity, erro
 		return client.N14Webhook(nil), nil
 	case "n1_customer":
 		return client.N1Customer(nil), nil
-	case "n2_account":
-		return client.N2Account(nil), nil
-	case "n3_fund":
-		return client.N3Fund(nil), nil
 	case "n8_line_item":
 		return client.N8LineItem(nil), nil
 	case "n9_digital_template":

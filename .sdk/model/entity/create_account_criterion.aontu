@@ -1,0 +1,104 @@
+# Entity: create_account_criterion
+
+main: kit: entity: create_account_criterion: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      sh: "A unique identifier for this account."
+      t: "`$STRING`"
+    }
+    contactEmail: {
+      h: "Contact Email"
+      n: "contactEmail"
+      r: true
+      sh: "An email address for a designated representative for this account."
+      t: "`$STRING`"
+    }
+    currencyCode: {
+      h: "Currency Code"
+      n: "currencyCode"
+      r: false
+      sh: "The currency this account will accept for deposits/withdraws."
+      t: "`$STRING`"
+    }
+    displayName: {
+      h: "Display Name"
+      n: "displayName"
+      r: true
+      sh: "A friendly name for this account."
+      t: "`$STRING`"
+    }
+    fundingNotification: {
+      h: "Funding Notification"
+      n: "fundingNotification"
+      r: false
+      sh: "optional, send funding notification emails to the following address(es)"
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "create_account_criterion"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /customers/{customerIdentifier}/accounts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/customers/{customerIdentifier}/accounts"
+          q: {
+            exist: [
+              "customer_identifier"
+            ]
+          }
+          r: {
+            param: {
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.customer")]
+  ]
+
+}

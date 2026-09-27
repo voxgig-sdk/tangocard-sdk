@@ -1,0 +1,120 @@
+# Entity: exchange_rates_with_disclaimer
+
+main: kit: entity: exchange_rates_with_disclaimer: {
+
+  alias: field: {}
+
+  fields: {
+    baseCurrency: {
+      h: "Base Currency"
+      n: "baseCurrency"
+      r: true
+      t: "`$STRING`"
+    }
+    baseFx: {
+      h: "Base Fx"
+      n: "baseFx"
+      r: true
+      t: "`$STRING`"
+    }
+    lastModifiedDate: {
+      fo: "date-time"
+      h: "Last Modified Date"
+      n: "lastModifiedDate"
+      r: true
+      t: "`$STRING`"
+    }
+    rewardCurrency: {
+      h: "Reward Currency"
+      n: "rewardCurrency"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "exchange_rates_with_disclaimer"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /exchangerates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "base_currency"
+                or: "base_currency"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "paginate"
+                or: "paginate"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reward_currency"
+                or: "reward_currency"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/exchangerates"
+          q: {
+            exist: [
+              "base_currency"
+              "max_result"
+              "next_cursor"
+              "paginate"
+              "prev_cursor"
+              "reward_currency"
+            ]
+          }
+          s: [
+            {
+              lit: "exchangerates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.exchangeRates`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -15,12 +15,11 @@
 <a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
 <a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
 <a href="../api/balance_alert_view.html">BalanceAlertView</a>
-<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/brand_category.html">BrandCategory</a>
 <a href="../api/catalog.html">Catalog</a>
 <a href="../api/choice_product.html">ChoiceProduct</a>
 <a href="../api/country_view_summary.html">CountryViewSummary</a>
 <a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
-<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
 <a href="../api/credential_type_view.html">CredentialTypeView</a>
 <a href="../api/credit_card.html">CreditCard</a>
 <a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
@@ -28,7 +27,6 @@
 <a aria-current="page" href="../api/customer.html">Customer</a><div class="nav-sections"><a class="nav-section" href="#post-customers">POST /customers</a>
 <a class="nav-section" href="#get-customers">GET /customers</a>
 <a class="nav-section" href="#get-customerscustomeridentifier">GET /customers/{customerIdentifier}</a></div>
-<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
 <a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
 <a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
 <a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
@@ -38,8 +36,6 @@
 <a href="../api/mobile_country.html">MobileCountry</a>
 <a href="../api/n14_webhook.html">N14Webhook</a>
 <a href="../api/n1_customer.html">N1Customer</a>
-<a href="../api/n2_account.html">N2Account</a>
-<a href="../api/n3_fund.html">N3Fund</a>
 <a href="../api/n8_line_item.html">N8LineItem</a>
 <a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
 <a href="../api/order.html">Order</a>
@@ -66,14 +62,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="customer">Customer</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="customer">Customer</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -106,6 +102,56 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">customers, err := client.Customer(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(customers)
+customer, err := client.Customer(nil).Load(map[string]any{&quot;id&quot;: &quot;example_id&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(customer)
+created, err := client.Customer(nil).Create(map[string]any{&quot;accounts&quot;: []any{}, &quot;createdAt&quot;: &quot;example&quot;, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;displayName&quot;: &quot;example&quot;, &quot;status&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+</code></pre>
+<h3 id="javascript">JavaScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/js.html#set-up-the-client">JavaScript setup</a>, then call the operations:</p>
+<pre><code class="language-js">const customers = await client.Customer().list()
+const customer = await client.Customer().load({ id: &quot;example_id&quot; })
+const created = await client.Customer().create({ accounts: [], createdAt: &quot;example&quot;, customerIdentifier: &quot;example&quot;, displayName: &quot;example&quot;, status: &quot;example&quot; })
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local customers, err = client:Customer():list()
+local customer, err = client:Customer():load({ id = &quot;example_id&quot; })
+local created, err = client:Customer():create({ accounts = {}, createdAt = &quot;example&quot;, customerIdentifier = &quot;example&quot;, displayName = &quot;example&quot;, status = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$customers = $client-&gt;Customer()-&gt;list();
+$customer = $client-&gt;Customer()-&gt;load([&quot;id&quot; =&gt; &quot;example_id&quot;]);
+$created = $client-&gt;Customer()-&gt;create([&quot;accounts&quot; =&gt; [], &quot;createdAt&quot; =&gt; &quot;example&quot;, &quot;customerIdentifier&quot; =&gt; &quot;example&quot;, &quot;displayName&quot; =&gt; &quot;example&quot;, &quot;status&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">customers = client.Customer().list()
+customer = client.Customer().load({&quot;id&quot;: &quot;example_id&quot;})
+created = client.Customer().create({ &quot;accounts&quot;: [], &quot;createdAt&quot;: &quot;example&quot;, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;displayName&quot;: &quot;example&quot;, &quot;status&quot;: &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const customers = await client.Customer().list()
+const customer = await client.Customer().load({ id: &quot;example_id&quot; })
+const created = await client.Customer().create({ accounts: [], createdAt: &quot;example&quot;, customerIdentifier: &quot;example&quot;, displayName: &quot;example&quot;, status: &quot;example&quot; })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -121,13 +167,13 @@
 <td><code>accounts</code></td>
 <td><code>array</code></td>
 <td>Yes</td>
-<td></td>
+<td>Accounts</td>
 </tr>
 <tr>
 <td><code>createdAt</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Created At</td>
 </tr>
 <tr>
 <td><code>customerIdentifier</code></td>
@@ -145,13 +191,13 @@
 <td><code>id</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Id</td>
 </tr>
 <tr>
 <td><code>status</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Status</td>
 </tr>
 </tbody>
 </table>

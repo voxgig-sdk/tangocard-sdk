@@ -1,0 +1,89 @@
+# Entity: prepaid_card_transaction
+
+main: kit: entity: prepaid_card_transaction: {
+
+  alias: field: {}
+
+  fields: {
+    journal: {
+      h: "Journal"
+      n: "journal"
+      r: false
+      t: "`$ARRAY`"
+    }
+    page: {
+      h: "Page"
+      n: "page"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "prepaid_card_transaction"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /prepaidCardService/getCardTransactions/{referenceLineItemID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 0
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/prepaidCardService/getCardTransactions/{referenceLineItemID}"
+          q: {
+            exist: [
+              "page"
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "getCardTransactions"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

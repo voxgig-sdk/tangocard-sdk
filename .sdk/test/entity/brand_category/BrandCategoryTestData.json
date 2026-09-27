@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "brand_category": {
+      "BRAND_CATEGORY00": {
+        "description": "s14",
+        "identifier": "s15"
+      },
+      "BRAND_CATEGORY01": {
+        "description": "s28",
+        "identifier": "s29"
+      },
+      "BRAND_CATEGORY02": {
+        "description": "s3c",
+        "identifier": "s3d"
+      }
+    }
+  },
+  "new": {
+    "brand_category": {
+      "brand_category_ref01": {
+        "description": "s50",
+        "identifier": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /brandCategories": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

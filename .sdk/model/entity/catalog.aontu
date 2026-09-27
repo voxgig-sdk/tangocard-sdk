@@ -1,0 +1,375 @@
+# Entity: catalog
+
+main: kit: entity: catalog: {
+
+  alias: field: {}
+
+  fields: {
+    barcodeType: {
+      h: "Barcode Type"
+      n: "barcodeType"
+      r: false
+      t: "`$STRING`"
+    }
+    brandKey: {
+      h: "Brand Key"
+      n: "brandKey"
+      r: true
+      t: "`$STRING`"
+    }
+    brandName: {
+      h: "Brand Name"
+      n: "brandName"
+      r: true
+      t: "`$STRING`"
+    }
+    brandRequirements: {
+      h: "Brand Requirements"
+      n: "brandRequirements"
+      r: true
+      t: "`$OBJECT`"
+    }
+    categories: {
+      h: "Categories"
+      n: "categories"
+      r: true
+      t: "`$ARRAY`"
+    }
+    createdDate: {
+      h: "Created Date"
+      n: "createdDate"
+      r: true
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: true
+      t: "`$STRING`"
+    }
+    disclaimer: {
+      h: "Disclaimer"
+      n: "disclaimer"
+      r: true
+      t: "`$STRING`"
+    }
+    imageUrls: {
+      h: "Image Urls"
+      n: "imageUrls"
+      r: true
+      t: "`$OBJECT`"
+    }
+    items: {
+      h: "Items"
+      n: "items"
+      r: true
+      t: "`$ARRAY`"
+    }
+    lastUpdateDate: {
+      h: "Last Update Date"
+      n: "lastUpdateDate"
+      r: true
+      t: "`$STRING`"
+    }
+    shortDescription: {
+      h: "Short Description"
+      n: "shortDescription"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    terms: {
+      h: "Terms"
+      n: "terms"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "catalog"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /choiceProducts/{choiceProductUtid}/catalog"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "choice_product_id"
+                or: "choice_product_utid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "brand_key"
+                or: "brand_key"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "brand_name"
+                or: "brand_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "category_id"
+                or: "category_id"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "country"
+                or: "country"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "currency_code"
+                or: "currency_code"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "fulfillment_type"
+                or: "fulfillment_type"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "item_attribute"
+                or: "item_attribute"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "reward_name"
+                or: "reward_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reward_type"
+                or: "reward_type"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "utid"
+                or: "utid"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: true
+                k: "query"
+                n: "verbose"
+                or: "verbose"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/choiceProducts/{choiceProductUtid}/catalog"
+          q: {
+            exist: [
+              "brand_key"
+              "brand_name"
+              "category_id"
+              "choice_product_id"
+              "country"
+              "currency_code"
+              "fulfillment_type"
+              "item_attribute"
+              "reward_name"
+              "reward_type"
+              "status"
+              "utid"
+              "verbose"
+            ]
+          }
+          r: {
+            param: {
+              choiceProductUtid: "choice_product_id"
+            }
+          }
+          s: [
+            {
+              lit: "choiceProducts"
+            }
+            {
+              var: "choice_product_id"
+            }
+            {
+              lit: "catalog"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.brands`"
+          }
+        }
+        {
+          co: {
+            id: "GET /catalogs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "brand_key"
+                or: "brand_key"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "brand_name"
+                or: "brand_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "category_id"
+                or: "category_id"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "country"
+                or: "country"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "currency_code"
+                or: "currency_code"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "fulfillment_type"
+                or: "fulfillment_type"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "item_attribute"
+                or: "item_attribute"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "reward_name"
+                or: "reward_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reward_type"
+                or: "reward_type"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "utid"
+                or: "utid"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: true
+                k: "query"
+                n: "verbose"
+                or: "verbose"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/catalogs"
+          q: {
+            exist: [
+              "brand_key"
+              "brand_name"
+              "category_id"
+              "country"
+              "currency_code"
+              "fulfillment_type"
+              "item_attribute"
+              "reward_name"
+              "reward_type"
+              "status"
+              "utid"
+              "verbose"
+            ]
+          }
+          s: [
+            {
+              lit: "catalogs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.brands`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.choice_product")]
+  ]
+
+}

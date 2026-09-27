@@ -1,0 +1,285 @@
+# Entity: low_balance_alert_view
+
+main: kit: entity: low_balance_alert_view: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: false
+      t: "`$STRING`"
+    }
+    balanceAlertDisplayName: {
+      h: "Balance Alert Display Name"
+      n: "balanceAlertDisplayName"
+      r: false
+      sh: "A friendly name for this low balance alert (will be displayed in the Tango Portal)."
+      t: "`$STRING`"
+    }
+    balanceAlertID: {
+      fo: "uuid"
+      h: "Balance Alert Id"
+      n: "balanceAlertID"
+      r: false
+      t: "`$STRING`"
+    }
+    balanceAlertNotification: {
+      h: "Balance Alert Notification"
+      n: "balanceAlertNotification"
+      r: false
+      sh: "Send low balance notification emails to the following address(es)."
+      t: "`$ARRAY`"
+    }
+    balanceAlertThreshold: {
+      h: "Balance Alert Threshold"
+      n: "balanceAlertThreshold"
+      r: false
+      sh: "The threshold amount that will trigger the low balance alert."
+      t: "`$NUMBER`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      t: "`$STRING`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "low_balance_alert_view"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance"
+          q: {
+            exist: [
+              "account_identifier"
+              "customer_identifier"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "account_identifier"
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_identifier"
+            }
+            {
+              lit: "lowbalance"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_id"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "balance_alert_id"
+                or: "balance_alert_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}"
+          q: {
+            exist: [
+              "account_id"
+              "balance_alert_id"
+              "customer_identifier"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "account_id"
+              balanceAlertID: "balance_alert_id"
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_id"
+            }
+            {
+              lit: "lowbalance"
+            }
+            {
+              var: "balance_alert_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_id"
+                or: "account_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "balance_alert_id"
+                or: "balance_alert_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}"
+          q: {
+            exist: [
+              "account_id"
+              "balance_alert_id"
+              "customer_identifier"
+            ]
+          }
+          r: {
+            param: {
+              accountIdentifier: "account_id"
+              balanceAlertID: "balance_alert_id"
+              customerIdentifier: "customer_identifier"
+            }
+          }
+          s: [
+            {
+              lit: "customers"
+            }
+            {
+              var: "customer_identifier"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_id"
+            }
+            {
+              lit: "lowbalance"
+            }
+            {
+              var: "balance_alert_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.customer") path("$.main.kit.entity.account")]
+    [path("$.main.kit.entity.customer") path("$.main.kit.entity.account")]
+  ]
+
+}

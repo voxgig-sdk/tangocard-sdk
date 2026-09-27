@@ -1,7 +1,7 @@
 // Typed models for the Tangocard SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,16 +14,6 @@ import (
 
 // Account is the typed data model for the account entity.
 type Account struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	AccountNumber string `json:"accountNumber"`
-	ContactEmail *string `json:"contactEmail,omitempty"`
-	CreatedAt string `json:"createdAt"`
-	CurrencyCode string `json:"currencyCode"`
-	CurrentBalance float64 `json:"currentBalance"`
-	DisplayName string `json:"displayName"`
-	FundingNotification *[]any `json:"fundingNotification,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Status string `json:"status"`
 }
 
 // AccountLoadMatch is the typed request payload for Account.LoadTyped.
@@ -48,16 +38,6 @@ type AccountUpdateData struct {
 
 // AddCommentEscalation is the typed data model for the add_comment_escalation entity.
 type AddCommentEscalation struct {
-	Assignee *int `json:"assignee,omitempty"`
-	CommentText string `json:"commentText"`
-	Id *string `json:"id,omitempty"`
-	InquiryCategoryCode *int `json:"inquiryCategoryCode,omitempty"`
-	InquiryIdNumber *int `json:"inquiryIdNumber,omitempty"`
-	InquirySource *string `json:"inquirySource,omitempty"`
-	InquiryTypeCode *int `json:"inquiryTypeCode,omitempty"`
-	IssueDescription string `json:"issueDescription"`
-	Status *string `json:"status,omitempty"`
-	UserId *string `json:"userId,omitempty"`
 }
 
 // AddCommentEscalationCreateData is the typed request payload for AddCommentEscalation.CreateTyped.
@@ -76,8 +56,6 @@ type AddCommentEscalationCreateData struct {
 
 // AllEventType is the typed data model for the all_event_type entity.
 type AllEventType struct {
-	Category *string `json:"category,omitempty"`
-	EventTypes *[]any `json:"eventTypes,omitempty"`
 }
 
 // AllEventTypeListMatch is the typed request payload for AllEventType.ListTyped.
@@ -90,25 +68,6 @@ type AllEventTypeListMatch struct {
 
 // AsyncOrder is the typed data model for the async_order entity.
 type AsyncOrder struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	AccountNumber string `json:"accountNumber"`
-	AmountCharged *map[string]any `json:"amountCharged,omitempty"`
-	Campaign *string `json:"campaign,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	DuplicateLineItemRefIds *map[string]any `json:"duplicateLineItemRefIds,omitempty"`
-	ExternalRefID *string `json:"externalRefID,omitempty"`
-	FailedLineItems *[]any `json:"failedLineItems,omitempty"`
-	FulfillBy *string `json:"fulfillBy,omitempty"`
-	LineItems []any `json:"lineItems"`
-	Notes *string `json:"notes,omitempty"`
-	OrderStatus *string `json:"orderStatus,omitempty"`
-	PurchaseOrderNumber *string `json:"purchaseOrderNumber,omitempty"`
-	ReferenceOrderID string `json:"referenceOrderID"`
-	Sender *map[string]any `json:"sender,omitempty"`
-	Status *string `json:"status,omitempty"`
-	TotalLineItems *int `json:"totalLineItems,omitempty"`
-	TotalLineItemsRows *int `json:"totalLineItemsRows,omitempty"`
 }
 
 // AsyncOrderListMatch is the typed request payload for AsyncOrder.ListTyped.
@@ -171,23 +130,6 @@ type AsyncOrderCreateData struct {
 
 // AsyncOrderDetailView is the typed data model for the async_order_detail_view entity.
 type AsyncOrderDetailView struct {
-	AccountIdentifier *string `json:"accountIdentifier,omitempty"`
-	AmountCharged *map[string]any `json:"amountCharged,omitempty"`
-	Campaign *string `json:"campaign,omitempty"`
-	CompletedAt *string `json:"completedAt,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	CustomerIdentifier *string `json:"customerIdentifier,omitempty"`
-	ExternalRefID *string `json:"externalRefID,omitempty"`
-	Id *string `json:"id,omitempty"`
-	LineItems *[]any `json:"lineItems,omitempty"`
-	Notes *string `json:"notes,omitempty"`
-	OrderErrors *[]any `json:"orderErrors,omitempty"`
-	OrderStatus *string `json:"orderStatus,omitempty"`
-	Pagination *map[string]any `json:"pagination,omitempty"`
-	PurchaseOrderNumber *string `json:"purchaseOrderNumber,omitempty"`
-	ReferenceOrderID *string `json:"referenceOrderID,omitempty"`
-	Sender *map[string]any `json:"sender,omitempty"`
-	TotalLineItems *int `json:"totalLineItems,omitempty"`
 }
 
 // AsyncOrderDetailViewLoadMatch is the typed request payload for AsyncOrderDetailView.LoadTyped.
@@ -229,19 +171,6 @@ type AsyncOrderDetailViewUpdateData struct {
 
 // AsyncOrderLineItemsView is the typed data model for the async_order_line_items_view entity.
 type AsyncOrderLineItemsView struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	AmountCharged *map[string]any `json:"amountCharged,omitempty"`
-	Campaign *string `json:"campaign,omitempty"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	ExternalRefID *string `json:"externalRefID,omitempty"`
-	LineItems *[]any `json:"lineItems,omitempty"`
-	OrderErrors *[]any `json:"orderErrors,omitempty"`
-	OrderNotes *string `json:"orderNotes,omitempty"`
-	OrderStatus string `json:"orderStatus"`
-	Pagination *map[string]any `json:"pagination,omitempty"`
-	PurchaseOrderNumber *string `json:"purchaseOrderNumber,omitempty"`
-	ReferenceOrderID string `json:"referenceOrderID"`
-	Sender *map[string]any `json:"sender,omitempty"`
 }
 
 // AsyncOrderLineItemsViewListMatch is the typed request payload for AsyncOrderLineItemsView.ListTyped.
@@ -267,9 +196,6 @@ type AsyncReasonCodesViewLoadMatch struct {
 
 // AsyncUpdateLineItemView is the typed data model for the async_update_line_item_view entity.
 type AsyncUpdateLineItemView struct {
-	DeliveryDate *string `json:"deliveryDate,omitempty"`
-	LineItemNote *string `json:"lineItemNote,omitempty"`
-	SenderInfo *map[string]any `json:"senderInfo,omitempty"`
 }
 
 // AsyncUpdateLineItemViewUpdateData is the typed request payload for AsyncUpdateLineItemView.UpdateTyped.
@@ -291,34 +217,18 @@ type BalanceAlertViewRemoveMatch struct {
 	CustomerIdentifier string `json:"customer_identifier"`
 }
 
-// BrandCategoriesView is the typed data model for the brand_categories_view entity.
-type BrandCategoriesView struct {
-	Description *string `json:"description,omitempty"`
-	Identifier *string `json:"identifier,omitempty"`
+// BrandCategory is the typed data model for the brand_category entity.
+type BrandCategory struct {
 }
 
-// BrandCategoriesViewListMatch is the typed request payload for BrandCategoriesView.ListTyped.
-type BrandCategoriesViewListMatch struct {
+// BrandCategoryListMatch is the typed request payload for BrandCategory.ListTyped.
+type BrandCategoryListMatch struct {
 	Description *string `json:"description,omitempty"`
 	Identifier *string `json:"identifier,omitempty"`
 }
 
 // Catalog is the typed data model for the catalog entity.
 type Catalog struct {
-	BarcodeType *string `json:"barcodeType,omitempty"`
-	BrandKey string `json:"brandKey"`
-	BrandName string `json:"brandName"`
-	BrandRequirements map[string]any `json:"brandRequirements"`
-	Categories []any `json:"categories"`
-	CreatedDate string `json:"createdDate"`
-	Description string `json:"description"`
-	Disclaimer string `json:"disclaimer"`
-	ImageUrls map[string]any `json:"imageUrls"`
-	Items []any `json:"items"`
-	LastUpdateDate string `json:"lastUpdateDate"`
-	ShortDescription string `json:"shortDescription"`
-	Status string `json:"status"`
-	Terms string `json:"terms"`
 }
 
 // CatalogListMatch is the typed request payload for Catalog.ListTyped.
@@ -339,11 +249,6 @@ type CatalogListMatch struct {
 
 // ChoiceProduct is the typed data model for the choice_product entity.
 type ChoiceProduct struct {
-	Countries *[]any `json:"countries,omitempty"`
-	CurrencyCode *string `json:"currencyCode,omitempty"`
-	Id *string `json:"id,omitempty"`
-	RewardName *string `json:"rewardName,omitempty"`
-	Utid *string `json:"utid,omitempty"`
 }
 
 // ChoiceProductLoadMatch is the typed request payload for ChoiceProduct.LoadTyped.
@@ -360,10 +265,6 @@ type ChoiceProductListMatch struct {
 
 // CountryViewSummary is the typed data model for the country_view_summary entity.
 type CountryViewSummary struct {
-	CountryName string `json:"countryName"`
-	PreferredCurrency string `json:"preferredCurrency"`
-	ThreeLetterCode string `json:"threeLetterCode"`
-	TwoLetterCode string `json:"twoLetterCode"`
 }
 
 // CountryViewSummaryLoadMatch is the typed request payload for CountryViewSummary.LoadTyped.
@@ -377,11 +278,6 @@ type CountryViewSummaryLoadMatch struct {
 
 // CreateAccountCriterion is the typed data model for the create_account_criterion entity.
 type CreateAccountCriterion struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	ContactEmail string `json:"contactEmail"`
-	CurrencyCode *string `json:"currencyCode,omitempty"`
-	DisplayName string `json:"displayName"`
-	FundingNotification *[]any `json:"fundingNotification,omitempty"`
 }
 
 // CreateAccountCriterionCreateData is the typed request payload for CreateAccountCriterion.CreateTyped.
@@ -394,14 +290,8 @@ type CreateAccountCriterionCreateData struct {
 	FundingNotification *[]any `json:"fundingNotification,omitempty"`
 }
 
-// CreateCustomerCriterion is the typed data model for the create_customer_criterion entity.
-type CreateCustomerCriterion struct {
-}
-
 // CredentialTypeView is the typed data model for the credential_type_view entity.
 type CredentialTypeView struct {
-	CredentialType string `json:"credentialType"`
-	Description *string `json:"description,omitempty"`
 }
 
 // CredentialTypeViewListMatch is the typed request payload for CredentialTypeView.ListTyped.
@@ -412,21 +302,6 @@ type CredentialTypeViewListMatch struct {
 
 // CreditCard is the typed data model for the credit_card entity.
 type CreditCard struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	AccountNumber string `json:"accountNumber"`
-	ActivationDate string `json:"activationDate"`
-	BillingAddress map[string]any `json:"billingAddress"`
-	ContactInformation []any `json:"contactInformation"`
-	CreatedDate string `json:"createdDate"`
-	CreditCard map[string]any `json:"creditCard"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	ExpirationDate string `json:"expirationDate"`
-	Id *string `json:"id,omitempty"`
-	IpAddress string `json:"ipAddress"`
-	Label string `json:"label"`
-	LastFourDigits string `json:"lastFourDigits"`
-	Status string `json:"status"`
-	Token string `json:"token"`
 }
 
 // CreditCardLoadMatch is the typed request payload for CreditCard.LoadTyped.
@@ -455,18 +330,6 @@ type CreditCardCreateData struct {
 
 // CreditCardDeposit is the typed data model for the credit_card_deposit entity.
 type CreditCardDeposit struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	AccountNumber string `json:"accountNumber"`
-	Amount float64 `json:"amount"`
-	AmountCharged float64 `json:"amountCharged"`
-	CreatedDate string `json:"createdDate"`
-	CreditCardToken string `json:"creditCardToken"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	ExternalRefID *string `json:"externalRefID,omitempty"`
-	FeePercent float64 `json:"feePercent"`
-	Id *string `json:"id,omitempty"`
-	ReferenceDepositID string `json:"referenceDepositID"`
-	Status string `json:"status"`
 }
 
 // CreditCardDepositLoadMatch is the typed request payload for CreditCardDeposit.LoadTyped.
@@ -492,12 +355,6 @@ type CreditCardDepositCreateData struct {
 
 // CreditCardUnregister is the typed data model for the credit_card_unregister entity.
 type CreditCardUnregister struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	CreatedDate string `json:"createdDate"`
-	CreditCardToken string `json:"creditCardToken"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	Message string `json:"message"`
-	Token string `json:"token"`
 }
 
 // CreditCardUnregisterCreateData is the typed request payload for CreditCardUnregister.CreateTyped.
@@ -512,12 +369,6 @@ type CreditCardUnregisterCreateData struct {
 
 // Customer is the typed data model for the customer entity.
 type Customer struct {
-	Accounts []any `json:"accounts"`
-	CreatedAt string `json:"createdAt"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	DisplayName string `json:"displayName"`
-	Id *string `json:"id,omitempty"`
-	Status string `json:"status"`
 }
 
 // CustomerLoadMatch is the typed request payload for Customer.LoadTyped.
@@ -553,26 +404,8 @@ type CustomerCreateData struct {
 	Status string `json:"status"`
 }
 
-// EmailTemplateListView is the typed data model for the email_template_list_view entity.
-type EmailTemplateListView struct {
-}
-
 // EmailTemplateViewVerbose is the typed data model for the email_template_view_verbose entity.
 type EmailTemplateViewVerbose struct {
-	AccentColor string `json:"accentColor"`
-	AccessControl *[]any `json:"accessControl,omitempty"`
-	AccessControls *[]any `json:"accessControls,omitempty"`
-	Closing string `json:"closing"`
-	CustomerServiceMessage *string `json:"customerServiceMessage,omitempty"`
-	Defaults *[]any `json:"defaults,omitempty"`
-	Etid string `json:"etid"`
-	FromName string `json:"fromName"`
-	HeaderImage string `json:"headerImage"`
-	HeaderImageAltText string `json:"headerImageAltText"`
-	MessageBody string `json:"messageBody"`
-	Name string `json:"name"`
-	SmsMessageBody *string `json:"smsMessageBody,omitempty"`
-	Subject string `json:"subject"`
 }
 
 // EmailTemplateViewVerboseLoadMatch is the typed request payload for EmailTemplateViewVerbose.LoadTyped.
@@ -624,7 +457,6 @@ type EmailTemplateViewVerboseUpdateData struct {
 
 // EmbeddableResponseDto is the typed data model for the embeddable_response_dto entity.
 type EmbeddableResponseDto struct {
-	Url *string `json:"url,omitempty"`
 }
 
 // EmbeddableResponseDtoLoadMatch is the typed request payload for EmbeddableResponseDto.LoadTyped.
@@ -634,10 +466,6 @@ type EmbeddableResponseDtoLoadMatch struct {
 
 // ExchangeRatesWithDisclaimer is the typed data model for the exchange_rates_with_disclaimer entity.
 type ExchangeRatesWithDisclaimer struct {
-	BaseCurrency string `json:"baseCurrency"`
-	BaseFx string `json:"baseFx"`
-	LastModifiedDate string `json:"lastModifiedDate"`
-	RewardCurrency string `json:"rewardCurrency"`
 }
 
 // ExchangeRatesWithDisclaimerListMatch is the typed request payload for ExchangeRatesWithDisclaimer.ListTyped.
@@ -652,47 +480,6 @@ type ExchangeRatesWithDisclaimerListMatch struct {
 
 // LineItem is the typed data model for the line_item entity.
 type LineItem struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	AccountNumber string `json:"accountNumber"`
-	AmountCharged *map[string]any `json:"amountCharged,omitempty"`
-	AmountIssued map[string]any `json:"amountIssued"`
-	Campaign *string `json:"campaign,omitempty"`
-	CanCancel *bool `json:"canCancel,omitempty"`
-	CanFreeze *bool `json:"canFreeze,omitempty"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	DateIssued string `json:"dateIssued"`
-	DeliveryMethod *string `json:"deliveryMethod,omitempty"`
-	DeliveryStatus *string `json:"deliveryStatus,omitempty"`
-	EmailStatus string `json:"emailStatus"`
-	Etid string `json:"etid"`
-	ExpirationDate string `json:"expirationDate"`
-	ExternalReferenceLineItemID *string `json:"externalReferenceLineItemID,omitempty"`
-	Id *string `json:"id,omitempty"`
-	LineItemActionHistory *[]any `json:"lineItemActionHistory,omitempty"`
-	LineItemActionReason *string `json:"lineItemActionReason,omitempty"`
-	LineItemErrors *[]any `json:"lineItemErrors,omitempty"`
-	LineNumber int `json:"lineNumber"`
-	OrderNotes *string `json:"orderNotes,omitempty"`
-	OrderSource string `json:"orderSource"`
-	OrderStatus string `json:"orderStatus"`
-	Ptid *string `json:"ptid,omitempty"`
-	PurchaseOrderNumber *string `json:"purchaseOrderNumber,omitempty"`
-	Quantity *int `json:"quantity,omitempty"`
-	Recipient *map[string]any `json:"recipient,omitempty"`
-	RedemptionHistory *[]any `json:"redemptionHistory,omitempty"`
-	ReferenceLineItemID string `json:"referenceLineItemID"`
-	ReferenceOrderID string `json:"referenceOrderID"`
-	ReissuedFromReferenceLineItemId *string `json:"reissuedFromReferenceLineItemId,omitempty"`
-	ReissuedToReferenceLineItemId *string `json:"reissuedToReferenceLineItemId,omitempty"`
-	RemainingBalance *float64 `json:"remainingBalance,omitempty"`
-	ResendHistory *[]any `json:"resendHistory,omitempty"`
-	Reward map[string]any `json:"reward"`
-	RewardName string `json:"rewardName"`
-	RewardStatus *string `json:"rewardStatus,omitempty"`
-	RewardViewHistory *[]any `json:"rewardViewHistory,omitempty"`
-	Sender *map[string]any `json:"sender,omitempty"`
-	Status string `json:"status"`
-	Utid string `json:"utid"`
 }
 
 // LineItemLoadMatch is the typed request payload for LineItem.LoadTyped.
@@ -787,13 +574,6 @@ type LineItemCreateData struct {
 
 // LowBalanceAlertListView is the typed data model for the low_balance_alert_list_view entity.
 type LowBalanceAlertListView struct {
-	AccountIdentifier *string `json:"accountIdentifier,omitempty"`
-	BalanceAlertDisplayName *string `json:"balanceAlertDisplayName,omitempty"`
-	BalanceAlertID *string `json:"balanceAlertID,omitempty"`
-	BalanceAlertNotification *[]any `json:"balanceAlertNotification,omitempty"`
-	BalanceAlertThreshold *float64 `json:"balanceAlertThreshold,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	CustomerIdentifier *string `json:"customerIdentifier,omitempty"`
 }
 
 // LowBalanceAlertListViewListMatch is the typed request payload for LowBalanceAlertListView.ListTyped.
@@ -809,13 +589,6 @@ type LowBalanceAlertListViewListMatch struct {
 
 // LowBalanceAlertView is the typed data model for the low_balance_alert_view entity.
 type LowBalanceAlertView struct {
-	AccountIdentifier *string `json:"accountIdentifier,omitempty"`
-	BalanceAlertDisplayName *string `json:"balanceAlertDisplayName,omitempty"`
-	BalanceAlertID *string `json:"balanceAlertID,omitempty"`
-	BalanceAlertNotification *[]any `json:"balanceAlertNotification,omitempty"`
-	BalanceAlertThreshold *float64 `json:"balanceAlertThreshold,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	CustomerIdentifier *string `json:"customerIdentifier,omitempty"`
 }
 
 // LowBalanceAlertViewLoadMatch is the typed request payload for LowBalanceAlertView.LoadTyped.
@@ -854,10 +627,6 @@ type LowBalanceAlertViewUpdateData struct {
 
 // MobileCountry is the typed data model for the mobile_country entity.
 type MobileCountry struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	CountryName *string `json:"countryName,omitempty"`
-	IsoCode *string `json:"isoCode,omitempty"`
-	LanguageCode *string `json:"languageCode,omitempty"`
 }
 
 // MobileCountryLoadMatch is the typed request payload for MobileCountry.LoadTyped.
@@ -870,18 +639,6 @@ type MobileCountryLoadMatch struct {
 
 // N14Webhook is the typed data model for the n14_webhook entity.
 type N14Webhook struct {
-	Categories *[]any `json:"categories,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	EventTypes *[]any `json:"eventTypes,omitempty"`
-	ExpiresAt *string `json:"expiresAt,omitempty"`
-	Headers *[]any `json:"headers,omitempty"`
-	HmacSharedSecretKey *string `json:"hmacSharedSecretKey,omitempty"`
-	Id *string `json:"id,omitempty"`
-	PayloadVerificationMethod *string `json:"payloadVerificationMethod,omitempty"`
-	SigningCertificate *string `json:"signingCertificate,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	Url string `json:"url"`
-	WebhookId *string `json:"webhookId,omitempty"`
 }
 
 // N14WebhookLoadMatch is the typed request payload for N14Webhook.LoadTyped.
@@ -956,20 +713,8 @@ type N1CustomerLoadMatch struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// N2Account is the typed data model for the n2_account entity.
-type N2Account struct {
-}
-
-// N3Fund is the typed data model for the n3_fund entity.
-type N3Fund struct {
-}
-
 // N8LineItem is the typed data model for the n8_line_item entity.
 type N8LineItem struct {
-	Campaign *string `json:"campaign,omitempty"`
-	Id *string `json:"id,omitempty"`
-	OrderNotes *string `json:"orderNotes,omitempty"`
-	PurchaseOrderNumber *string `json:"purchaseOrderNumber,omitempty"`
 }
 
 // N8LineItemUpdateData is the typed request payload for N8LineItem.UpdateTyped.
@@ -982,7 +727,6 @@ type N8LineItemUpdateData struct {
 
 // N9DigitalTemplate is the typed data model for the n9_digital_template entity.
 type N9DigitalTemplate struct {
-	Id *string `json:"id,omitempty"`
 }
 
 // N9DigitalTemplateRemoveMatch is the typed request payload for N9DigitalTemplate.RemoveTyped.
@@ -992,40 +736,6 @@ type N9DigitalTemplateRemoveMatch struct {
 
 // Order is the typed data model for the order entity.
 type Order struct {
-	AccountIdentifier string `json:"accountIdentifier"`
-	AccountNumber string `json:"accountNumber"`
-	Amount float64 `json:"amount"`
-	AmountCharged map[string]any `json:"amountCharged"`
-	AsyncOrderEntity *map[string]any `json:"asyncOrderEntity,omitempty"`
-	Campaign string `json:"campaign"`
-	CreatedAt string `json:"createdAt"`
-	CustomFields *map[string]any `json:"customFields,omitempty"`
-	CustomerIdentifier string `json:"customerIdentifier"`
-	DeliveryMethod *string `json:"deliveryMethod,omitempty"`
-	Denomination *map[string]any `json:"denomination,omitempty"`
-	EmailSubject string `json:"emailSubject"`
-	Etid string `json:"etid"`
-	ExpirationDate *string `json:"expirationDate,omitempty"`
-	ExternalRefID *string `json:"externalRefID,omitempty"`
-	Id *string `json:"id,omitempty"`
-	LineItemStatus *string `json:"lineItemStatus,omitempty"`
-	Message string `json:"message"`
-	Notes *string `json:"notes,omitempty"`
-	OrderClientSource *string `json:"orderClientSource,omitempty"`
-	OrderExternalRefIdDupe *bool `json:"orderExternalRefIdDupe,omitempty"`
-	OrderStatus *string `json:"orderStatus,omitempty"`
-	Ptid *string `json:"ptid,omitempty"`
-	PurchaseOrderNumber *string `json:"purchaseOrderNumber,omitempty"`
-	Recipient *map[string]any `json:"recipient,omitempty"`
-	RedemptionInstructions *string `json:"redemptionInstructions,omitempty"`
-	ReferenceLineItemID *string `json:"referenceLineItemID,omitempty"`
-	ReferenceOrderID string `json:"referenceOrderID"`
-	Reward map[string]any `json:"reward"`
-	RewardName string `json:"rewardName"`
-	SendEmail *bool `json:"sendEmail,omitempty"`
-	Sender *map[string]any `json:"sender,omitempty"`
-	Status string `json:"status"`
-	Utid string `json:"utid"`
 }
 
 // OrderLoadMatch is the typed request payload for Order.LoadTyped.
@@ -1106,12 +816,6 @@ type OrderCreateData struct {
 
 // OrderViewSummary is the typed data model for the order_view_summary entity.
 type OrderViewSummary struct {
-	Amount *float64 `json:"amount,omitempty"`
-	DeliveryMethod *string `json:"deliveryMethod,omitempty"`
-	Notes *string `json:"notes,omitempty"`
-	OtherReason *string `json:"otherReason,omitempty"`
-	ReasonCode string `json:"reasonCode"`
-	Recipient *map[string]any `json:"recipient,omitempty"`
 }
 
 // OrderViewSummaryCreateData is the typed request payload for OrderViewSummary.CreateTyped.
@@ -1127,10 +831,6 @@ type OrderViewSummaryCreateData struct {
 
 // PrepaidCardInfo is the typed data model for the prepaid_card_info entity.
 type PrepaidCardInfo struct {
-	Balance *map[string]any `json:"balance,omitempty"`
-	Card *map[string]any `json:"card,omitempty"`
-	Comments *[]any `json:"comments,omitempty"`
-	Registration *map[string]any `json:"registration,omitempty"`
 }
 
 // PrepaidCardInfoLoadMatch is the typed request payload for PrepaidCardInfo.LoadTyped.
@@ -1140,8 +840,6 @@ type PrepaidCardInfoLoadMatch struct {
 
 // PrepaidCardTransaction is the typed data model for the prepaid_card_transaction entity.
 type PrepaidCardTransaction struct {
-	Journal *[]any `json:"journal,omitempty"`
-	Page map[string]any `json:"page"`
 }
 
 // PrepaidCardTransactionLoadMatch is the typed request payload for PrepaidCardTransaction.LoadTyped.
@@ -1152,11 +850,6 @@ type PrepaidCardTransactionLoadMatch struct {
 
 // ReissueCard is the typed data model for the reissue_card entity.
 type ReissueCard struct {
-	CommentText *string `json:"commentText,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Reason string `json:"reason"`
-	Status *string `json:"status,omitempty"`
-	UpdatedBy string `json:"updatedBy"`
 }
 
 // ReissueCardCreateData is the typed request payload for ReissueCard.CreateTyped.
@@ -1170,7 +863,6 @@ type ReissueCardCreateData struct {
 
 // ReplacementReason is the typed data model for the replacement_reason entity.
 type ReplacementReason struct {
-	ReplacementReasons *[]any `json:"replacementReasons,omitempty"`
 }
 
 // ReplacementReasonListMatch is the typed request payload for ReplacementReason.ListTyped.
@@ -1180,13 +872,6 @@ type ReplacementReasonListMatch struct {
 
 // Resend is the typed data model for the resend entity.
 type Resend struct {
-	NewDeliveryMethod *string `json:"newDeliveryMethod,omitempty"`
-	NewEmail *string `json:"newEmail,omitempty"`
-	NewEtid *string `json:"newEtid,omitempty"`
-	NewMobile *string `json:"newMobile,omitempty"`
-	NewMobileNumber *string `json:"newMobileNumber,omitempty"`
-	OtherReason *string `json:"otherReason,omitempty"`
-	ReasonCode *string `json:"reasonCode,omitempty"`
 }
 
 // ResendCreateData is the typed request payload for Resend.CreateTyped.
@@ -1203,10 +888,6 @@ type ResendCreateData struct {
 
 // RewardReasonsMap is the typed data model for the reward_reasons_map entity.
 type RewardReasonsMap struct {
-	CANCEL *map[string]any `json:"CANCEL,omitempty"`
-	CANCELANDREISSUE *map[string]any `json:"CANCEL_AND_REISSUE,omitempty"`
-	FREEZE *map[string]any `json:"FREEZE,omitempty"`
-	UNFREEZE *map[string]any `json:"UNFREEZE,omitempty"`
 }
 
 // RewardReasonsMapLoadMatch is the typed request payload for RewardReasonsMap.LoadTyped.
@@ -1219,13 +900,6 @@ type RewardReasonsMapLoadMatch struct {
 
 // TransferFund is the typed data model for the transfer_fund entity.
 type TransferFund struct {
-	Amount float64 `json:"amount"`
-	ExternalRefID *string `json:"externalRefID,omitempty"`
-	TransferDate *string `json:"transferDate,omitempty"`
-	TransferFrom *map[string]any `json:"transferFrom,omitempty"`
-	TransferNotes *string `json:"transferNotes,omitempty"`
-	TransferTo *map[string]any `json:"transferTo,omitempty"`
-	TransferredAmount *float64 `json:"transferredAmount,omitempty"`
 }
 
 // TransferFundCreateData is the typed request payload for TransferFund.CreateTyped.
@@ -1241,10 +915,6 @@ type TransferFundCreateData struct {
 
 // UpdateAccount is the typed data model for the update_account entity.
 type UpdateAccount struct {
-	Id *string `json:"id,omitempty"`
-	Registration map[string]any `json:"registration"`
-	Status *string `json:"status,omitempty"`
-	UpdatedBy *string `json:"updatedBy,omitempty"`
 }
 
 // UpdateAccountCreateData is the typed request payload for UpdateAccount.CreateTyped.
@@ -1257,17 +927,6 @@ type UpdateAccountCreateData struct {
 
 // UpdateWebhookSubscriptionResponseView is the typed data model for the update_webhook_subscription_response_view entity.
 type UpdateWebhookSubscriptionResponseView struct {
-	Categories *[]any `json:"categories,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	EventTypes *[]any `json:"eventTypes,omitempty"`
-	ExpiresAt *string `json:"expiresAt,omitempty"`
-	Headers *[]any `json:"headers,omitempty"`
-	HmacSharedSecretKey *string `json:"hmacSharedSecretKey,omitempty"`
-	PayloadVerificationMethod *string `json:"payloadVerificationMethod,omitempty"`
-	SigningCertificate *string `json:"signingCertificate,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	Url *string `json:"url,omitempty"`
-	WebhookId *string `json:"webhookId,omitempty"`
 }
 
 // UpdateWebhookSubscriptionResponseViewUpdateData is the typed request payload for UpdateWebhookSubscriptionResponseView.UpdateTyped.
@@ -1288,18 +947,6 @@ type UpdateWebhookSubscriptionResponseViewUpdateData struct {
 
 // Webhook is the typed data model for the webhook entity.
 type Webhook struct {
-	Categories *[]any `json:"categories,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	EventTypes *[]any `json:"eventTypes,omitempty"`
-	ExpiresAt *string `json:"expiresAt,omitempty"`
-	Headers *[]any `json:"headers,omitempty"`
-	HmacSharedSecretKey *string `json:"hmacSharedSecretKey,omitempty"`
-	Id *string `json:"id,omitempty"`
-	PayloadVerificationMethod *string `json:"payloadVerificationMethod,omitempty"`
-	SigningCertificate *string `json:"signingCertificate,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	Url *string `json:"url,omitempty"`
-	WebhookId *string `json:"webhookId,omitempty"`
 }
 
 // WebhookLoadMatch is the typed request payload for Webhook.LoadTyped.

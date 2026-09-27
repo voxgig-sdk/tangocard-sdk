@@ -201,7 +201,7 @@ func n14_webhookBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"n14_webhook01", "n14_webhook02", "n14_webhook03", "webhook01", "webhook02", "webhook03", "test01", "test02", "test03"},
+		[]any{"n14_webhook01", "n14_webhook02", "n14_webhook03", "webhook01", "webhook02", "webhook03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

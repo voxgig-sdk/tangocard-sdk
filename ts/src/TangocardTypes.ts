@@ -1,7 +1,7 @@
 // Typed models for the Tangocard SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
@@ -263,12 +263,12 @@ export interface BalanceAlertViewRemoveMatch {
   customer_identifier: string
 }
 
-export interface BrandCategoriesView {
+export interface BrandCategory {
   description?: string
   identifier?: string
 }
 
-export interface BrandCategoriesViewListMatch {
+export interface BrandCategoryListMatch {
   description?: string
   identifier?: string
 }
@@ -353,9 +353,6 @@ export interface CreateAccountCriterionCreateData {
   currencyCode?: string
   displayName: string
   fundingNotification?: any[]
-}
-
-export interface CreateCustomerCriterion {
 }
 
 export interface CredentialTypeView {
@@ -497,9 +494,6 @@ export interface CustomerCreateData {
   displayName: string
   id?: string
   status: string
-}
-
-export interface EmailTemplateListView {
 }
 
 export interface EmailTemplateViewVerbose {
@@ -877,12 +871,6 @@ export interface N1CustomerLoadMatch {
   paginate?: boolean
   prev_cursor?: string
   status?: string
-}
-
-export interface N2Account {
-}
-
-export interface N3Fund {
 }
 
 export interface N8LineItem {

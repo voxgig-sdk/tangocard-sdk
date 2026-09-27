@@ -19,7 +19,6 @@ import type {
   AllEventTypeListMatch,
 } from '../TangocardTypes'
 
-// TODO: needs Entity superclass
 class AllEventTypeEntity extends TangocardEntityBase<AllEventType> {
 
   constructor(client: TangocardSDK, entopts: any) {

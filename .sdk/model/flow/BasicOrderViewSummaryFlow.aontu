@@ -1,0 +1,22 @@
+# BasicOrderViewSummaryFlow
+
+main: kit: flow: BasicOrderViewSummaryFlow:
+{
+  entity: "order_view_summary",
+  kind: "basic",
+  name: "BasicOrderViewSummaryFlow",
+  step: [
+    {
+      i: {
+        ref: "order_view_summary_ref01"
+      }
+
+      m: {
+        reference_line_item_id: "reference_line_item01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicOrderViewSummaryFlow"
+}

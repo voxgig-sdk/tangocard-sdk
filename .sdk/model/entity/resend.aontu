@@ -1,0 +1,164 @@
+# Entity: resend
+
+main: kit: entity: resend: {
+
+  alias: field: {}
+
+  fields: {
+    newDeliveryMethod: {
+      h: "New Delivery Method"
+      n: "newDeliveryMethod"
+      r: false
+      sh: "The delivery method used to re-deliver the reward."
+      t: "`$STRING`"
+    }
+    newEmail: {
+      h: "New Email"
+      n: "newEmail"
+      r: false
+      sh: "A new email address to re-deliver this order to."
+      t: "`$STRING`"
+    }
+    newEtid: {
+      h: "New Etid"
+      n: "newEtid"
+      r: false
+      sh: "A new etid used to re-deliver an order."
+      t: "`$STRING`"
+    }
+    newMobile: {
+      h: "New Mobile"
+      n: "newMobile"
+      r: false
+      sh: "A new mobile number to use for resending an order."
+      t: "`$STRING`"
+    }
+    newMobileNumber: {
+      h: "New Mobile Number"
+      n: "newMobileNumber"
+      r: false
+      sh: "A new phone number to re-deliver this order to."
+      t: "`$STRING`"
+    }
+    otherReason: {
+      h: "Other Reason"
+      n: "otherReason"
+      r: false
+      sh: "Required when lineItemResendReasonCode is \"OTHER\", enter the reason why the line item is being RESENT"
+      t: "`$STRING`"
+    }
+    reasonCode: {
+      h: "Reason Code"
+      n: "reasonCode"
+      r: false
+      sh: "Enter the reason why this line item is being RESENT (respectively)"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "resend"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /lineItems/{referenceLineItemId}/resends"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/lineItems/{referenceLineItemId}/resends"
+          q: {
+            exist: [
+              "line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemId: "line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "line_item_id"
+            }
+            {
+              lit: "resends"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /orders/{referenceOrderID}/resends"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_order_id"
+                or: "reference_order_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/orders/{referenceOrderID}/resends"
+          q: {
+            exist: [
+              "reference_order_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceOrderID: "reference_order_id"
+            }
+          }
+          s: [
+            {
+              lit: "orders"
+            }
+            {
+              var: "reference_order_id"
+            }
+            {
+              lit: "resends"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.line_item")]
+    [path("$.main.kit.entity.order")]
+  ]
+
+}

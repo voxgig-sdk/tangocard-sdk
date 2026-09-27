@@ -1,0 +1,52 @@
+# Entity: brand_category
+
+main: kit: entity: brand_category: {
+
+  alias: field: {}
+
+  fields: {
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    identifier: {
+      fo: "uuid"
+      h: "Identifier"
+      n: "identifier"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "brand_category"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /brandCategories"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/brandCategories"
+          s: [
+            {
+              lit: "brandCategories"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.brandCategories`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

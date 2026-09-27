@@ -84,9 +84,9 @@ Create a new `AsyncUpdateLineItemView` entity instance. Pass `nil` for no initia
 
 Create a new `BalanceAlertView` entity instance. Pass `nil` for no initial data.
 
-#### `BrandCategoriesView(data map[string]any) TangocardEntity`
+#### `BrandCategory(data map[string]any) TangocardEntity`
 
-Create a new `BrandCategoriesView` entity instance. Pass `nil` for no initial data.
+Create a new `BrandCategory` entity instance. Pass `nil` for no initial data.
 
 #### `Catalog(data map[string]any) TangocardEntity`
 
@@ -103,10 +103,6 @@ Create a new `CountryViewSummary` entity instance. Pass `nil` for no initial dat
 #### `CreateAccountCriterion(data map[string]any) TangocardEntity`
 
 Create a new `CreateAccountCriterion` entity instance. Pass `nil` for no initial data.
-
-#### `CreateCustomerCriterion(data map[string]any) TangocardEntity`
-
-Create a new `CreateCustomerCriterion` entity instance. Pass `nil` for no initial data.
 
 #### `CredentialTypeView(data map[string]any) TangocardEntity`
 
@@ -127,10 +123,6 @@ Create a new `CreditCardUnregister` entity instance. Pass `nil` for no initial d
 #### `Customer(data map[string]any) TangocardEntity`
 
 Create a new `Customer` entity instance. Pass `nil` for no initial data.
-
-#### `EmailTemplateListView(data map[string]any) TangocardEntity`
-
-Create a new `EmailTemplateListView` entity instance. Pass `nil` for no initial data.
 
 #### `EmailTemplateViewVerbose(data map[string]any) TangocardEntity`
 
@@ -167,14 +159,6 @@ Create a new `N14Webhook` entity instance. Pass `nil` for no initial data.
 #### `N1Customer(data map[string]any) TangocardEntity`
 
 Create a new `N1Customer` entity instance. Pass `nil` for no initial data.
-
-#### `N2Account(data map[string]any) TangocardEntity`
-
-Create a new `N2Account` entity instance. Pass `nil` for no initial data.
-
-#### `N3Fund(data map[string]any) TangocardEntity`
-
-Create a new `N3Fund` entity instance. Pass `nil` for no initial data.
 
 #### `N8LineItem(data map[string]any) TangocardEntity`
 
@@ -879,11 +863,11 @@ Return the entity name.
 
 ---
 
-## BrandCategoriesViewEntity
+## BrandCategoryEntity
 
 ```go
-brandCategoriesView := client.BrandCategoriesView(nil)
-fmt.Println(brandCategoriesView.GetName()) // "brand_categories_view"
+brandCategory := client.BrandCategory(nil)
+fmt.Println(brandCategory.GetName()) // "brand_category"
 ```
 
 ### Fields
@@ -900,7 +884,7 @@ fmt.Println(brandCategoriesView.GetName()) // "brand_categories_view"
 List entities matching the given criteria. Returns an array.
 
 ```go
-results, err := client.BrandCategoriesView(nil).List(nil, nil)
+results, err := client.BrandCategory(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -921,7 +905,7 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 #### `Make() Entity`
 
-Create a new `BrandCategoriesViewEntity` instance with the same client and
+Create a new `BrandCategoryEntity` instance with the same client and
 options.
 
 #### `GetName() string`
@@ -1167,37 +1151,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `CreateAccountCriterionEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## CreateCustomerCriterionEntity
-
-```go
-createCustomerCriterion := client.CreateCustomerCriterion(nil)
-fmt.Println(createCustomerCriterion.GetName()) // "create_customer_criterion"
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `CreateCustomerCriterionEntity` instance with the same client and
 options.
 
 #### `GetName() string`
@@ -1596,37 +1549,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `CustomerEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## EmailTemplateListViewEntity
-
-```go
-emailTemplateListView := client.EmailTemplateListView(nil)
-fmt.Println(emailTemplateListView.GetName()) // "email_template_list_view"
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `EmailTemplateListViewEntity` instance with the same client and
 options.
 
 #### `GetName() string`
@@ -2362,68 +2284,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `N1CustomerEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## N2AccountEntity
-
-```go
-n2Account := client.N2Account(nil)
-fmt.Println(n2Account.GetName()) // "n2_account"
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `N2AccountEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## N3FundEntity
-
-```go
-n3Fund := client.N3Fund(nil)
-fmt.Println(n3Fund.GetName()) // "n3_fund"
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `N3FundEntity` instance with the same client and
 options.
 
 #### `GetName() string`
@@ -3364,14 +3224,14 @@ Return the entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -3417,7 +3277,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -3448,7 +3308,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -3479,7 +3339,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -3507,7 +3367,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -3542,7 +3402,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -3573,7 +3433,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -3607,7 +3467,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -3638,7 +3498,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

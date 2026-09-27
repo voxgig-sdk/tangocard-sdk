@@ -128,7 +128,7 @@ function email_template_view_verbose_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["email_template_view_verbose01", "email_template_view_verbose02", "email_template_view_verbose03", "digital_template01", "digital_template02", "digital_template03"] as $k) {
+    foreach (["email_template_view_verbose01", "email_template_view_verbose02", "email_template_view_verbose03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

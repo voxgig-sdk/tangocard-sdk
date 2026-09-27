@@ -479,15 +479,15 @@ function TangocardSDK:BalanceAlertView(data)
 end
 
 
--- Idiomatic facade: client:BrandCategoriesView():list() / client:BrandCategoriesView():load({ id = ... })
+-- Idiomatic facade: client:BrandCategory():list() / client:BrandCategory():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function TangocardSDK:BrandCategoriesView(data)
-  local EntityMod = require("entity.brand_categories_view_entity")
+function TangocardSDK:BrandCategory(data)
+  local EntityMod = require("entity.brand_category_entity")
   if data == nil then
-    if self._brand_categories_view == nil then
-      self._brand_categories_view = EntityMod.new(self, nil)
+    if self._brand_category == nil then
+      self._brand_category = EntityMod.new(self, nil)
     end
-    return self._brand_categories_view
+    return self._brand_category
   end
   return EntityMod.new(self, data)
 end
@@ -544,20 +544,6 @@ function TangocardSDK:CreateAccountCriterion(data)
       self._create_account_criterion = EntityMod.new(self, nil)
     end
     return self._create_account_criterion
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:CreateCustomerCriterion():list() / client:CreateCustomerCriterion():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function TangocardSDK:CreateCustomerCriterion(data)
-  local EntityMod = require("entity.create_customer_criterion_entity")
-  if data == nil then
-    if self._create_customer_criterion == nil then
-      self._create_customer_criterion = EntityMod.new(self, nil)
-    end
-    return self._create_customer_criterion
   end
   return EntityMod.new(self, data)
 end
@@ -628,20 +614,6 @@ function TangocardSDK:Customer(data)
       self._customer = EntityMod.new(self, nil)
     end
     return self._customer
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:EmailTemplateListView():list() / client:EmailTemplateListView():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function TangocardSDK:EmailTemplateListView(data)
-  local EntityMod = require("entity.email_template_list_view_entity")
-  if data == nil then
-    if self._email_template_list_view == nil then
-      self._email_template_list_view = EntityMod.new(self, nil)
-    end
-    return self._email_template_list_view
   end
   return EntityMod.new(self, data)
 end
@@ -768,34 +740,6 @@ function TangocardSDK:N1Customer(data)
       self._n1_customer = EntityMod.new(self, nil)
     end
     return self._n1_customer
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:N2Account():list() / client:N2Account():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function TangocardSDK:N2Account(data)
-  local EntityMod = require("entity.n2_account_entity")
-  if data == nil then
-    if self._n2_account == nil then
-      self._n2_account = EntityMod.new(self, nil)
-    end
-    return self._n2_account
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:N3Fund():list() / client:N3Fund():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function TangocardSDK:N3Fund(data)
-  local EntityMod = require("entity.n3_fund_entity")
-  if data == nil then
-    if self._n3_fund == nil then
-      self._n3_fund = EntityMod.new(self, nil)
-    end
-    return self._n3_fund
   end
   return EntityMod.new(self, data)
 end

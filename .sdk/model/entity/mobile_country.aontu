@@ -1,0 +1,63 @@
+# Entity: mobile_country
+
+main: kit: entity: mobile_country: {
+
+  alias: field: {}
+
+  fields: {
+    countryCode: {
+      h: "Country Code"
+      n: "countryCode"
+      r: false
+      t: "`$STRING`"
+    }
+    countryName: {
+      h: "Country Name"
+      n: "countryName"
+      r: false
+      t: "`$STRING`"
+    }
+    isoCode: {
+      h: "Iso Code"
+      n: "isoCode"
+      r: false
+      t: "`$STRING`"
+    }
+    languageCode: {
+      h: "Language Code"
+      n: "languageCode"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "mobile_country"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /mobileCountries"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/mobileCountries"
+          s: [
+            {
+              lit: "mobileCountries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

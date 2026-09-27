@@ -1,0 +1,22 @@
+# BasicReplacementReasonFlow
+
+main: kit: flow: BasicReplacementReasonFlow:
+{
+  entity: "replacement_reason",
+  kind: "basic",
+  name: "BasicReplacementReasonFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "replacement_reason_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReplacementReasonFlow"
+}

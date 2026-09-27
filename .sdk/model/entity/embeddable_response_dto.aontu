@@ -1,0 +1,75 @@
+# Entity: embeddable_response_dto
+
+main: kit: entity: embeddable_response_dto: {
+
+  alias: field: {}
+
+  fields: {
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "embeddable_response_dto"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /lineItems/{referenceLineItemID}/embeddedUrl"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lineItems/{referenceLineItemID}/embeddedUrl"
+          q: {
+            exist: [
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+            {
+              lit: "embeddedUrl"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.line_item")]
+  ]
+
+}

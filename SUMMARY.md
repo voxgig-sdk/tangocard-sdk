@@ -6,7 +6,7 @@ Welcome to the Tango API – with this RESTful API you can integrate a global re
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 46 entities and 72 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 42 entities and 72 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
@@ -114,7 +114,7 @@ Results: OK.
 
 SDK operations: `remove`.
 
-### [BrandCategoriesView](docs/api/brand_categories_view.html)
+### [BrandCategory](docs/api/brand_category.html)
 
 Results: OK.
 
@@ -151,10 +151,6 @@ Key fields to recognise:
 - `currencyCode`: The currency this account will accept for deposits/withdraws. Only one currency can be specified, and can never be changed. Default to USD if not specified.
 - `displayName`: A friendly name for this account.
 - `fundingNotification`: optional, send funding notification emails to the following address(es)
-
-### [CreateCustomerCriterion](docs/api/create_customer_criterion.html)
-
-SDK operations: .
 
 ### [CredentialTypeView](docs/api/credential_type_view.html)
 
@@ -201,6 +197,7 @@ Key fields to recognise:
 - `accountIdentifier`: Specify the account this credit card is associated with.
 - `creditCardToken`: Specify the credit card token to unregister.
 - `customerIdentifier`: Specify the customer associated with the credit card.
+- `message`: A Generic Example
 
 ### [Customer](docs/api/customer.html)
 
@@ -212,10 +209,6 @@ Key fields to recognise:
 
 - `customerIdentifier`: A unique identifier for this customer. Must be between 5-100 characters and accepts the following: -0-9a-zA-Z in any sequence.
 - `displayName`: A friendly name for this customer. Must be between 5-100 characters and accepts letters, numbers, punctuation and whitespace separators in any sequence.
-
-### [EmailTemplateListView](docs/api/email_template_list_view.html)
-
-SDK operations: .
 
 ### [EmailTemplateViewVerbose](docs/api/email_template_view_verbose.html)
 
@@ -255,6 +248,7 @@ Key fields to recognise:
 - `quantity`: quantity of line items
 - `reissuedFromReferenceLineItemId`: Reissued from reference line item ID
 - `reissuedToReferenceLineItemId`: Reissued to reference line item ID
+- `status`: The status of the reward view
 
 ### [LowBalanceAlertListView](docs/api/low_balance_alert_list_view.html)
 
@@ -299,14 +293,6 @@ Key fields to recognise:
 Results: OK.
 
 SDK operations: `load`.
-
-### [N2Account](docs/api/n2_account.html)
-
-SDK operations: .
-
-### [N3Fund](docs/api/n3_fund.html)
-
-SDK operations: .
 
 ### [N8LineItem](docs/api/n8_line_item.html)
 
@@ -483,7 +469,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | [AsyncReasonCodesView](docs/api/async_reason_codes_view.html) | `load` | `GET /asyncOrders/reasonCodes` | Required |
 | [AsyncUpdateLineItemView](docs/api/async_update_line_item_view.html) | `update` | `PATCH /asyncOrders/lineItems/{referenceLineItemId}` | Required |
 | [BalanceAlertView](docs/api/balance_alert_view.html) | `remove` | `DELETE /customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}` | Required |
-| [BrandCategoriesView](docs/api/brand_categories_view.html) | `list` | `GET /brandCategories` | Required |
+| [BrandCategory](docs/api/brand_category.html) | `list` | `GET /brandCategories` | Required |
 | [Catalog](docs/api/catalog.html) | `list` | `GET /choiceProducts/{choiceProductUtid}/catalog` | Required |
 | [Catalog](docs/api/catalog.html) | `list` | `GET /catalogs` | Required |
 | [ChoiceProduct](docs/api/choice_product.html) | `list` | `GET /choiceProducts` | Required |
@@ -591,7 +577,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `tangocard_list`: List records for an entity. Supported entities: `all_event_type`, `async_order`, `async_order_line_items_view`, `brand_categories_view`, `catalog`, `choice_product`, `credential_type_view`, `customer`, `email_template_view_verbose`, `exchange_rates_with_disclaimer`, `line_item`, `low_balance_alert_list_view`, `n14_webhook`, `order`, `replacement_reason`.
+- `tangocard_list`: List records for an entity. Supported entities: `all_event_type`, `async_order`, `async_order_line_items_view`, `brand_category`, `catalog`, `choice_product`, `credential_type_view`, `customer`, `email_template_view_verbose`, `exchange_rates_with_disclaimer`, `line_item`, `low_balance_alert_list_view`, `n14_webhook`, `order`, `replacement_reason`.
 - `tangocard_load`: Load one record for an entity. Supported entities: `account`, `async_order_detail_view`, `async_reason_codes_view`, `choice_product`, `country_view_summary`, `credit_card`, `credit_card_deposit`, `customer`, `email_template_view_verbose`, `embeddable_response_dto`, `line_item`, `low_balance_alert_view`, `mobile_country`, `n14_webhook`, `n1_customer`, `order`, `prepaid_card_info`, `prepaid_card_transaction`, `reward_reasons_map`, `webhook`.
 
 ## Operational features

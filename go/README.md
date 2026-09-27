@@ -76,12 +76,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-rewardreasonsmap, err := client.RewardReasonsMap(nil).Load(nil, nil)
+prepaidcardinfo, err := client.PrepaidCardInfo(nil).Load(map[string]any{"reference_line_item_id": "example"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = rewardreasonsmap
+_ = prepaidcardinfo
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -145,13 +145,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-rewardReasonsMap, err := client.RewardReasonsMap(nil).Load(
-    nil, nil,
+prepaidCardInfo, err := client.PrepaidCardInfo(nil).Load(
+    map[string]any{"reference_line_item_id": "example"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(rewardReasonsMap) // the returned mock data
+fmt.Println(prepaidCardInfo) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -239,18 +239,16 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `AsyncReasonCodesView` | `(data map[string]any) TangocardEntity` | Create an AsyncReasonCodesView entity instance. |
 | `AsyncUpdateLineItemView` | `(data map[string]any) TangocardEntity` | Create an AsyncUpdateLineItemView entity instance. |
 | `BalanceAlertView` | `(data map[string]any) TangocardEntity` | Create a BalanceAlertView entity instance. |
-| `BrandCategoriesView` | `(data map[string]any) TangocardEntity` | Create a BrandCategoriesView entity instance. |
+| `BrandCategory` | `(data map[string]any) TangocardEntity` | Create a BrandCategory entity instance. |
 | `Catalog` | `(data map[string]any) TangocardEntity` | Create a Catalog entity instance. |
 | `ChoiceProduct` | `(data map[string]any) TangocardEntity` | Create a ChoiceProduct entity instance. |
 | `CountryViewSummary` | `(data map[string]any) TangocardEntity` | Create a CountryViewSummary entity instance. |
 | `CreateAccountCriterion` | `(data map[string]any) TangocardEntity` | Create a CreateAccountCriterion entity instance. |
-| `CreateCustomerCriterion` | `(data map[string]any) TangocardEntity` | Create a CreateCustomerCriterion entity instance. |
 | `CredentialTypeView` | `(data map[string]any) TangocardEntity` | Create a CredentialTypeView entity instance. |
 | `CreditCard` | `(data map[string]any) TangocardEntity` | Create a CreditCard entity instance. |
 | `CreditCardDeposit` | `(data map[string]any) TangocardEntity` | Create a CreditCardDeposit entity instance. |
 | `CreditCardUnregister` | `(data map[string]any) TangocardEntity` | Create a CreditCardUnregister entity instance. |
 | `Customer` | `(data map[string]any) TangocardEntity` | Create a Customer entity instance. |
-| `EmailTemplateListView` | `(data map[string]any) TangocardEntity` | Create an EmailTemplateListView entity instance. |
 | `EmailTemplateViewVerbose` | `(data map[string]any) TangocardEntity` | Create an EmailTemplateViewVerbose entity instance. |
 | `EmbeddableResponseDto` | `(data map[string]any) TangocardEntity` | Create an EmbeddableResponseDto entity instance. |
 | `ExchangeRatesWithDisclaimer` | `(data map[string]any) TangocardEntity` | Create an ExchangeRatesWithDisclaimer entity instance. |
@@ -260,8 +258,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `MobileCountry` | `(data map[string]any) TangocardEntity` | Create a MobileCountry entity instance. |
 | `N14Webhook` | `(data map[string]any) TangocardEntity` | Create a N14Webhook entity instance. |
 | `N1Customer` | `(data map[string]any) TangocardEntity` | Create a N1Customer entity instance. |
-| `N2Account` | `(data map[string]any) TangocardEntity` | Create a N2Account entity instance. |
-| `N3Fund` | `(data map[string]any) TangocardEntity` | Create a N3Fund entity instance. |
 | `N8LineItem` | `(data map[string]any) TangocardEntity` | Create a N8LineItem entity instance. |
 | `N9DigitalTemplate` | `(data map[string]any) TangocardEntity` | Create a N9DigitalTemplate entity instance. |
 | `Order` | `(data map[string]any) TangocardEntity` | Create an Order entity instance. |
@@ -471,7 +467,7 @@ Operations: Remove.
 
 API path: `/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}`
 
-#### BrandCategoriesView
+#### BrandCategory
 
 | Field | Description |
 | --- | --- |
@@ -545,15 +541,6 @@ API path: `/rewardCountries`
 Operations: Create.
 
 API path: `/customers/{customerIdentifier}/accounts`
-
-#### CreateCustomerCriterion
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### CredentialTypeView
 
@@ -640,15 +627,6 @@ API path: `/creditCardUnregisters`
 Operations: Create, List, Load.
 
 API path: `/customers`
-
-#### EmailTemplateListView
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### EmailTemplateViewVerbose
 
@@ -820,24 +798,6 @@ API path: `/webhooks/{webhookId}/tests/{testName}`
 Operations: Load.
 
 API path: `/customers/{customerIdentifier}/accounts`
-
-#### N2Account
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### N3Fund
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### N8LineItem
 
@@ -1373,9 +1333,9 @@ Create an instance: `balanceAlertView := client.BalanceAlertView(nil)`
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
 
-### BrandCategoriesView
+### BrandCategory
 
-Create an instance: `brandCategoriesView := client.BrandCategoriesView(nil)`
+Create an instance: `brandCategory := client.BrandCategory(nil)`
 
 #### Operations
 
@@ -1393,11 +1353,11 @@ Create an instance: `brandCategoriesView := client.BrandCategoriesView(nil)`
 #### Example: List
 
 ```go
-brandCategoriesViews, err := client.BrandCategoriesView(nil).List(nil, nil)
+brandCategorys, err := client.BrandCategory(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(brandCategoriesViews) // the array of records
+fmt.Println(brandCategorys) // the array of records
 ```
 
 
@@ -1547,11 +1507,6 @@ if err != nil {
 }
 fmt.Println(result)
 ```
-
-
-### CreateCustomerCriterion
-
-Create an instance: `createCustomerCriterion := client.CreateCustomerCriterion(nil)`
 
 
 ### CredentialTypeView
@@ -1806,11 +1761,6 @@ if err != nil {
 }
 fmt.Println(result)
 ```
-
-
-### EmailTemplateListView
-
-Create an instance: `emailTemplateListView := client.EmailTemplateListView(nil)`
 
 
 ### EmailTemplateViewVerbose
@@ -2246,16 +2196,6 @@ if err != nil {
 }
 fmt.Println(n1Customer) // the loaded record
 ```
-
-
-### N2Account
-
-Create an instance: `n2Account := client.N2Account(nil)`
-
-
-### N3Fund
-
-Create an instance: `n3Fund := client.N3Fund(nil)`
 
 
 ### N8LineItem
@@ -2769,14 +2709,14 @@ above:
 
 | Feature | What it does |
 |---|---|
-| [`debug`](#debug) | Request/response capture ring buffer for debugging |
-| [`idempotency`](#idempotency) | Idempotency keys for safe retries of mutating operations |
-| [`metrics`](#metrics) | Statistics capture: per-operation counters and latency |
-| [`paging`](#paging) | Pagination signals for list operations |
-| [`ratelimit`](#ratelimit) | Client-side rate limiting via a token bucket |
-| [`retry`](#retry) | Automatic retry of transient failures with exponential backoff |
-| [`test`](#test) | In-memory mock transport for testing without a live server |
-| [`timeout`](#timeout) | Per-request timeout with transport abort |
+| [`debug`](#debug) | Debug capture |
+| [`idempotency`](#idempotency) | Idempotency |
+| [`metrics`](#metrics) | Metrics |
+| [`paging`](#paging) | Paging |
+| [`ratelimit`](#ratelimit) | Rate limiting |
+| [`retry`](#retry) | Retry |
+| [`test`](#test) | Test transport |
+| [`timeout`](#timeout) | Timeout |
 
 > **Order matters for `ratelimit`, `retry`, `timeout`.** These wrap the
 > transport, so each one wraps whatever is already installed: the order you
@@ -2785,7 +2725,7 @@ above:
 
 ### debug
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 | Option | Default |
 |---|---|
@@ -2797,7 +2737,7 @@ Set `feature.debug.active` to enable it, then override any of the options above.
 
 ### idempotency
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 | Option | Default |
 |---|---|
@@ -2810,7 +2750,7 @@ Set `feature.idempotency.active` to enable it, then override any of the options 
 
 ### metrics
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 | Option | Default |
 |---|---|
@@ -2820,7 +2760,7 @@ Set `feature.metrics.active` to enable it, then override any of the options abov
 
 ### paging
 
-Pagination signals for list operations.
+Paging.
 
 | Option | Default |
 |---|---|
@@ -2836,7 +2776,7 @@ Set `feature.paging.active` to enable it, then override any of the options above
 
 ### ratelimit
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 | Option | Default |
 |---|---|
@@ -2852,7 +2792,7 @@ activated earlier.
 
 ### retry
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 | Option | Default |
 |---|---|
@@ -2871,7 +2811,7 @@ activated earlier.
 
 ### test
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 | Option | Default |
 |---|---|
@@ -2881,7 +2821,7 @@ Set `feature.test.active` to enable it, then override any of the options above.
 
 ### timeout
 
-Per-request timeout with transport abort.
+Timeout.
 
 | Option | Default |
 |---|---|
@@ -2933,14 +2873,14 @@ stage names.
 
 The SDK ships with built-in features:
 
-- **DebugFeature**: Request/response capture ring buffer for debugging
-- **IdempotencyFeature**: Idempotency keys for safe retries of mutating operations
-- **MetricsFeature**: Statistics capture: per-operation counters and latency
-- **PagingFeature**: Pagination signals for list operations
-- **RatelimitFeature**: Client-side rate limiting via a token bucket
-- **RetryFeature**: Automatic retry of transient failures with exponential backoff
-- **TestFeature**: In-memory mock transport for testing without a live server
-- **TimeoutFeature**: Per-request timeout with transport abort
+- **DebugFeature**: Debug capture
+- **IdempotencyFeature**: Idempotency
+- **MetricsFeature**: Metrics
+- **PagingFeature**: Paging
+- **RatelimitFeature**: Rate limiting
+- **RetryFeature**: Retry
+- **TestFeature**: Test transport
+- **TimeoutFeature**: Timeout
 
 Features are initialized in order. Hooks fire in the order features
 were added, so later features can override earlier ones.
@@ -2975,11 +2915,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-rewardreasonsmap := client.RewardReasonsMap(nil)
-rewardreasonsmap.Load(nil, nil)
+prepaidcardinfo := client.PrepaidCardInfo(nil)
+prepaidcardinfo.Load(map[string]any{"reference_line_item_id": "example"}, nil)
 
-// rewardreasonsmap.Data() now returns the rewardreasonsmap data from the last load
-// rewardreasonsmap.Match() returns the last match criteria
+// prepaidcardinfo.Data() now returns the prepaidcardinfo data from the last load
+// prepaidcardinfo.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

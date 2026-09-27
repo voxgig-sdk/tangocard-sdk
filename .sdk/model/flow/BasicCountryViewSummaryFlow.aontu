@@ -1,0 +1,28 @@
+# BasicCountryViewSummaryFlow
+
+main: kit: flow: BasicCountryViewSummaryFlow:
+{
+  entity: "country_view_summary",
+  kind: "basic",
+  name: "BasicCountryViewSummaryFlow",
+  step: [
+    {
+      i: {
+        ref: "country_view_summary_ref01",
+        srcdatavar: "country_view_summary_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-country_view_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCountryViewSummaryFlow"
+}

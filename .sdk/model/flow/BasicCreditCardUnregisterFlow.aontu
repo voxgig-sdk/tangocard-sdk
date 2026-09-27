@@ -1,0 +1,18 @@
+# BasicCreditCardUnregisterFlow
+
+main: kit: flow: BasicCreditCardUnregisterFlow:
+{
+  entity: "credit_card_unregister",
+  kind: "basic",
+  name: "BasicCreditCardUnregisterFlow",
+  step: [
+    {
+      i: {
+        ref: "credit_card_unregister_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreditCardUnregisterFlow"
+}

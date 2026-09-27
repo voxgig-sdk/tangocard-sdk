@@ -235,11 +235,11 @@ export interface BalanceAlertViewRemoveMatch {
     balance_alert_id: string;
     customer_identifier: string;
 }
-export interface BrandCategoriesView {
+export interface BrandCategory {
     description?: string;
     identifier?: string;
 }
-export interface BrandCategoriesViewListMatch {
+export interface BrandCategoryListMatch {
     description?: string;
     identifier?: string;
 }
@@ -315,8 +315,6 @@ export interface CreateAccountCriterionCreateData {
     currencyCode?: string;
     displayName: string;
     fundingNotification?: any[];
-}
-export interface CreateCustomerCriterion {
 }
 export interface CredentialTypeView {
     credentialType: string;
@@ -444,8 +442,6 @@ export interface CustomerCreateData {
     displayName: string;
     id?: string;
     status: string;
-}
-export interface EmailTemplateListView {
 }
 export interface EmailTemplateViewVerbose {
     accentColor: string;
@@ -791,10 +787,6 @@ export interface N1CustomerLoadMatch {
     paginate?: boolean;
     prev_cursor?: string;
     status?: string;
-}
-export interface N2Account {
-}
-export interface N3Fund {
 }
 export interface N8LineItem {
     campaign?: string;

@@ -1,0 +1,90 @@
+# Entity: prepaid_card_info
+
+main: kit: entity: prepaid_card_info: {
+
+  alias: field: {}
+
+  fields: {
+    balance: {
+      h: "Balance"
+      n: "balance"
+      r: false
+      t: "`$OBJECT`"
+    }
+    card: {
+      h: "Card"
+      n: "card"
+      r: false
+      t: "`$OBJECT`"
+    }
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: false
+      t: "`$ARRAY`"
+    }
+    registration: {
+      h: "Registration"
+      n: "registration"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "prepaid_card_info"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /prepaidCardService/getCardInfo/{referenceLineItemID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_line_item_id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/prepaidCardService/getCardInfo/{referenceLineItemID}"
+          q: {
+            exist: [
+              "reference_line_item_id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "reference_line_item_id"
+            }
+          }
+          s: [
+            {
+              lit: "prepaidCardService"
+            }
+            {
+              lit: "getCardInfo"
+            }
+            {
+              var: "reference_line_item_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,637 @@
+# Entity: order
+
+main: kit: entity: order: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      sh: "Specify the account this order will be deducted from"
+      t: "`$STRING`"
+    }
+    accountNumber: {
+      h: "Account Number"
+      n: "accountNumber"
+      r: true
+      t: "`$STRING`"
+    }
+    amount: {
+      h: "Amount"
+      n: "amount"
+      r: true
+      sh: "Specify the face value of of the reward."
+      t: "`$NUMBER`"
+    }
+    amountCharged: {
+      h: "Amount Charged"
+      n: "amountCharged"
+      r: true
+      t: "`$OBJECT`"
+    }
+    asyncOrderEntity: {
+      h: "Async Order Entity"
+      n: "asyncOrderEntity"
+      r: false
+      t: "`$OBJECT`"
+    }
+    campaign: {
+      h: "Campaign"
+      n: "campaign"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Optional."
+      t: "`$STRING`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    customFields: {
+      h: "Custom Fields"
+      n: "customFields"
+      r: false
+      sh: "Optional."
+      t: "`$OBJECT`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: true
+      sh: "Specify the customer associated with the order."
+      t: "`$STRING`"
+    }
+    deliveryMethod: {
+      h: "Delivery Method"
+      n: "deliveryMethod"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "Specify delivery method for the order"
+      t: "`$STRING`"
+    }
+    denomination: {
+      h: "Denomination"
+      n: "denomination"
+      op: {
+        create: {
+          req: true
+          type: "`$OBJECT`"
+        }
+      }
+      r: false
+      t: "`$OBJECT`"
+    }
+    emailSubject: {
+      h: "Email Subject"
+      n: "emailSubject"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Optional."
+      t: "`$STRING`"
+    }
+    etid: {
+      h: "Etid"
+      n: "etid"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Optional."
+      t: "`$STRING`"
+    }
+    expirationDate: {
+      h: "Expiration Date"
+      n: "expirationDate"
+      r: false
+      sh: "Optional for Promo Links, the exact calendar date the Promo Link will expire."
+      t: "`$STRING`"
+    }
+    externalRefID: {
+      h: "External Ref Id"
+      n: "externalRefID"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "Optional."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    lineItemStatus: {
+      h: "Line Item Status"
+      n: "lineItemStatus"
+      r: false
+      t: "`$STRING`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Optional gift message"
+      t: "`$STRING`"
+    }
+    notes: {
+      h: "Notes"
+      n: "notes"
+      r: false
+      sh: "Optional order notes."
+      t: "`$STRING`"
+    }
+    orderClientSource: {
+      h: "Order Client Source"
+      n: "orderClientSource"
+      r: false
+      t: "`$STRING`"
+    }
+    orderExternalRefIdDupe: {
+      h: "Order External Ref Id Dupe"
+      n: "orderExternalRefIdDupe"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    orderStatus: {
+      h: "Order Status"
+      n: "orderStatus"
+      r: false
+      t: "`$STRING`"
+    }
+    ptid: {
+      h: "Ptid"
+      n: "ptid"
+      r: false
+      sh: "Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page."
+      t: "`$STRING`"
+    }
+    purchaseOrderNumber: {
+      h: "Purchase Order Number"
+      n: "purchaseOrderNumber"
+      r: false
+      sh: "The Purchase Order Number associated with this order."
+      t: "`$STRING`"
+    }
+    recipient: {
+      h: "Recipient"
+      n: "recipient"
+      op: {
+        create: {
+          req: true
+          type: "`$OBJECT`"
+        }
+      }
+      r: false
+      sh: "Required if deliveryMethod is EMAIL, PHONE, or ADDRESS."
+      t: "`$OBJECT`"
+    }
+    redemptionInstructions: {
+      h: "Redemption Instructions"
+      n: "redemptionInstructions"
+      r: false
+      t: "`$STRING`"
+    }
+    referenceLineItemID: {
+      h: "Reference Line Item Id"
+      n: "referenceLineItemID"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    referenceOrderID: {
+      h: "Reference Order Id"
+      n: "referenceOrderID"
+      r: true
+      t: "`$STRING`"
+    }
+    reward: {
+      h: "Reward"
+      n: "reward"
+      r: true
+      t: "`$OBJECT`"
+    }
+    rewardName: {
+      h: "Reward Name"
+      n: "rewardName"
+      r: true
+      t: "`$STRING`"
+    }
+    sendEmail: {
+      de: true
+      h: "Send Email"
+      n: "sendEmail"
+      r: false
+      sh: "Deprecated Oct 1, 2025."
+      t: "`$BOOLEAN`"
+    }
+    sender: {
+      h: "Sender"
+      n: "sender"
+      op: {
+        create: {
+          req: true
+          type: "`$OBJECT`"
+        }
+      }
+      r: false
+      sh: "Optional."
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    utid: {
+      h: "Utid"
+      n: "utid"
+      r: true
+      sh: "The unique identifier for the reward you are sending as provided in the Get Catalog call"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "order"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /orders"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/orders"
+          s: [
+            {
+              lit: "orders"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /orders"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "campaign"
+                or: "campaign"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "currency_code"
+                or: "currency_code"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "delivery_method"
+                or: "delivery_method"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "elements_per_block"
+                or: "elements_per_block"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "end_date"
+                or: "end_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "external_ref_id"
+                or: "external_ref_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "line_item_note"
+                or: "line_item_note"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "line_item_status"
+                or: "line_item_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_amount"
+                or: "max_amount"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "min_amount"
+                or: "min_amount"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "note"
+                or: "note"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "order_status"
+                or: "order_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "ptid"
+                or: "ptid"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "purchase_order_number"
+                or: "purchase_order_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_email"
+                or: "recipient_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_first_name"
+                or: "recipient_first_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_last_name"
+                or: "recipient_last_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "recipient_mobile_number"
+                or: "recipient_mobile_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reward_name"
+                or: "reward_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "send_email"
+                or: "send_email"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "sender_email"
+                or: "sender_email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "sender_first_name"
+                or: "sender_first_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "sender_last_name"
+                or: "sender_last_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "start_date"
+                or: "start_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "utid"
+                or: "utid"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/orders"
+          q: {
+            exist: [
+              "account_identifier"
+              "campaign"
+              "currency_code"
+              "customer_identifier"
+              "delivery_method"
+              "elements_per_block"
+              "end_date"
+              "external_ref_id"
+              "line_item_note"
+              "line_item_status"
+              "max_amount"
+              "min_amount"
+              "note"
+              "order_status"
+              "page"
+              "ptid"
+              "purchase_order_number"
+              "recipient_email"
+              "recipient_first_name"
+              "recipient_last_name"
+              "recipient_mobile_number"
+              "reward_name"
+              "send_email"
+              "sender_email"
+              "sender_first_name"
+              "sender_last_name"
+              "start_date"
+              "status"
+              "utid"
+            ]
+          }
+          s: [
+            {
+              lit: "orders"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /orders/{referenceOrderID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "reference_order_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/orders/{referenceOrderID}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              referenceOrderID: "id"
+            }
+          }
+          s: [
+            {
+              lit: "orders"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

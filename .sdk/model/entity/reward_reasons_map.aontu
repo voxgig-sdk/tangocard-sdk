@@ -1,0 +1,70 @@
+# Entity: reward_reasons_map
+
+main: kit: entity: reward_reasons_map: {
+
+  alias: field: {}
+
+  fields: {
+    CANCEL: {
+      h: "Cancel"
+      n: "CANCEL"
+      r: false
+      sh: "Map of cancel reasons"
+      t: "`$OBJECT`"
+    }
+    CANCEL_AND_REISSUE: {
+      h: "Cancel And Reissue"
+      n: "CANCEL_AND_REISSUE"
+      r: false
+      sh: "Map of cancel and reissue reasons"
+      t: "`$OBJECT`"
+    }
+    FREEZE: {
+      h: "Freeze"
+      n: "FREEZE"
+      r: false
+      sh: "Map of freeze reasons"
+      t: "`$OBJECT`"
+    }
+    UNFREEZE: {
+      h: "Unfreeze"
+      n: "UNFREEZE"
+      r: false
+      sh: "Map of unfreeze reasons"
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "reward_reasons_map"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /lineItems/reasonCodes"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/lineItems/reasonCodes"
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              lit: "reasonCodes"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

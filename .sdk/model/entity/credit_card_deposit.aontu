@@ -1,0 +1,168 @@
+# Entity: credit_card_deposit
+
+main: kit: entity: credit_card_deposit: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      sh: "specify the account this credit card is associated with"
+      t: "`$STRING`"
+    }
+    accountNumber: {
+      h: "Account Number"
+      n: "accountNumber"
+      r: true
+      t: "`$STRING`"
+    }
+    amount: {
+      h: "Amount"
+      n: "amount"
+      r: true
+      sh: "specify the amount to fund in USD"
+      t: "`$NUMBER`"
+    }
+    amountCharged: {
+      h: "Amount Charged"
+      n: "amountCharged"
+      r: true
+      t: "`$NUMBER`"
+    }
+    createdDate: {
+      h: "Created Date"
+      n: "createdDate"
+      r: true
+      t: "`$STRING`"
+    }
+    creditCardToken: {
+      h: "Credit Card Token"
+      n: "creditCardToken"
+      r: true
+      sh: "specify the credit card token to fund with"
+      t: "`$STRING`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: true
+      sh: "specify the customer associated with the credit card."
+      t: "`$STRING`"
+    }
+    externalRefID: {
+      h: "External Ref Id"
+      n: "externalRefID"
+      r: false
+      sh: "specify the external reference id to associate with this funding action."
+      t: "`$STRING`"
+    }
+    feePercent: {
+      h: "Fee Percent"
+      n: "feePercent"
+      r: true
+      t: "`$NUMBER`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    referenceDepositID: {
+      h: "Reference Deposit Id"
+      n: "referenceDepositID"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "credit_card_deposit"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /creditCardDeposits"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/creditCardDeposits"
+          s: [
+            {
+              lit: "creditCardDeposits"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /creditCardDeposits/{referenceDepositID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "reference_deposit_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/creditCardDeposits/{referenceDepositID}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              referenceDepositID: "id"
+            }
+          }
+          s: [
+            {
+              lit: "creditCardDeposits"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

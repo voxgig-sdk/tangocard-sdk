@@ -19,19 +19,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -197,18 +190,16 @@ class Config {
             async_reason_codes_view: {},
             async_update_line_item_view: {},
             balance_alert_view: {},
-            brand_categories_view: {},
+            brand_category: {},
             catalog: {},
             choice_product: {},
             country_view_summary: {},
             create_account_criterion: {},
-            create_customer_criterion: {},
             credential_type_view: {},
             credit_card: {},
             credit_card_deposit: {},
             credit_card_unregister: {},
             customer: {},
-            email_template_list_view: {},
             email_template_view_verbose: {},
             embeddable_response_dto: {},
             exchange_rates_with_disclaimer: {},
@@ -218,8 +209,6 @@ class Config {
             mobile_country: {},
             n14_webhook: {},
             n1_customer: {},
-            n2_account: {},
-            n3_fund: {},
             n8_line_item: {},
             n9_digital_template: {},
             order: {},
@@ -241,58 +230,68 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "accountNumber",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Number",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "contactEmail",
-                    "short": "optional, an email address for a designated representative for this account.",
-                    "type": "`$STRING`"
+                    "title": "Contact Email",
+                    "type": "`$STRING`",
+                    "short": "optional, an email address for a designated representative for this account."
                 },
                 {
                     "name": "createdAt",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Created At",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "currencyCode",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Currency Code",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "currentBalance",
-                    "req": true,
-                    "type": "`$NUMBER`"
+                    "title": "Current Balance",
+                    "type": "`$NUMBER`",
+                    "req": true
                 },
                 {
                     "name": "displayName",
+                    "title": "Display Name",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "optional, a friendly name for this account.",
-                    "type": "`$STRING`"
+                    "short": "optional, a friendly name for this account."
                 },
                 {
                     "name": "fundingNotification",
-                    "short": "optional, send funding notification emails to the following address(es).",
-                    "type": "`$ARRAY`"
+                    "title": "Funding Notification",
+                    "type": "`$ARRAY`",
+                    "short": "optional, send funding notification emails to the following address(es)."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "id": {
@@ -306,94 +305,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "account_number",
-                                        "orig": "account_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "contact_email",
-                                        "orig": "contact_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "currency_code",
-                                        "orig": "currency_code",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "display_name",
-                                        "orig": "display_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "funding_notification_email",
-                                        "orig": "funding_notification_email",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_balance",
-                                        "orig": "max_balance",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_date_created_at",
-                                        "orig": "max_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "min_balance",
-                                        "orig": "min_balance",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "min_date_created_at",
-                                        "orig": "min_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "paginate",
-                                        "orig": "paginate",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/accounts",
@@ -402,6 +313,102 @@ class Config {
                                     "lit": "accounts"
                                 }
                             ],
+                            "parts": [
+                                "accounts"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "account_number",
+                                        "orig": "account_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "contact_email",
+                                        "orig": "contact_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "currency_code",
+                                        "orig": "currency_code",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "display_name",
+                                        "orig": "display_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "funding_notification_email",
+                                        "orig": "funding_notification_email",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_balance",
+                                        "orig": "max_balance",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_date_created_at",
+                                        "orig": "max_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "min_balance",
+                                        "orig": "min_balance",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "min_date_created_at",
+                                        "orig": "min_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "paginate",
+                                        "orig": "paginate",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_number",
@@ -419,35 +426,12 @@ class Config {
                                     "prev_cursor",
                                     "status"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "accounts"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/accounts/{accountIdentifier}",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "accounts"
@@ -456,19 +440,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "accounts",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "accounts",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 },
@@ -477,33 +477,9 @@ class Config {
                     "name": "update",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "PATCH",
                             "orig": "/customers/{customerIdentifier}/accounts/{accountIdentifier}",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "id",
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -518,22 +494,46 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "customer_identifier",
-                                    "id"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "customers",
                                 "{customer_identifier}",
                                 "accounts",
                                 "{id}"
-                            ]
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "id",
+                                    "customerIdentifier": "customer_identifier"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "customer_identifier",
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -541,7 +541,7 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer"
+                        "$.main.kit.entity.customer"
                     ]
                 ]
             }
@@ -549,59 +549,69 @@ class Config {
         "add_comment_escalation": {
             "fields": [
                 {
-                    "format": "int32",
                     "name": "assignee",
+                    "title": "Assignee",
+                    "type": "`$INTEGER`",
                     "short": "Assignee ID.",
-                    "type": "`$INTEGER`"
+                    "format": "int32"
                 },
                 {
                     "name": "commentText",
+                    "title": "Comment Text",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Free-text comment to add to the prepaid card.",
-                    "type": "`$STRING`"
+                    "short": "Free-text comment to add to the prepaid card."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
-                    "format": "int32",
                     "name": "inquiryCategoryCode",
+                    "title": "Inquiry Category Code",
+                    "type": "`$INTEGER`",
                     "short": "Inquiry category code.",
-                    "type": "`$INTEGER`"
+                    "format": "int32"
                 },
                 {
-                    "format": "int32",
                     "name": "inquiryIdNumber",
+                    "title": "Inquiry Id Number",
+                    "type": "`$INTEGER`",
                     "short": "Inquiry ID number.",
-                    "type": "`$INTEGER`"
+                    "format": "int32"
                 },
                 {
                     "name": "inquirySource",
-                    "short": "Origination source identifier (e.g.",
-                    "type": "`$STRING`"
+                    "title": "Inquiry Source",
+                    "type": "`$STRING`",
+                    "short": "Origination source identifier (e.g."
                 },
                 {
-                    "format": "int32",
                     "name": "inquiryTypeCode",
+                    "title": "Inquiry Type Code",
+                    "type": "`$INTEGER`",
                     "short": "Inquiry type code.",
-                    "type": "`$INTEGER`"
+                    "format": "int32"
                 },
                 {
                     "name": "issueDescription",
+                    "title": "Issue Description",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Short description of the issue.",
-                    "type": "`$STRING`"
+                    "short": "Short description of the issue."
                 },
                 {
                     "name": "status",
-                    "short": "Status of the inquiry (e.g.",
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "short": "Status of the inquiry (e.g."
                 },
                 {
                     "name": "userId",
-                    "short": "Agent or CSR user ID.",
-                    "type": "`$STRING`"
+                    "title": "User Id",
+                    "type": "`$STRING`",
+                    "short": "Agent or CSR user ID."
                 }
             ],
             "id": {
@@ -615,25 +625,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/prepaidCardService/addCommentEscalation/{referenceLineItemID}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "prepaidCardService"
@@ -645,20 +639,36 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "prepaidCardService",
+                                "addCommentEscalation",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "prepaidCardService",
-                                "addCommentEscalation",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -671,13 +681,15 @@ class Config {
             "fields": [
                 {
                     "name": "category",
-                    "short": "The category of events can be subscribed to.",
-                    "type": "`$STRING`"
+                    "title": "Category",
+                    "type": "`$STRING`",
+                    "short": "The category of events can be subscribed to."
                 },
                 {
                     "name": "eventTypes",
-                    "short": "The event types that can be subscribed to.",
-                    "type": "`$ARRAY`"
+                    "title": "Event Types",
+                    "type": "`$ARRAY`",
+                    "short": "The event types that can be subscribed to."
                 }
             ],
             "name": "all_event_type",
@@ -687,35 +699,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "category",
-                                        "orig": "category",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": 10,
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/webhooks/eventtypes",
@@ -727,6 +710,44 @@ class Config {
                                     "lit": "eventtypes"
                                 }
                             ],
+                            "parts": [
+                                "webhooks",
+                                "eventtypes"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.items`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "category",
+                                        "orig": "category",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 10
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "category",
@@ -734,15 +755,7 @@ class Config {
                                     "next_cursor",
                                     "prev_cursor"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.items`"
-                            },
-                            "parts": [
-                                "webhooks",
-                                "eventtypes"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -755,118 +768,137 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the account this order will be deducted from",
-                    "type": "`$STRING`"
+                    "short": "specify the account this order will be deducted from"
                 },
                 {
                     "name": "accountNumber",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Number",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "amountCharged",
-                    "short": "Initial value and the total charged amount on the account",
-                    "type": "`$OBJECT`"
+                    "title": "Amount Charged",
+                    "type": "`$OBJECT`",
+                    "short": "Initial value and the total charged amount on the account"
                 },
                 {
                     "name": "campaign",
+                    "title": "Campaign",
+                    "type": "`$STRING`",
                     "op": {
                         "list": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "short": "Optional.",
-                    "type": "`$STRING`"
+                    "short": "Optional."
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "op": {
                         "list": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the customer associated with the order.",
-                    "type": "`$STRING`"
+                    "short": "specify the customer associated with the order."
                 },
                 {
                     "name": "duplicateLineItemRefIds",
-                    "short": "If any duplicate duplicateLineItemRefIds exist in the request",
-                    "type": "`$OBJECT`"
+                    "title": "Duplicate Line Item Ref Ids",
+                    "type": "`$OBJECT`",
+                    "short": "If any duplicate duplicateLineItemRefIds exist in the request"
                 },
                 {
                     "name": "externalRefID",
+                    "title": "External Ref Id",
+                    "type": "`$STRING`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "short": "Required.",
-                    "type": "`$STRING`"
+                    "short": "Required."
                 },
                 {
                     "name": "failedLineItems",
-                    "short": "Failed line items list (business validations)",
-                    "type": "`$ARRAY`"
+                    "title": "Failed Line Items",
+                    "type": "`$ARRAY`",
+                    "short": "Failed line items list (business validations)"
                 },
                 {
                     "name": "fulfillBy",
+                    "title": "Fulfill By",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "lineItems",
+                    "title": "Line Items",
+                    "type": "`$ARRAY`",
                     "req": true,
-                    "short": "Line Items of the bulk order a required field",
-                    "type": "`$ARRAY`"
+                    "short": "Line Items of the bulk order a required field"
                 },
                 {
                     "name": "notes",
-                    "short": "Optional order notes.",
-                    "type": "`$STRING`"
+                    "title": "Notes",
+                    "type": "`$STRING`",
+                    "short": "Optional order notes."
                 },
                 {
                     "name": "orderStatus",
+                    "title": "Order Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "purchaseOrderNumber",
-                    "short": "The Purchase Order Number associated with this order.",
-                    "type": "`$STRING`"
+                    "title": "Purchase Order Number",
+                    "type": "`$STRING`",
+                    "short": "The Purchase Order Number associated with this order."
                 },
                 {
                     "name": "referenceOrderID",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reference Order Id",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "sender",
-                    "short": "Optional.",
-                    "type": "`$OBJECT`"
+                    "title": "Sender",
+                    "type": "`$OBJECT`",
+                    "short": "Optional."
                 },
                 {
                     "name": "status",
-                    "short": "This status reflects about cart status or validation status based on the processing",
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "short": "This status reflects about cart status or validation status based on the processing"
                 },
                 {
-                    "format": "int32",
                     "name": "totalLineItems",
+                    "title": "Total Line Items",
+                    "type": "`$INTEGER`",
                     "short": "Total number of line items submitted in the request",
-                    "type": "`$INTEGER`"
+                    "format": "int32"
                 },
                 {
-                    "format": "int64",
                     "name": "totalLineItemsRows",
-                    "type": "`$INTEGER`"
+                    "title": "Total Line Items Rows",
+                    "type": "`$INTEGER`",
+                    "format": "int64"
                 }
             ],
             "name": "async_order",
@@ -876,7 +908,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/asyncOrders",
@@ -885,14 +916,16 @@ class Config {
                                     "lit": "asyncOrders"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "asyncOrders"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "asyncOrders"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -901,196 +934,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "campaign",
-                                        "orig": "campaign",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "currency_code",
-                                        "orig": "currency_code",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "delivery_method",
-                                        "orig": "delivery_method",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "elements_per_block",
-                                        "orig": "elements_per_block",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "end_date",
-                                        "orig": "end_date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "external_ref_id",
-                                        "orig": "external_ref_id",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "line_item_note",
-                                        "orig": "line_item_note",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "line_item_status",
-                                        "orig": "line_item_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_amount",
-                                        "orig": "max_amount",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "min_amount",
-                                        "orig": "min_amount",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "note",
-                                        "orig": "note",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "order_status",
-                                        "orig": "order_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "page",
-                                        "orig": "page",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "ptid",
-                                        "orig": "ptid",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "purchase_order_number",
-                                        "orig": "purchase_order_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_email",
-                                        "orig": "recipient_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_first_name",
-                                        "orig": "recipient_first_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_last_name",
-                                        "orig": "recipient_last_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_mobile_number",
-                                        "orig": "recipient_mobile_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_name",
-                                        "orig": "reward_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "send_email",
-                                        "orig": "send_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "sender_email",
-                                        "orig": "sender_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "sender_first_name",
-                                        "orig": "sender_first_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "sender_last_name",
-                                        "orig": "sender_last_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "start_date",
-                                        "orig": "start_date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "utid",
-                                        "orig": "utid",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/asyncOrders",
@@ -1099,6 +942,204 @@ class Config {
                                     "lit": "asyncOrders"
                                 }
                             ],
+                            "parts": [
+                                "asyncOrders"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.orders`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "campaign",
+                                        "orig": "campaign",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "currency_code",
+                                        "orig": "currency_code",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "delivery_method",
+                                        "orig": "delivery_method",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "elements_per_block",
+                                        "orig": "elements_per_block",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "end_date",
+                                        "orig": "end_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "external_ref_id",
+                                        "orig": "external_ref_id",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "line_item_note",
+                                        "orig": "line_item_note",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "line_item_status",
+                                        "orig": "line_item_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_amount",
+                                        "orig": "max_amount",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "min_amount",
+                                        "orig": "min_amount",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "note",
+                                        "orig": "note",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "order_status",
+                                        "orig": "order_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "page",
+                                        "orig": "page",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "ptid",
+                                        "orig": "ptid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "purchase_order_number",
+                                        "orig": "purchase_order_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_email",
+                                        "orig": "recipient_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_first_name",
+                                        "orig": "recipient_first_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_last_name",
+                                        "orig": "recipient_last_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_mobile_number",
+                                        "orig": "recipient_mobile_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_name",
+                                        "orig": "reward_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "send_email",
+                                        "orig": "send_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "sender_email",
+                                        "orig": "sender_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "sender_first_name",
+                                        "orig": "sender_first_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "sender_last_name",
+                                        "orig": "sender_last_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "start_date",
+                                        "orig": "start_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "utid",
+                                        "orig": "utid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_identifier",
@@ -1133,14 +1174,7 @@ class Config {
                                     "start_date",
                                     "utid"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.orders`"
-                            },
-                            "parts": [
-                                "asyncOrders"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -1153,90 +1187,107 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
-                    "short": "Account identifier",
-                    "type": "`$STRING`"
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
+                    "short": "Account identifier"
                 },
                 {
                     "name": "amountCharged",
-                    "short": "Initial value and the total charged amount on the account",
-                    "type": "`$OBJECT`"
+                    "title": "Amount Charged",
+                    "type": "`$OBJECT`",
+                    "short": "Initial value and the total charged amount on the account"
                 },
                 {
                     "name": "campaign",
-                    "short": "Campaign name",
-                    "type": "`$STRING`"
+                    "title": "Campaign",
+                    "type": "`$STRING`",
+                    "short": "Campaign name"
                 },
                 {
-                    "format": "date-time",
                     "name": "completedAt",
+                    "title": "Completed At",
+                    "type": "`$STRING`",
                     "short": "Order completion timestamp",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "short": "Order creation timestamp",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "customerIdentifier",
-                    "short": "Customer identifier",
-                    "type": "`$STRING`"
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
+                    "short": "Customer identifier"
                 },
                 {
                     "name": "externalRefID",
-                    "short": "External reference ID provided by client",
-                    "type": "`$STRING`"
+                    "title": "External Ref Id",
+                    "type": "`$STRING`",
+                    "short": "External reference ID provided by client"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "lineItems",
-                    "short": "list of line items",
-                    "type": "`$ARRAY`"
+                    "title": "Line Items",
+                    "type": "`$ARRAY`",
+                    "short": "list of line items"
                 },
                 {
                     "name": "notes",
-                    "short": "Order notes",
-                    "type": "`$STRING`"
+                    "title": "Notes",
+                    "type": "`$STRING`",
+                    "short": "Order notes"
                 },
                 {
                     "name": "orderErrors",
-                    "short": "Order level errors",
-                    "type": "`$ARRAY`"
+                    "title": "Order Errors",
+                    "type": "`$ARRAY`",
+                    "short": "Order level errors"
                 },
                 {
                     "name": "orderStatus",
-                    "short": "Current status of the order",
-                    "type": "`$STRING`"
+                    "title": "Order Status",
+                    "type": "`$STRING`",
+                    "short": "Current status of the order"
                 },
                 {
                     "name": "pagination",
-                    "short": "Pagination information",
-                    "type": "`$OBJECT`"
+                    "title": "Pagination",
+                    "type": "`$OBJECT`",
+                    "short": "Pagination information"
                 },
                 {
                     "name": "purchaseOrderNumber",
-                    "short": "Purchase order number",
-                    "type": "`$STRING`"
+                    "title": "Purchase Order Number",
+                    "type": "`$STRING`",
+                    "short": "Purchase order number"
                 },
                 {
                     "name": "referenceOrderID",
-                    "short": "Internal reference order ID",
-                    "type": "`$STRING`"
+                    "title": "Reference Order Id",
+                    "type": "`$STRING`",
+                    "short": "Internal reference order ID"
                 },
                 {
                     "name": "sender",
-                    "short": "Sender information",
-                    "type": "`$OBJECT`"
+                    "title": "Sender",
+                    "type": "`$OBJECT`",
+                    "short": "Sender information"
                 },
                 {
-                    "format": "int64",
                     "name": "totalLineItems",
+                    "title": "Total Line Items",
+                    "type": "`$INTEGER`",
                     "short": "Total number of line items",
-                    "type": "`$INTEGER`"
+                    "format": "int64"
                 }
             ],
             "id": {
@@ -1259,83 +1310,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "external_ref_id",
-                                        "orig": "external_ref_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "external_ref_line_item_i_d",
-                                        "orig": "external_ref_line_item_i_d",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "failed_only",
-                                        "orig": "failed_only",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": 100,
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": "NjI=",
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "NjE=",
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reference_line_item_i_d",
-                                        "orig": "reference_line_item_i_d",
-                                        "type": "`$ARRAY`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_identifier",
-                                    "customerIdentifier": "customer_identifier",
-                                    "externalRefID": "external_ref_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "asyncOrders"
@@ -1356,6 +1333,92 @@ class Config {
                                     "var": "external_ref_id"
                                 }
                             ],
+                            "parts": [
+                                "asyncOrders",
+                                "customers",
+                                "{customer_identifier}",
+                                "accounts",
+                                "{account_identifier}",
+                                "{external_ref_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_identifier",
+                                    "customerIdentifier": "customer_identifier",
+                                    "externalRefID": "external_ref_id"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "external_ref_id",
+                                        "orig": "external_ref_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "external_ref_line_item_i_d",
+                                        "orig": "external_ref_line_item_i_d",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "failed_only",
+                                        "orig": "failed_only",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 100
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "NjI="
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "NjE="
+                                    },
+                                    {
+                                        "name": "reference_line_item_i_d",
+                                        "orig": "reference_line_item_i_d",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_identifier",
@@ -1368,19 +1431,7 @@ class Config {
                                     "prev_cursor",
                                     "reference_line_item_i_d"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "asyncOrders",
-                                "customers",
-                                "{customer_identifier}",
-                                "accounts",
-                                "{account_identifier}",
-                                "{external_ref_id}"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -1389,41 +1440,9 @@ class Config {
                     "name": "update",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "external_ref_id",
-                                        "orig": "external_ref_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "PATCH",
                             "orig": "/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_identifier",
-                                    "customerIdentifier": "customer_identifier",
-                                    "externalRefID": "external_ref_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "asyncOrders"
@@ -1444,17 +1463,6 @@ class Config {
                                     "var": "external_ref_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "account_identifier",
-                                    "customer_identifier",
-                                    "external_ref_id"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "asyncOrders",
                                 "customers",
@@ -1462,7 +1470,50 @@ class Config {
                                 "accounts",
                                 "{account_identifier}",
                                 "{external_ref_id}"
-                            ]
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_identifier",
+                                    "customerIdentifier": "customer_identifier",
+                                    "externalRefID": "external_ref_id"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "external_ref_id",
+                                        "orig": "external_ref_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "account_identifier",
+                                    "customer_identifier",
+                                    "external_ref_id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1470,8 +1521,8 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer",
-                        "account"
+                        "$.main.kit.entity.customer",
+                        "$.main.kit.entity.account"
                     ]
                 ]
             }
@@ -1480,62 +1531,75 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "amountCharged",
-                    "short": "Initial value and the total charged amount on the account",
-                    "type": "`$OBJECT`"
+                    "title": "Amount Charged",
+                    "type": "`$OBJECT`",
+                    "short": "Initial value and the total charged amount on the account"
                 },
                 {
                     "name": "campaign",
+                    "title": "Campaign",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "customerIdentifier",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "externalRefID",
+                    "title": "External Ref Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "lineItems",
-                    "short": "The List of Line Items for the Async Order.",
-                    "type": "`$ARRAY`"
+                    "title": "Line Items",
+                    "type": "`$ARRAY`",
+                    "short": "The List of Line Items for the Async Order."
                 },
                 {
                     "name": "orderErrors",
-                    "short": "The List of Errors for the Async Order.",
-                    "type": "`$ARRAY`"
+                    "title": "Order Errors",
+                    "type": "`$ARRAY`",
+                    "short": "The List of Errors for the Async Order."
                 },
                 {
                     "name": "orderNotes",
+                    "title": "Order Notes",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "orderStatus",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Order Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "pagination",
-                    "short": "The cursor for pagination of the async order line items.",
-                    "type": "`$OBJECT`"
+                    "title": "Pagination",
+                    "type": "`$OBJECT`",
+                    "short": "The cursor for pagination of the async order line items."
                 },
                 {
                     "name": "purchaseOrderNumber",
+                    "title": "Purchase Order Number",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "referenceOrderID",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reference Order Id",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "sender",
+                    "title": "Sender",
                     "type": "`$OBJECT`"
                 }
             ],
@@ -1546,83 +1610,9 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_id",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_id",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "external_ref_id",
-                                        "orig": "external_ref_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "external_ref_line_item_i_d",
-                                        "orig": "external_ref_line_item_i_d",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "failed_only",
-                                        "orig": "failed_only",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": 50,
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": "",
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "",
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reference_line_item_i_d",
-                                        "orig": "reference_line_item_i_d",
-                                        "type": "`$ARRAY`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/asyncOrders/customers/{customerIdentifier}/accounts/{accountIdentifier}/{externalRefID}/lineItems",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_id",
-                                    "customerIdentifier": "customer_id",
-                                    "externalRefID": "external_ref_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "asyncOrders"
@@ -1646,6 +1636,93 @@ class Config {
                                     "lit": "lineItems"
                                 }
                             ],
+                            "parts": [
+                                "asyncOrders",
+                                "customers",
+                                "{customer_id}",
+                                "accounts",
+                                "{account_id}",
+                                "{external_ref_id}",
+                                "lineItems"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_id",
+                                    "customerIdentifier": "customer_id",
+                                    "externalRefID": "external_ref_id"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_id",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_id",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "external_ref_id",
+                                        "orig": "external_ref_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "external_ref_line_item_i_d",
+                                        "orig": "external_ref_line_item_i_d",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "failed_only",
+                                        "orig": "failed_only",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 50
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": ""
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": ""
+                                    },
+                                    {
+                                        "name": "reference_line_item_i_d",
+                                        "orig": "reference_line_item_i_d",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_id",
@@ -1658,20 +1735,7 @@ class Config {
                                     "prev_cursor",
                                     "reference_line_item_i_d"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "asyncOrders",
-                                "customers",
-                                "{customer_id}",
-                                "accounts",
-                                "{account_id}",
-                                "{external_ref_id}",
-                                "lineItems"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -1679,8 +1743,8 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer",
-                        "account"
+                        "$.main.kit.entity.customer",
+                        "$.main.kit.entity.account"
                     ]
                 ]
             }
@@ -1694,7 +1758,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/asyncOrders/reasonCodes",
@@ -1706,15 +1769,17 @@ class Config {
                                     "lit": "reasonCodes"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "asyncOrders",
+                                "reasonCodes"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.reasonCodes`"
                             },
-                            "parts": [
-                                "asyncOrders",
-                                "reasonCodes"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -1727,18 +1792,21 @@ class Config {
             "fields": [
                 {
                     "name": "deliveryDate",
-                    "short": "Optional.",
-                    "type": "`$STRING`"
+                    "title": "Delivery Date",
+                    "type": "`$STRING`",
+                    "short": "Optional."
                 },
                 {
                     "name": "lineItemNote",
-                    "short": "Optional line item notes (up to 150 characters)",
-                    "type": "`$STRING`"
+                    "title": "Line Item Note",
+                    "type": "`$STRING`",
+                    "short": "Optional line item notes (up to 150 characters)"
                 },
                 {
                     "name": "senderInfo",
-                    "short": "Optional.",
-                    "type": "`$OBJECT`"
+                    "title": "Sender Info",
+                    "type": "`$OBJECT`",
+                    "short": "Optional."
                 }
             ],
             "name": "async_update_line_item_view",
@@ -1748,25 +1816,9 @@ class Config {
                     "name": "update",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "PATCH",
                             "orig": "/asyncOrders/lineItems/{referenceLineItemId}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemId": "reference_line_item_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "asyncOrders"
@@ -1778,20 +1830,36 @@ class Config {
                                     "var": "reference_line_item_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "reference_line_item_id"
-                                ]
+                            "parts": [
+                                "asyncOrders",
+                                "lineItems",
+                                "{reference_line_item_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemId": "reference_line_item_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.senderInfo`"
                             },
-                            "parts": [
-                                "asyncOrders",
-                                "lineItems",
-                                "{reference_line_item_id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "reference_line_item_id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1799,7 +1867,7 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "line_item"
+                        "$.main.kit.entity.line_item"
                     ]
                 ]
             }
@@ -1813,41 +1881,9 @@ class Config {
                     "name": "remove",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_id",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "balance_alert_id",
-                                        "orig": "balance_alert_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "DELETE",
                             "orig": "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_id",
-                                    "balanceAlertID": "balance_alert_id",
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -1868,17 +1904,6 @@ class Config {
                                     "var": "balance_alert_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "account_id",
-                                    "balance_alert_id",
-                                    "customer_identifier"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "customers",
                                 "{customer_identifier}",
@@ -1886,7 +1911,50 @@ class Config {
                                 "{account_id}",
                                 "lowbalance",
                                 "{balance_alert_id}"
-                            ]
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_id",
+                                    "balanceAlertID": "balance_alert_id",
+                                    "customerIdentifier": "customer_identifier"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_id",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "balance_alert_id",
+                                        "orig": "balance_alert_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "account_id",
+                                    "balance_alert_id",
+                                    "customer_identifier"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1894,33 +1962,33 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer",
-                        "account",
-                        "lowbalance"
+                        "$.main.kit.entity.customer",
+                        "$.main.kit.entity.account"
                     ]
                 ]
             }
         },
-        "brand_categories_view": {
+        "brand_category": {
             "fields": [
                 {
                     "name": "description",
+                    "title": "Description",
                     "type": "`$STRING`"
                 },
                 {
-                    "format": "uuid",
                     "name": "identifier",
-                    "type": "`$STRING`"
+                    "title": "Identifier",
+                    "type": "`$STRING`",
+                    "format": "uuid"
                 }
             ],
-            "name": "brand_categories_view",
+            "name": "brand_category",
             "op": {
                 "list": {
                     "input": "data",
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/brandCategories",
@@ -1929,14 +1997,16 @@ class Config {
                                     "lit": "brandCategories"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "brandCategories"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.brandCategories`"
                             },
-                            "parts": [
-                                "brandCategories"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -1949,72 +2019,86 @@ class Config {
             "fields": [
                 {
                     "name": "barcodeType",
+                    "title": "Barcode Type",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "brandKey",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Brand Key",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "brandName",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Brand Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "brandRequirements",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Brand Requirements",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "categories",
-                    "req": true,
-                    "type": "`$ARRAY`"
+                    "title": "Categories",
+                    "type": "`$ARRAY`",
+                    "req": true
                 },
                 {
                     "name": "createdDate",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Created Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "description",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Description",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "disclaimer",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Disclaimer",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "imageUrls",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Image Urls",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "items",
-                    "req": true,
-                    "type": "`$ARRAY`"
+                    "title": "Items",
+                    "type": "`$ARRAY`",
+                    "req": true
                 },
                 {
                     "name": "lastUpdateDate",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Last Update Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "shortDescription",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Short Description",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "terms",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Terms",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "name": "catalog",
@@ -2024,100 +2108,9 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "choice_product_id",
-                                        "orig": "choice_product_utid",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "brand_key",
-                                        "orig": "brand_key",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "brand_name",
-                                        "orig": "brand_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "category_id",
-                                        "orig": "category_id",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "country",
-                                        "orig": "country",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "currency_code",
-                                        "orig": "currency_code",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "fulfillment_type",
-                                        "orig": "fulfillment_type",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "item_attribute",
-                                        "orig": "item_attribute",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_name",
-                                        "orig": "reward_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_type",
-                                        "orig": "reward_type",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "utid",
-                                        "orig": "utid",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": true,
-                                        "kind": "query",
-                                        "name": "verbose",
-                                        "orig": "verbose",
-                                        "type": "`$BOOLEAN`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/choiceProducts/{choiceProductUtid}/catalog",
-                            "rename": {
-                                "param": {
-                                    "choiceProductUtid": "choice_product_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "choiceProducts"
@@ -2129,6 +2122,106 @@ class Config {
                                     "lit": "catalog"
                                 }
                             ],
+                            "parts": [
+                                "choiceProducts",
+                                "{choice_product_id}",
+                                "catalog"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "choiceProductUtid": "choice_product_id"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.brands`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "choice_product_id",
+                                        "orig": "choice_product_utid",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "brand_key",
+                                        "orig": "brand_key",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "brand_name",
+                                        "orig": "brand_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "category_id",
+                                        "orig": "category_id",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "country",
+                                        "orig": "country",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "currency_code",
+                                        "orig": "currency_code",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "fulfillment_type",
+                                        "orig": "fulfillment_type",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "item_attribute",
+                                        "orig": "item_attribute",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_name",
+                                        "orig": "reward_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_type",
+                                        "orig": "reward_type",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "utid",
+                                        "orig": "utid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "verbose",
+                                        "orig": "verbose",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": true
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "brand_key",
@@ -2145,95 +2238,9 @@ class Config {
                                     "utid",
                                     "verbose"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.brands`"
-                            },
-                            "parts": [
-                                "choiceProducts",
-                                "{choice_product_id}",
-                                "catalog"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "brand_key",
-                                        "orig": "brand_key",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "brand_name",
-                                        "orig": "brand_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "category_id",
-                                        "orig": "category_id",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "country",
-                                        "orig": "country",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "currency_code",
-                                        "orig": "currency_code",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "fulfillment_type",
-                                        "orig": "fulfillment_type",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "item_attribute",
-                                        "orig": "item_attribute",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_name",
-                                        "orig": "reward_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_type",
-                                        "orig": "reward_type",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "utid",
-                                        "orig": "utid",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": true,
-                                        "kind": "query",
-                                        "name": "verbose",
-                                        "orig": "verbose",
-                                        "type": "`$BOOLEAN`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/catalogs",
@@ -2242,6 +2249,91 @@ class Config {
                                     "lit": "catalogs"
                                 }
                             ],
+                            "parts": [
+                                "catalogs"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.brands`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "brand_key",
+                                        "orig": "brand_key",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "brand_name",
+                                        "orig": "brand_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "category_id",
+                                        "orig": "category_id",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "country",
+                                        "orig": "country",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "currency_code",
+                                        "orig": "currency_code",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "fulfillment_type",
+                                        "orig": "fulfillment_type",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "item_attribute",
+                                        "orig": "item_attribute",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_name",
+                                        "orig": "reward_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_type",
+                                        "orig": "reward_type",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "utid",
+                                        "orig": "utid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "verbose",
+                                        "orig": "verbose",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": true
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "brand_key",
@@ -2257,14 +2349,7 @@ class Config {
                                     "utid",
                                     "verbose"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.brands`"
-                            },
-                            "parts": [
-                                "catalogs"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -2272,7 +2357,7 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "choice_product"
+                        "$.main.kit.entity.choice_product"
                     ]
                 ]
             }
@@ -2281,22 +2366,27 @@ class Config {
             "fields": [
                 {
                     "name": "countries",
+                    "title": "Countries",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "currencyCode",
+                    "title": "Currency Code",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rewardName",
+                    "title": "Reward Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "utid",
+                    "title": "Utid",
                     "type": "`$STRING`"
                 }
             ],
@@ -2311,28 +2401,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "country",
-                                        "orig": "country",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "currency_code",
-                                        "orig": "currency_code",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_name",
-                                        "orig": "reward_name",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/choiceProducts",
@@ -2341,20 +2409,43 @@ class Config {
                                     "lit": "choiceProducts"
                                 }
                             ],
+                            "parts": [
+                                "choiceProducts"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.choiceProducts`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "country",
+                                        "orig": "country",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "currency_code",
+                                        "orig": "currency_code",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_name",
+                                        "orig": "reward_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "country",
                                     "currency_code",
                                     "reward_name"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.choiceProducts`"
-                            },
-                            "parts": [
-                                "choiceProducts"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -2363,25 +2454,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "utid",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/choiceProducts/{utid}",
-                            "rename": {
-                                "param": {
-                                    "utid": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "choiceProducts"
@@ -2390,19 +2465,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "choiceProducts",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "utid": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "choiceProducts",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "utid",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -2415,23 +2506,27 @@ class Config {
             "fields": [
                 {
                     "name": "countryName",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Country Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "preferredCurrency",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Preferred Currency",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "threeLetterCode",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Three Letter Code",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "twoLetterCode",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Two Letter Code",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "name": "country_view_summary",
@@ -2441,40 +2536,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "country",
-                                        "orig": "country",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "preferred_currency",
-                                        "orig": "preferred_currency",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/rewardCountries",
@@ -2483,6 +2544,48 @@ class Config {
                                     "lit": "rewardCountries"
                                 }
                             ],
+                            "parts": [
+                                "rewardCountries"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "country",
+                                        "orig": "country",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "preferred_currency",
+                                        "orig": "preferred_currency",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "country",
@@ -2491,14 +2594,7 @@ class Config {
                                     "preferred_currency",
                                     "prev_cursor"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "rewardCountries"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -2511,31 +2607,36 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "A unique identifier for this account.",
-                    "type": "`$STRING`"
+                    "short": "A unique identifier for this account."
                 },
                 {
                     "name": "contactEmail",
+                    "title": "Contact Email",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "An email address for a designated representative for this account.",
-                    "type": "`$STRING`"
+                    "short": "An email address for a designated representative for this account."
                 },
                 {
                     "name": "currencyCode",
-                    "short": "The currency this account will accept for deposits/withdraws.",
-                    "type": "`$STRING`"
+                    "title": "Currency Code",
+                    "type": "`$STRING`",
+                    "short": "The currency this account will accept for deposits/withdraws."
                 },
                 {
                     "name": "displayName",
+                    "title": "Display Name",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "A friendly name for this account.",
-                    "type": "`$STRING`"
+                    "short": "A friendly name for this account."
                 },
                 {
                     "name": "fundingNotification",
-                    "short": "optional, send funding notification emails to the following address(es)",
-                    "type": "`$ARRAY`"
+                    "title": "Funding Notification",
+                    "type": "`$ARRAY`",
+                    "short": "optional, send funding notification emails to the following address(es)"
                 }
             ],
             "name": "create_account_criterion",
@@ -2545,25 +2646,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/customers/{customerIdentifier}/accounts",
-                            "rename": {
-                                "param": {
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -2575,20 +2660,36 @@ class Config {
                                     "lit": "accounts"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "customer_identifier"
-                                ]
+                            "parts": [
+                                "customers",
+                                "{customer_identifier}",
+                                "accounts"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "customerIdentifier": "customer_identifier"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "customers",
-                                "{customer_identifier}",
-                                "accounts"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "customer_identifier"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -2596,28 +2697,22 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer"
+                        "$.main.kit.entity.customer"
                     ]
                 ]
-            }
-        },
-        "create_customer_criterion": {
-            "fields": [],
-            "name": "create_customer_criterion",
-            "op": {},
-            "relations": {
-                "ancestors": []
             }
         },
         "credential_type_view": {
             "fields": [
                 {
                     "name": "credentialType",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Credential Type",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "description",
+                    "title": "Description",
                     "type": "`$STRING`"
                 }
             ],
@@ -2628,7 +2723,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/credentialtypes",
@@ -2637,14 +2731,16 @@ class Config {
                                     "lit": "credentialtypes"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "credentialtypes"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "credentialtypes"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -2657,89 +2753,104 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the account this credit card is associated with",
-                    "type": "`$STRING`"
+                    "short": "specify the account this credit card is associated with"
                 },
                 {
                     "name": "accountNumber",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Number",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "activationDate",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Activation Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "billingAddress",
+                    "title": "Billing Address",
+                    "type": "`$OBJECT`",
                     "req": true,
-                    "short": "required Enter the billing address information for the credit card that is being registered",
-                    "type": "`$OBJECT`"
+                    "short": "required Enter the billing address information for the credit card that is being registered"
                 },
                 {
                     "name": "contactInformation",
+                    "title": "Contact Information",
+                    "type": "`$ARRAY`",
+                    "req": true,
                     "op": {
                         "create": {
                             "type": "`$ARRAY`"
                         }
                     },
-                    "req": true,
-                    "short": "Optional.",
-                    "type": "`$ARRAY`"
+                    "short": "Optional."
                 },
                 {
                     "name": "createdDate",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Created Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "creditCard",
+                    "title": "Credit Card",
+                    "type": "`$OBJECT`",
                     "req": true,
-                    "short": "required Enter the credit card details that is being registered",
-                    "type": "`$OBJECT`"
+                    "short": "required Enter the credit card details that is being registered"
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the customer associated with the credit card.",
-                    "type": "`$STRING`"
+                    "short": "specify the customer associated with the credit card."
                 },
                 {
                     "name": "expirationDate",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Expiration Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "ipAddress",
+                    "title": "Ip Address",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the The IP address of the person adding the credit card",
-                    "type": "`$STRING`"
+                    "short": "specify the The IP address of the person adding the credit card"
                 },
                 {
                     "name": "label",
+                    "title": "Label",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify a label for the credit card",
-                    "type": "`$STRING`"
+                    "short": "specify a label for the credit card"
                 },
                 {
                     "name": "lastFourDigits",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Last Four Digits",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "token",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Token",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "id": {
@@ -2753,7 +2864,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/creditCards",
@@ -2762,14 +2872,16 @@ class Config {
                                     "lit": "creditCards"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "creditCards"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "creditCards"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -2778,101 +2890,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "account_number",
-                                        "orig": "account_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "email_address",
-                                        "orig": "email_address",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "expiration_date",
-                                        "orig": "expiration_date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "full_name",
-                                        "orig": "full_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "label",
-                                        "orig": "label",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "last_four_digit",
-                                        "orig": "last_four_digit",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "paginate",
-                                        "orig": "paginate",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "false",
-                                        "kind": "query",
-                                        "name": "show_inactive",
-                                        "orig": "show_inactive",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "token",
-                                        "orig": "token",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/creditCards",
@@ -2881,6 +2898,109 @@ class Config {
                                     "lit": "creditCards"
                                 }
                             ],
+                            "parts": [
+                                "creditCards"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "account_number",
+                                        "orig": "account_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "email_address",
+                                        "orig": "email_address",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "expiration_date",
+                                        "orig": "expiration_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "full_name",
+                                        "orig": "full_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "label",
+                                        "orig": "label",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "last_four_digit",
+                                        "orig": "last_four_digit",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "paginate",
+                                        "orig": "paginate",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "show_inactive",
+                                        "orig": "show_inactive",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "false"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "token",
+                                        "orig": "token",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_identifier",
@@ -2899,35 +3019,12 @@ class Config {
                                     "status",
                                     "token"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "creditCards"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "token",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/creditCards/{token}",
-                            "rename": {
-                                "param": {
-                                    "token": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "creditCards"
@@ -2936,19 +3033,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "creditCards",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "token": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "creditCards",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "token",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -2961,66 +3074,78 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the account this credit card is associated with",
-                    "type": "`$STRING`"
+                    "short": "specify the account this credit card is associated with"
                 },
                 {
                     "name": "accountNumber",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Number",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "amount",
+                    "title": "Amount",
+                    "type": "`$NUMBER`",
                     "req": true,
-                    "short": "specify the amount to fund in USD",
-                    "type": "`$NUMBER`"
+                    "short": "specify the amount to fund in USD"
                 },
                 {
                     "name": "amountCharged",
-                    "req": true,
-                    "type": "`$NUMBER`"
+                    "title": "Amount Charged",
+                    "type": "`$NUMBER`",
+                    "req": true
                 },
                 {
                     "name": "createdDate",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Created Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "creditCardToken",
+                    "title": "Credit Card Token",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the credit card token to fund with",
-                    "type": "`$STRING`"
+                    "short": "specify the credit card token to fund with"
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "specify the customer associated with the credit card.",
-                    "type": "`$STRING`"
+                    "short": "specify the customer associated with the credit card."
                 },
                 {
                     "name": "externalRefID",
-                    "short": "specify the external reference id to associate with this funding action.",
-                    "type": "`$STRING`"
+                    "title": "External Ref Id",
+                    "type": "`$STRING`",
+                    "short": "specify the external reference id to associate with this funding action."
                 },
                 {
                     "name": "feePercent",
-                    "req": true,
-                    "type": "`$NUMBER`"
+                    "title": "Fee Percent",
+                    "type": "`$NUMBER`",
+                    "req": true
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "referenceDepositID",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reference Deposit Id",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "id": {
@@ -3034,7 +3159,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/creditCardDeposits",
@@ -3043,14 +3167,16 @@ class Config {
                                     "lit": "creditCardDeposits"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "creditCardDeposits"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "creditCardDeposits"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -3059,25 +3185,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "reference_deposit_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/creditCardDeposits/{referenceDepositID}",
-                            "rename": {
-                                "param": {
-                                    "referenceDepositID": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "creditCardDeposits"
@@ -3086,19 +3196,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "creditCardDeposits",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceDepositID": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "creditCardDeposits",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "reference_deposit_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -3111,36 +3237,42 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Specify the account this credit card is associated with.",
-                    "type": "`$STRING`"
+                    "short": "Specify the account this credit card is associated with."
                 },
                 {
                     "name": "createdDate",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Created Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "creditCardToken",
+                    "title": "Credit Card Token",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Specify the credit card token to unregister.",
-                    "type": "`$STRING`"
+                    "short": "Specify the credit card token to unregister."
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Specify the customer associated with the credit card.",
-                    "type": "`$STRING`"
+                    "short": "Specify the customer associated with the credit card."
                 },
                 {
                     "name": "message",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Message",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "token",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Token",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "name": "credit_card_unregister",
@@ -3150,7 +3282,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/creditCardUnregisters",
@@ -3159,14 +3290,16 @@ class Config {
                                     "lit": "creditCardUnregisters"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "creditCardUnregisters"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "creditCardUnregisters"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -3179,34 +3312,40 @@ class Config {
             "fields": [
                 {
                     "name": "accounts",
-                    "req": true,
-                    "type": "`$ARRAY`"
+                    "title": "Accounts",
+                    "type": "`$ARRAY`",
+                    "req": true
                 },
                 {
                     "name": "createdAt",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Created At",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "A unique identifier for this customer.",
-                    "type": "`$STRING`"
+                    "short": "A unique identifier for this customer."
                 },
                 {
                     "name": "displayName",
+                    "title": "Display Name",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "A friendly name for this customer.",
-                    "type": "`$STRING`"
+                    "short": "A friendly name for this customer."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "id": {
@@ -3220,7 +3359,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/customers",
@@ -3229,14 +3367,16 @@ class Config {
                                     "lit": "customers"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "customers"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "customers"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -3245,94 +3385,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "account_display_name",
-                                        "orig": "account_display_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "account_max_date_created_at",
-                                        "orig": "account_max_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "account_min_date_created_at",
-                                        "orig": "account_min_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "account_number",
-                                        "orig": "account_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "account_status",
-                                        "orig": "account_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "customer_max_date_created_at",
-                                        "orig": "customer_max_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "customer_min_date_created_at",
-                                        "orig": "customer_min_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "display_name",
-                                        "orig": "display_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "paginate",
-                                        "orig": "paginate",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/customers",
@@ -3341,6 +3393,102 @@ class Config {
                                     "lit": "customers"
                                 }
                             ],
+                            "parts": [
+                                "customers"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "account_display_name",
+                                        "orig": "account_display_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "account_max_date_created_at",
+                                        "orig": "account_max_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "account_min_date_created_at",
+                                        "orig": "account_min_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "account_number",
+                                        "orig": "account_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "account_status",
+                                        "orig": "account_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "customer_max_date_created_at",
+                                        "orig": "customer_max_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "customer_min_date_created_at",
+                                        "orig": "customer_min_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "display_name",
+                                        "orig": "display_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "paginate",
+                                        "orig": "paginate",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_display_name",
@@ -3358,14 +3506,7 @@ class Config {
                                     "prev_cursor",
                                     "status"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "customers"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -3374,25 +3515,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/customers/{customerIdentifier}",
-                            "rename": {
-                                "param": {
-                                    "customerIdentifier": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -3401,19 +3526,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "customers",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "customerIdentifier": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "customers",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -3422,132 +3563,138 @@ class Config {
                 "ancestors": []
             }
         },
-        "email_template_list_view": {
-            "fields": [],
-            "name": "email_template_list_view",
-            "op": {},
-            "relations": {
-                "ancestors": []
-            }
-        },
         "email_template_view_verbose": {
             "fields": [
                 {
                     "name": "accentColor",
+                    "title": "Accent Color",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email.",
-                    "type": "`$STRING`"
+                    "short": "A Hex color value, six hexadecimal digits preceded by a pound sign, used as an accent in the email."
                 },
                 {
                     "name": "accessControl",
-                    "short": "(Optional) Which Customers and/or Accounts should have access to this template.",
-                    "type": "`$ARRAY`"
+                    "title": "Access Control",
+                    "type": "`$ARRAY`",
+                    "short": "(Optional) Which Customers and/or Accounts should have access to this template."
                 },
                 {
                     "name": "accessControls",
+                    "title": "Access Controls",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "closing",
+                    "title": "Closing",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "After the reward credential, a space to close the email message to the recipient.",
-                    "type": "`$STRING`"
+                    "short": "After the reward credential, a space to close the email message to the recipient."
                 },
                 {
                     "name": "customerServiceMessage",
-                    "short": "If left null, Tango Card's Customer Support contact information will be included.",
-                    "type": "`$STRING`"
+                    "title": "Customer Service Message",
+                    "type": "`$STRING`",
+                    "short": "If left null, Tango Card's Customer Support contact information will be included."
                 },
                 {
                     "name": "defaults",
-                    "short": "If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order.",
-                    "type": "`$ARRAY`"
+                    "title": "Defaults",
+                    "type": "`$ARRAY`",
+                    "short": "If you want this template to be used at order time for the given Platform, Customer or Account when the Email Template Identifier (etid) is not provided with the order."
                 },
                 {
                     "name": "etid",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Etid",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "fromName",
+                    "title": "From Name",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "The name that will appear in the From line of the email and the {from_name} in the text message.",
-                    "type": "`$STRING`"
+                    "short": "The name that will appear in the From line of the email and the {from_name} in the text message."
                 },
                 {
                     "name": "headerImage",
+                    "title": "Header Image",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "A Base64 encoded string of an image that will show as the header of the email.",
-                    "type": "`$STRING`"
+                    "short": "A Base64 encoded string of an image that will show as the header of the email."
                 },
                 {
                     "name": "headerImageAltText",
+                    "title": "Header Image Alt Text",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "The Alt Text for the Header Image in the email.",
-                    "type": "`$STRING`"
+                    "short": "The Alt Text for the Header Image in the email."
                 },
                 {
                     "name": "messageBody",
+                    "title": "Message Body",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "The message body for the email.",
-                    "type": "`$STRING`"
+                    "short": "The message body for the email."
                 },
                 {
                     "name": "name",
+                    "title": "Name",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "A unique name to give the template.",
-                    "type": "`$STRING`"
+                    "short": "A unique name to give the template."
                 },
                 {
                     "name": "smsMessageBody",
-                    "short": "The message body for the SMS.",
-                    "type": "`$STRING`"
+                    "title": "Sms Message Body",
+                    "type": "`$STRING`",
+                    "short": "The message body for the SMS."
                 },
                 {
                     "name": "subject",
+                    "title": "Subject",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "update": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "The Subject of the email.",
-                    "type": "`$STRING`"
+                    "short": "The Subject of the email."
                 }
             ],
             "name": "email_template_view_verbose",
@@ -3557,7 +3704,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/digitalTemplates",
@@ -3566,14 +3712,16 @@ class Config {
                                     "lit": "digitalTemplates"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "digitalTemplates"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "digitalTemplates"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -3582,22 +3730,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "elements_per_block",
-                                        "orig": "elements_per_block",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "page",
-                                        "orig": "page",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/digitalTemplates",
@@ -3606,19 +3738,36 @@ class Config {
                                     "lit": "digitalTemplates"
                                 }
                             ],
+                            "parts": [
+                                "digitalTemplates"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "elements_per_block",
+                                        "orig": "elements_per_block",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "page",
+                                        "orig": "page",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "elements_per_block",
                                     "page"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "digitalTemplates"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -3627,17 +3776,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "etid",
-                                        "orig": "etid",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/digitalTemplates/{etid}",
@@ -3649,19 +3787,31 @@ class Config {
                                     "var": "etid"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "etid"
-                                ]
-                            },
+                            "parts": [
+                                "digitalTemplates",
+                                "{etid}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "digitalTemplates",
-                                "{etid}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "etid",
+                                        "orig": "etid",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "etid"
+                                ]
+                            }
                         }
                     ]
                 },
@@ -3670,17 +3820,6 @@ class Config {
                     "name": "update",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "etid",
-                                        "orig": "etid",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "PATCH",
                             "orig": "/digitalTemplates/{etid}",
@@ -3692,35 +3831,44 @@ class Config {
                                     "var": "etid"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "etid"
-                                ]
-                            },
+                            "parts": [
+                                "digitalTemplates",
+                                "{etid}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "digitalTemplates",
-                                "{etid}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "etid",
+                                        "orig": "etid",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "etid"
+                                ]
+                            }
                         }
                     ]
                 }
             },
             "relations": {
-                "ancestors": [
-                    [
-                        "digital_template"
-                    ]
-                ]
+                "ancestors": []
             }
         },
         "embeddable_response_dto": {
             "fields": [
                 {
                     "name": "url",
+                    "title": "Url",
                     "type": "`$STRING`"
                 }
             ],
@@ -3731,25 +3879,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lineItems/{referenceLineItemID}/embeddedUrl",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "reference_line_item_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -3761,20 +3893,36 @@ class Config {
                                     "lit": "embeddedUrl"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "reference_line_item_id"
-                                ]
+                            "parts": [
+                                "lineItems",
+                                "{reference_line_item_id}",
+                                "embeddedUrl"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "reference_line_item_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lineItems",
-                                "{reference_line_item_id}",
-                                "embeddedUrl"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "reference_line_item_id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -3782,7 +3930,7 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "line_item"
+                        "$.main.kit.entity.line_item"
                     ]
                 ]
             }
@@ -3791,24 +3939,28 @@ class Config {
             "fields": [
                 {
                     "name": "baseCurrency",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Base Currency",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "baseFx",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Base Fx",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "format": "date-time",
                     "name": "lastModifiedDate",
+                    "title": "Last Modified Date",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "rewardCurrency",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reward Currency",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "name": "exchange_rates_with_disclaimer",
@@ -3818,46 +3970,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "base_currency",
-                                        "orig": "base_currency",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "paginate",
-                                        "orig": "paginate",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_currency",
-                                        "orig": "reward_currency",
-                                        "type": "`$ARRAY`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/exchangerates",
@@ -3866,6 +3978,54 @@ class Config {
                                     "lit": "exchangerates"
                                 }
                             ],
+                            "parts": [
+                                "exchangerates"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.exchangeRates`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "base_currency",
+                                        "orig": "base_currency",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "paginate",
+                                        "orig": "paginate",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_currency",
+                                        "orig": "reward_currency",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "base_currency",
@@ -3875,14 +4035,7 @@ class Config {
                                     "prev_cursor",
                                     "reward_currency"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.exchangeRates`"
-                            },
-                            "parts": [
-                                "exchangerates"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -3895,192 +4048,233 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "accountNumber",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Number",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "amountCharged",
+                    "title": "Amount Charged",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "amountIssued",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Amount Issued",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "campaign",
+                    "title": "Campaign",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "canCancel",
+                    "title": "Can Cancel",
                     "type": "`$BOOLEAN`"
                 },
                 {
                     "name": "canFreeze",
+                    "title": "Can Freeze",
                     "type": "`$BOOLEAN`"
                 },
                 {
                     "name": "customerIdentifier",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "format": "date-time",
                     "name": "dateIssued",
+                    "title": "Date Issued",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "deliveryMethod",
+                    "title": "Delivery Method",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "deliveryStatus",
+                    "title": "Delivery Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "emailStatus",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Email Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "etid",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Etid",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "format": "date-time",
                     "name": "expirationDate",
+                    "title": "Expiration Date",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "externalReferenceLineItemID",
+                    "title": "External Reference Line Item Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "lineItemActionHistory",
+                    "title": "Line Item Action History",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "lineItemActionReason",
+                    "title": "Line Item Action Reason",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "lineItemErrors",
-                    "short": "Errors related to the line item",
-                    "type": "`$ARRAY`"
+                    "title": "Line Item Errors",
+                    "type": "`$ARRAY`",
+                    "short": "Errors related to the line item"
                 },
                 {
-                    "format": "int32",
                     "name": "lineNumber",
+                    "title": "Line Number",
+                    "type": "`$INTEGER`",
                     "req": true,
-                    "type": "`$INTEGER`"
+                    "format": "int32"
                 },
                 {
                     "name": "orderNotes",
+                    "title": "Order Notes",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "orderSource",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Order Source",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "orderStatus",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Order Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "ptid",
+                    "title": "Ptid",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "purchaseOrderNumber",
+                    "title": "Purchase Order Number",
                     "type": "`$STRING`"
                 },
                 {
-                    "format": "int32",
                     "name": "quantity",
+                    "title": "Quantity",
+                    "type": "`$INTEGER`",
                     "short": "quantity of line items",
-                    "type": "`$INTEGER`"
+                    "format": "int32"
                 },
                 {
                     "name": "recipient",
+                    "title": "Recipient",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "redemptionHistory",
+                    "title": "Redemption History",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "referenceLineItemID",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reference Line Item Id",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "referenceOrderID",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reference Order Id",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "reissuedFromReferenceLineItemId",
-                    "short": "Reissued from reference line item ID",
-                    "type": "`$STRING`"
+                    "title": "Reissued From Reference Line Item Id",
+                    "type": "`$STRING`",
+                    "short": "Reissued from reference line item ID"
                 },
                 {
                     "name": "reissuedToReferenceLineItemId",
-                    "short": "Reissued to reference line item ID",
-                    "type": "`$STRING`"
+                    "title": "Reissued To Reference Line Item Id",
+                    "type": "`$STRING`",
+                    "short": "Reissued to reference line item ID"
                 },
                 {
                     "name": "remainingBalance",
+                    "title": "Remaining Balance",
                     "type": "`$NUMBER`"
                 },
                 {
                     "name": "resendHistory",
+                    "title": "Resend History",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "reward",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Reward",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "rewardName",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reward Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "rewardStatus",
+                    "title": "Reward Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rewardViewHistory",
+                    "title": "Reward View History",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "sender",
+                    "title": "Sender",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "utid",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Utid",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "id": {
@@ -4094,25 +4288,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/lineItems/{referenceLineItemID}/cancel",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "reference_line_item_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -4124,42 +4302,42 @@ class Config {
                                     "lit": "cancel"
                                 }
                             ],
-                            "select": {
-                                "$action": "cancel",
-                                "exist": [
-                                    "reference_line_item_id"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "lineItems",
                                 "{reference_line_item_id}",
                                 "cancel"
-                            ]
-                        },
-                        {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
-                            "kind": "http",
-                            "method": "POST",
-                            "orig": "/lineItems/{referenceLineItemID}/freeze",
+                            ],
                             "rename": {
                                 "param": {
                                     "referenceLineItemID": "reference_line_item_id"
                                 }
                             },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "$action": "cancel",
+                                "exist": [
+                                    "reference_line_item_id"
+                                ]
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "POST",
+                            "orig": "/lineItems/{referenceLineItemID}/freeze",
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -4171,42 +4349,42 @@ class Config {
                                     "lit": "freeze"
                                 }
                             ],
-                            "select": {
-                                "$action": "freeze",
-                                "exist": [
-                                    "reference_line_item_id"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "lineItems",
                                 "{reference_line_item_id}",
                                 "freeze"
-                            ]
-                        },
-                        {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
-                            "kind": "http",
-                            "method": "POST",
-                            "orig": "/lineItems/{referenceLineItemID}/unfreeze",
+                            ],
                             "rename": {
                                 "param": {
                                     "referenceLineItemID": "reference_line_item_id"
                                 }
                             },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "$action": "freeze",
+                                "exist": [
+                                    "reference_line_item_id"
+                                ]
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "POST",
+                            "orig": "/lineItems/{referenceLineItemID}/unfreeze",
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -4218,21 +4396,37 @@ class Config {
                                     "lit": "unfreeze"
                                 }
                             ],
-                            "select": {
-                                "$action": "unfreeze",
-                                "exist": [
-                                    "reference_line_item_id"
-                                ]
+                            "parts": [
+                                "lineItems",
+                                "{reference_line_item_id}",
+                                "unfreeze"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "reference_line_item_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lineItems",
-                                "{reference_line_item_id}",
-                                "unfreeze"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "$action": "unfreeze",
+                                "exist": [
+                                    "reference_line_item_id"
+                                ]
+                            }
                         }
                     ]
                 },
@@ -4241,223 +4435,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "campaign",
-                                        "orig": "campaign",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "false",
-                                        "kind": "query",
-                                        "name": "column_sort_ascending",
-                                        "orig": "column_sort_ascending",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "dateIssued",
-                                        "kind": "query",
-                                        "name": "column_sort_name",
-                                        "orig": "column_sort_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "delivery_method",
-                                        "orig": "delivery_method",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "delivery_status",
-                                        "orig": "delivery_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "elements_per_block",
-                                        "orig": "elements_per_block",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "email_status",
-                                        "orig": "email_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "end_date",
-                                        "orig": "end_date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "etid",
-                                        "orig": "etid",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "external_ref_id",
-                                        "orig": "external_ref_id",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "has_remaining_balance",
-                                        "orig": "has_remaining_balance",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_remaining_balance",
-                                        "orig": "max_remaining_balance",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "min_remaining_balance",
-                                        "orig": "min_remaining_balance",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "order_note",
-                                        "orig": "order_note",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "order_source",
-                                        "orig": "order_source",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "order_status",
-                                        "orig": "order_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "page_key",
-                                        "orig": "page_key",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "page_previous",
-                                        "orig": "page_previous",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "ptid",
-                                        "orig": "ptid",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "purchase_order_number",
-                                        "orig": "purchase_order_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_city",
-                                        "orig": "recipient_city",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_country",
-                                        "orig": "recipient_country",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_email",
-                                        "orig": "recipient_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_first_name",
-                                        "orig": "recipient_first_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_last_name",
-                                        "orig": "recipient_last_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_mobile_number",
-                                        "orig": "recipient_mobile_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_postal_code",
-                                        "orig": "recipient_postal_code",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_state_or_province",
-                                        "orig": "recipient_state_or_province",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_street_line1",
-                                        "orig": "recipient_street_line1",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_street_line2",
-                                        "orig": "recipient_street_line2",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reference_order_id",
-                                        "orig": "reference_order_id",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "start_date",
-                                        "orig": "start_date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "utid",
-                                        "orig": "utid",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lineItems",
@@ -4466,6 +4443,231 @@ class Config {
                                     "lit": "lineItems"
                                 }
                             ],
+                            "parts": [
+                                "lineItems"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "campaign",
+                                        "orig": "campaign",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "column_sort_ascending",
+                                        "orig": "column_sort_ascending",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "false"
+                                    },
+                                    {
+                                        "name": "column_sort_name",
+                                        "orig": "column_sort_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "dateIssued"
+                                    },
+                                    {
+                                        "name": "delivery_method",
+                                        "orig": "delivery_method",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "delivery_status",
+                                        "orig": "delivery_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "elements_per_block",
+                                        "orig": "elements_per_block",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "email_status",
+                                        "orig": "email_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "end_date",
+                                        "orig": "end_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "etid",
+                                        "orig": "etid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "external_ref_id",
+                                        "orig": "external_ref_id",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "has_remaining_balance",
+                                        "orig": "has_remaining_balance",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_remaining_balance",
+                                        "orig": "max_remaining_balance",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "min_remaining_balance",
+                                        "orig": "min_remaining_balance",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "order_note",
+                                        "orig": "order_note",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "order_source",
+                                        "orig": "order_source",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "order_status",
+                                        "orig": "order_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "page_key",
+                                        "orig": "page_key",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "page_previous",
+                                        "orig": "page_previous",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "ptid",
+                                        "orig": "ptid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "purchase_order_number",
+                                        "orig": "purchase_order_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_city",
+                                        "orig": "recipient_city",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_country",
+                                        "orig": "recipient_country",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_email",
+                                        "orig": "recipient_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_first_name",
+                                        "orig": "recipient_first_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_last_name",
+                                        "orig": "recipient_last_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_mobile_number",
+                                        "orig": "recipient_mobile_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_postal_code",
+                                        "orig": "recipient_postal_code",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_state_or_province",
+                                        "orig": "recipient_state_or_province",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_street_line1",
+                                        "orig": "recipient_street_line1",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_street_line2",
+                                        "orig": "recipient_street_line2",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reference_order_id",
+                                        "orig": "reference_order_id",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "start_date",
+                                        "orig": "start_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "utid",
+                                        "orig": "utid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_identifier",
@@ -4504,14 +4706,7 @@ class Config {
                                     "status",
                                     "utid"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "lineItems"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -4520,25 +4715,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lineItems/{referenceLineItemID}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -4547,60 +4726,79 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "lineItems",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lineItems",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
             },
             "relations": {
-                "ancestors": [
-                    [
-                        "line_item"
-                    ]
-                ]
+                "ancestors": []
             }
         },
         "low_balance_alert_list_view": {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "balanceAlertDisplayName",
+                    "title": "Balance Alert Display Name",
                     "type": "`$STRING`"
                 },
                 {
-                    "format": "uuid",
                     "name": "balanceAlertID",
-                    "type": "`$STRING`"
+                    "title": "Balance Alert Id",
+                    "type": "`$STRING`",
+                    "format": "uuid"
                 },
                 {
                     "name": "balanceAlertNotification",
+                    "title": "Balance Alert Notification",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "balanceAlertThreshold",
+                    "title": "Balance Alert Threshold",
                     "type": "`$NUMBER`"
                 },
                 {
                     "name": "createdAt",
+                    "title": "Created At",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
                     "type": "`$STRING`"
                 }
             ],
@@ -4611,65 +4809,9 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "balance_alert_display_name",
-                                        "orig": "balance_alert_display_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "balance_alert_notification",
-                                        "orig": "balance_alert_notification",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "balance_alert_threshold",
-                                        "orig": "balance_alert_threshold",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "elements_per_block",
-                                        "orig": "elements_per_block",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "page",
-                                        "orig": "page",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_identifier",
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -4687,6 +4829,73 @@ class Config {
                                     "lit": "lowbalance"
                                 }
                             ],
+                            "parts": [
+                                "customers",
+                                "{customer_identifier}",
+                                "accounts",
+                                "{account_identifier}",
+                                "lowbalance"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_identifier",
+                                    "customerIdentifier": "customer_identifier"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "balance_alert_display_name",
+                                        "orig": "balance_alert_display_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "balance_alert_notification",
+                                        "orig": "balance_alert_notification",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "balance_alert_threshold",
+                                        "orig": "balance_alert_threshold",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "elements_per_block",
+                                        "orig": "elements_per_block",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "page",
+                                        "orig": "page",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_identifier",
@@ -4697,18 +4906,7 @@ class Config {
                                     "elements_per_block",
                                     "page"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "customers",
-                                "{customer_identifier}",
-                                "accounts",
-                                "{account_identifier}",
-                                "lowbalance"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -4716,8 +4914,8 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer",
-                        "account"
+                        "$.main.kit.entity.customer",
+                        "$.main.kit.entity.account"
                     ]
                 ]
             }
@@ -4726,34 +4924,41 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "balanceAlertDisplayName",
-                    "short": "A friendly name for this low balance alert (will be displayed in the Tango Portal).",
-                    "type": "`$STRING`"
+                    "title": "Balance Alert Display Name",
+                    "type": "`$STRING`",
+                    "short": "A friendly name for this low balance alert (will be displayed in the Tango Portal)."
                 },
                 {
-                    "format": "uuid",
                     "name": "balanceAlertID",
-                    "type": "`$STRING`"
+                    "title": "Balance Alert Id",
+                    "type": "`$STRING`",
+                    "format": "uuid"
                 },
                 {
                     "name": "balanceAlertNotification",
-                    "short": "Send low balance notification emails to the following address(es).",
-                    "type": "`$ARRAY`"
+                    "title": "Balance Alert Notification",
+                    "type": "`$ARRAY`",
+                    "short": "Send low balance notification emails to the following address(es)."
                 },
                 {
                     "name": "balanceAlertThreshold",
-                    "short": "The threshold amount that will trigger the low balance alert.",
-                    "type": "`$NUMBER`"
+                    "title": "Balance Alert Threshold",
+                    "type": "`$NUMBER`",
+                    "short": "The threshold amount that will trigger the low balance alert."
                 },
                 {
                     "name": "createdAt",
+                    "title": "Created At",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
                     "type": "`$STRING`"
                 }
             ],
@@ -4764,33 +4969,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_identifier",
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -4808,23 +4989,47 @@ class Config {
                                     "lit": "lowbalance"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "account_identifier",
-                                    "customer_identifier"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "customers",
                                 "{customer_identifier}",
                                 "accounts",
                                 "{account_identifier}",
                                 "lowbalance"
-                            ]
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_identifier",
+                                    "customerIdentifier": "customer_identifier"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "account_identifier",
+                                    "customer_identifier"
+                                ]
+                            }
                         }
                     ]
                 },
@@ -4833,41 +5038,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_id",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "balance_alert_id",
-                                        "orig": "balance_alert_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_id",
-                                    "balanceAlertID": "balance_alert_id",
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -4888,17 +5061,6 @@ class Config {
                                     "var": "balance_alert_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "account_id",
-                                    "balance_alert_id",
-                                    "customer_identifier"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "customers",
                                 "{customer_identifier}",
@@ -4906,7 +5068,50 @@ class Config {
                                 "{account_id}",
                                 "lowbalance",
                                 "{balance_alert_id}"
-                            ]
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_id",
+                                    "balanceAlertID": "balance_alert_id",
+                                    "customerIdentifier": "customer_identifier"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_id",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "balance_alert_id",
+                                        "orig": "balance_alert_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "account_id",
+                                    "balance_alert_id",
+                                    "customer_identifier"
+                                ]
+                            }
                         }
                     ]
                 },
@@ -4915,41 +5120,9 @@ class Config {
                     "name": "update",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "account_id",
-                                        "orig": "account_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "balance_alert_id",
-                                        "orig": "balance_alert_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "PATCH",
                             "orig": "/customers/{customerIdentifier}/accounts/{accountIdentifier}/lowbalance/{balanceAlertID}",
-                            "rename": {
-                                "param": {
-                                    "accountIdentifier": "account_id",
-                                    "balanceAlertID": "balance_alert_id",
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -4970,17 +5143,6 @@ class Config {
                                     "var": "balance_alert_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "account_id",
-                                    "balance_alert_id",
-                                    "customer_identifier"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "customers",
                                 "{customer_identifier}",
@@ -4988,7 +5150,50 @@ class Config {
                                 "{account_id}",
                                 "lowbalance",
                                 "{balance_alert_id}"
-                            ]
+                            ],
+                            "rename": {
+                                "param": {
+                                    "accountIdentifier": "account_id",
+                                    "balanceAlertID": "balance_alert_id",
+                                    "customerIdentifier": "customer_identifier"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "account_id",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "balance_alert_id",
+                                        "orig": "balance_alert_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "account_id",
+                                    "balance_alert_id",
+                                    "customer_identifier"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -4996,13 +5201,12 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer",
-                        "account"
+                        "$.main.kit.entity.customer",
+                        "$.main.kit.entity.account"
                     ],
                     [
-                        "customer",
-                        "account",
-                        "lowbalance"
+                        "$.main.kit.entity.customer",
+                        "$.main.kit.entity.account"
                     ]
                 ]
             }
@@ -5011,18 +5215,22 @@ class Config {
             "fields": [
                 {
                     "name": "countryCode",
+                    "title": "Country Code",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "countryName",
+                    "title": "Country Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "isoCode",
+                    "title": "Iso Code",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "languageCode",
+                    "title": "Language Code",
                     "type": "`$STRING`"
                 }
             ],
@@ -5033,7 +5241,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/mobileCountries",
@@ -5042,14 +5249,16 @@ class Config {
                                     "lit": "mobileCountries"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "mobileCountries"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "mobileCountries"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -5062,72 +5271,84 @@ class Config {
             "fields": [
                 {
                     "name": "categories",
-                    "short": "The categories the customer wants to subscribe to.",
-                    "type": "`$ARRAY`"
+                    "title": "Categories",
+                    "type": "`$ARRAY`",
+                    "short": "The categories the customer wants to subscribe to."
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "short": "The date and time the webhook was created.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "eventTypes",
-                    "short": "The event types the customer wants to subscribe to.",
-                    "type": "`$ARRAY`"
+                    "title": "Event Types",
+                    "type": "`$ARRAY`",
+                    "short": "The event types the customer wants to subscribe to."
                 },
                 {
-                    "format": "date-time",
                     "name": "expiresAt",
+                    "title": "Expires At",
+                    "type": "`$STRING`",
                     "short": "The date and time the webhook expires.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "headers",
-                    "short": "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener.",
-                    "type": "`$ARRAY`"
+                    "title": "Headers",
+                    "type": "`$ARRAY`",
+                    "short": "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener."
                 },
                 {
                     "name": "hmacSharedSecretKey",
-                    "short": "The HMAC secret key used to sign the webhook payload.",
-                    "type": "`$STRING`"
+                    "title": "Hmac Shared Secret Key",
+                    "type": "`$STRING`",
+                    "short": "The HMAC secret key used to sign the webhook payload."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "payloadVerificationMethod",
-                    "short": "Method to verify webhook payload authenticity",
-                    "type": "`$STRING`"
+                    "title": "Payload Verification Method",
+                    "type": "`$STRING`",
+                    "short": "Method to verify webhook payload authenticity"
                 },
                 {
                     "name": "signingCertificate",
-                    "short": "The public X509 certificate used to sign the webhook payload.",
-                    "type": "`$STRING`"
+                    "title": "Signing Certificate",
+                    "type": "`$STRING`",
+                    "short": "The public X509 certificate used to sign the webhook payload."
                 },
                 {
-                    "format": "date-time",
                     "name": "updatedAt",
+                    "title": "Updated At",
+                    "type": "`$STRING`",
                     "short": "The date and time when the webhook was last updated.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "url",
+                    "title": "Url",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "list": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "The URL of the customer's webhook listener.",
-                    "type": "`$STRING`"
+                    "short": "The URL of the customer's webhook listener."
                 },
                 {
-                    "format": "uuid",
                     "name": "webhookId",
+                    "title": "Webhook Id",
+                    "type": "`$STRING`",
                     "short": "The ID of the webhook.",
-                    "type": "`$STRING`"
+                    "format": "uuid"
                 }
             ],
             "id": {
@@ -5141,33 +5362,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "test_name",
-                                        "orig": "test_name",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "param",
-                                        "name": "webhook_id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/webhooks/{webhookId}/tests/{testName}",
-                            "rename": {
-                                "param": {
-                                    "testName": "test_name",
-                                    "webhookId": "webhook_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -5182,43 +5379,51 @@ class Config {
                                     "var": "test_name"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "test_name",
-                                    "webhook_id"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "webhooks",
                                 "{webhook_id}",
                                 "tests",
                                 "{test_name}"
-                            ]
-                        },
-                        {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "webhook_id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
-                            "kind": "http",
-                            "method": "POST",
-                            "orig": "/webhooks/{webhookId}/tests",
+                            ],
                             "rename": {
                                 "param": {
+                                    "testName": "test_name",
                                     "webhookId": "webhook_id"
                                 }
                             },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "test_name",
+                                        "orig": "test_name",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "webhook_id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "test_name",
+                                    "webhook_id"
+                                ]
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "POST",
+                            "orig": "/webhooks/{webhookId}/tests",
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -5230,23 +5435,38 @@ class Config {
                                     "lit": "tests"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "webhook_id"
-                                ]
+                            "parts": [
+                                "webhooks",
+                                "{webhook_id}",
+                                "tests"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "webhookId": "webhook_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "webhooks",
-                                "{webhook_id}",
-                                "tests"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "webhook_id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "webhook_id"
+                                ]
+                            }
                         },
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/webhooks",
@@ -5255,14 +5475,16 @@ class Config {
                                     "lit": "webhooks"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "webhooks"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "webhooks"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -5271,83 +5493,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "category",
-                                        "orig": "category",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "created_at_from",
-                                        "orig": "created_at_from",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "created_at_to",
-                                        "orig": "created_at_to",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "event_type",
-                                        "orig": "event_type",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "expires_at_from",
-                                        "orig": "expires_at_from",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "expires_at_to",
-                                        "orig": "expires_at_to",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "header_name",
-                                        "orig": "header_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "header_value",
-                                        "orig": "header_value",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": 10,
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "url",
-                                        "orig": "url",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/webhooks",
@@ -5356,6 +5501,91 @@ class Config {
                                     "lit": "webhooks"
                                 }
                             ],
+                            "parts": [
+                                "webhooks"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.items`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "category",
+                                        "orig": "category",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "created_at_from",
+                                        "orig": "created_at_from",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "created_at_to",
+                                        "orig": "created_at_to",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "event_type",
+                                        "orig": "event_type",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "expires_at_from",
+                                        "orig": "expires_at_from",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "expires_at_to",
+                                        "orig": "expires_at_to",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "header_name",
+                                        "orig": "header_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "header_value",
+                                        "orig": "header_value",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 10
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "url",
+                                        "orig": "url",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "category",
@@ -5371,14 +5601,7 @@ class Config {
                                     "prev_cursor",
                                     "url"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.items`"
-                            },
-                            "parts": [
-                                "webhooks"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -5387,57 +5610,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "webhook_id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "from_revision",
-                                        "orig": "from_revision",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "to_revision",
-                                        "orig": "to_revision",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/webhooks/{webhookId}/events",
-                            "rename": {
-                                "param": {
-                                    "webhookId": "webhook_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -5449,6 +5624,63 @@ class Config {
                                     "lit": "events"
                                 }
                             ],
+                            "parts": [
+                                "webhooks",
+                                "{webhook_id}",
+                                "events"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "webhookId": "webhook_id"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "webhook_id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "from_revision",
+                                        "orig": "from_revision",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "to_revision",
+                                        "orig": "to_revision",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "from_revision",
@@ -5458,16 +5690,7 @@ class Config {
                                     "to_revision",
                                     "webhook_id"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "webhooks",
-                                "{webhook_id}",
-                                "events"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -5476,25 +5699,9 @@ class Config {
                     "name": "remove",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "DELETE",
                             "orig": "/webhooks/{webhookId}",
-                            "rename": {
-                                "param": {
-                                    "webhookId": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -5503,19 +5710,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "webhooks",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "webhookId": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "webhooks",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -5523,11 +5746,10 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "webhook"
+                        "$.main.kit.entity.webhook"
                     ],
                     [
-                        "webhook",
-                        "test"
+                        "$.main.kit.entity.webhook"
                     ]
                 ]
             }
@@ -5541,111 +5763,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "account_number",
-                                        "orig": "account_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "contact_email",
-                                        "orig": "contact_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "currency_code",
-                                        "orig": "currency_code",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "display_name",
-                                        "orig": "display_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "funding_notification_email",
-                                        "orig": "funding_notification_email",
-                                        "type": "`$ARRAY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_balance",
-                                        "orig": "max_balance",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_date_created_at",
-                                        "orig": "max_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_result",
-                                        "orig": "max_result",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "min_balance",
-                                        "orig": "min_balance",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "min_date_created_at",
-                                        "orig": "min_date_created_at",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "next_cursor",
-                                        "orig": "next_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "paginate",
-                                        "orig": "paginate",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "prev_cursor",
-                                        "orig": "prev_cursor",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/customers/{customerIdentifier}/accounts",
-                            "rename": {
-                                "param": {
-                                    "customerIdentifier": "customer_identifier"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "customers"
@@ -5657,6 +5777,117 @@ class Config {
                                     "lit": "accounts"
                                 }
                             ],
+                            "parts": [
+                                "customers",
+                                "{customer_identifier}",
+                                "accounts"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "customerIdentifier": "customer_identifier"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "account_number",
+                                        "orig": "account_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "contact_email",
+                                        "orig": "contact_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "currency_code",
+                                        "orig": "currency_code",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "display_name",
+                                        "orig": "display_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "funding_notification_email",
+                                        "orig": "funding_notification_email",
+                                        "type": "`$ARRAY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_balance",
+                                        "orig": "max_balance",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_date_created_at",
+                                        "orig": "max_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_result",
+                                        "orig": "max_result",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "min_balance",
+                                        "orig": "min_balance",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "min_date_created_at",
+                                        "orig": "min_date_created_at",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "next_cursor",
+                                        "orig": "next_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "paginate",
+                                        "orig": "paginate",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "prev_cursor",
+                                        "orig": "prev_cursor",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_number",
@@ -5675,16 +5906,7 @@ class Config {
                                     "prev_cursor",
                                     "status"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "customers",
-                                "{customer_identifier}",
-                                "accounts"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -5692,47 +5914,35 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "customer"
+                        "$.main.kit.entity.customer"
                     ]
                 ]
-            }
-        },
-        "n2_account": {
-            "fields": [],
-            "name": "n2_account",
-            "op": {},
-            "relations": {
-                "ancestors": []
-            }
-        },
-        "n3_fund": {
-            "fields": [],
-            "name": "n3_fund",
-            "op": {},
-            "relations": {
-                "ancestors": []
             }
         },
         "n8_line_item": {
             "fields": [
                 {
                     "name": "campaign",
-                    "short": "optional campaign that may be used to administratively categorize a specific order.",
-                    "type": "`$STRING`"
+                    "title": "Campaign",
+                    "type": "`$STRING`",
+                    "short": "optional campaign that may be used to administratively categorize a specific order."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "orderNotes",
-                    "short": "Optional order notes (up to 150 characters)",
-                    "type": "`$STRING`"
+                    "title": "Order Notes",
+                    "type": "`$STRING`",
+                    "short": "Optional order notes (up to 150 characters)"
                 },
                 {
                     "name": "purchaseOrderNumber",
-                    "short": "The Purchase Order Number associated with this order.",
-                    "type": "`$STRING`"
+                    "title": "Purchase Order Number",
+                    "type": "`$STRING`",
+                    "short": "The Purchase Order Number associated with this order."
                 }
             ],
             "id": {
@@ -5746,25 +5956,9 @@ class Config {
                     "name": "update",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "PATCH",
                             "orig": "/lineItems/{referenceLineItemID}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -5773,19 +5967,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "lineItems",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lineItems",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -5798,6 +6008,7 @@ class Config {
             "fields": [
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 }
             ],
@@ -5812,25 +6023,9 @@ class Config {
                     "name": "remove",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "etid",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "DELETE",
                             "orig": "/digitalTemplates/{etid}",
-                            "rename": {
-                                "param": {
-                                    "etid": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "digitalTemplates"
@@ -5839,19 +6034,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "digitalTemplates",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "etid": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "digitalTemplates",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "etid",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -5864,229 +6075,263 @@ class Config {
             "fields": [
                 {
                     "name": "accountIdentifier",
+                    "title": "Account Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Specify the account this order will be deducted from",
-                    "type": "`$STRING`"
+                    "short": "Specify the account this order will be deducted from"
                 },
                 {
                     "name": "accountNumber",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Number",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "amount",
+                    "title": "Amount",
+                    "type": "`$NUMBER`",
                     "req": true,
-                    "short": "Specify the face value of of the reward.",
-                    "type": "`$NUMBER`"
+                    "short": "Specify the face value of of the reward."
                 },
                 {
                     "name": "amountCharged",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Amount Charged",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "asyncOrderEntity",
+                    "title": "Async Order Entity",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "campaign",
+                    "title": "Campaign",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "create": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "Optional.",
-                    "type": "`$STRING`"
+                    "short": "Optional."
                 },
                 {
                     "name": "createdAt",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Created At",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "customFields",
-                    "short": "Optional.",
-                    "type": "`$OBJECT`"
+                    "title": "Custom Fields",
+                    "type": "`$OBJECT`",
+                    "short": "Optional."
                 },
                 {
                     "name": "customerIdentifier",
+                    "title": "Customer Identifier",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Specify the customer associated with the order.",
-                    "type": "`$STRING`"
+                    "short": "Specify the customer associated with the order."
                 },
                 {
                     "name": "deliveryMethod",
+                    "title": "Delivery Method",
+                    "type": "`$STRING`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "short": "Specify delivery method for the order",
-                    "type": "`$STRING`"
+                    "short": "Specify delivery method for the order"
                 },
                 {
                     "name": "denomination",
+                    "title": "Denomination",
+                    "type": "`$OBJECT`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$OBJECT`"
                         }
-                    },
-                    "type": "`$OBJECT`"
+                    }
                 },
                 {
                     "name": "emailSubject",
+                    "title": "Email Subject",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "create": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "Optional.",
-                    "type": "`$STRING`"
+                    "short": "Optional."
                 },
                 {
                     "name": "etid",
+                    "title": "Etid",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "create": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "Optional.",
-                    "type": "`$STRING`"
+                    "short": "Optional."
                 },
                 {
                     "name": "expirationDate",
-                    "short": "Optional for Promo Links, the exact calendar date the Promo Link will expire.",
-                    "type": "`$STRING`"
+                    "title": "Expiration Date",
+                    "type": "`$STRING`",
+                    "short": "Optional for Promo Links, the exact calendar date the Promo Link will expire."
                 },
                 {
                     "name": "externalRefID",
+                    "title": "External Ref Id",
+                    "type": "`$STRING`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "short": "Optional.",
-                    "type": "`$STRING`"
+                    "short": "Optional."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "lineItemStatus",
+                    "title": "Line Item Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "message",
+                    "title": "Message",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "create": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "Optional gift message",
-                    "type": "`$STRING`"
+                    "short": "Optional gift message"
                 },
                 {
                     "name": "notes",
-                    "short": "Optional order notes.",
-                    "type": "`$STRING`"
+                    "title": "Notes",
+                    "type": "`$STRING`",
+                    "short": "Optional order notes."
                 },
                 {
                     "name": "orderClientSource",
+                    "title": "Order Client Source",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "orderExternalRefIdDupe",
+                    "title": "Order External Ref Id Dupe",
                     "type": "`$BOOLEAN`"
                 },
                 {
                     "name": "orderStatus",
+                    "title": "Order Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "ptid",
-                    "short": "Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page.",
-                    "type": "`$STRING`"
+                    "title": "Ptid",
+                    "type": "`$STRING`",
+                    "short": "Only required for Printed Reward Links, the unique identifier for the Printed Reward Link Template provided in the Tango Portal on the Printed Template page."
                 },
                 {
                     "name": "purchaseOrderNumber",
-                    "short": "The Purchase Order Number associated with this order.",
-                    "type": "`$STRING`"
+                    "title": "Purchase Order Number",
+                    "type": "`$STRING`",
+                    "short": "The Purchase Order Number associated with this order."
                 },
                 {
                     "name": "recipient",
+                    "title": "Recipient",
+                    "type": "`$OBJECT`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$OBJECT`"
                         }
                     },
-                    "short": "Required if deliveryMethod is EMAIL, PHONE, or ADDRESS.",
-                    "type": "`$OBJECT`"
+                    "short": "Required if deliveryMethod is EMAIL, PHONE, or ADDRESS."
                 },
                 {
                     "name": "redemptionInstructions",
+                    "title": "Redemption Instructions",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "referenceLineItemID",
+                    "title": "Reference Line Item Id",
+                    "type": "`$STRING`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$STRING`"
                         }
-                    },
-                    "type": "`$STRING`"
+                    }
                 },
                 {
                     "name": "referenceOrderID",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reference Order Id",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "reward",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Reward",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "rewardName",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Reward Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "deprecated": true,
                     "name": "sendEmail",
+                    "title": "Send Email",
+                    "type": "`$BOOLEAN`",
                     "short": "Deprecated Oct 1, 2025.",
-                    "type": "`$BOOLEAN`"
+                    "deprecated": true
                 },
                 {
                     "name": "sender",
+                    "title": "Sender",
+                    "type": "`$OBJECT`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$OBJECT`"
                         }
                     },
-                    "short": "Optional.",
-                    "type": "`$OBJECT`"
+                    "short": "Optional."
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "utid",
+                    "title": "Utid",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "The unique identifier for the reward you are sending as provided in the Get Catalog call",
-                    "type": "`$STRING`"
+                    "short": "The unique identifier for the reward you are sending as provided in the Get Catalog call"
                 }
             ],
             "id": {
@@ -6100,7 +6345,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/orders",
@@ -6109,14 +6353,16 @@ class Config {
                                     "lit": "orders"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "orders"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "orders"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -6125,184 +6371,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "account_identifier",
-                                        "orig": "account_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "campaign",
-                                        "orig": "campaign",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "currency_code",
-                                        "orig": "currency_code",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "customer_identifier",
-                                        "orig": "customer_identifier",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "delivery_method",
-                                        "orig": "delivery_method",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "elements_per_block",
-                                        "orig": "elements_per_block",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "end_date",
-                                        "orig": "end_date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "external_ref_id",
-                                        "orig": "external_ref_id",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "line_item_note",
-                                        "orig": "line_item_note",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "line_item_status",
-                                        "orig": "line_item_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "max_amount",
-                                        "orig": "max_amount",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "min_amount",
-                                        "orig": "min_amount",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "note",
-                                        "orig": "note",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "order_status",
-                                        "orig": "order_status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "page",
-                                        "orig": "page",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "ptid",
-                                        "orig": "ptid",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "purchase_order_number",
-                                        "orig": "purchase_order_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_email",
-                                        "orig": "recipient_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_first_name",
-                                        "orig": "recipient_first_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_last_name",
-                                        "orig": "recipient_last_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "recipient_mobile_number",
-                                        "orig": "recipient_mobile_number",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "reward_name",
-                                        "orig": "reward_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "send_email",
-                                        "orig": "send_email",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "sender_email",
-                                        "orig": "sender_email",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "sender_first_name",
-                                        "orig": "sender_first_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "sender_last_name",
-                                        "orig": "sender_last_name",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "start_date",
-                                        "orig": "start_date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "status",
-                                        "orig": "status",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "utid",
-                                        "orig": "utid",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/orders",
@@ -6311,6 +6379,192 @@ class Config {
                                     "lit": "orders"
                                 }
                             ],
+                            "parts": [
+                                "orders"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "account_identifier",
+                                        "orig": "account_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "campaign",
+                                        "orig": "campaign",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "currency_code",
+                                        "orig": "currency_code",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "customer_identifier",
+                                        "orig": "customer_identifier",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "delivery_method",
+                                        "orig": "delivery_method",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "elements_per_block",
+                                        "orig": "elements_per_block",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "end_date",
+                                        "orig": "end_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "external_ref_id",
+                                        "orig": "external_ref_id",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "line_item_note",
+                                        "orig": "line_item_note",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "line_item_status",
+                                        "orig": "line_item_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "max_amount",
+                                        "orig": "max_amount",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "min_amount",
+                                        "orig": "min_amount",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "note",
+                                        "orig": "note",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "order_status",
+                                        "orig": "order_status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "page",
+                                        "orig": "page",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "ptid",
+                                        "orig": "ptid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "purchase_order_number",
+                                        "orig": "purchase_order_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_email",
+                                        "orig": "recipient_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_first_name",
+                                        "orig": "recipient_first_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_last_name",
+                                        "orig": "recipient_last_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "recipient_mobile_number",
+                                        "orig": "recipient_mobile_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "reward_name",
+                                        "orig": "reward_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "send_email",
+                                        "orig": "send_email",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "sender_email",
+                                        "orig": "sender_email",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "sender_first_name",
+                                        "orig": "sender_first_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "sender_last_name",
+                                        "orig": "sender_last_name",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "start_date",
+                                        "orig": "start_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "utid",
+                                        "orig": "utid",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "account_identifier",
@@ -6343,14 +6597,7 @@ class Config {
                                     "status",
                                     "utid"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "orders"
-                            ]
+                            }
                         }
                     ]
                 },
@@ -6359,25 +6606,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "reference_order_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/orders/{referenceOrderID}",
-                            "rename": {
-                                "param": {
-                                    "referenceOrderID": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "orders"
@@ -6386,19 +6617,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "orders",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceOrderID": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "orders",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "reference_order_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -6411,34 +6658,40 @@ class Config {
             "fields": [
                 {
                     "name": "amount",
-                    "short": "Optional.",
-                    "type": "`$NUMBER`"
+                    "title": "Amount",
+                    "type": "`$NUMBER`",
+                    "short": "Optional."
                 },
                 {
                     "name": "deliveryMethod",
-                    "short": "Optional.",
-                    "type": "`$STRING`"
+                    "title": "Delivery Method",
+                    "type": "`$STRING`",
+                    "short": "Optional."
                 },
                 {
                     "name": "notes",
-                    "short": "Optional order notes (up to 150 characters).",
-                    "type": "`$STRING`"
+                    "title": "Notes",
+                    "type": "`$STRING`",
+                    "short": "Optional order notes (up to 150 characters)."
                 },
                 {
                     "name": "otherReason",
-                    "short": "Required when reasonCode is \"OTHER\", enter the reason why the line item is being reissued.",
-                    "type": "`$STRING`"
+                    "title": "Other Reason",
+                    "type": "`$STRING`",
+                    "short": "Required when reasonCode is \"OTHER\", enter the reason why the line item is being reissued."
                 },
                 {
                     "name": "reasonCode",
+                    "title": "Reason Code",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Required.",
-                    "type": "`$STRING`"
+                    "short": "Required."
                 },
                 {
                     "name": "recipient",
-                    "short": "Optional.",
-                    "type": "`$OBJECT`"
+                    "title": "Recipient",
+                    "type": "`$OBJECT`",
+                    "short": "Optional."
                 }
             ],
             "name": "order_view_summary",
@@ -6448,25 +6701,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/lineItems/{referenceLineItemID}/reissue",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "reference_line_item_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -6478,20 +6715,36 @@ class Config {
                                     "lit": "reissue"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "reference_line_item_id"
-                                ]
+                            "parts": [
+                                "lineItems",
+                                "{reference_line_item_id}",
+                                "reissue"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "reference_line_item_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lineItems",
-                                "{reference_line_item_id}",
-                                "reissue"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "reference_line_item_id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -6499,7 +6752,7 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "line_item"
+                        "$.main.kit.entity.line_item"
                     ]
                 ]
             }
@@ -6508,18 +6761,22 @@ class Config {
             "fields": [
                 {
                     "name": "balance",
+                    "title": "Balance",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "card",
+                    "title": "Card",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "comments",
+                    "title": "Comments",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "registration",
+                    "title": "Registration",
                     "type": "`$OBJECT`"
                 }
             ],
@@ -6530,25 +6787,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/prepaidCardService/getCardInfo/{referenceLineItemID}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "reference_line_item_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "prepaidCardService"
@@ -6560,42 +6801,56 @@ class Config {
                                     "var": "reference_line_item_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "reference_line_item_id"
-                                ]
+                            "parts": [
+                                "prepaidCardService",
+                                "getCardInfo",
+                                "{reference_line_item_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "reference_line_item_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "prepaidCardService",
-                                "getCardInfo",
-                                "{reference_line_item_id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "reference_line_item_id"
+                                ]
+                            }
                         }
                     ]
                 }
             },
             "relations": {
-                "ancestors": [
-                    [
-                        "get_card_info"
-                    ]
-                ]
+                "ancestors": []
             }
         },
         "prepaid_card_transaction": {
             "fields": [
                 {
                     "name": "journal",
+                    "title": "Journal",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "page",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Page",
+                    "type": "`$OBJECT`",
+                    "req": true
                 }
             ],
             "name": "prepaid_card_transaction",
@@ -6605,34 +6860,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "reference_line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "example": 0,
-                                        "kind": "query",
-                                        "name": "page",
-                                        "orig": "page",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/prepaidCardService/getCardTransactions/{referenceLineItemID}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "reference_line_item_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "prepaidCardService"
@@ -6644,60 +6874,86 @@ class Config {
                                     "var": "reference_line_item_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "page",
-                                    "reference_line_item_id"
-                                ]
+                            "parts": [
+                                "prepaidCardService",
+                                "getCardTransactions",
+                                "{reference_line_item_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "reference_line_item_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "prepaidCardService",
-                                "getCardTransactions",
-                                "{reference_line_item_id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "page",
+                                        "orig": "page",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 0
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "page",
+                                    "reference_line_item_id"
+                                ]
+                            }
                         }
                     ]
                 }
             },
             "relations": {
-                "ancestors": [
-                    [
-                        "get_card_transaction"
-                    ]
-                ]
+                "ancestors": []
             }
         },
         "reissue_card": {
             "fields": [
                 {
                     "name": "commentText",
-                    "short": "Optional comment for the card replacement.",
-                    "type": "`$STRING`"
+                    "title": "Comment Text",
+                    "type": "`$STRING`",
+                    "short": "Optional comment for the card replacement."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "reason",
+                    "title": "Reason",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Reason for the card replacement.",
-                    "type": "`$STRING`"
+                    "short": "Reason for the card replacement."
                 },
                 {
                     "name": "status",
-                    "short": "Status of the reissue request.",
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "short": "Status of the reissue request."
                 },
                 {
                     "name": "updatedBy",
+                    "title": "Updated By",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Identifier of the agent initiating the request.",
-                    "type": "`$STRING`"
+                    "short": "Identifier of the agent initiating the request."
                 }
             ],
             "id": {
@@ -6711,25 +6967,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/prepaidCardService/reissueCard/{referenceLineItemID}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "prepaidCardService"
@@ -6741,20 +6981,36 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "prepaidCardService",
+                                "reissueCard",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "prepaidCardService",
-                                "reissueCard",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -6767,8 +7023,9 @@ class Config {
             "fields": [
                 {
                     "name": "replacementReasons",
-                    "short": "List of valid replacement reason codes.",
-                    "type": "`$ARRAY`"
+                    "title": "Replacement Reasons",
+                    "type": "`$ARRAY`",
+                    "short": "List of valid replacement reason codes."
                 }
             ],
             "name": "replacement_reason",
@@ -6778,7 +7035,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/prepaidCardService/replacementReasons",
@@ -6790,15 +7046,17 @@ class Config {
                                     "lit": "replacementReasons"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "prepaidCardService",
+                                "replacementReasons"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.replacementReasons`"
                             },
-                            "parts": [
-                                "prepaidCardService",
-                                "replacementReasons"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -6811,38 +7069,45 @@ class Config {
             "fields": [
                 {
                     "name": "newDeliveryMethod",
-                    "short": "The delivery method used to re-deliver the reward.",
-                    "type": "`$STRING`"
+                    "title": "New Delivery Method",
+                    "type": "`$STRING`",
+                    "short": "The delivery method used to re-deliver the reward."
                 },
                 {
                     "name": "newEmail",
-                    "short": "A new email address to re-deliver this order to.",
-                    "type": "`$STRING`"
+                    "title": "New Email",
+                    "type": "`$STRING`",
+                    "short": "A new email address to re-deliver this order to."
                 },
                 {
                     "name": "newEtid",
-                    "short": "A new etid used to re-deliver an order.",
-                    "type": "`$STRING`"
+                    "title": "New Etid",
+                    "type": "`$STRING`",
+                    "short": "A new etid used to re-deliver an order."
                 },
                 {
                     "name": "newMobile",
-                    "short": "A new mobile number to use for resending an order.",
-                    "type": "`$STRING`"
+                    "title": "New Mobile",
+                    "type": "`$STRING`",
+                    "short": "A new mobile number to use for resending an order."
                 },
                 {
                     "name": "newMobileNumber",
-                    "short": "A new phone number to re-deliver this order to.",
-                    "type": "`$STRING`"
+                    "title": "New Mobile Number",
+                    "type": "`$STRING`",
+                    "short": "A new phone number to re-deliver this order to."
                 },
                 {
                     "name": "otherReason",
-                    "short": "Required when lineItemResendReasonCode is \"OTHER\", enter the reason why the line item is being RESENT",
-                    "type": "`$STRING`"
+                    "title": "Other Reason",
+                    "type": "`$STRING`",
+                    "short": "Required when lineItemResendReasonCode is \"OTHER\", enter the reason why the line item is being RESENT"
                 },
                 {
                     "name": "reasonCode",
-                    "short": "Enter the reason why this line item is being RESENT (respectively)",
-                    "type": "`$STRING`"
+                    "title": "Reason Code",
+                    "type": "`$STRING`",
+                    "short": "Enter the reason why this line item is being RESENT (respectively)"
                 }
             ],
             "name": "resend",
@@ -6852,25 +7117,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "line_item_id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/lineItems/{referenceLineItemId}/resends",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemId": "line_item_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lineItems"
@@ -6882,41 +7131,41 @@ class Config {
                                     "lit": "resends"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "line_item_id"
-                                ]
+                            "parts": [
+                                "lineItems",
+                                "{line_item_id}",
+                                "resends"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemId": "line_item_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lineItems",
-                                "{line_item_id}",
-                                "resends"
-                            ]
-                        },
-                        {
                             "args": {
                                 "params": [
                                     {
+                                        "name": "line_item_id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
                                         "kind": "param",
-                                        "name": "reference_order_id",
-                                        "orig": "reference_order_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
+                                        "reqd": true
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "line_item_id"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "POST",
                             "orig": "/orders/{referenceOrderID}/resends",
-                            "rename": {
-                                "param": {
-                                    "referenceOrderID": "reference_order_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "orders"
@@ -6928,20 +7177,36 @@ class Config {
                                     "lit": "resends"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "reference_order_id"
-                                ]
+                            "parts": [
+                                "orders",
+                                "{reference_order_id}",
+                                "resends"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceOrderID": "reference_order_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "orders",
-                                "{reference_order_id}",
-                                "resends"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "reference_order_id",
+                                        "orig": "reference_order_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "reference_order_id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -6949,10 +7214,10 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "line_item"
+                        "$.main.kit.entity.line_item"
                     ],
                     [
-                        "order"
+                        "$.main.kit.entity.order"
                     ]
                 ]
             }
@@ -6961,23 +7226,27 @@ class Config {
             "fields": [
                 {
                     "name": "CANCEL",
-                    "short": "Map of cancel reasons",
-                    "type": "`$OBJECT`"
+                    "title": "Cancel",
+                    "type": "`$OBJECT`",
+                    "short": "Map of cancel reasons"
                 },
                 {
                     "name": "CANCEL_AND_REISSUE",
-                    "short": "Map of cancel and reissue reasons",
-                    "type": "`$OBJECT`"
+                    "title": "Cancel And Reissue",
+                    "type": "`$OBJECT`",
+                    "short": "Map of cancel and reissue reasons"
                 },
                 {
                     "name": "FREEZE",
-                    "short": "Map of freeze reasons",
-                    "type": "`$OBJECT`"
+                    "title": "Freeze",
+                    "type": "`$OBJECT`",
+                    "short": "Map of freeze reasons"
                 },
                 {
                     "name": "UNFREEZE",
-                    "short": "Map of unfreeze reasons",
-                    "type": "`$OBJECT`"
+                    "title": "Unfreeze",
+                    "type": "`$OBJECT`",
+                    "short": "Map of unfreeze reasons"
                 }
             ],
             "name": "reward_reasons_map",
@@ -6987,7 +7256,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lineItems/reasonCodes",
@@ -6999,15 +7267,17 @@ class Config {
                                     "lit": "reasonCodes"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "lineItems",
+                                "reasonCodes"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lineItems",
-                                "reasonCodes"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -7020,48 +7290,55 @@ class Config {
             "fields": [
                 {
                     "name": "amount",
+                    "title": "Amount",
+                    "type": "`$NUMBER`",
                     "req": true,
-                    "short": "Specify the currency amount of the funds being transferred.",
-                    "type": "`$NUMBER`"
+                    "short": "Specify the currency amount of the funds being transferred."
                 },
                 {
                     "name": "externalRefID",
-                    "short": "specify the external reference id to associate with this funding action.",
-                    "type": "`$STRING`"
+                    "title": "External Ref Id",
+                    "type": "`$STRING`",
+                    "short": "specify the external reference id to associate with this funding action."
                 },
                 {
                     "name": "transferDate",
+                    "title": "Transfer Date",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "transferFrom",
+                    "title": "Transfer From",
+                    "type": "`$OBJECT`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "short": "The accountIdentifier for the Account transferring funds from.",
-                    "type": "`$OBJECT`"
+                    "short": "The accountIdentifier for the Account transferring funds from."
                 },
                 {
                     "name": "transferNotes",
-                    "short": "Optional transfer notes (up to 150 characters)",
-                    "type": "`$STRING`"
+                    "title": "Transfer Notes",
+                    "type": "`$STRING`",
+                    "short": "Optional transfer notes (up to 150 characters)"
                 },
                 {
                     "name": "transferTo",
+                    "title": "Transfer To",
+                    "type": "`$OBJECT`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "short": "The accountIdentifier for the Account transferring funds to.",
-                    "type": "`$OBJECT`"
+                    "short": "The accountIdentifier for the Account transferring funds to."
                 },
                 {
                     "name": "transferredAmount",
+                    "title": "Transferred Amount",
                     "type": "`$NUMBER`"
                 }
             ],
@@ -7072,7 +7349,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/transferFunds",
@@ -7081,14 +7357,16 @@ class Config {
                                     "lit": "transferFunds"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "transferFunds"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "transferFunds"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -7101,19 +7379,23 @@ class Config {
             "fields": [
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "registration",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Registration",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "status",
+                    "title": "Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "updatedBy",
+                    "title": "Updated By",
                     "type": "`$STRING`"
                 }
             ],
@@ -7128,25 +7410,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "reference_line_item_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/prepaidCardService/updateAccount/{referenceLineItemID}",
-                            "rename": {
-                                "param": {
-                                    "referenceLineItemID": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "prepaidCardService"
@@ -7158,20 +7424,36 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "prepaidCardService",
+                                "updateAccount",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "referenceLineItemID": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "prepaidCardService",
-                                "updateAccount",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "reference_line_item_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -7184,62 +7466,73 @@ class Config {
             "fields": [
                 {
                     "name": "categories",
-                    "short": "The categories the customer is subscribed to.",
-                    "type": "`$ARRAY`"
+                    "title": "Categories",
+                    "type": "`$ARRAY`",
+                    "short": "The categories the customer is subscribed to."
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "short": "The date and time the webhook was created.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "eventTypes",
-                    "short": "The event types the customer is subscribed to.",
-                    "type": "`$ARRAY`"
+                    "title": "Event Types",
+                    "type": "`$ARRAY`",
+                    "short": "The event types the customer is subscribed to."
                 },
                 {
-                    "format": "date-time",
                     "name": "expiresAt",
+                    "title": "Expires At",
+                    "type": "`$STRING`",
                     "short": "The date and time the webhook expires.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "headers",
-                    "short": "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener.",
-                    "type": "`$ARRAY`"
+                    "title": "Headers",
+                    "type": "`$ARRAY`",
+                    "short": "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener."
                 },
                 {
                     "name": "hmacSharedSecretKey",
-                    "short": "The HMAC secret key used to sign the webhook payload.",
-                    "type": "`$STRING`"
+                    "title": "Hmac Shared Secret Key",
+                    "type": "`$STRING`",
+                    "short": "The HMAC secret key used to sign the webhook payload."
                 },
                 {
                     "name": "payloadVerificationMethod",
-                    "short": "Method to verify webhook payload integrity",
-                    "type": "`$STRING`"
+                    "title": "Payload Verification Method",
+                    "type": "`$STRING`",
+                    "short": "Method to verify webhook payload integrity"
                 },
                 {
                     "name": "signingCertificate",
-                    "short": "The public X509 certificate used to sign the webhook payload.",
-                    "type": "`$STRING`"
+                    "title": "Signing Certificate",
+                    "type": "`$STRING`",
+                    "short": "The public X509 certificate used to sign the webhook payload."
                 },
                 {
-                    "format": "date-time",
                     "name": "updatedAt",
+                    "title": "Updated At",
+                    "type": "`$STRING`",
                     "short": "The date and time when the webhook was last updated.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "url",
-                    "short": "The URL of the customer's webhook listener.",
-                    "type": "`$STRING`"
+                    "title": "Url",
+                    "type": "`$STRING`",
+                    "short": "The URL of the customer's webhook listener."
                 },
                 {
-                    "format": "uuid",
                     "name": "webhookId",
+                    "title": "Webhook Id",
+                    "type": "`$STRING`",
                     "short": "The ID of the webhook.",
-                    "type": "`$STRING`"
+                    "format": "uuid"
                 }
             ],
             "name": "update_webhook_subscription_response_view",
@@ -7249,25 +7542,9 @@ class Config {
                     "name": "update",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "webhook_id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "PATCH",
                             "orig": "/webhooks/{webhookId}",
-                            "rename": {
-                                "param": {
-                                    "webhookId": "webhook_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -7276,19 +7553,35 @@ class Config {
                                     "var": "webhook_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "webhook_id"
-                                ]
+                            "parts": [
+                                "webhooks",
+                                "{webhook_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "webhookId": "webhook_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "webhooks",
-                                "{webhook_id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "webhook_id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "webhook_id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -7296,7 +7589,7 @@ class Config {
             "relations": {
                 "ancestors": [
                     [
-                        "webhook"
+                        "$.main.kit.entity.webhook"
                     ]
                 ]
             }
@@ -7305,66 +7598,78 @@ class Config {
             "fields": [
                 {
                     "name": "categories",
-                    "short": "The categories the customer wants to subscribe to.",
-                    "type": "`$ARRAY`"
+                    "title": "Categories",
+                    "type": "`$ARRAY`",
+                    "short": "The categories the customer wants to subscribe to."
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "short": "The date and time the webhook was created.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "eventTypes",
-                    "short": "The event types the customer wants to subscribe to.",
-                    "type": "`$ARRAY`"
+                    "title": "Event Types",
+                    "type": "`$ARRAY`",
+                    "short": "The event types the customer wants to subscribe to."
                 },
                 {
-                    "format": "date-time",
                     "name": "expiresAt",
+                    "title": "Expires At",
+                    "type": "`$STRING`",
                     "short": "The date and time the webhook expires.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "headers",
-                    "short": "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener.",
-                    "type": "`$ARRAY`"
+                    "title": "Headers",
+                    "type": "`$ARRAY`",
+                    "short": "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener."
                 },
                 {
                     "name": "hmacSharedSecretKey",
-                    "short": "The HMAC secret key used to sign the webhook payload.",
-                    "type": "`$STRING`"
+                    "title": "Hmac Shared Secret Key",
+                    "type": "`$STRING`",
+                    "short": "The HMAC secret key used to sign the webhook payload."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "payloadVerificationMethod",
-                    "short": "Method to verify webhook payload integrity.",
-                    "type": "`$STRING`"
+                    "title": "Payload Verification Method",
+                    "type": "`$STRING`",
+                    "short": "Method to verify webhook payload integrity."
                 },
                 {
                     "name": "signingCertificate",
-                    "short": "The public X509 certificate used to sign the webhook payload.",
-                    "type": "`$STRING`"
+                    "title": "Signing Certificate",
+                    "type": "`$STRING`",
+                    "short": "The public X509 certificate used to sign the webhook payload."
                 },
                 {
-                    "format": "date-time",
                     "name": "updatedAt",
+                    "title": "Updated At",
+                    "type": "`$STRING`",
                     "short": "The date and time when the webhook was last updated.",
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "url",
-                    "short": "The URL of the customer's webhook listener.",
-                    "type": "`$STRING`"
+                    "title": "Url",
+                    "type": "`$STRING`",
+                    "short": "The URL of the customer's webhook listener."
                 },
                 {
-                    "format": "uuid",
                     "name": "webhookId",
+                    "title": "Webhook Id",
+                    "type": "`$STRING`",
                     "short": "The ID of the webhook.",
-                    "type": "`$STRING`"
+                    "format": "uuid"
                 }
             ],
             "id": {
@@ -7378,40 +7683,9 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ],
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "from_revision",
-                                        "orig": "from_revision",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "to_revision",
-                                        "orig": "to_revision",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/webhooks/{webhookId}/replay",
-                            "rename": {
-                                "param": {
-                                    "webhookId": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -7423,6 +7697,46 @@ class Config {
                                     "lit": "replay"
                                 }
                             ],
+                            "parts": [
+                                "webhooks",
+                                "{id}",
+                                "replay"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "webhookId": "id"
+                                }
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ],
+                                "query": [
+                                    {
+                                        "name": "from_revision",
+                                        "orig": "from_revision",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "to_revision",
+                                        "orig": "to_revision",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "$action": "replay",
                                 "exist": [
@@ -7430,37 +7744,12 @@ class Config {
                                     "id",
                                     "to_revision"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "webhooks",
-                                "{id}",
-                                "replay"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "POST",
                             "orig": "/webhooks/{webhookId}/renew",
-                            "rename": {
-                                "param": {
-                                    "webhookId": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -7472,21 +7761,37 @@ class Config {
                                     "lit": "renew"
                                 }
                             ],
-                            "select": {
-                                "$action": "renew",
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "webhooks",
+                                "{id}",
+                                "renew"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "webhookId": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "webhooks",
-                                "{id}",
-                                "renew"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "$action": "renew",
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 },
@@ -7495,25 +7800,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "webhook_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/webhooks/{webhookId}",
-                            "rename": {
-                                "param": {
-                                    "webhookId": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "webhooks"
@@ -7522,19 +7811,35 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "webhooks",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "webhookId": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "webhooks",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "webhook_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }

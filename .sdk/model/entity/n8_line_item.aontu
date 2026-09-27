@@ -1,0 +1,95 @@
+# Entity: n8_line_item
+
+main: kit: entity: n8_line_item: {
+
+  alias: field: {}
+
+  fields: {
+    campaign: {
+      h: "Campaign"
+      n: "campaign"
+      r: false
+      sh: "optional campaign that may be used to administratively categorize a specific order."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    orderNotes: {
+      h: "Order Notes"
+      n: "orderNotes"
+      r: false
+      sh: "Optional order notes (up to 150 characters)"
+      t: "`$STRING`"
+    }
+    purchaseOrderNumber: {
+      h: "Purchase Order Number"
+      n: "purchaseOrderNumber"
+      r: false
+      sh: "The Purchase Order Number associated with this order."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "n8_line_item"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /lineItems/{referenceLineItemID}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "reference_line_item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/lineItems/{referenceLineItemID}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              referenceLineItemID: "id"
+            }
+          }
+          s: [
+            {
+              lit: "lineItems"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

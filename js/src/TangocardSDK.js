@@ -9,18 +9,16 @@ const { AsyncOrderLineItemsViewEntity } = require('./entity/AsyncOrderLineItemsV
 const { AsyncReasonCodesViewEntity } = require('./entity/AsyncReasonCodesViewEntity')
 const { AsyncUpdateLineItemViewEntity } = require('./entity/AsyncUpdateLineItemViewEntity')
 const { BalanceAlertViewEntity } = require('./entity/BalanceAlertViewEntity')
-const { BrandCategoriesViewEntity } = require('./entity/BrandCategoriesViewEntity')
+const { BrandCategoryEntity } = require('./entity/BrandCategoryEntity')
 const { CatalogEntity } = require('./entity/CatalogEntity')
 const { ChoiceProductEntity } = require('./entity/ChoiceProductEntity')
 const { CountryViewSummaryEntity } = require('./entity/CountryViewSummaryEntity')
 const { CreateAccountCriterionEntity } = require('./entity/CreateAccountCriterionEntity')
-const { CreateCustomerCriterionEntity } = require('./entity/CreateCustomerCriterionEntity')
 const { CredentialTypeViewEntity } = require('./entity/CredentialTypeViewEntity')
 const { CreditCardEntity } = require('./entity/CreditCardEntity')
 const { CreditCardDepositEntity } = require('./entity/CreditCardDepositEntity')
 const { CreditCardUnregisterEntity } = require('./entity/CreditCardUnregisterEntity')
 const { CustomerEntity } = require('./entity/CustomerEntity')
-const { EmailTemplateListViewEntity } = require('./entity/EmailTemplateListViewEntity')
 const { EmailTemplateViewVerboseEntity } = require('./entity/EmailTemplateViewVerboseEntity')
 const { EmbeddableResponseDtoEntity } = require('./entity/EmbeddableResponseDtoEntity')
 const { ExchangeRatesWithDisclaimerEntity } = require('./entity/ExchangeRatesWithDisclaimerEntity')
@@ -30,8 +28,6 @@ const { LowBalanceAlertViewEntity } = require('./entity/LowBalanceAlertViewEntit
 const { MobileCountryEntity } = require('./entity/MobileCountryEntity')
 const { N14WebhookEntity } = require('./entity/N14WebhookEntity')
 const { N1CustomerEntity } = require('./entity/N1CustomerEntity')
-const { N2AccountEntity } = require('./entity/N2AccountEntity')
-const { N3FundEntity } = require('./entity/N3FundEntity')
 const { N8LineItemEntity } = require('./entity/N8LineItemEntity')
 const { N9DigitalTemplateEntity } = require('./entity/N9DigitalTemplateEntity')
 const { OrderEntity } = require('./entity/OrderEntity')
@@ -419,12 +415,12 @@ class TangocardSDK {
   }
 
 
-  // Entity access: `client.BrandCategoriesView().list()` / `client.BrandCategoriesView().load({ id })`.
+  // Entity access: `client.BrandCategory().list()` / `client.BrandCategory().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
-  BrandCategoriesView(entopts) {
+  BrandCategory(entopts) {
     const self = this
-    return new BrandCategoriesViewEntity(self, entopts)
+    return new BrandCategoryEntity(self, entopts)
   }
 
 
@@ -461,15 +457,6 @@ class TangocardSDK {
   CreateAccountCriterion(entopts) {
     const self = this
     return new CreateAccountCriterionEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.CreateCustomerCriterion().list()` / `client.CreateCustomerCriterion().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  CreateCustomerCriterion(entopts) {
-    const self = this
-    return new CreateCustomerCriterionEntity(self, entopts)
   }
 
 
@@ -515,15 +502,6 @@ class TangocardSDK {
   Customer(entopts) {
     const self = this
     return new CustomerEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.EmailTemplateListView().list()` / `client.EmailTemplateListView().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  EmailTemplateListView(entopts) {
-    const self = this
-    return new EmailTemplateListViewEntity(self, entopts)
   }
 
 
@@ -605,24 +583,6 @@ class TangocardSDK {
   N1Customer(entopts) {
     const self = this
     return new N1CustomerEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.N2Account().list()` / `client.N2Account().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  N2Account(entopts) {
-    const self = this
-    return new N2AccountEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.N3Fund().list()` / `client.N3Fund().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  N3Fund(entopts) {
-    const self = this
-    return new N3FundEntity(self, entopts)
   }
 
 

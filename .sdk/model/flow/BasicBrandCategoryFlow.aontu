@@ -1,0 +1,22 @@
+# BasicBrandCategoryFlow
+
+main: kit: flow: BasicBrandCategoryFlow:
+{
+  entity: "brand_category",
+  kind: "basic",
+  name: "BasicBrandCategoryFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "brand_category_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicBrandCategoryFlow"
+}

@@ -182,7 +182,7 @@ func email_template_view_verboseBasicSetup(extra map[string]any) *entityTestSetu
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"email_template_view_verbose01", "email_template_view_verbose02", "email_template_view_verbose03", "digital_template01", "digital_template02", "digital_template03"},
+		[]any{"email_template_view_verbose01", "email_template_view_verbose02", "email_template_view_verbose03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

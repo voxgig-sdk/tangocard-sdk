@@ -1,7 +1,7 @@
 // Typed models for the Tangocard SDK (JSDoc typedefs).
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
 // edit by hand.
@@ -286,13 +286,13 @@
  */
 
 /**
- * @typedef {Object} BrandCategoriesView
+ * @typedef {Object} BrandCategory
  * @property {string} [description]
  * @property {string} [identifier]
  */
 
 /**
- * @typedef {Object} BrandCategoriesViewListMatch
+ * @typedef {Object} BrandCategoryListMatch
  * @property {string} [description]
  * @property {string} [identifier]
  */
@@ -386,10 +386,6 @@
  * @property {string} [currencyCode]
  * @property {string} displayName
  * @property {Array} [fundingNotification]
- */
-
-/**
- * @typedef {Object} CreateCustomerCriterion
  */
 
 /**
@@ -545,10 +541,6 @@
  * @property {string} displayName
  * @property {string} [id]
  * @property {string} status
- */
-
-/**
- * @typedef {Object} EmailTemplateListView
  */
 
 /**
@@ -948,14 +940,6 @@
  * @property {boolean} [paginate]
  * @property {string} [prev_cursor]
  * @property {string} [status]
- */
-
-/**
- * @typedef {Object} N2Account
- */
-
-/**
- * @typedef {Object} N3Fund
  */
 
 /**

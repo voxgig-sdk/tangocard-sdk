@@ -1,0 +1,98 @@
+# Entity: transfer_fund
+
+main: kit: entity: transfer_fund: {
+
+  alias: field: {}
+
+  fields: {
+    amount: {
+      h: "Amount"
+      n: "amount"
+      r: true
+      sh: "Specify the currency amount of the funds being transferred."
+      t: "`$NUMBER`"
+    }
+    externalRefID: {
+      h: "External Ref Id"
+      n: "externalRefID"
+      r: false
+      sh: "specify the external reference id to associate with this funding action."
+      t: "`$STRING`"
+    }
+    transferDate: {
+      h: "Transfer Date"
+      n: "transferDate"
+      r: false
+      t: "`$STRING`"
+    }
+    transferFrom: {
+      h: "Transfer From"
+      n: "transferFrom"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The accountIdentifier for the Account transferring funds from."
+      t: "`$OBJECT`"
+    }
+    transferNotes: {
+      h: "Transfer Notes"
+      n: "transferNotes"
+      r: false
+      sh: "Optional transfer notes (up to 150 characters)"
+      t: "`$STRING`"
+    }
+    transferTo: {
+      h: "Transfer To"
+      n: "transferTo"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The accountIdentifier for the Account transferring funds to."
+      t: "`$OBJECT`"
+    }
+    transferredAmount: {
+      h: "Transferred Amount"
+      n: "transferredAmount"
+      r: false
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "transfer_fund"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /transferFunds"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/transferFunds"
+          s: [
+            {
+              lit: "transferFunds"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

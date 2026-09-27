@@ -1,0 +1,18 @@
+# BasicTransferFundFlow
+
+main: kit: flow: BasicTransferFundFlow:
+{
+  entity: "transfer_fund",
+  kind: "basic",
+  name: "BasicTransferFundFlow",
+  step: [
+    {
+      i: {
+        ref: "transfer_fund_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicTransferFundFlow"
+}

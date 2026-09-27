@@ -1,0 +1,341 @@
+# Entity: credit_card
+
+main: kit: entity: credit_card: {
+
+  alias: field: {}
+
+  fields: {
+    accountIdentifier: {
+      h: "Account Identifier"
+      n: "accountIdentifier"
+      r: true
+      sh: "specify the account this credit card is associated with"
+      t: "`$STRING`"
+    }
+    accountNumber: {
+      h: "Account Number"
+      n: "accountNumber"
+      r: true
+      t: "`$STRING`"
+    }
+    activationDate: {
+      h: "Activation Date"
+      n: "activationDate"
+      r: true
+      t: "`$STRING`"
+    }
+    billingAddress: {
+      h: "Billing Address"
+      n: "billingAddress"
+      r: true
+      sh: "required Enter the billing address information for the credit card that is being registered"
+      t: "`$OBJECT`"
+    }
+    contactInformation: {
+      h: "Contact Information"
+      n: "contactInformation"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      r: true
+      sh: "Optional."
+      t: "`$ARRAY`"
+    }
+    createdDate: {
+      h: "Created Date"
+      n: "createdDate"
+      r: true
+      t: "`$STRING`"
+    }
+    creditCard: {
+      h: "Credit Card"
+      n: "creditCard"
+      r: true
+      sh: "required Enter the credit card details that is being registered"
+      t: "`$OBJECT`"
+    }
+    customerIdentifier: {
+      h: "Customer Identifier"
+      n: "customerIdentifier"
+      r: true
+      sh: "specify the customer associated with the credit card."
+      t: "`$STRING`"
+    }
+    expirationDate: {
+      h: "Expiration Date"
+      n: "expirationDate"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    ipAddress: {
+      h: "Ip Address"
+      n: "ipAddress"
+      r: true
+      sh: "specify the The IP address of the person adding the credit card"
+      t: "`$STRING`"
+    }
+    label: {
+      h: "Label"
+      n: "label"
+      r: true
+      sh: "specify a label for the credit card"
+      t: "`$STRING`"
+    }
+    lastFourDigits: {
+      h: "Last Four Digits"
+      n: "lastFourDigits"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    token: {
+      h: "Token"
+      n: "token"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "credit_card"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /creditCards"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/creditCards"
+          s: [
+            {
+              lit: "creditCards"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /creditCards"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "account_identifier"
+                or: "account_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "account_number"
+                or: "account_number"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "customer_identifier"
+                or: "customer_identifier"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "email_address"
+                or: "email_address"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "expiration_date"
+                or: "expiration_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "full_name"
+                or: "full_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "label"
+                or: "label"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "last_four_digit"
+                or: "last_four_digit"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "max_result"
+                or: "max_result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "next_cursor"
+                or: "next_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "paginate"
+                or: "paginate"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "prev_cursor"
+                or: "prev_cursor"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "false"
+                k: "query"
+                n: "show_inactive"
+                or: "show_inactive"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "token"
+                or: "token"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/creditCards"
+          q: {
+            exist: [
+              "account_identifier"
+              "account_number"
+              "customer_identifier"
+              "email_address"
+              "expiration_date"
+              "full_name"
+              "label"
+              "last_four_digit"
+              "max_result"
+              "next_cursor"
+              "paginate"
+              "prev_cursor"
+              "show_inactive"
+              "status"
+              "token"
+            ]
+          }
+          s: [
+            {
+              lit: "creditCards"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /creditCards/{token}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "token"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/creditCards/{token}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              token: "id"
+            }
+          }
+          s: [
+            {
+              lit: "creditCards"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

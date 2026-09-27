@@ -19,7 +19,6 @@ import type {
   CredentialTypeViewListMatch,
 } from '../TangocardTypes'
 
-// TODO: needs Entity superclass
 class CredentialTypeViewEntity extends TangocardEntityBase<CredentialTypeView> {
 
   constructor(client: TangocardSDK, entopts: any) {

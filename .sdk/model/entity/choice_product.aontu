@@ -1,0 +1,153 @@
+# Entity: choice_product
+
+main: kit: entity: choice_product: {
+
+  alias: field: {}
+
+  fields: {
+    countries: {
+      h: "Countries"
+      n: "countries"
+      r: false
+      t: "`$ARRAY`"
+    }
+    currencyCode: {
+      h: "Currency Code"
+      n: "currencyCode"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    rewardName: {
+      h: "Reward Name"
+      n: "rewardName"
+      r: false
+      t: "`$STRING`"
+    }
+    utid: {
+      h: "Utid"
+      n: "utid"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "choice_product"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /choiceProducts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "country"
+                or: "country"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "currency_code"
+                or: "currency_code"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "reward_name"
+                or: "reward_name"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/choiceProducts"
+          q: {
+            exist: [
+              "country"
+              "currency_code"
+              "reward_name"
+            ]
+          }
+          s: [
+            {
+              lit: "choiceProducts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.choiceProducts`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /choiceProducts/{utid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "utid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/choiceProducts/{utid}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              utid: "id"
+            }
+          }
+          s: [
+            {
+              lit: "choiceProducts"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

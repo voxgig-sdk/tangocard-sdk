@@ -19,7 +19,6 @@ import type {
   CatalogListMatch,
 } from '../TangocardTypes'
 
-// TODO: needs Entity superclass
 class CatalogEntity extends TangocardEntityBase<Catalog> {
 
   constructor(client: TangocardSDK, entopts: any) {

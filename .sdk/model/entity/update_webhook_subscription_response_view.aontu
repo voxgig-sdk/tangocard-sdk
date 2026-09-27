@@ -1,0 +1,147 @@
+# Entity: update_webhook_subscription_response_view
+
+main: kit: entity: update_webhook_subscription_response_view: {
+
+  alias: field: {}
+
+  fields: {
+    categories: {
+      h: "Categories"
+      n: "categories"
+      r: false
+      sh: "The categories the customer is subscribed to."
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "The date and time the webhook was created."
+      t: "`$STRING`"
+    }
+    eventTypes: {
+      h: "Event Types"
+      n: "eventTypes"
+      r: false
+      sh: "The event types the customer is subscribed to."
+      t: "`$ARRAY`"
+    }
+    expiresAt: {
+      fo: "date-time"
+      h: "Expires At"
+      n: "expiresAt"
+      r: false
+      sh: "The date and time the webhook expires."
+      t: "`$STRING`"
+    }
+    headers: {
+      h: "Headers"
+      n: "headers"
+      r: false
+      sh: "Appropriate for the authentication method the customer wants Tango to use when calling their webhook listener."
+      t: "`$ARRAY`"
+    }
+    hmacSharedSecretKey: {
+      h: "Hmac Shared Secret Key"
+      n: "hmacSharedSecretKey"
+      r: false
+      sh: "The HMAC secret key used to sign the webhook payload."
+      t: "`$STRING`"
+    }
+    payloadVerificationMethod: {
+      h: "Payload Verification Method"
+      n: "payloadVerificationMethod"
+      r: false
+      sh: "Method to verify webhook payload integrity"
+      t: "`$STRING`"
+    }
+    signingCertificate: {
+      h: "Signing Certificate"
+      n: "signingCertificate"
+      r: false
+      sh: "The public X509 certificate used to sign the webhook payload."
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      sh: "The date and time when the webhook was last updated."
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "The URL of the customer's webhook listener."
+      t: "`$STRING`"
+    }
+    webhookId: {
+      fo: "uuid"
+      h: "Webhook Id"
+      n: "webhookId"
+      r: false
+      sh: "The ID of the webhook."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "update_webhook_subscription_response_view"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /webhooks/{webhookId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "webhook_id"
+                or: "webhook_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/webhooks/{webhookId}"
+          q: {
+            exist: [
+              "webhook_id"
+            ]
+          }
+          r: {
+            param: {
+              webhookId: "webhook_id"
+            }
+          }
+          s: [
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "webhook_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.webhook")]
+  ]
+
+}

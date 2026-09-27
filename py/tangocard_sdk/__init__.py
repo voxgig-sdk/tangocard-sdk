@@ -361,10 +361,10 @@ class TangocardSDK:
         return BalanceAlertViewEntity(self, data)
 
 
-    def BrandCategoriesView(self, data=None) -> "BrandCategoriesViewEntity":
-        """Entity factory: client.BrandCategoriesView().list() / client.BrandCategoriesView().load({"id": ...})."""
-        from tangocard_sdk.entity.brand_categories_view_entity import BrandCategoriesViewEntity
-        return BrandCategoriesViewEntity(self, data)
+    def BrandCategory(self, data=None) -> "BrandCategoryEntity":
+        """Entity factory: client.BrandCategory().list() / client.BrandCategory().load({"id": ...})."""
+        from tangocard_sdk.entity.brand_category_entity import BrandCategoryEntity
+        return BrandCategoryEntity(self, data)
 
 
     def Catalog(self, data=None) -> "CatalogEntity":
@@ -389,12 +389,6 @@ class TangocardSDK:
         """Entity factory: client.CreateAccountCriterion().list() / client.CreateAccountCriterion().load({"id": ...})."""
         from tangocard_sdk.entity.create_account_criterion_entity import CreateAccountCriterionEntity
         return CreateAccountCriterionEntity(self, data)
-
-
-    def CreateCustomerCriterion(self, data=None) -> "CreateCustomerCriterionEntity":
-        """Entity factory: client.CreateCustomerCriterion().list() / client.CreateCustomerCriterion().load({"id": ...})."""
-        from tangocard_sdk.entity.create_customer_criterion_entity import CreateCustomerCriterionEntity
-        return CreateCustomerCriterionEntity(self, data)
 
 
     def CredentialTypeView(self, data=None) -> "CredentialTypeViewEntity":
@@ -425,12 +419,6 @@ class TangocardSDK:
         """Entity factory: client.Customer().list() / client.Customer().load({"id": ...})."""
         from tangocard_sdk.entity.customer_entity import CustomerEntity
         return CustomerEntity(self, data)
-
-
-    def EmailTemplateListView(self, data=None) -> "EmailTemplateListViewEntity":
-        """Entity factory: client.EmailTemplateListView().list() / client.EmailTemplateListView().load({"id": ...})."""
-        from tangocard_sdk.entity.email_template_list_view_entity import EmailTemplateListViewEntity
-        return EmailTemplateListViewEntity(self, data)
 
 
     def EmailTemplateViewVerbose(self, data=None) -> "EmailTemplateViewVerboseEntity":
@@ -485,18 +473,6 @@ class TangocardSDK:
         """Entity factory: client.N1Customer().list() / client.N1Customer().load({"id": ...})."""
         from tangocard_sdk.entity.n1_customer_entity import N1CustomerEntity
         return N1CustomerEntity(self, data)
-
-
-    def N2Account(self, data=None) -> "N2AccountEntity":
-        """Entity factory: client.N2Account().list() / client.N2Account().load({"id": ...})."""
-        from tangocard_sdk.entity.n2_account_entity import N2AccountEntity
-        return N2AccountEntity(self, data)
-
-
-    def N3Fund(self, data=None) -> "N3FundEntity":
-        """Entity factory: client.N3Fund().list() / client.N3Fund().load({"id": ...})."""
-        from tangocard_sdk.entity.n3_fund_entity import N3FundEntity
-        return N3FundEntity(self, data)
 
 
     def N8LineItem(self, data=None) -> "N8LineItemEntity":
@@ -619,18 +595,16 @@ if TYPE_CHECKING:
     from tangocard_sdk.entity.async_reason_codes_view_entity import AsyncReasonCodesViewEntity
     from tangocard_sdk.entity.async_update_line_item_view_entity import AsyncUpdateLineItemViewEntity
     from tangocard_sdk.entity.balance_alert_view_entity import BalanceAlertViewEntity
-    from tangocard_sdk.entity.brand_categories_view_entity import BrandCategoriesViewEntity
+    from tangocard_sdk.entity.brand_category_entity import BrandCategoryEntity
     from tangocard_sdk.entity.catalog_entity import CatalogEntity
     from tangocard_sdk.entity.choice_product_entity import ChoiceProductEntity
     from tangocard_sdk.entity.country_view_summary_entity import CountryViewSummaryEntity
     from tangocard_sdk.entity.create_account_criterion_entity import CreateAccountCriterionEntity
-    from tangocard_sdk.entity.create_customer_criterion_entity import CreateCustomerCriterionEntity
     from tangocard_sdk.entity.credential_type_view_entity import CredentialTypeViewEntity
     from tangocard_sdk.entity.credit_card_entity import CreditCardEntity
     from tangocard_sdk.entity.credit_card_deposit_entity import CreditCardDepositEntity
     from tangocard_sdk.entity.credit_card_unregister_entity import CreditCardUnregisterEntity
     from tangocard_sdk.entity.customer_entity import CustomerEntity
-    from tangocard_sdk.entity.email_template_list_view_entity import EmailTemplateListViewEntity
     from tangocard_sdk.entity.email_template_view_verbose_entity import EmailTemplateViewVerboseEntity
     from tangocard_sdk.entity.embeddable_response_dto_entity import EmbeddableResponseDtoEntity
     from tangocard_sdk.entity.exchange_rates_with_disclaimer_entity import ExchangeRatesWithDisclaimerEntity
@@ -640,8 +614,6 @@ if TYPE_CHECKING:
     from tangocard_sdk.entity.mobile_country_entity import MobileCountryEntity
     from tangocard_sdk.entity.n14_webhook_entity import N14WebhookEntity
     from tangocard_sdk.entity.n1_customer_entity import N1CustomerEntity
-    from tangocard_sdk.entity.n2_account_entity import N2AccountEntity
-    from tangocard_sdk.entity.n3_fund_entity import N3FundEntity
     from tangocard_sdk.entity.n8_line_item_entity import N8LineItemEntity
     from tangocard_sdk.entity.n9_digital_template_entity import N9DigitalTemplateEntity
     from tangocard_sdk.entity.order_entity import OrderEntity

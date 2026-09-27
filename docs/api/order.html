@@ -15,18 +15,16 @@
 <a href="../api/async_reason_codes_view.html">AsyncReasonCodesView</a>
 <a href="../api/async_update_line_item_view.html">AsyncUpdateLineItemView</a>
 <a href="../api/balance_alert_view.html">BalanceAlertView</a>
-<a href="../api/brand_categories_view.html">BrandCategoriesView</a>
+<a href="../api/brand_category.html">BrandCategory</a>
 <a href="../api/catalog.html">Catalog</a>
 <a href="../api/choice_product.html">ChoiceProduct</a>
 <a href="../api/country_view_summary.html">CountryViewSummary</a>
 <a href="../api/create_account_criterion.html">CreateAccountCriterion</a>
-<a href="../api/create_customer_criterion.html">CreateCustomerCriterion</a>
 <a href="../api/credential_type_view.html">CredentialTypeView</a>
 <a href="../api/credit_card.html">CreditCard</a>
 <a href="../api/credit_card_deposit.html">CreditCardDeposit</a>
 <a href="../api/credit_card_unregister.html">CreditCardUnregister</a>
 <a href="../api/customer.html">Customer</a>
-<a href="../api/email_template_list_view.html">EmailTemplateListView</a>
 <a href="../api/email_template_view_verbose.html">EmailTemplateViewVerbose</a>
 <a href="../api/embeddable_response_dto.html">EmbeddableResponseDto</a>
 <a href="../api/exchange_rates_with_disclaimer.html">ExchangeRatesWithDisclaimer</a>
@@ -36,8 +34,6 @@
 <a href="../api/mobile_country.html">MobileCountry</a>
 <a href="../api/n14_webhook.html">N14Webhook</a>
 <a href="../api/n1_customer.html">N1Customer</a>
-<a href="../api/n2_account.html">N2Account</a>
-<a href="../api/n3_fund.html">N3Fund</a>
 <a href="../api/n8_line_item.html">N8LineItem</a>
 <a href="../api/n9_digital_template.html">N9DigitalTemplate</a>
 <a aria-current="page" href="../api/order.html">Order</a><div class="nav-sections"><a class="nav-section" href="#post-orders">POST /orders</a>
@@ -66,14 +62,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="order">Order</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="order">Order</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -106,6 +102,56 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">orders, err := client.Order(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(orders)
+order, err := client.Order(nil).Load(map[string]any{&quot;id&quot;: &quot;example_id&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(order)
+created, err := client.Order(nil).Create(map[string]any{&quot;accountIdentifier&quot;: &quot;example&quot;, &quot;accountNumber&quot;: &quot;example&quot;, &quot;amount&quot;: 1, &quot;amountCharged&quot;: map[string]any{}, &quot;campaign&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;emailSubject&quot;: &quot;example&quot;, &quot;etid&quot;: &quot;example&quot;, &quot;message&quot;: &quot;example&quot;, &quot;referenceOrderID&quot;: &quot;example&quot;, &quot;reward&quot;: map[string]any{}, &quot;rewardName&quot;: &quot;example&quot;, &quot;status&quot;: &quot;example&quot;, &quot;utid&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+</code></pre>
+<h3 id="javascript">JavaScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/js.html#set-up-the-client">JavaScript setup</a>, then call the operations:</p>
+<pre><code class="language-js">const orders = await client.Order().list()
+const order = await client.Order().load({ id: &quot;example_id&quot; })
+const created = await client.Order().create({ accountIdentifier: &quot;example&quot;, accountNumber: &quot;example&quot;, amount: 1, amountCharged: {}, campaign: &quot;example&quot;, createdAt: &quot;example&quot;, customerIdentifier: &quot;example&quot;, emailSubject: &quot;example&quot;, etid: &quot;example&quot;, message: &quot;example&quot;, referenceOrderID: &quot;example&quot;, reward: {}, rewardName: &quot;example&quot;, status: &quot;example&quot;, utid: &quot;example&quot; })
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local orders, err = client:Order():list()
+local order, err = client:Order():load({ id = &quot;example_id&quot; })
+local created, err = client:Order():create({ accountIdentifier = &quot;example&quot;, accountNumber = &quot;example&quot;, amount = 1, amountCharged = {}, campaign = &quot;example&quot;, createdAt = &quot;example&quot;, customerIdentifier = &quot;example&quot;, emailSubject = &quot;example&quot;, etid = &quot;example&quot;, message = &quot;example&quot;, referenceOrderID = &quot;example&quot;, reward = {}, rewardName = &quot;example&quot;, status = &quot;example&quot;, utid = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$orders = $client-&gt;Order()-&gt;list();
+$order = $client-&gt;Order()-&gt;load([&quot;id&quot; =&gt; &quot;example_id&quot;]);
+$created = $client-&gt;Order()-&gt;create([&quot;accountIdentifier&quot; =&gt; &quot;example&quot;, &quot;accountNumber&quot; =&gt; &quot;example&quot;, &quot;amount&quot; =&gt; 1, &quot;amountCharged&quot; =&gt; [], &quot;campaign&quot; =&gt; &quot;example&quot;, &quot;createdAt&quot; =&gt; &quot;example&quot;, &quot;customerIdentifier&quot; =&gt; &quot;example&quot;, &quot;emailSubject&quot; =&gt; &quot;example&quot;, &quot;etid&quot; =&gt; &quot;example&quot;, &quot;message&quot; =&gt; &quot;example&quot;, &quot;referenceOrderID&quot; =&gt; &quot;example&quot;, &quot;reward&quot; =&gt; [], &quot;rewardName&quot; =&gt; &quot;example&quot;, &quot;status&quot; =&gt; &quot;example&quot;, &quot;utid&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">orders = client.Order().list()
+order = client.Order().load({&quot;id&quot;: &quot;example_id&quot;})
+created = client.Order().create({ &quot;accountIdentifier&quot;: &quot;example&quot;, &quot;accountNumber&quot;: &quot;example&quot;, &quot;amount&quot;: 1, &quot;amountCharged&quot;: {}, &quot;campaign&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;, &quot;customerIdentifier&quot;: &quot;example&quot;, &quot;emailSubject&quot;: &quot;example&quot;, &quot;etid&quot;: &quot;example&quot;, &quot;message&quot;: &quot;example&quot;, &quot;referenceOrderID&quot;: &quot;example&quot;, &quot;reward&quot;: {}, &quot;rewardName&quot;: &quot;example&quot;, &quot;status&quot;: &quot;example&quot;, &quot;utid&quot;: &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const orders = await client.Order().list()
+const order = await client.Order().load({ id: &quot;example_id&quot; })
+const created = await client.Order().create({ accountIdentifier: &quot;example&quot;, accountNumber: &quot;example&quot;, amount: 1, amountCharged: {}, campaign: &quot;example&quot;, createdAt: &quot;example&quot;, customerIdentifier: &quot;example&quot;, emailSubject: &quot;example&quot;, etid: &quot;example&quot;, message: &quot;example&quot;, referenceOrderID: &quot;example&quot;, reward: {}, rewardName: &quot;example&quot;, status: &quot;example&quot;, utid: &quot;example&quot; })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -127,7 +173,7 @@
 <td><code>accountNumber</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Account Number</td>
 </tr>
 <tr>
 <td><code>amount</code></td>
@@ -139,13 +185,13 @@
 <td><code>amountCharged</code></td>
 <td><code>object</code></td>
 <td>Yes</td>
-<td></td>
+<td>Amount Charged</td>
 </tr>
 <tr>
 <td><code>asyncOrderEntity</code></td>
 <td><code>object</code></td>
 <td>No</td>
-<td></td>
+<td>Async Order Entity</td>
 </tr>
 <tr>
 <td><code>campaign</code></td>
@@ -157,7 +203,7 @@
 <td><code>createdAt</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Created At</td>
 </tr>
 <tr>
 <td><code>customFields</code></td>
@@ -181,7 +227,7 @@
 <td><code>denomination</code></td>
 <td><code>object</code></td>
 <td>No</td>
-<td></td>
+<td>Denomination</td>
 </tr>
 <tr>
 <td><code>emailSubject</code></td>
@@ -211,13 +257,13 @@
 <td><code>id</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Id</td>
 </tr>
 <tr>
 <td><code>lineItemStatus</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Line Item Status</td>
 </tr>
 <tr>
 <td><code>message</code></td>
@@ -235,19 +281,19 @@
 <td><code>orderClientSource</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Order Client Source</td>
 </tr>
 <tr>
 <td><code>orderExternalRefIdDupe</code></td>
 <td><code>boolean</code></td>
 <td>No</td>
-<td></td>
+<td>Order External Ref Id Dupe</td>
 </tr>
 <tr>
 <td><code>orderStatus</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Order Status</td>
 </tr>
 <tr>
 <td><code>ptid</code></td>
@@ -271,31 +317,31 @@
 <td><code>redemptionInstructions</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Redemption Instructions</td>
 </tr>
 <tr>
 <td><code>referenceLineItemID</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Reference Line Item Id</td>
 </tr>
 <tr>
 <td><code>referenceOrderID</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Reference Order Id</td>
 </tr>
 <tr>
 <td><code>reward</code></td>
 <td><code>object</code></td>
 <td>Yes</td>
-<td></td>
+<td>Reward</td>
 </tr>
 <tr>
 <td><code>rewardName</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Reward Name</td>
 </tr>
 <tr>
 <td><code>sendEmail</code></td>
@@ -313,7 +359,7 @@
 <td><code>status</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Status</td>
 </tr>
 <tr>
 <td><code>utid</code></td>
@@ -625,8 +671,32 @@
 <td>Denomination</td>
 </tr>
 <tr>
-<td><code>denomination.$ref</code></td>
-<td><code>any</code></td>
+<td><code>denomination.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.value</code></td>
+<td><code>number</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -867,10 +937,328 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>accountIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Account Identifier</td>
+</tr>
+<tr>
+<td><code>amountCharged</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Amount Charged</td>
+</tr>
+<tr>
+<td><code>amountCharged.currencyCode</code></td>
+<td><code>string</code></td>
 <td>No</td>
 <td></td>
+</tr>
+<tr>
+<td><code>amountCharged.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amountCharged.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>campaign</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Campaign</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>customerIdentifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Customer Identifier</td>
+</tr>
+<tr>
+<td><code>deliveryMethod</code></td>
+<td><code>enum: NONE, EMAIL, PHONE, ADDRESS, EMBEDDED, BULKSHIPMENT, ...</code></td>
+<td>No</td>
+<td>Delivery Method</td>
+</tr>
+<tr>
+<td><code>denomination</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Denomination</td>
+</tr>
+<tr>
+<td><code>denomination.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.value</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>emailSubject</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Subject</td>
+</tr>
+<tr>
+<td><code>externalRefID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>External Reference ID</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Email Message</td>
+</tr>
+<tr>
+<td><code>ptid</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Ptid - Unique Printed Reward Link Template ID.</td>
+</tr>
+<tr>
+<td><code>purchaseOrderNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Purchase Order Number</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Recipient Details</td>
+</tr>
+<tr>
+<td><code>recipient.address</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Address</td>
+</tr>
+<tr>
+<td><code>recipient.address.city</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>recipient.address.companyName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Company Name</td>
+</tr>
+<tr>
+<td><code>recipient.address.country</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Country Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.postalCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Postal Code</td>
+</tr>
+<tr>
+<td><code>recipient.address.stateOrProvince</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>State or Province</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine1</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 1</td>
+</tr>
+<tr>
+<td><code>recipient.address.streetLine2</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Street Line 2</td>
+</tr>
+<tr>
+<td><code>recipient.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>recipient.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>recipient.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>recipient.mobileNumber</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Mobile Number</td>
+</tr>
+<tr>
+<td><code>redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Redemption Instructions</td>
+</tr>
+<tr>
+<td><code>referenceLineItemID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Line Item ID</td>
+</tr>
+<tr>
+<td><code>referenceOrderID</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reference Order ID</td>
+</tr>
+<tr>
+<td><code>reward</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The Reward</td>
+</tr>
+<tr>
+<td><code>reward.credentialList</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Verbose list of credentials</td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].credentialType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].label</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentialList[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reward.credentials</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Credentials as a map with String label key and credential value String</td>
+</tr>
+<tr>
+<td><code>reward.redemptionInstructions</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rewardName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Name</td>
+</tr>
+<tr>
+<td><code>sendEmail</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Send Email?</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Sender Details</td>
+</tr>
+<tr>
+<td><code>sender.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><code>sender.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td><code>sender.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Reward Status</td>
+</tr>
+<tr>
+<td><code>utid</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Utid - Unique Tango Card ID.</td>
 </tr>
 </tbody>
 </table>
@@ -949,8 +1337,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -969,8 +1399,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -989,8 +1461,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1009,8 +1523,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1029,8 +1585,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1049,8 +1647,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1069,8 +1709,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1634,8 +2316,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1654,8 +2378,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -1851,8 +2617,32 @@
 <td>Denomination</td>
 </tr>
 <tr>
-<td><code>denomination.$ref</code></td>
-<td><code>any</code></td>
+<td><code>denomination.currencyCode</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.exchangeRate</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.fee</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.total</code></td>
+<td><code>number</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>denomination.value</code></td>
+<td><code>number</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -2185,8 +2975,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -2205,8 +3037,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
@@ -2225,8 +3099,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$ref</code></td>
-<td><code>any</code></td>
+<td><code>errors</code></td>
+<td><code>array of any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpCode</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>httpPhrase</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>i18nKey</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A Generic Example</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requestId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>string (date-time)</code></td>
 <td>No</td>
 <td></td>
 </tr>
